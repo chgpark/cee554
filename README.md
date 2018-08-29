@@ -1,3 +1,2 @@
 # cee554
-for lecture
-TEST
+29/08/2018 init git repo

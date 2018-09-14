@@ -1,0 +1,6 @@
+<device_state libver="3.2" filemajor="1" fileminor="0">
+    <device name="DFx 31BU03" base_name="DFx 31BU03" unique_name="DFx 31BU03 11114192">
+        <videoformat>BY8 (1024x768)</videoformat>
+        <fps>30.000030000030002</fps>
+    </device>
+</device_state>

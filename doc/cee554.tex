@@ -88,7 +88,7 @@ Range-only SLAM is a method for localizing a mobile robot and beacons by mainly 
 	\centering
 	%\subfigure[]{
 		%\includegraphics[height=4.5cm]{Drone_image_1}
-	\includegraphics[height=3.0cm]{Drone_image_1}
+	\includegraphics[height=4.5cm]{Drone_image_1}
 		
 		%\includegraphics[trim={0 0 0 1cm}height=4.5cm]{IROS2018_image_1}
 	\label{fig:example}
@@ -113,7 +113,7 @@ By virtue of the LSTM architecture that has memory gates and units that enable l
 
 \subsubsection{Localization with Deep Learning}
 There have been many approaches combining Simultaneous Localization and Mapping (SLAM) with deep learning, aiming to overcome the limitations on SLAM only technique such as difficulty on tuning the proper parameters in different environments and recovering an exact scale. Actually, those researches are showing the superior performance to the traditional SLAM approaches.
-One of the popular SLAM techniques with deep learning is CNN-SLAM \cite which takes Convolutional Neural Networks (CNNs) to precisely predict the depth from a single image without any scene-based assumptions or geometric constraints, allowing them to recover the absolute scale of the reconstruction. Another approach using deep learning for localization is Deep VO \cite{clark2017vinet} In this method, Recurrent Convolutional Neural Networks (RCNNs) is utilized. Specifically, feature representation is learned by Convolutional Neural Networks and Sequential information and motion dynamics are obtained by deep Recurrent Neural Networks without using any module in the classic VO pipeline.
+One of the popular SLAM techniques with deep learning is CNN-SLAM \cite{tateno2017cnn} which takes Convolutional Neural Networks (CNNs) to precisely predict the depth from a single image without any scene-based assumptions or geometric constraints, allowing them to recover the absolute scale of the reconstruction. Another approach using deep learning for localization is Deep VO \cite{clark2017vinet} In this method, Recurrent Convolutional Neural Networks (RCNNs) is utilized. Specifically, feature representation is learned by Convolutional Neural Networks and Sequential information and motion dynamics are obtained by deep Recurrent Neural Networks without using any module in the classic VO pipeline.
 
 
 

@@ -132,14 +132,20 @@ S.~Hochreiter and J.~Schmidhuber, ``Long short-term memory,'' \emph{Neural
 W.~Zaremba and I.~Sutskever, ``Learning to execute,'' \emph{arXiv preprint
   arXiv:1410.4615}, 2014.
 
-\bibitem{ordonez2016deep}
-F.~J. Ord{\'o}{\~n}ez and D.~Roggen, ``Deep convolutional and lstm recurrent
-  neural networks for multimodal wearable activity recognition,''
-  \emph{Sensors}, vol.~16, no.~1, p. 115, 2016.
+\bibitem{tateno2017cnn}
+K.~Tateno, F.~Tombari, I.~Laina, and N.~Navab, ``Cnn-slam: Real-time dense
+  monocular slam with learned depth prediction,'' in \emph{Proceedings of the
+  IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}, vol.~2,
+  2017.
 
 \bibitem{clark2017vinet}
 R.~Clark, S.~Wang, H.~Wen, A.~Markham, and N.~Trigoni, ``Vinet: Visual-inertial
   odometry as a sequence-to-sequence learning problem.'' in \emph{AAAI}, 2017,
   pp. 3995--4001.
+
+\bibitem{ordonez2016deep}
+F.~J. Ord{\'o}{\~n}ez and D.~Roggen, ``Deep convolutional and lstm recurrent
+  neural networks for multimodal wearable activity recognition,''
+  \emph{Sensors}, vol.~16, no.~1, p. 115, 2016.
 
 \end{thebibliography}

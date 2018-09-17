@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.7.23)  17 SEP 2018 10:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.8.29)  17 SEP 2018 21:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -276,7 +276,7 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \l_MT_below_shortintertext_sep=\dimen134
 )
 (c:/texlive/2018/texmf-dist/tex/latex/multirow/multirow.sty
-Package: multirow 2016/11/25 v2.2 Span multiple rows of a table
+Package: multirow 2018/08/03 v2.3 Span multiple rows of a table
 \multirow@colwidth=\skip60
 \multirow@cntb=\count112
 \multirow@dima=\skip61
@@ -481,10 +481,10 @@ LaTeX Font Info:    Try loading font information for T1+pcr on input line 63.
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 Package epstopdf Info: Source file: <Drone_image_1.eps>
-(epstopdf)                    date: 2018-09-17 10:02:33
-(epstopdf)                    size: 1487036 bytes
+(epstopdf)                    date: 2018-09-17 20:10:48
+(epstopdf)                    size: 1487052 bytes
 (epstopdf)             Output file: <Drone_image_1-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-09-17 10:03:31
+(epstopdf)                    date: 2018-09-17 20:10:48
 (epstopdf)                    size: 508342 bytes
 (epstopdf)             Command: <repstopdf --outfile=Drone_image_1-eps-converte
 d-to.pdf Drone_image_1.eps>
@@ -499,6 +499,9 @@ Package pdftex.def Info: Drone_image_1-eps-converted-to.pdf  used on input line
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation `w' on page 1 undefined on input line 116.
 
 [1{c:/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
@@ -515,29 +518,33 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[2] (./cee554.aux) ) 
+[2] (./cee554.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 5442 strings out of 494587
- 81237 string characters out of 6177953
- 150207 words of memory out of 5000000
- 8972 multiletter control sequences out of 15000+600000
- 116232 words of font info for 140 fonts, out of 8000000 for 9000
+ 5444 strings out of 494587
+ 81246 string characters out of 6177953
+ 151207 words of memory out of 5000000
+ 8973 multiletter control sequences out of 15000+600000
+ 117339 words of font info for 141 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  41i,9n,39p,1110b,301s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:
-/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/
-2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2018/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2018/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2018/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr6.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr7.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8
-.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/
-texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/20
-18/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2018/texmf-dist/fo
-nts/type1/urw/times/utmb8a.pfb><c:/texlive/2018/texmf-dist/fonts/type1/urw/time
-s/utmbi8a.pfb><c:/texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/
-texlive/2018/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on cee554.pdf (2 pages, 649225 bytes).
+{c:/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2018/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2018/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2018/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr10.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr6.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c
+:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2
+018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2018/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2018/texmf-dist/font
+s/type1/urw/courier/ucrr8a.pfb><c:/texlive/2018/texmf-dist/fonts/type1/urw/time
+s/utmb8a.pfb><c:/texlive/2018/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/
+texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2018/texmf
+-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on cee554.pdf (2 pages, 650888 bytes).
 PDF statistics:
  140 PDF objects out of 1000 (max. 8388607)
  58 compressed objects within 1 object stream

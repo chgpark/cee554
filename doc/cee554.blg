@@ -1,6 +1,6 @@
 This is BibTeX, Version 0.99d (TeX Live 2018/W32TeX)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
-The top-level auxiliary file: IROS2018_HT.aux
+The top-level auxiliary file: cee554.aux
 The style file: IEEEtran.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
@@ -12,46 +12,48 @@ Database file #2: ./MyBib.bib
 -- IEEEtran.bst version 1.11 (2003/04/02) by Michael Shell.
 -- http://www.ctan.org/tex-archive/macros/latex/contrib/supported/IEEEtran/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty journal in smith2018object
 
 Done.
-You've used 3 entries,
+You've used 24 entries,
             3975 wiz_defined-function locations,
-            1146 strings with 14101 characters,
-and the built_in function-call counts, 2622 in all, are:
-= -- 209
-> -- 67
-< -- 26
-+ -- 38
-- -- 11
-* -- 138
-:= -- 398
-add.period$ -- 6
-call.type$ -- 3
-change.case$ -- 3
-chr.to.int$ -- 60
-cite$ -- 3
-duplicate$ -- 178
-empty$ -- 182
-format.name$ -- 14
-if$ -- 584
+            1270 strings with 18156 characters,
+and the built_in function-call counts, 20518 in all, are:
+= -- 1635
+> -- 490
+< -- 202
++ -- 281
+- -- 76
+* -- 980
+:= -- 2931
+add.period$ -- 56
+call.type$ -- 24
+change.case$ -- 24
+chr.to.int$ -- 495
+cite$ -- 25
+duplicate$ -- 1431
+empty$ -- 1651
+format.name$ -- 97
+if$ -- 4782
 int.to.chr$ -- 0
-int.to.str$ -- 3
-missing$ -- 29
-newline$ -- 29
-num.names$ -- 3
-pop$ -- 62
+int.to.str$ -- 24
+missing$ -- 232
+newline$ -- 92
+num.names$ -- 24
+pop$ -- 540
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 198
+skip$ -- 1601
 stack$ -- 0
-substring$ -- 143
-swap$ -- 157
-text.length$ -- 6
+substring$ -- 1190
+swap$ -- 1217
+text.length$ -- 37
 text.prefix$ -- 0
 top$ -- 5
 type$ -- 0
-warning$ -- 0
-while$ -- 11
-width$ -- 4
-write$ -- 49
+warning$ -- 1
+while$ -- 98
+width$ -- 26
+write$ -- 248
+(There was 1 warning)

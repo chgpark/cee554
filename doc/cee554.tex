@@ -44,15 +44,13 @@
 \usepackage{cite}
 
 \title{\LARGE \bf
-Recurrent Neural Networks for Range-based Indoor Robot Localization}
+Recurrent Neural Networks for Range-only SLAM}
 
 
-\author{Hyungtae Lim$^{1}$ , Jungmo Koo$^{2}$, Jieum Hyun$^{3}$, Hyun Myung$^{4}$, \textit{Senior Member, IEEE}% <-this % stops a space
-\thanks{
-	*This material is based upon work supported by the Ministry of Trade, Industry \& Energy(MOTIE, Korea) under Industrial Technology Innovation Program. No.10067202, 'Development of Disaster Response Robot System for Lifesaving and Supporting Fire Fighters at Complex Disaster Environment'.}% <-this % stops a space
-\thanks{$^{1}$Hyungtae Lim, $^{2}$Jungmo Koo, $^{3}$Jieum Hyun, and $^{4}$Hyun Myung are with
+\author{Hyungtae Lim$^{1}$ , Junseok Lee$^{1}$, Changgyu Park$^{1}$, Ye Eun Kim$^{1}$, % <-this % stops a space
+\thanks{$^{1}$Hyungtae Lim, $^{1}$Junseok Lee, $^{1}$Changgyu Park, and $^{1}$Ye Eun Kim are with
 	the Urban Robotics Laboratory, Korea Advanced Institute of Science
-	and Technology (KAIST) Daejeon, 34141, South Korea. {\tt\small \{shapelim, jungmokoo, jimi, hmyung\}@kaist.ac.kr}}%
+	and Technology (KAIST) Daejeon, 34141, South Korea. {\tt\small \{shapelim, ljs630, cpark, yeeunk\}@kaist.ac.kr}}%
 %
 }
 
@@ -112,6 +110,8 @@ LSTM is a type of Recurrent Neural Networks(RNNs) that has loops so that infer o
 
 However, RNNs often have a \textit{vanishing gradient problem},i.e., RNNs fail to propagate the previous matter into present tasks as time step gap grows by. In other words, RNNs are not able to learn to store appropriate internal states and operate on long-term trends. That is the reason why the Long Short-Term Memory (LSTM) architecture was introduced to solve this long-term dependency problem and make the networks possible to learn longer-term contextual understandings\cite{hochreiter1997long}.
 By virtue of the LSTM architecture that has memory gates and units that enable learning of long-term dependencies\cite{zaremba2014learning}, LSTM are widely used in most of the deep learning research areas and numerous variations of LSTM architecutres have been studied.
+
+\subsubsection{Deep Learning for SLAM}
 
 \subsubsection{Applications of LSTMs}
 

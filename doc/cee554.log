@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.7.23)  17 SEP 2018 10:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.7.23)  17 SEP 2018 10:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -340,58 +340,58 @@ Package: cite 2015/02/27  v 5.5
 ) (./cee554.aux)
 \openout1 = `cee554.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <5> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <7> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <8> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <9> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <10> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <11> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <11> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <12> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <16> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <16> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <20> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <20> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <24> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 60.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 
 (c:/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -464,18 +464,18 @@ e
 ))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 65.
-LaTeX Font Info:    Try loading font information for U+msa on input line 65.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 63.
+LaTeX Font Info:    Try loading font information for U+msa on input line 63.
 
 (c:/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 65.
+LaTeX Font Info:    Try loading font information for U+msb on input line 63.
 
 (c:/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 65.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 63.
 
 (c:/texlive/2018/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
@@ -488,15 +488,19 @@ Package epstopdf Info: Source file: <Drone_image_1.eps>
 (epstopdf)                    size: 508342 bytes
 (epstopdf)             Command: <repstopdf --outfile=Drone_image_1-eps-converte
 d-to.pdf Drone_image_1.eps>
-(epstopdf)             \includegraphics on input line 93.
+(epstopdf)             \includegraphics on input line 91.
 Package epstopdf Info: Output file is already uptodate.
 <Drone_image_1-eps-converted-to.pdf, id=1, 963.6pt x 542.025pt>
 File: Drone_image_1-eps-converted-to.pdf Graphic file (type pdf)
 <use Drone_image_1-eps-converted-to.pdf>
 Package pdftex.def Info: Drone_image_1-eps-converted-to.pdf  used on input line
- 93.
+ 91.
 (pdftex.def)             Requested size: 151.73839pt x 85.35826pt.
- [1{c:/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[1{c:/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
  <./Drone_image_1-eps-converted-to.pdf>] (./cee554.bbl)
@@ -513,13 +517,13 @@ Before submitting the final camera ready copy, remember to:
 
 [2] (./cee554.aux) ) 
 Here is how much of TeX's memory you used:
- 5443 strings out of 494587
- 81244 string characters out of 6177953
- 150536 words of memory out of 5000000
+ 5442 strings out of 494587
+ 81237 string characters out of 6177953
+ 150207 words of memory out of 5000000
  8972 multiletter control sequences out of 15000+600000
- 117368 words of font info for 141 fonts, out of 8000000 for 9000
+ 116232 words of font info for 140 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 41i,9n,39p,1110b,305s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,9n,39p,1110b,301s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:
 /texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/
 2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2018/texm
@@ -533,7 +537,7 @@ texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/20
 nts/type1/urw/times/utmb8a.pfb><c:/texlive/2018/texmf-dist/fonts/type1/urw/time
 s/utmbi8a.pfb><c:/texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/
 texlive/2018/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on cee554.pdf (2 pages, 650475 bytes).
+Output written on cee554.pdf (2 pages, 649225 bytes).
 PDF statistics:
  140 PDF objects out of 1000 (max. 8388607)
  58 compressed objects within 1 object stream

@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-class LSTM:
+class RONet:
     def __init__(self, args): # batch_size, input_size,sequence_length, hidden_size, output_size):
         self.batch_size = args.batch_size
         self.input_size = args.input_size
@@ -16,12 +16,21 @@ class LSTM:
                                         name='output_placeholder')
 
         self.build_model()
-    def setLSTM(self):
-        with tf.variable_scope("unidirectional_lstm"):
-            cell = tf.contrib.rnn.BasicLSTMCell(num_units = self.hidden_size)
-            # outputs : tuple
+    def setPreprocessingLSTM(self):
+        with tf.variable_scope("bidirectional_lstm"):
+            cell_forward = tf.contrib.rnn.BasicLSTMCell(num_units = self.hidden_size)
+            #cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            cell_backward = tf.contrib.rnn.BasicLSTMCell(num_units = self.hidden_size)
+            #cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
 
-            return tf.nn.dynamic_rnn(cell, self.X_data, dtype=tf.float32)
+            # outputs : tuple
+            return tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.X_data, dtype=tf.float32)
+
+    def getAttentionedOutput(self, tensor):
+        attentioned_tensor = tf.nn.sigmoid(tensor)
+        
+
+
 
     def setGRU(self):
         with tf.variable_scope("GRU"):

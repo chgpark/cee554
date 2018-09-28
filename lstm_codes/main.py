@@ -18,7 +18,9 @@ p.add_argument('--train_data', type=str, default="train_data_square_for_bi__prev
 p.add_argument('--board_dir', type=str, default="./board/RiTA_wo_fcn/stacked_bi_epoch_1000_lr_0_02")
 p.add_argument('--save_dir', type=str, default="model/RiTA_wo_fcn/stacked_bi_epoch_1000_lr_0_02/")
 p.add_argument('--network_model', type=str, default="stack")
+p.add_argument('--num_UWB', type = int, default = 6)
 
+p.add_argument('--output_type', type = str, default = 'pose') # position or pose
 p.add_argument('--lr', type=float, default = 0.014)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 7)

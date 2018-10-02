@@ -2,10 +2,11 @@ from pandas import DataFrame
 from sklearn.preprocessing import MinMaxScaler
 import csv
 import numpy as np
-class DataPreprocessing:
-    def __init__(self, dir, sequence_length):
+class DataManager:
+    def __init__(self, dir, sequence_length, num_uwb):
         self.dir = dir
         self.seq_length = sequence_length
+        self.num_uwb = num_uwb
         # scaler saves min / max value of data
        ##########Usage##########
         # scalar = MinMaxScaler()
@@ -26,37 +27,55 @@ class DataPreprocessing:
     def set_data(self):
         xy = np.loadtxt(self.dir, delimiter=',')
 
+        # xy = self.scaler.transform(xy)
 
-        # test= xy[0,:4]
-        # test1= xy[0,4:]
-        # print(test)
-        # print(test1)
-        xy = self.scaler.transform(xy)
+        x = xy[:,:self.num_uwb]
+        robot_pose = xy[:,self.num_uwb:(-1)*self.num_uwb*3]  # Close as label
+        relative_cartesian_position = xy[:, (-1)*self.num_uwb*3:]
 
-        x = xy[:,:4]
-        y = xy[:,4:]  # Close as label
-        # print (type(x))
-        # print (type(y))
         X_data =[]
-        Y_data =[]
+        robot_pose_data =[]
+        relative_position_anchor_data = []
 
-        for i in range(len(y)-self.seq_length+1):
-            _x = x[i:i+self.seq_length]
-            _y = y[i:i+self.seq_length]
-            X_data.append(_x)
-            Y_data.append(_y)
+        for i in range(self.seq_length - 1):
+            range_list = []
+            for j in range(self.num_uwb):
+                _x = []
+                for k in range(i+1):
+                    _x.append(x[k, j])
+
+                _x = _x + [0]*(self.seq_length - i - 1)
+                range_list.append(_x)
+
+            X_data.append(range_list)
+            robot_pose_data.append(robot_pose[i])
+            relative_position_anchor_data.append(relative_cartesian_position[i])
+
+        for i in range(len(x) - self.seq_length + 1):
+            range_list = []
+            for j in range(self.num_uwb):
+                _x = x[i:i+self.seq_length, j]
+                range_list.append(_x)
+
+            X_data.append(range_list)
+            robot_pose_data.append(robot_pose[i + self.seq_length - 1])
+            relative_position_anchor_data.append(relative_cartesian_position[i + self.seq_length - 1])
+
         X_data = np.array(X_data)
-        Y_data = np.array(Y_data)
+        robot_pose_data = np.array(robot_pose_data)
+        relative_position_anchor_data = np.array(relative_position_anchor_data)
 
-        X_data, Y_data = self.suffle_array_in_the_same_order(X_data, Y_data)
+        X_data, robot_pose_data, relative_position_anchor_data = self.suffle_array_in_the_same_order(X_data, robot_pose_data, relative_position_anchor_data)
 
-        return X_data, Y_data
-    def suffle_array_in_the_same_order(self,x_data,y_data):
+        return X_data, robot_pose_data, relative_position_anchor_data
+
+    def suffle_array_in_the_same_order(self,x_data, y_data, z_data):
         shuffle_index = np.arange(x_data.shape[0])
         x_data = x_data[shuffle_index]
         y_data = y_data[shuffle_index]
+        z_data = z_data[shuffle_index]
 
-        return x_data, y_data
+        return x_data, y_data, z_data
     def set_test_data(self, isRaw = False):
         #set depends on sequence length
         #Just do MinMax Scaler to whole data
@@ -106,20 +125,23 @@ class DataPreprocessing:
 
 #Below Line : Extract colums that we want to extract#
 #
-# file_name = 'data_diagonal.csv'
-# seq_length = 10
-# data_parser = DataPreprocessing(file_name,seq_length)
-# X_test, Y_test = data_parser.set_test_data(isRaw=True)
-#
-# total_length = 0
-# with open(file_name) as f:
-#     for num_line, l in enumerate(f):  # For large data, enumerate should be used!
-#         pass
-#     total_length = num_line
-# total_length +=1
-# with open('results/test_diagonal_gt.csv' ,'w') as fp:
-#     for i in range(int( total_length/seq_length) ):
-#         np.savetxt(fp,Y_test[i],delimiter=",")
+if __name__ == '__main__':
+    file_name = 'train_data.csv'
+    seq_length = 10
+    num_uwb = 4
+    data_parser = DataManager(file_name,seq_length, num_uwb)
+    data_parser.fitDataForMinMaxScaler()
+    X_test, Y_test = data_parser.set_data()
+
+    total_length = 0
+    with open(file_name) as f:
+        for num_line, l in enumerate(f):  # For large data, enumerate should be used!
+            pass
+        total_length = num_line
+    total_length +=1
+    # with open('results/test_diagonal_gt.csv' ,'w') as fp:
+    #     for i in range(int( total_length/seq_length) ):
+    #         np.savetxt(fp,Y_test[i],delimiter=",")
 #
 
 

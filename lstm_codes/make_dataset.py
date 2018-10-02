@@ -4,7 +4,7 @@ import csv
 
 ISZIGZAG = False
 UNCERTAINTY = 0.1
-DIMENSION = '2D'
+DIMENSION = '3D'
 DELTALENGTH = 0.01
 ONESIDELENGTH = 5
 
@@ -45,6 +45,7 @@ uwb1 = UWB( -0.5, -0.5, 0)
 uwb2 = UWB( 5.5,-0.5, 0)
 uwb3 = UWB( 5.5, 5.5, 0)
 uwb4 = UWB( -0.5, 5.5, 0)
+uwb_list = [uwb1, uwb2, uwb3, uwb4]
 # Below :
 # uwb1 = UWB( 0.9, 0.9, 0)
 # uwb2 = UWB( 4.5,-0.9, 0)
@@ -77,7 +78,10 @@ class CSVWriter():
             self.wr.writerow(dist_list +(self.kobuki.x, self.kobuki.y))
 
         elif (self.dimension == '3D'):
-            self.wr.writerow(dist_list +(self.kobuki.x, self.kobuki.y, self.kobuki.z))
+            written_data = dist_list + (self.kobuki.x, self.kobuki.y, self.kobuki.z)
+            for uwb in uwb_list:
+                written_data += (self.kobuki.x - uwb.x, self.kobuki.y - uwb.y, self.kobuki.z - uwb.z)
+            self.wr.writerow(written_data)
 
     def moveRobot(self, x,y,z):
         self.kobuki.setPose(x, y, z)

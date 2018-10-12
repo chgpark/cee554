@@ -50,6 +50,8 @@ for i in range(outputs.shape[1]):
     array.append(a)
 array = tf.convert_to_tensor(array)
 pp.pprint(array.eval())
+array2 = getAttentionedOutput(array)
+pp.pprint(array2.eval())
 
 # outputs = tf.unstack(outputs, axis = 1)
 # outputs = tf.convert_to_tensor(outputs)

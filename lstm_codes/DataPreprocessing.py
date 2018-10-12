@@ -90,8 +90,8 @@ class DataManager:
             robot_pose_data.append(robot_pose[i])
             relative_position_anchor_data.append(relative_cartesian_position[i])
 
-        robot_pose_data = np.array([robot_pose_data])
-        relative_position_anchor_data = np.array([relative_position_anchor_data])
+        robot_pose_data = np.array(robot_pose_data)
+        relative_position_anchor_data = np.array(relative_position_anchor_data)
 
         return robot_pose_data, relative_position_anchor_data
 

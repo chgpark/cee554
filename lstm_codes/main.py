@@ -8,20 +8,20 @@ from tqdm import tqdm, trange
 import os
 import argparse
 import csv
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0, 1'
 tf.set_random_seed(777)  # reproducibilityb
 # hyper parameters
 p =argparse.ArgumentParser()
 #FOR TRAIN
-p.add_argument('--train_data', type=str, default="train_data.csv")
-p.add_argument('--board_dir', type=str, default="./board/LSTM/stacked_bi_epoch_1000_lr_0_02")
-p.add_argument('--save_dir', type=str, default="model/LSTM/stacked_bi_epoch_1000_lr_0_02/")
+p.add_argument('--train_data', type=str, default="inputs/train_3D_zigzag_uncertainty_0_03.csv")
+p.add_argument('--board_dir', type=str, default="./board/multimodal/stacked_bi_epoch_2000_lr_0_02")
+p.add_argument('--save_dir', type=str, default="model/multimodal/stacked_bi_epoch_2000_lr_0_02/")
 
-p.add_argument('--lr', type=float, default = 0.014)
+p.add_argument('--lr', type=float, default = 0.02)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 7)
-p.add_argument('--epoches', type=int, default = 2500)
-p.add_argument('--batch_size', type=int, default = 7)
+p.add_argument('--epoches', type=int, default = 2000)
+p.add_argument('--batch_size', type=int, default = 5000)
 #NETWORK PARAMETERS
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
 p.add_argument('--hidden_size', type=int, default = 3) # RNN output size
@@ -47,7 +47,8 @@ d0_data, d1_data, d2_data, d3_data = data_parser.set_range_data_for_4_uwb()
 print(d0_data.shape) #Data size / sequence length / uwb num
 
 robot_pose_gt, relative_anchor_position_gt = data_parser.set_gt_data()
-print (robot_pose_gt.shape)
+
+d0_data, d1_data, d2_data, d3_data, robot_pose_gt = data_parser.suffle_array_in_the_same_order(d0_data, d1_data, d2_data, d3_data, robot_pose_gt)
 # print(X_data[2])
 # print(X_data[-1])
 # print(robot_pose_data[-1])

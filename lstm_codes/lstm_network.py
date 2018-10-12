@@ -11,7 +11,6 @@ class RONet:
         self.hidden_size = args.hidden_size
         self.output_size = args.output_size
         self.sequence_length = args.sequence_length
-        self.networks = args.network_model
         self.output_type = args.output_type
         self.set_placeholders()
 

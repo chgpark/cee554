@@ -6,22 +6,22 @@ import os
 from scipy import interpolate
 from scipy.interpolate import spline
 p =argparse.ArgumentParser()
-p.add_argument('--save_dir', type=str, default="results/RiTA/graphs/")
-# p.add_argument('--gt_dir', type=str, default="inputs/test_data_arbitrary_square_uwb_2D_e10.csv")
-p.add_argument('--gt_dir', type=str, default="inputs/test_data_diagonal_curve2D.csv")
+# p.add_argument('--save_dir', type=str, default="results/RiTA/graphs/")
+p.add_argument('--gt_dir', type=str, default="inputs/test_data_arbitrary_square_uwb_2D_e10.csv")
+# p.add_argument('--gt_dir', type=str, default="inputs/test_data_diagonal_curve2D.csv")
 #In case of test 1
-# p.add_argument('--bidirectional_LSTM_csv', type=str, default="results/RiTA/bidirectional_wo_fcn_well_trained.csv")
-# p.add_argument('--stacked_bi_LSTM_csv', type=str, default="results/RiTA/stack_bi_2.csv")
-# p.add_argument('--unidirectional_LSTM_csv', type=str, default= "results/RiTA/unidirectional_wo_fcn.csv")
-# p.add_argument('--gru_csv', type=str, default= "results/RiTA/gru.csv")
+p.add_argument('--bidirectional_LSTM_csv', type=str, default="results/RiTA/bidirectional_wo_fcn_well_trained.csv")
+p.add_argument('--stacked_bi_LSTM_csv', type=str, default="results/RiTA/stack_bi_2.csv")
+p.add_argument('--unidirectional_LSTM_csv', type=str, default= "results/RiTA/unidirectional_wo_fcn.csv")
+p.add_argument('--gru_csv', type=str, default= "results/RiTA/gru.csv")
 
 #In case of test 2
-p.add_argument('--bidirectional_LSTM_csv', type=str, default="results/RiTA/bi_lstm_to_curve_test.csv")
-p.add_argument('--stacked_bi_LSTM_csv', type=str, default="results/RiTA/stack_lstm_2.csv")
-p.add_argument('--unidirectional_LSTM_csv', type=str, default= "results/RiTA/uni_lstm_to_curve_test.csv")
-p.add_argument('--gru_csv', type=str, default= "results/RiTA/gru_to_curve_test.csv")
-
-p.add_argument('--trilateration_csv', type=str, default="results/RiTA/trilateration.csv")
+# p.add_argument('--bidirectional_LSTM_csv', type=str, default="results/RiTA/bi_lstm_to_curve_test.csv")
+# p.add_argument('--stacked_bi_LSTM_csv', type=str, default="results/RiTA/stack_lstm_2.csv")
+# p.add_argument('--unidirectional_LSTM_csv', type=str, default= "results/RiTA/uni_lstm_to_curve_test.csv")
+# p.add_argument('--gru_csv', type=str, default= "results/RiTA/gru_to_curve_test.csv")
+#
+# p.add_argument('--trilateration_csv', type=str, default="results/RiTA/trilateration.csv")
 p.add_argument('--save_MSE_name', type=str, default="Distance_error_result__test1.png")
 p.add_argument('--save_error_percent_name', type=str, default="test_stack.png")
 p.add_argument('--save_trajectory_name', type=str, default="Test_trajectory11_legend.png") #""Trajectory_result_refined_interval_10_smoothed_test_stack.png")
@@ -104,7 +104,6 @@ class Visualization:
                             linestyle = LINE[i],label = self.label[i])
             # plt.scatter(x_for_marker, distance_error_for_marker, color= self.color_set[i], marker = marker,
             #                 linestyle = linestyle) #,label = self.label[i])
-
 
         plt.legend()
         plt.grid(True)
@@ -242,15 +241,15 @@ class Visualization:
         # self.ax1 = self.fig.gca(projection = '3d') #add_subplot(111, projection='3d')
         # self.ax1.scatter(X_list, Y_list, Z_list)
         plt.subplot(221)
-        plt.scatter(X_list, Y_list)
+        plt.plot(X_list, Y_list)
         plt.xlabel("X_axis")
         plt.ylabel("Y_axis")
         plt.subplot(222)
-        plt.scatter(Z_list, Y_list)
-        plt.xlabel("Y_axis")
-        plt.ylabel("Z_axis")
+        plt.plot(Z_list, Y_list)
+        plt.xlabel("Z_axis")
+        plt.ylabel("Y_axis")
         plt.subplot(223)
-        plt.scatter(X_list, Z_list)
+        plt.plot(X_list, Z_list)
         plt.xlabel("X_axis")
         plt.ylabel("Z_axis")
         self.fig = plt.gcf()
@@ -258,7 +257,13 @@ class Visualization:
 
 if __name__ == "__main__":
     viz = Visualization(args)
+    test = np.loadtxt("train_yz3D.csv", delimiter= ',')
+    X = test[:, 4]
+    Y = test[:, 5]
+    Z = test[:, 6]
+    print ("heelo")
+    viz.drawResult3D(X, Y, Z)
     # viz.plotDistanceError(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)
     # viz.plotErrorPercent(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)
-    viz.plot2DTrajectory(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)
+    # viz.plot2DTrajectory(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)
 

@@ -2,6 +2,7 @@ from pandas import DataFrame
 from sklearn.preprocessing import MinMaxScaler
 import csv
 import numpy as np
+from random import shuffle
 class DataManager:
     def __init__(self, dir, sequence_length, num_uwb):
         self.dir = dir
@@ -95,13 +96,16 @@ class DataManager:
 
         return robot_pose_data, relative_position_anchor_data
 
-    def suffle_array_in_the_same_order(self,x_data, y_data, z_data):
-        shuffle_index = np.arange(x_data.shape[0])
-        x_data = x_data[shuffle_index]
-        y_data = y_data[shuffle_index]
-        z_data = z_data[shuffle_index]
+    def suffle_array_in_the_same_order(self,*argv):
+        index = np.arange((argv[0].shape[0]))
+        shuffle(index)
+        output_argv =[]
 
-        return x_data, y_data, z_data
+        for arg in argv:
+            shuffled_arg = arg[index]
+            output_argv.append(shuffled_arg)
+
+        return output_argv
     def set_test_data(self, isRaw = False):
         #set depends on sequence length
         #Just do MinMax Scaler to whole data
@@ -152,13 +156,15 @@ class DataManager:
 #Below Line : Extract colums that we want to extract#
 #
 if __name__ == '__main__':
-    file_name = 'train_data.csv'
+    file_name = 'inputs/train_3D_zigzag_uncertainty_0_03.csv'
     seq_length = 10
     num_uwb = 4
     data_parser = DataManager(file_name,seq_length, num_uwb)
-    data_parser.fitDataForMinMaxScaler()
-    X_test, Y_test = data_parser.set_data()
-
+    x = np.array([[1,3],[2,7],[3, 10], [4, 1313],[5,1]])
+    y = np.array(['a','b','c','d', 'e'])
+    z = np.array([111,222,333,444,555])
+    x,y,z = data_parser.suffle_array_in_the_same_order(x, y, z)
+    print (x,y,z)
     total_length = 0
     with open(file_name) as f:
         for num_line, l in enumerate(f):  # For large data, enumerate should be used!

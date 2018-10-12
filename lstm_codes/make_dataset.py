@@ -2,8 +2,8 @@ import random
 import math
 import csv
 
-ISZIGZAG = False
-UNCERTAINTY = 0.1
+ISZIGZAG = True
+UNCERTAINTY = 0.03
 DIMENSION = '3D'
 DELTALENGTH = 0.05
 ONESIDELENGTH = 4
@@ -180,11 +180,30 @@ class CSVWriter():
                 self.writerow(dist_list)
 
         for i in range(self.iteration_num):
-            dist_list = self.moveRobot(0.0, DELTALENGTH, 0.0)
+            dist_list = self.moveRobot(0.0, 0.0, DELTALENGTH)
             self.writerow(dist_list)
-    def drawZigzagPath_3D(self, round_number):
-        pass
 
+    def drawZigzagPath_3D(self, round_number):
+        self.zigzag_xy(round_number)
+        for j in range(10):
+            for k in range(int(self.iteration_num/10)):
+                dist_list = self.moveRobot( 0.0, 0.0, DELTALENGTH)
+                self.writerow(dist_list)
+            self.zigzag_xy(round_number)
+
+        self.zigzag_yz(round_number)
+        for j in range(10):
+            for k in range(int(self.iteration_num/10)):
+                dist_list = self.moveRobot( DELTALENGTH, 0.0, 0.0)
+                self.writerow(dist_list)
+            self.zigzag_yz(round_number)
+
+        self.zigzag_zx(round_number)
+        for j in range(10):
+            for k in range(int(self.iteration_num/10)):
+                dist_list = self.moveRobot( 0.0, DELTALENGTH, 0.0)
+                self.writerow(dist_list)
+            self.zigzag_zx(round_number)
 
     def drawSquarePath(self, round_number):
         for j in range(round_number):
@@ -301,20 +320,20 @@ uwb_list = [uwb1, uwb2, uwb3, uwb4]
 # uwb2 = UWB( 4.5,-0.9, 0)
 # uwb3 = UWB( 4.5, 4.5, 0)
 # uwb4 = UWB( 0.9, 2.7, 0)
-file_name = 'train_zx' + DIMENSION
+file_name = 'train_' + DIMENSION
 # file_name = 'test_data_arbitrary_path' + DIMENSION
 if (ISZIGZAG):
     file_name = file_name +'_' + 'zigzag'
 file_name = file_name + '.csv'
 
-kobuki = Robot(2.0, -2.0, 4.0)
+kobuki = Robot(-2.0, -2.0, 4.0)
 
 train_file = open(file_name ,'w',encoding = 'utf-8', newline ='')
 wr = csv.writer(train_file)
 
 dataWriter = CSVWriter(wr, kobuki)
 
-dataWriter.zigzag_xy(1)
+dataWriter.drawZigzagPath_3D(10)
 
 
 print ("Make "+file_name)

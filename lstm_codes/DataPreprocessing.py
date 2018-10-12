@@ -24,50 +24,76 @@ class DataManager:
         # else:
         self.scaler_for_prediction.fit(xy[:,4:])
 
-    def set_data(self):
+    def set_range_data_for_4_uwb(self):
+        xy = np.loadtxt(self.dir, delimiter=',')
+        # xy = self.scaler.transform(xy)
+
+        x = xy[:,:self.num_uwb]
+
+        d0_data =[]
+        d1_data =[]
+        d2_data =[]
+        d3_data =[]
+
+        for i in range(self.seq_length - 1):
+            for j in range(self.num_uwb):
+                _x = []
+                for k in range(i+1):
+                    _x.append([x[k, j]])
+
+                _x = _x + [[0]]*(self.seq_length - i - 1)
+
+                if j == 0:
+                    d0_data.append(_x)
+                elif j == 1:
+                    d1_data.append(_x)
+                elif j == 2:
+                    d2_data.append(_x)
+                elif j == 3:
+                    d3_data.append(_x)
+
+
+        for i in range(len(x) - self.seq_length + 1):
+            for j in range(self.num_uwb):
+                _x = []
+                for k in range(self.seq_length):
+                    _x.append([x[i+k, j]])
+
+                if j == 0:
+                    d0_data.append(_x)
+                elif j == 1:
+                    d1_data.append(_x)
+                elif j == 2:
+                    d2_data.append(_x)
+                elif j == 3:
+                    d3_data.append(_x)
+
+        d0_data = np.array(d0_data)
+        d1_data = np.array(d1_data)
+        d2_data = np.array(d2_data)
+        d3_data = np.array(d3_data)
+
+        return d0_data, d1_data, d2_data, d3_data
+
+    def set_gt_data(self):
         xy = np.loadtxt(self.dir, delimiter=',')
 
         # xy = self.scaler.transform(xy)
 
-        x = xy[:,:self.num_uwb]
         robot_pose = xy[:,self.num_uwb:(-1)*self.num_uwb*3]  # Close as label
         relative_cartesian_position = xy[:, (-1)*self.num_uwb*3:]
 
-        X_data =[]
         robot_pose_data =[]
         relative_position_anchor_data = []
 
-        for i in range(self.seq_length - 1):
-            range_list = []
-            for j in range(self.num_uwb):
-                _x = []
-                for k in range(i+1):
-                    _x.append(x[k, j])
-
-                _x = _x + [0]*(self.seq_length - i - 1)
-                range_list.append(_x)
-
-            X_data.append(range_list)
+        for i in range(len(robot_pose)):
             robot_pose_data.append(robot_pose[i])
             relative_position_anchor_data.append(relative_cartesian_position[i])
 
-        for i in range(len(x) - self.seq_length + 1):
-            range_list = []
-            for j in range(self.num_uwb):
-                _x = x[i:i+self.seq_length, j]
-                range_list.append(_x)
+        robot_pose_data = np.array([robot_pose_data])
+        relative_position_anchor_data = np.array([relative_position_anchor_data])
 
-            X_data.append(range_list)
-            robot_pose_data.append(robot_pose[i + self.seq_length - 1])
-            relative_position_anchor_data.append(relative_cartesian_position[i + self.seq_length - 1])
-
-        X_data = np.array(X_data)
-        robot_pose_data = np.array(robot_pose_data)
-        relative_position_anchor_data = np.array(relative_position_anchor_data)
-
-        X_data, robot_pose_data, relative_position_anchor_data = self.suffle_array_in_the_same_order(X_data, robot_pose_data, relative_position_anchor_data)
-
-        return X_data, robot_pose_data, relative_position_anchor_data
+        return robot_pose_data, relative_position_anchor_data
 
     def suffle_array_in_the_same_order(self,x_data, y_data, z_data):
         shuffle_index = np.arange(x_data.shape[0])

@@ -1,4 +1,5 @@
 import tensorflow as tf
+import pprint
 
 class RONet:
     def __init__(self, args): # batch_size, input_size,sequence_length, hidden_size, output_size):
@@ -8,41 +9,71 @@ class RONet:
         self.output_size = args.output_size
         self.sequence_length = args.sequence_length
         self.networks = args.network_model
-        self.X_data = tf.placeholder(dtype=tf.float32,
+        self.d0_data = tf.placeholder(dtype=tf.float32,
                                            shape=[None, self.sequence_length, self.input_size],
                                            name='input_placeholder')
+        self.d1_data = tf.placeholder(dtype=tf.float32,
+                                           shape=[None, self.sequence_length, self.input_size],
+                                           name='input_placeholder')
+        self.d2_data = tf.placeholder(dtype=tf.float32,
+                                           shape=[None, self.sequence_length, self.input_size],
+                                           name='input_placeholder')
+        self.d3_data = tf.placeholder(dtype=tf.float32,
+                                           shape=[None, self.sequence_length, self.input_size],
+                                           name='input_placeholder')
+
         self.pose_data = tf.placeholder(dtype=tf.float32,
                                         shape=[None, self.sequence_length,self.hidden_size],
                                         name='output_placeholder')
-        self.build_model()
+        self.buildRONet()
 
     def setPreprocessingLSTM(self):
-        with tf.variable_scope("preprocessing"):
-            cell_forward = tf.contrib.rnn.BasicLSTMCell(num_units = self.hidden_size)
+        with tf.variable_scope("preprocessing0"):
+            cell_forward = tf.contrib.rnn.BasicLSTMCell(num_units = self.sequence_length)
             #cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
-            cell_backward = tf.contrib.rnn.BasicLSTMCell(num_units = self.hidden_size)
+            cell_backward = tf.contrib.rnn.BasicLSTMCell(num_units = self.sequence_length)
             #cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
 
             # outputs : tuple
-            return tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.X_data, dtype=tf.float32)
+            output0, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d0_data, dtype=tf.float32)
 
-    def getPreprocessedData(self, range_input_per_anchor):
-        with tf.variable_scope("preprocessing"):
-            cell_forward = tf.contrib.rnn.BasicLSTMCell(num_units = self.hidden_size)
-            cell_backward = tf.contrib.rnn.BasicLSTMCell(num_units = self.hidden_size)
+        with tf.variable_scope("preprocessing1"):
+            cell_forward = tf.contrib.rnn.BasicLSTMCell(num_units = self.sequence_length)
+            #cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            cell_backward = tf.contrib.rnn.BasicLSTMCell(num_units = self.sequence_length)
+            #cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
 
-            # outputs : tuple
-            return tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, range_input_per_anchor, dtype=tf.float32)
+            output1, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d1_data, dtype=tf.float32)
+        with tf.variable_scope("preprocessing2"):
+            cell_forward = tf.contrib.rnn.BasicLSTMCell(num_units = self.sequence_length)
+            #cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            cell_backward = tf.contrib.rnn.BasicLSTMCell(num_units = self.sequence_length)
+            #cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
 
-    def setRONet(self):
-        input = self.X_data
-        anchor_list = []
-        for i in range(self.input_size):
-            output = self.getPreprocessedData(self.X_data[i])
-            anchor_list.append(output)
-        anchor_array = np.array()
+            output2, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d2_data, dtype=tf.float32)
+        with tf.variable_scope("preprocessing3"):
+            cell_forward = tf.contrib.rnn.BasicLSTMCell(num_units = self.sequence_length)
+            #cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            cell_backward = tf.contrib.rnn.BasicLSTMCell(num_units = self.sequence_length)
+            #cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
 
+            output3, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d3_data, dtype=tf.float32)
 
+            return output0, output1, output2, output3
+
+    def getPreprocessedData(self):
+        output0, output1, output2, output3 = self.setPreprocessingLSTM()
+        outputs_array = []
+        print (output0[0].shape)
+        for i in range(self.batch_size): # shape of output0[0]: (num_data, seq_length, hidden_size)
+            concatnated_output = tf.concat([output0[0][i], output0[1][i],
+                                            output1[0][i], output1[1][i],
+                                            output2[0][i], output2[1][i],
+                                            output3[0][i], output3[1][i]], axis = 1)
+            outputs_array.append(concatnated_output)
+
+        outputs_array = self.getAttentionedOutput(outputs_array)
+        return outputs_array
 
     def getAttentionedOutput(self, tensor):
         attention = tf.nn.sigmoid(tensor)
@@ -50,64 +81,52 @@ class RONet:
 
         return attentioned_tensor + tensor
 
-    def setStackedBiLSTM(self):
+    def getConcatenatedTensor(self, outputs):
+        concatenated_tensor = []
+        for i in range(self.batch_size):
+            concatenated_output = tf.concat([outputs[0][i], outputs[1][i]], axis = 1)
+            concatenated_tensor.append(concatenated_output)
+
+        # concatenated_tensor = tf.convert_to_tensor(concatenated_tensor)
+        return concatenated_tensor
+
+    def setStackedBiLSTMwithAttention(self, input_data):
         with tf.variable_scope("Stacked_bi_lstm1"):
             # outputs : tuple
-            first_layer_output_num = 100
+            first_layer_output_num = 10
             cell_forward1 = tf.contrib.rnn.BasicLSTMCell(num_units= first_layer_output_num)
             cell_backward1 = tf.contrib.rnn.BasicLSTMCell(num_units=first_layer_output_num)
 
             # outputs : tuple
-            outputs, _states = tf.nn.bidirectional_dynamic_rnn(cell_forward1, cell_backward1, self.X_data, dtype=tf.float32)
-            # outputs = tf.concat([outputs[0], outputs[1]], axis=1)
-            outputs = tf.add(outputs[0], outputs[1])
+            outputs, _states = tf.nn.bidirectional_dynamic_rnn(cell_forward1, cell_backward1, input_data, dtype=tf.float32)
+            outputs = self.getConcatenatedTensor(outputs)
+            attentioned_outputs = self.getAttentionedOutput(outputs)
 
         with tf.variable_scope("Stacked_bi_lstm2"):
             cell_forward2 = tf.contrib.rnn.BasicLSTMCell(num_units=self.hidden_size)
             cell_backward2 = tf.contrib.rnn.BasicLSTMCell(num_units=self.hidden_size)
 
             # outputs : tuple
-            return tf.nn.bidirectional_dynamic_rnn(cell_forward2, cell_backward2, outputs, dtype=tf.float32)
+            outputs = tf.nn.bidirectional_dynamic_rnn(cell_forward2, cell_backward2, attentioned_outputs, dtype=tf.float32)
+            outputs = self.getConcatenatedTensor(outputs)
 
-    def setStackedBiLSTM_by_MultiRNNCell(self):
-        with tf.variable_scope("MultiRNNCell"):
-            # outputs : tuple
-            layer_output_num = 100
-            cell_fw = tf.contrib.rnn.BasicLSTMCell(num_units= layer_output_num)
-            cell_bw = tf.contrib.rnn.BasicLSTMCell(num_units= layer_output_num)
-
-            lstm_fw_multicell = tf.nn.rnn_cell.MultiRNNCell([cell_fw]*2)
-            lstm_bw_multicell = tf.nn.rnn_cell.MultiRNNCell([cell_bw]*2)
-
-            # outputs : tuple
-            return tf.nn.bidirectional_dynamic_rnn(lstm_fw_multicell, lstm_bw_multicell, self.X_data, dtype =tf.float32)   # def setStackedBiLSTM_test(self):
+            self.pose_pred = outputs[:, -1, :]
 
 
-    def setBiLSTM(self):
-        with tf.variable_scope("bidirectional_lstm"):
-            cell_forward = tf.contrib.rnn.BasicLSTMCell(num_units = self.hidden_size)
-            #cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
-            cell_backward = tf.contrib.rnn.BasicLSTMCell(num_units = self.hidden_size)
-            #cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
-
-            # outputs : tuple
-            return tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.X_data, dtype=tf.float32)
-
-    def build_model(self):
-            if (self.networks == 'bi'):
-                outputs, _states = self.setBiLSTM()
-                #outputs = tf.concat([outputs[0], outputs[1]], axis=1)
-                outputs = tf.add(outputs[0], outputs[1])
-                print ("Bidirectional LSTM")
-
-            elif (self.networks == 'stack'):
-
-                outputs, _states = self.setStackedBiLSTM()
-                outputs = tf.add(outputs[0], outputs[1])
-                print ("Stacked Bidirectional LSTM")
-
-            # outputs = tf.contrib.layers.fully_connected(X_for_fc, 100, activation_fn=None)
-            self.pose_pred = outputs[:,-1, :]
+    def buildRONet(self):
+        input_to_LSTM = self.getPreprocessedData()
+        self.setStackedBiLSTMwithAttention(input_to_LSTM)
+            #
+            # preprocessed_output = tf.concat([output0, output1, output2, output3], 1)
+            #
+            # local_attetioned_input = self.getAttentionedOutput(preprocessed_output)
+            #
+            # outputs = self.setStackedBiLSTMwithAttention(local_attetioned_input)
+            # outputs = tf.concat(outputs[0], outputs[1], 1)
+            # outputs= outputs[:, -1, :]
+            # X_for_fc = tf.reshape(outputs, [-1, self.hidden_size*2])
+            #
+            # self.pose_pred = tf.contrib.layers.fully_connected(X_for_fc, 3)
 
     def build_loss(self, lr, lr_decay_rate, lr_decay_step):
         self.init_lr = lr

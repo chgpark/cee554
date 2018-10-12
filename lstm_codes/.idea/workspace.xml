@@ -11,7 +11,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/lstm_codes$scribble.coverage" NAME="scribble Coverage Results" MODIFIED="1538128551518" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/lstm_codes$make_dataset.coverage" NAME="make_dataset Coverage Results" MODIFIED="1538499181745" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/lstm_codes$make_dataset.coverage" NAME="make_dataset Coverage Results" MODIFIED="1539341131219" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lstm_codes$lstm_network.coverage" NAME="lstm_network Coverage Results" MODIFIED="1539329784710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lstm_codes$test_bidirectional_rnn.coverage" NAME="test_bidirectional_rnn Coverage Results" MODIFIED="1539330363809" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lstm_codes$main.coverage" NAME="main Coverage Results" MODIFIED="1539333097184" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -74,8 +74,8 @@
           <file leaf-file-name="make_dataset.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/make_dataset.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1005">
-                  <caret line="84" column="54" selection-start-line="84" selection-start-column="54" selection-end-line="84" selection-end-column="54" />
+                <state relative-caret-position="246">
+                  <caret line="309" column="22" selection-start-line="309" selection-start-column="22" selection-end-line="309" selection-end-column="22" />
                   <folding>
                     <element signature="e#0#13#0" expanded="true" />
                   </folding>
@@ -183,7 +183,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.make_dataset">
     <configuration name="DataPreprocessing" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="lstm_codes" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -288,11 +288,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.make_dataset" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.test_bidirectional_rnn" />
         <item itemvalue="Python.lstm_network" />
         <item itemvalue="Python.DataPreprocessing" />
-        <item itemvalue="Python.make_dataset" />
       </list>
     </recent_temporary>
   </component>
@@ -318,9 +318,9 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.38854805" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.38854805" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11752021" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11752021" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -837,8 +837,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/make_dataset.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1005">
-          <caret line="84" column="54" selection-start-line="84" selection-start-column="54" selection-end-line="84" selection-end-column="54" />
+        <state relative-caret-position="246">
+          <caret line="309" column="22" selection-start-line="309" selection-start-column="22" selection-end-line="309" selection-end-column="22" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>

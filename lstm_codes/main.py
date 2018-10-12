@@ -14,9 +14,8 @@ tf.set_random_seed(777)  # reproducibilityb
 p =argparse.ArgumentParser()
 #FOR TRAIN
 p.add_argument('--train_data', type=str, default="train_data.csv")
-p.add_argument('--board_dir', type=str, default="./board/RiTA_wo_fcn/stacked_bi_epoch_1000_lr_0_02")
-p.add_argument('--save_dir', type=str, default="model/RiTA_wo_fcn/stacked_bi_epoch_1000_lr_0_02/")
-p.add_argument('--network_model', type=str, default="stack")
+p.add_argument('--board_dir', type=str, default="./board/LSTM/stacked_bi_epoch_1000_lr_0_02")
+p.add_argument('--save_dir', type=str, default="model/LSTM/stacked_bi_epoch_1000_lr_0_02/")
 
 p.add_argument('--lr', type=float, default = 0.014)
 p.add_argument('--decay_rate', type=float, default = 0.7)

@@ -48,7 +48,7 @@ print(d0_data.shape) #Data size / sequence length / uwb num
 
 robot_pose_gt, relative_anchor_position_gt = data_parser.set_gt_data()
 
-d0_data, d1_data, d2_data, d3_data, robot_pose_gt = data_parser.suffle_array_in_the_same_order(d0_data, d1_data, d2_data, d3_data, robot_pose_gt)
+# d0_data, d1_data, d2_data, d3_data, robot_pose_gt = data_parser.suffle_array_in_the_same_order(d0_data, d1_data, d2_data, d3_data, robot_pose_gt)
 # print(X_data[2])
 # print(X_data[-1])
 # print(robot_pose_data[-1])

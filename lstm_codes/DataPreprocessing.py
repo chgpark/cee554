@@ -23,7 +23,7 @@ class DataManager:
         # if (not prediction):
         self.scaler.fit(xy)
         # else:
-        self.scaler_for_prediction.fit(xy[:,4:])
+        # self.scaler_for_prediction.fit(xy[:,4:])
 
     def set_range_data_for_4_uwb(self):
         xy = np.loadtxt(self.dir, delimiter=',')

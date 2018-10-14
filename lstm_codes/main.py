@@ -14,8 +14,8 @@ tf.set_random_seed(777)  # reproducibilityb
 p =argparse.ArgumentParser()
 #FOR TRAIN
 p.add_argument('--train_data', type=str, default="inputs/train_3D_zigzag_uncertainty_0_03.csv")
-p.add_argument('--board_dir', type=str, default="./board/multimodal/stacked_bi_epoch_2000_lr_0_02")
-p.add_argument('--save_dir', type=str, default="model/multimodal/stacked_bi_epoch_2000_lr_0_02/")
+p.add_argument('--board_dir', type=str, default="/home/shapelim/git_files/RONet_result/board/multimodal/stacked_bi_epoch_2000_lr_0_02")
+p.add_argument('--save_dir', type=str, default="/home/shapelim/git_flies/RONet_result/model/multimodal/stacked_bi_epoch_2000_lr_0_02/")
 
 p.add_argument('--lr', type=float, default = 0.02)
 p.add_argument('--decay_rate', type=float, default = 0.7)
@@ -71,6 +71,10 @@ saver = tf.train.Saver(max_to_keep = 5)
 ###########for using tensorboard########
 merged = tf.summary.merge_all()
 ########################################
+
+if not os.path.isdir(args.save_dir):
+    os.makedirs(args.save_dir)
+
 with tf.Session() as sess:
     if (args.mode=='train'):
 

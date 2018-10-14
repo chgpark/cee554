@@ -27,7 +27,7 @@ class DataManager:
 
     def set_range_data_for_4_uwb(self):
         xy = np.loadtxt(self.dir, delimiter=',')
-        # xy = self.scaler.transform(xy)
+        xy = self.scaler.transform(xy)
 
         x = xy[:,:self.num_uwb]
 
@@ -79,7 +79,7 @@ class DataManager:
     def set_gt_data(self):
         xy = np.loadtxt(self.dir, delimiter=',')
 
-        # xy = self.scaler.transform(xy)
+        xy = self.scaler.transform(xy)
 
         robot_pose = xy[:,self.num_uwb:(-1)*self.num_uwb*3]  # Close as label
         relative_cartesian_position = xy[:, (-1)*self.num_uwb*3:]

@@ -12,6 +12,8 @@ class RONet:
         self.output_size = args.output_size
         self.sequence_length = args.sequence_length
         self.output_type = args.output_type
+
+
         self.set_placeholders()
 
         self.buildRONet()
@@ -161,9 +163,9 @@ class RONet:
         self.set_preprocessed_bi_LSTMs()
         self.set_stacked_bi_LSTM_with_attention()
 
-        position = self.output[:, -1, :]
+        self.output = self.output[:, -1, :]
         # position = tf.reshape(lstm_output, [-1, ])
-        self.pose_pred = tf.contrib.layers.fully_connected(position, 3)
+        self.pose_pred = tf.contrib.layers.fully_connected(self.output, 3)
 
     def build_loss(self, lr, lr_decay_rate, lr_decay_step):
         self.init_lr = lr

@@ -82,9 +82,7 @@ class RONet:
             #cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
 
             output3, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d3_data, dtype=tf.float32)
-
             return output0, output1, output2, output3
-
     def getPreprocessedData(self):
         output0, output1, output2, output3 = self.set_multimodal_PreprocessingLSTM_for_4_uwb()
         outputs_array = []
@@ -139,10 +137,12 @@ class RONet:
             attentioned_outputs = self.getAttentionedOutput(outputs)
             return attentioned_outputs
 
+
     def buildRONet(self):
         input_to_LSTM = self.getPreprocessedData() #shape: batch, sequence_length, intput_size*2*self.preprocessing_output_size
         lstm_output = self.setStackedBiLSTMwithAttention(input_to_LSTM)
         position = lstm_output[:, -1, :]
+        # position = tf.reshape(lstm_output, [-1, ])
         self.pose_pred = tf.contrib.layers.fully_connected(position, 3)
 
     def build_loss(self, lr, lr_decay_rate, lr_decay_step):

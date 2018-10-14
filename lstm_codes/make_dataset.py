@@ -108,43 +108,6 @@ class CSVWriter():
             dist_list = self.moveRobot(0.0, -DELTALENGTH, 0.0)
             self.writerow(dist_list)
 
-    def zigzag_zx(self, round_number):
-        for j in range(5):
-            for i in range(self.iteration_num):
-                dist_list = self.moveRobot( 0.0, 0.0, -DELTALENGTH)
-                self.writerow(dist_list)
-            for i in range(int(self.iteration_num/10)):
-                dist_list = self.moveRobot( -DELTALENGTH, 0.0, 0.0)
-                self.writerow(dist_list)
-            for i in range(int(self.iteration_num)):
-                dist_list = self.moveRobot(0.0, 0.0, DELTALENGTH)
-                self.writerow(dist_list)
-            for i in range(int(self.iteration_num/10)):
-                dist_list = self.moveRobot( -DELTALENGTH,  0.0, 0.0)
-                self.writerow(dist_list)
-
-        for i in range(self.iteration_num):
-            dist_list = self.moveRobot( 0.0, 0.0, -DELTALENGTH)
-            self.writerow(dist_list)
-
-        for j in range(5):
-            for i in range(self.iteration_num):
-                dist_list = self.moveRobot(DELTALENGTH, 0.0, 0.0)
-                self.writerow(dist_list)
-            for i in range(int(self.iteration_num / 10)):
-                dist_list = self.moveRobot(0.0, 0.0, DELTALENGTH)
-                self.writerow(dist_list)
-            for i in range(self.iteration_num):
-                dist_list = self.moveRobot(-DELTALENGTH, 0.0, 0.0)
-                self.writerow(dist_list)
-            for i in range(int(self.iteration_num / 10)):
-                dist_list = self.moveRobot(0.0, 0.0, DELTALENGTH)
-                self.writerow(dist_list)
-
-        for i in range(self.iteration_num):
-            dist_list = self.moveRobot(DELTALENGTH, 0.0, 0.0)
-            self.writerow(dist_list)
-
     def zigzag_yz(self, round_number):
         for j in range(5):
             for i in range(self.iteration_num):
@@ -181,6 +144,43 @@ class CSVWriter():
 
         for i in range(self.iteration_num):
             dist_list = self.moveRobot(0.0, 0.0, DELTALENGTH)
+            self.writerow(dist_list)
+
+    def zigzag_zx(self, round_number):
+        for j in range(5):
+            for i in range(self.iteration_num):
+                dist_list = self.moveRobot( 0.0, 0.0, -DELTALENGTH)
+                self.writerow(dist_list)
+            for i in range(int(self.iteration_num/10)):
+                dist_list = self.moveRobot( -DELTALENGTH, 0.0, 0.0)
+                self.writerow(dist_list)
+            for i in range(int(self.iteration_num)):
+                dist_list = self.moveRobot(0.0, 0.0, DELTALENGTH)
+                self.writerow(dist_list)
+            for i in range(int(self.iteration_num/10)):
+                dist_list = self.moveRobot( -DELTALENGTH,  0.0, 0.0)
+                self.writerow(dist_list)
+
+        for i in range(self.iteration_num):
+            dist_list = self.moveRobot( 0.0, 0.0, -DELTALENGTH)
+            self.writerow(dist_list)
+
+        for j in range(5):
+            for i in range(self.iteration_num):
+                dist_list = self.moveRobot(DELTALENGTH, 0.0, 0.0)
+                self.writerow(dist_list)
+            for i in range(int(self.iteration_num / 10)):
+                dist_list = self.moveRobot(0.0, 0.0, DELTALENGTH)
+                self.writerow(dist_list)
+            for i in range(self.iteration_num):
+                dist_list = self.moveRobot(-DELTALENGTH, 0.0, 0.0)
+                self.writerow(dist_list)
+            for i in range(int(self.iteration_num / 10)):
+                dist_list = self.moveRobot(0.0, 0.0, DELTALENGTH)
+                self.writerow(dist_list)
+
+        for i in range(self.iteration_num):
+            dist_list = self.moveRobot(DELTALENGTH, 0.0, 0.0)
             self.writerow(dist_list)
 
     def drawZigzagPath_3D(self, round_number):
@@ -285,27 +285,7 @@ class CSVWriter():
             self.writerow(dist_list)
         print(self.kobuki.x, self.kobuki.y)
 
-    def drawTestPath2(self):
-            # 0,0 -> 5,1
 
-            y_t_1 = 0
-            for i in range(785):
-                x = 5/785
-                y_t = curve_function1(x * i)
-                y = y_t - y_t_1
-                dist_list = self.moveRobot( x, y, 0.0)
-                self.writerow(dist_list)
-                y_t_1 = y_t
-
-            y_t_1 = 5
-            # -> 2,1.5
-            for i in range(785):
-                x = -5/785
-                y_t = curve_function2( 5 + x * i )
-                y = y_t - y_t_1
-                dist_list = self.moveRobot(x, y, 0.0)
-                self.writerow(dist_list)
-                y_t_1 = y_t
 
 
 

@@ -1,3 +1,4 @@
+from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 import argparse
 import csv
@@ -234,35 +235,56 @@ class Visualization:
         fig.savefig(saved_file_name)
         print ("Done")
 
-    def drawResult3D(self, X_list, Y_list, Z_list):
+    def drawResult3D(self, X_list, Y_list, Z_list, c, m):
 
         self.fig = plt.figure()
+        self.ax1 = self.fig.add_subplot(111, projection='3d')
+        self.ax1.scatter(X_list, Y_list, Z_list, c=c, marker=m)
         # plt.subplot(221)
         # self.ax1 = self.fig.gca(projection = '3d') #add_subplot(111, projection='3d')
         # self.ax1.scatter(X_list, Y_list, Z_list)
-        plt.subplot(221)
-        plt.plot(X_list, Y_list)
-        plt.xlabel("X_axis")
-        plt.ylabel("Y_axis")
-        plt.subplot(222)
-        plt.plot(Z_list, Y_list)
-        plt.xlabel("Z_axis")
-        plt.ylabel("Y_axis")
-        plt.subplot(223)
-        plt.plot(X_list, Z_list)
-        plt.xlabel("X_axis")
-        plt.ylabel("Z_axis")
+        # plt.subplot(221)
+        # plt.plot(X_list, Y_list)
+        # plt.xlabel("X_axis")
+        # plt.ylabel("Y_axis")
+        # plt.subplot(222)
+        # plt.plot(Z_list, Y_list)
+        # plt.xlabel("Z_axis")
+        # plt.ylabel("Y_axis")
+        # plt.subplot(223)
+        # plt.plot(X_list, Z_list)
+        # plt.xlabel("X_axis")
+        # plt.ylabel("Z_axis")
+        self.ax1.set_xlabel('X_axis')
+        self.ax1.set_ylabel('Y_axis')
+        self.ax1.set_zlabel('Z_axis')
         self.fig = plt.gcf()
         self.fig.savefig(self.folder_name +"/Results.png")
 
+
+
 if __name__ == "__main__":
-    viz = Visualization(args)
-    test = np.loadtxt("train_yz3D.csv", delimiter= ',')
-    X = test[:, 4]
-    Y = test[:, 5]
-    Z = test[:, 6]
+    def drawResult3D(X_list, Y_list, Z_list, c, m):
+        fig = plt.figure()
+        ax1 = fig.add_subplot(111, projection='3d')
+        ax1.scatter(X_list, Y_list, Z_list, c=c, marker=m)
+    def randrange(n, vmin, vmax):
+        return (vmax - vmin)*np.random.rand(n) + vmin
+
+    # viz = Visualization(args)
+    # test = np.loadtxt("train_yz3D.csv", delimiter= ',')
+    n = 100
+    for c, m, zlow, zhigh in [('r', 'o', -50, -25), ('b', '^', -30, -5)]:
+        xs = randrange(n, 23, 32)
+        ys = randrange(n, 0, 100)
+        zs = randrange(n, zlow, zhigh)
+        drawResult3D(xs, ys, zs, c, m)
+    plt.show()
+    # X = test[:, 4]
+    # Y = test[:, 5]
+    # Z = test[:, 6]
     print ("heelo")
-    viz.drawResult3D(X, Y, Z)
+    # viz.drawResult3D(X, Y, Z)
     # viz.plotDistanceError(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)
     # viz.plotErrorPercent(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)
     # viz.plot2DTrajectory(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)

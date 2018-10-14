@@ -146,7 +146,6 @@ class RONet:
             attention = tf.nn.sigmoid(self.output)
             self.output = attention*self.output
     def set_preprocessed_bi_LSTMs(self):
-
         self.set_multimodal_PreprocessingLSTM_for_4_uwb()
         self.concatenate_preprocessed_data()
         self.get_attentioned_preprocessed_data()

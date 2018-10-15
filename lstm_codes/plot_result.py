@@ -267,13 +267,13 @@ if __name__ == "__main__":
     def drawResult3D(X_list, Y_list, Z_list, c, m):
         fig = plt.figure()
         ax1 = fig.add_subplot(111, projection='3d')
-        ax1.scatter(X_list, Y_list, Z_list, c=c, marker=m)
+        ax1.plot(X_list, Y_list, Z_list, c=c, marker=m)
     def randrange(n, vmin, vmax):
         return (vmax - vmin)*np.random.rand(n) + vmin
 
     # viz = Visualization(args)
     # test = np.loadtxt("train_yz3D.csv", delimiter= ',')
-    n = 100
+    n = 10
     for c, m, zlow, zhigh in [('r', 'o', -50, -25), ('b', '^', -30, -5)]:
         xs = randrange(n, 23, 32)
         ys = randrange(n, 0, 100)

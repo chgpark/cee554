@@ -2,13 +2,13 @@ import random
 import math
 import csv
 
-ISZIGZAG = True
+ISZIGZAG = False
 UNCERTAINTY = 0.03
 DIMENSION = '3D'
 DELTALENGTH = 0.05
 ONESIDELENGTH = 4
 
-class position:
+class position(object):
     def __init__(self, x, y, z):
         self.x = x
         self.y = y
@@ -285,36 +285,85 @@ class CSVWriter():
             self.writerow(dist_list)
         print(self.kobuki.x, self.kobuki.y)
 
+    def drawPolyPath(self):
+        # 0,0 -> 1,0
+        for i in range(100):
+            dist_list = self.moveRobot(DELTALENGTH, 0.0, 0.0)
+            self.writerow(dist_list)
+
+        print(self.kobuki.x, self.kobuki.y)
+
+    def drawSpiralPath(self):
+        # (0,0,0)=>(1.2,0,0.7) z=0.486*x^2
+        for i in range(24):
+            dist_list = self.moveRobot(DELTALENGTH, 0.0, (0.486*(self.kobuki.x+DELTALENGTH)**2 )- self.kobuki.z)
+            self.writerow(dist_list)
+        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+
+        #spiral 48*0.05 =2.4 / radius = 1.2  # CCW
+        for i in range(48):
+            dist_list = self.moveRobot(-DELTALENGTH, math.sqrt((1.2*1.2+0.001) - (self.kobuki.x -DELTALENGTH)**2) -self.kobuki.y, DELTALENGTH*(0.2))
+            self.writerow(dist_list)
+        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+
+        for i in range(48):
+            #print(math.sqrt((1.2 * 1.2 + 0.001) - (self.kobuki.x + DELTALENGTH) ** 2))
+            dist_list = self.moveRobot(+DELTALENGTH, -1*math.sqrt((1.2*1.2+0.001) - (self.kobuki.x +DELTALENGTH)**2)-self.kobuki.y, DELTALENGTH*(0.2))
+            self.writerow(dist_list)
+        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+
+        for i in range(48):
+            dist_list = self.moveRobot(-DELTALENGTH, math.sqrt((1.2 * 1.2 + 0.001) - (self.kobuki.x - DELTALENGTH)**2) - self.kobuki.y, DELTALENGTH * (0.2))
+            self.writerow(dist_list)
+        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+
+        for i in range(48):
+            dist_list = self.moveRobot(+DELTALENGTH, -1 * math.sqrt((1.2 * 1.2 + 0.001) - (self.kobuki.x + DELTALENGTH)**2) - self.kobuki.y, DELTALENGTH * (0.2))
+            self.writerow(dist_list)
+        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+
+        for i in range(38):
+            dist_list = self.moveRobot(-DELTALENGTH, math.sqrt((1.2 * 1.2 + 0.001) - (self.kobuki.x - DELTALENGTH)**2) - self.kobuki.y, DELTALENGTH * (0.2))
+            self.writerow(dist_list)
+        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
 
 
 
 
-uwb1 = UWB( -2.4, -2.4, 0.1)
-uwb2 = UWB( 2.4, -2.4, 2.7)
-uwb3 = UWB( 2.4, 2.4, 1.4)
-uwb4 = UWB( -2.4, 2.4, 4.2)
+
+#uwb1 = UWB( -2.4, -2.4, 0.1)
+#uwb2 = UWB( 2.4, -2.4, 2.7)
+#uwb3 = UWB( 2.4, 2.4, 1.4)
+#uwb4 = UWB( -2.4, 2.4, 4.2)
+
+
+#uwb_list = [uwb1, uwb2, uwb3, uwb4]
+# Below :
+uwb1 = UWB( 0.9, 0.9, 0)
+uwb2 = UWB( 4.5,-0.9, 0)
+uwb3 = UWB( 4.5, 4.5, 0)
+uwb4 = UWB( 0.9, 2.7, 0)
 
 uwb_list = [uwb1, uwb2, uwb3, uwb4]
-# Below :
-# uwb1 = UWB( 0.9, 0.9, 0)
-# uwb2 = UWB( 4.5,-0.9, 0)
-# uwb3 = UWB( 4.5, 4.5, 0)
-# uwb4 = UWB( 0.9, 2.7, 0)
-file_name = 'train_' + DIMENSION
+
+file_name = '3D_path_spiral ' + DIMENSION # file name
 # file_name = 'test_data_arbitrary_path' + DIMENSION
 if (ISZIGZAG):
     file_name = file_name +'_' + 'zigzag'
 file_name = file_name + '.csv'
 
-kobuki = Robot(-2.0, -2.0, 4.0)
+kobuki = Robot(0.0, 0.0, 0.0) #initial position
 
-train_file = open(file_name ,'w',encoding = 'utf-8', newline ='')
+
+#train_file = open(file_name,'w',encoding = 'utf-8', newline ='')
+train_file = open(file_name,'w')
 wr = csv.writer(train_file)
 
 dataWriter = CSVWriter(wr, kobuki)
 
-dataWriter.drawZigzagPath_3D(10)
-
+#dataWriter.drawZigzagPath_3D(10)
+#dataWriter.drawTestPath()
+dataWriter.drawSpiralPath()
 
 print ("Make "+file_name)
 

@@ -301,26 +301,32 @@ class CSVWriter():
         #draw a square
         for i in range(30):
             dist_list = self.moveRobot(0,DELTALENGTH,0)
+            self.writerow(dist_list)
         print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
 
         for i in range(30):
             dist_list = self.moveRobot(-DELTALENGTH,0,0)
+            self.writerow(dist_list)
         print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
 
         for i in range(60):
             dist_list = self.moveRobot(0,-DELTALENGTH,0)
+            self.writerow(dist_list)
         print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
 
         for i in range(60):
             dist_list = self.moveRobot(+DELTALENGTH,0,0)
+            self.writerow(dist_list)
         print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
 
         for i in range(60):
             dist_list = self.moveRobot(0,+DELTALENGTH,0)
+            self.writerow(dist_list)
         print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
 
         for i in range(30):
             dist_list = self.moveRobot(-DELTALENGTH,0,0)
+            self.writerow(dist_list)
         print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
 
 

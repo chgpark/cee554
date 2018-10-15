@@ -286,12 +286,43 @@ class CSVWriter():
         print(self.kobuki.x, self.kobuki.y)
 
     def drawPolyPath(self):
-        # 0,0 -> 1,0
-        for i in range(100):
-            dist_list = self.moveRobot(DELTALENGTH, 0.0, 0.0)
+        # 0,0 -> (1.5,0,1.5)
+        for i in range(30):
+            dist_list = self.moveRobot(DELTALENGTH, 0.0, (0.667*(self.kobuki.x + DELTALENGTH) ** 2) - self.kobuki.z)
             self.writerow(dist_list)
+        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+            # (1.5,0,1.5) -> (0,0,3)
 
-        print(self.kobuki.x, self.kobuki.y)
+        for i in range(30):
+            dist_list = self.moveRobot(- DELTALENGTH, 0.0, (0.667 * (self.kobuki.x - DELTALENGTH -1.5) ** 2 +1.5) - self.kobuki.z)
+            self.writerow(dist_list)
+        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+
+        #draw a square
+        for i in range(30):
+            dist_list = self.moveRobot(0,DELTALENGTH,0)
+        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+
+        for i in range(30):
+            dist_list = self.moveRobot(-DELTALENGTH,0,0)
+        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+
+        for i in range(60):
+            dist_list = self.moveRobot(0,-DELTALENGTH,0)
+        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+
+        for i in range(60):
+            dist_list = self.moveRobot(+DELTALENGTH,0,0)
+        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+
+        for i in range(60):
+            dist_list = self.moveRobot(0,+DELTALENGTH,0)
+        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+
+        for i in range(30):
+            dist_list = self.moveRobot(-DELTALENGTH,0,0)
+        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+
 
     def drawSpiralPath(self):
         # (0,0,0)=>(1.2,0,0.7) z=0.486*x^2
@@ -346,7 +377,7 @@ uwb4 = UWB( 0.9, 2.7, 0)
 
 uwb_list = [uwb1, uwb2, uwb3, uwb4]
 
-file_name = '3D_path_spiral ' + DIMENSION # file name
+file_name = '3D_path_poly ' + DIMENSION # file name
 # file_name = 'test_data_arbitrary_path' + DIMENSION
 if (ISZIGZAG):
     file_name = file_name +'_' + 'zigzag'
@@ -363,7 +394,7 @@ dataWriter = CSVWriter(wr, kobuki)
 
 #dataWriter.drawZigzagPath_3D(10)
 #dataWriter.drawTestPath()
-dataWriter.drawSpiralPath()
+dataWriter.drawPolyPath()
 
 print ("Make "+file_name)
 

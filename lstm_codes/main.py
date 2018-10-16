@@ -13,7 +13,7 @@ tf.set_random_seed(777)  # reproducibilityb
 # hyper parameters
 p =argparse.ArgumentParser()
 #FOR TRAIN
-p.add_argument('--train_data', type=str, default="inputs/train_3D_zigzag_250.csv")
+p.add_argument('--train_data', type=str, default="train_3D_zigzag_1.csv")
 p.add_argument('--board_dir', type=str, default="/home/shapelim/git_files/RONet_result/board/multimodal/stacked_bi_e2500_lr0_02/")
 p.add_argument('--save_dir', type=str, default="/home/shapelim/git_flies/RONet_result/model/multimodal/stacked_bi_e2500_lr0_02/")
 

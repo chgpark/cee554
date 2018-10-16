@@ -2,7 +2,7 @@ import random
 import math
 import csv
 
-ISZIGZAG = False
+ISZIGZAG = True
 UNCERTAINTY = 0.03
 DIMENSION = '3D'
 DELTALENGTH = 0.05
@@ -393,13 +393,13 @@ uwb4 = UWB( -2.4, 2.4, 4.2)
 
 uwb_list = [uwb1, uwb2, uwb3, uwb4]
 
-file_name = 'spiral_' + DIMENSION # file name
+file_name = 'train_' + DIMENSION # file name
 # file_name = 'test_data_arbitrary_path' + DIMENSION
 if (ISZIGZAG):
-    file_name = file_name +'_' + 'zigzag_200'
+    file_name = file_name +'_' + 'zigzag_1'
 file_name = file_name + '.csv'
 
-drone = Robot(0.0, 0.0, 0.0) #initial position
+drone = Robot(-2.0, -2.0, 0.0) #initial position
 
 
 #train_file = open(file_name,'w',encoding = 'utf-8', newline ='')
@@ -408,10 +408,10 @@ wr = csv.writer(train_file)
 
 dataWriter = CSVWriter(wr, drone)
 
-# dataWriter.drawZigzagPath_3D(30)
+dataWriter.drawZigzagPath_3D(1)
 #dataWriter.drawTestPath()
 # dataWriter.drawPolyPath()
-dataWriter.drawSpiralPath()
+# dataWriter.drawSpiralPath()
 
 print ("Make "+file_name)
 

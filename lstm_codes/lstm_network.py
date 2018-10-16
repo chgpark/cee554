@@ -163,7 +163,7 @@ class RONet:
         self.set_preprocessed_multimodal_bi_LSTMs()
         self.set_stacked_bi_LSTM_with_attention()
 
-        self.output = tf.reshape (self.output, [-1, self.second_layer_output_size*2])
+        self.output = tf.reshape (self.output, [-1, self.sequence_length*self.second_layer_output_size*2])
         self.pose_pred = tf.contrib.layers.fully_connected(self.output, 3)
 
     def build_loss(self, lr, lr_decay_rate, lr_decay_step):

@@ -8,20 +8,20 @@ from tqdm import tqdm, trange
 import os
 import argparse
 import csv
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3'
 tf.set_random_seed(777)  # reproducibilityb
 # hyper parameters
 p =argparse.ArgumentParser()
 #FOR TRAIN
-p.add_argument('--train_data', type=str, default="inputs/train_3D_zigzag_250.csv")
-p.add_argument('--board_dir', type=str, default="/home/shapelim/git_files/RONet_result/board/multimodal/stacked_bi_e2500_lr0_02/")
-p.add_argument('--save_dir', type=str, default="/home/shapelim/git_flies/RONet_result/model/multimodal/stacked_bi_e2500_lr0_02/")
+p.add_argument('--train_data', type=str, default="/home/shapelim/workspace/train_3D_zigzag_30.csv")
+p.add_argument('--board_dir', type=str, default="/home/shapelim/workspace/RONet_result/board/multimodal/e2500_lr0_02/")
+p.add_argument('--save_dir', type=str, default="/home/shapelim/workspace/RONet_result/model/multimodal/e2500_lr0_02/")
 
 p.add_argument('--lr', type=float, default = 0.02)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 7)
 p.add_argument('--epoches', type=int, default = 2500)
-p.add_argument('--batch_size', type=int, default = 1000)
+p.add_argument('--batch_size', type=int, default = 5000)
 
 #NETWORK PARAMETERS
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
@@ -41,9 +41,10 @@ p.add_argument('--output_results', type=str, default= 'results/multimodal/multim
 p.add_argument('--mode', type=str, default = "train") #train or test
 args = p.parse_args()
 
+print ("Loading train data...")
 data_parser = DataPreprocessing.DataManager(args.train_data, args.sequence_length, args.input_size)
 data_parser.fitDataForMinMaxScaler()
-
+print ("Complete!")
 d0_data, d1_data, d2_data, d3_data = data_parser.set_range_data_for_4_uwb()
 
 print(d0_data.shape) #Data size / sequence length / uwb num

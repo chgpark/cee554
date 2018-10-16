@@ -32,11 +32,11 @@ p.add_argument('--second_layer_output_size', type=int, default = 3)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 3) #final output size (RNN or softmax, etc)
 #FOR TEST
-p.add_argument('--load_model_dir', type=str, default="model/RiTA_wo_fcn/stacked_bi_epoch_3000/model_0_00006-17700")
-p.add_argument('--test_data', type=str, default='inputs/test_data_diagonal_curve2D.csv')
-p.add_argument('--output_results', type=str, default= 'results/RiTA/stack_lstm_epoch3000_17700.csv')
+p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet_result/model/multimodal/stacked_bi_epoch_2500_lr_0_02/model_0_00013-132500")
+p.add_argument('--test_data', type=str, default='inputs/3D_path_poly.csv')
+p.add_argument('--output_results', type=str, default= 'results/multimodal/multimodal_poly.csv')
 ###########
-p.add_argument('--mode', type=str, default = "train") #train or test
+p.add_argument('--mode', type=str, default = "test") #train or test
 args = p.parse_args()
 
 data_parser = DataPreprocessing.DataManager(args.train_data, args.sequence_length, args.input_size)
@@ -44,7 +44,7 @@ data_parser.fitDataForMinMaxScaler()
 
 d0_data, d1_data, d2_data, d3_data = data_parser.set_range_data_for_4_uwb()
 
-print(d0_data.shape) #Data size / sequence length / uwb num
+# print(d0_data.shape) #Data size / sequence length / uwb num
 
 robot_pose_gt, relative_anchor_position_gt = data_parser.set_gt_data()
 
@@ -105,16 +105,19 @@ with tf.Session() as sess:
             tqdm_range.set_description('Loss ' +'{0:.7f}'.format(loss_of_epoch)+'  ')
             tqdm_range.refresh()
 
-#     elif (args.mode =='test'):
-#    #For save diagonal data
-#         saver.restore(sess, args.load_model_dir)
-#    # tf.train.latest_checkpoint(
-#
-#         test_data = args.test_data
-#         # diagonal_data = 'inputs/data_diagonal_w_big_error.csv'
-#         data_parser.dir = test_data
-#         X_test, Y_test = data_parser.set_data()
-#         prediction = sess.run([ro_net.Y_pred], feed_dict={ro_net.X_data: X_test}) #prediction : type: list, [ [[[hidden_size]*sequence_length] ... ] ]
-#
-#         data_parser.write_file_data(args.output_results, prediction)
+    elif (args.mode =='test'):
+   #For save diagonal data
+        saver.restore(sess, args.load_model_dir)
+        print ("Load success.")
+
+
+        data_parser.dir = args.test_data
+        d0_data, d1_data, d2_data, d3_data = data_parser.set_range_data_for_4_uwb()
+        prediction = sess.run([ro_net.pose_pred], feed_dict={ro_net.d0_data: d0_data,
+                                                          ro_net.d1_data: d1_data,
+                                                          ro_net.d2_data: d2_data,
+                                                          ro_net.d3_data: d3_data}) #prediction : type: list, [ [[[hidden_size]*sequence_length] ... ] ]
+
+        print (prediction)
+        data_parser.write_file_data(args.output_results, prediction)
 

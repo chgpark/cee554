@@ -11,10 +11,10 @@ p =argparse.ArgumentParser()
 p.add_argument('--gt_dir', type=str, default="inputs/test_data_arbitrary_square_uwb_2D_e10.csv")
 # p.add_argument('--gt_dir', type=str, default="inputs/test_data_diagonal_curve2D.csv")
 #In case of test 1
-p.add_argument('--bidirectional_LSTM_csv', type=str, default="results/RiTA/bidirectional_wo_fcn_well_trained.csv")
-p.add_argument('--stacked_bi_LSTM_csv', type=str, default="results/RiTA/stack_bi_2.csv")
-p.add_argument('--unidirectional_LSTM_csv', type=str, default= "results/RiTA/unidirectional_wo_fcn.csv")
-p.add_argument('--gru_csv', type=str, default= "results/RiTA/gru.csv")
+# p.add_argument('--bidirectional_LSTM_csv', type=str, default="results/RiTA/bidirectional_wo_fcn_well_trained.csv")
+# p.add_argument('--stacked_bi_LSTM_csv', type=str, default="results/RiTA/stack_bi_2.csv")
+# p.add_argument('--unidirectional_LSTM_csv', type=str, default= "results/RiTA/unidirectional_wo_fcn.csv")
+# p.add_argument('--gru_csv', type=str, default= "results/RiTA/gru.csv")
 
 #In case of test 2
 # p.add_argument('--bidirectional_LSTM_csv', type=str, default="results/RiTA/bi_lstm_to_curve_test.csv")
@@ -55,9 +55,10 @@ class Visualization:
         self.folder_name = "results/"
         if not os.path.isdir(self.folder_name):
             os.mkdir(self.folder_name)
-        self.setGT()
+        # self.setGT()
         self.color_set = COLORSET
         self.label = LABEL
+
     def setGT(self):
         gt_xy = np.loadtxt(args.gt_dir, delimiter=',')
         #x_array: gt_xy[:,0]
@@ -235,11 +236,12 @@ class Visualization:
         fig.savefig(saved_file_name)
         print ("Done")
 
-    def drawResult3D(self, X_list, Y_list, Z_list, c, m):
+    def drawResult3D(self, X_list, Y_list, Z_list, c):
 
         self.fig = plt.figure()
         self.ax1 = self.fig.add_subplot(111, projection='3d')
-        self.ax1.scatter(X_list, Y_list, Z_list, c=c, marker=m)
+        # self.ax1.scatter(X_list, Y_list, Z_list, c=c)
+        self.ax1.plot(X_list, Y_list, Z_list, c= c)
         # plt.subplot(221)
         # self.ax1 = self.fig.gca(projection = '3d') #add_subplot(111, projection='3d')
         # self.ax1.scatter(X_list, Y_list, Z_list)
@@ -259,32 +261,37 @@ class Visualization:
         self.ax1.set_ylabel('Y_axis')
         self.ax1.set_zlabel('Z_axis')
         self.fig = plt.gcf()
-        self.fig.savefig(self.folder_name +"/Results.png")
+        self.fig.savefig(self.folder_name +"/Results2.png")
 
 
 
 if __name__ == "__main__":
-    def drawResult3D(X_list, Y_list, Z_list, c, m):
+    def drawResult3D(X_list, Y_list, Z_list, c):
         fig = plt.figure()
         ax1 = fig.add_subplot(111, projection='3d')
-        ax1.plot(X_list, Y_list, Z_list, c=c, marker=m)
+        ax1.plot(X_list, Y_list, Z_list, c=c )
     def randrange(n, vmin, vmax):
         return (vmax - vmin)*np.random.rand(n) + vmin
 
-    # viz = Visualization(args)
+    viz = Visualization(args)
     # test = np.loadtxt("train_yz3D.csv", delimiter= ',')
-    n = 10
-    for c, m, zlow, zhigh in [('r', 'o', -50, -25), ('b', '^', -30, -5)]:
-        xs = randrange(n, 23, 32)
-        ys = randrange(n, 0, 100)
-        zs = randrange(n, zlow, zhigh)
-        drawResult3D(xs, ys, zs, c, m)
-    plt.show()
+    # n = 10
+    # for c, m, zlow, zhigh in [('r', 'o', -50, -25), ('b', '^', -30, -5)]:
+    #     xs = randrange(n, 23, 32)
+    #     ys = randrange(n, 0, 100)
+    #     zs = randrange(n, zlow, zhigh)
+    #     drawResult3D(xs, ys, zs, c)
+    # plt.show()
     # X = test[:, 4]
     # Y = test[:, 5]
     # Z = test[:, 6]
-    print ("heelo")
     # viz.drawResult3D(X, Y, Z)
+    # input = np.loadtxt("./inputs/3D_path_spiral.csv", delimiter = ',')
+    input = np.loadtxt("./inputs/3D_path_poly.csv", delimiter = ',')
+    x = input[:, 4]
+    y = input[:, 5]
+    z = input[:, 6]
+    viz.drawResult3D(x,y,z, 'b')
     # viz.plotDistanceError(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)
     # viz.plotErrorPercent(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)
     # viz.plot2DTrajectory(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)

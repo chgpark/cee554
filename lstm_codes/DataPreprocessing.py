@@ -22,8 +22,8 @@ class DataManager:
         xy = np.loadtxt(self.dir, delimiter=',')
         # if (not prediction):
         self.scaler.fit(xy)
-        # else:
-        # self.scaler_for_prediction.fit(xy[:,4:])
+        '''Below one is essential for test!!'''
+        self.scaler_for_prediction.fit(xy[:, 4:6])
 
     def set_range_data_for_4_uwb(self):
         xy = np.loadtxt(self.dir, delimiter=',')
@@ -135,7 +135,7 @@ class DataManager:
         result_file = open(out_dir, 'w', encoding='utf-8', newline='')
         wr = csv.writer(result_file)
 
-        for sequence_list in prediction[0]: # bc shape of prediction is "[" [[[hidden_size]*sequence_length], ... ] "]"
+        # for sequence_list in prediction[0]: # bc shape of prediction is "[" [[[hidden_size]*sequence_length], ... ] "]"
             # np_sequence = np.array(sequence_list, dtype=np.float32)
             #
             # # scaler for inverse transform of prediction
@@ -145,9 +145,10 @@ class DataManager:
 
 
             # scaler for inverse transform of prediction
-            transformed_sequence = self.scaler_for_prediction.inverse_transform([sequence_list])
-            for i in transformed_sequence:
-                wr.writerow([i[0], i[1]])
+        transformed_sequence = self.scaler_for_prediction.inverse_transform(prediction)
+
+        for i in transformed_sequence:
+            wr.writerow(i)
 
         result_file.close()
 
@@ -156,7 +157,7 @@ class DataManager:
 #Below Line : Extract colums that we want to extract#
 #
 if __name__ == '__main__':
-    file_name = 'inputs/train_3D_zigzag_uncertainty_0_03.csv'
+    file_name = 'inputs/multimodal_poly.csv'
     seq_length = 10
     num_uwb = 4
     data_parser = DataManager(file_name,seq_length, num_uwb)
@@ -165,12 +166,12 @@ if __name__ == '__main__':
     z = np.array([111,222,333,444,555])
     x,y,z = data_parser.suffle_array_in_the_same_order(x, y, z)
     print (x,y,z)
+
+
+    a= [([1,2,3],[4,5,6],[6,8,9])]
+
     total_length = 0
-    with open(file_name) as f:
-        for num_line, l in enumerate(f):  # For large data, enumerate should be used!
-            pass
-        total_length = num_line
-    total_length +=1
+
     # with open('results/test_diagonal_gt.csv' ,'w') as fp:
     #     for i in range(int( total_length/seq_length) ):
     #         np.savetxt(fp,Y_test[i],delimiter=",")

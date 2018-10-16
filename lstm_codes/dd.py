@@ -1,8 +1,12 @@
+import numpy as np
 def test():
     return [1,2,3]
 
-a, b, c = test()
-print (a)
-print (b)
-print (c)
 
+
+print ("loading...")
+d = np.loadtxt('train_3D_zigzag_200.csv', delimiter=',')
+print ('Complete')
+i = 0
+while(True):
+    print ("On test")

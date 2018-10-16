@@ -145,7 +145,8 @@ class RONet:
         with tf.variable_scope("Second_layer_attention"):
             attention = tf.nn.sigmoid(self.output)
             self.output = attention*self.output
-    def set_preprocessed_bi_LSTMs(self):
+
+    def set_preprocessed_multimodal_bi_LSTMs(self):
         self.set_multimodal_PreprocessingLSTM_for_4_uwb()
         self.concatenate_preprocessed_data()
         self.get_attentioned_preprocessed_data()
@@ -159,11 +160,10 @@ class RONet:
         self.get_attentioned_second_layer_output()
 
     def buildRONet(self):
-        self.set_preprocessed_bi_LSTMs()
+        self.set_preprocessed_multimodal_bi_LSTMs()
         self.set_stacked_bi_LSTM_with_attention()
 
-        self.output = self.output[:, -1, :]
-        # position = tf.reshape(lstm_output, [-1, ])
+        self.output = tf.reshape (self.output, [-1, self.second_layer_output_size*2])
         self.pose_pred = tf.contrib.layers.fully_connected(self.output, 3)
 
     def build_loss(self, lr, lr_decay_rate, lr_decay_step):

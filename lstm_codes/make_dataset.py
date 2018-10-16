@@ -36,6 +36,11 @@ class Robot(position):
     def getPose(self):
         return (self.x, self.y, self.z)
 
+    def setPosition(self, x, y, z):
+        self.x = x
+        self.y = y
+        self.z = z
+
     def setPose(self,dx,dy,dz):
         self.x += dx
         self.y += dy
@@ -48,30 +53,30 @@ def curve_function2(x):
     return math.sqrt((10 - x) * x)
 
 class CSVWriter():
-    def __init__(self, wr, kobuki):
+    def __init__(self, wr, drone):
         self.dimension = DIMENSION
         self.wr = wr
-        self.kobuki = kobuki
+        self.drone = drone
         self.iteration_num = int(ONESIDELENGTH/DELTALENGTH)
     def writerow(self, dist_list):
         if (self.dimension == '2D'):
-            self.wr.writerow(dist_list +(self.kobuki.x, self.kobuki.y))
+            self.wr.writerow(dist_list +(self.drone.x, self.drone.y))
 
         elif (self.dimension == '3D'):
-            written_data = dist_list + (self.kobuki.x, self.kobuki.y, self.kobuki.z)
+            written_data = dist_list + (self.drone.x, self.drone.y, self.drone.z)
             for uwb in uwb_list:
-                written_data += (self.kobuki.x - uwb.x, self.kobuki.y - uwb.y, self.kobuki.z - uwb.z)
+                written_data += (self.drone.x - uwb.x, self.drone.y - uwb.y, self.drone.z - uwb.z)
             self.wr.writerow(written_data)
 
     def moveRobot(self, x,y,z):
-        self.kobuki.setPose(x, y, z)
-        dist1 = uwb1.getDistancewNoise(kobuki)
-        dist2 = uwb2.getDistancewNoise(kobuki)
-        dist3 = uwb3.getDistancewNoise(kobuki)
-        dist4 = uwb4.getDistancewNoise(kobuki)
+        self.drone.setPose(x, y, z)
+        dist1 = uwb1.getDistancewNoise(drone)
+        dist2 = uwb2.getDistancewNoise(drone)
+        dist3 = uwb3.getDistancewNoise(drone)
+        dist4 = uwb4.getDistancewNoise(drone)
         return dist1,dist2,dist3,dist4
 
-    def zigzag_xy(self, round_number):
+    def zigzag_xy(self):
         for j in range(5):
             for i in range(self.iteration_num):
                 dist_list = self.moveRobot(DELTALENGTH, 0.0, 0.0)
@@ -108,7 +113,7 @@ class CSVWriter():
             dist_list = self.moveRobot(0.0, -DELTALENGTH, 0.0)
             self.writerow(dist_list)
 
-    def zigzag_yz(self, round_number):
+    def zigzag_yz(self):
         for j in range(5):
             for i in range(self.iteration_num):
                 dist_list = self.moveRobot(0.0, DELTALENGTH , 0.0)
@@ -146,7 +151,7 @@ class CSVWriter():
             dist_list = self.moveRobot(0.0, 0.0, DELTALENGTH)
             self.writerow(dist_list)
 
-    def zigzag_zx(self, round_number):
+    def zigzag_zx(self):
         for j in range(5):
             for i in range(self.iteration_num):
                 dist_list = self.moveRobot( 0.0, 0.0, -DELTALENGTH)
@@ -184,26 +189,32 @@ class CSVWriter():
             self.writerow(dist_list)
 
     def drawZigzagPath_3D(self, round_number):
-        self.zigzag_xy(round_number)
-        for j in range(10):
-            for k in range(int(self.iteration_num/10)):
-                dist_list = self.moveRobot( 0.0, 0.0, DELTALENGTH)
-                self.writerow(dist_list)
-            self.zigzag_xy(round_number)
+        for i in range(round_number):
+            self.drone.setPosition(-2, -2, 0)
+            self.zigzag_xy()
+            for j in range(10):
+                for k in range(int(self.iteration_num/10)):
+                    dist_list = self.moveRobot(0.0, 0.0, DELTALENGTH)
+                    self.writerow(dist_list)
+                self.zigzag_xy()
 
-        self.zigzag_yz(round_number)
-        for j in range(10):
-            for k in range(int(self.iteration_num/10)):
-                dist_list = self.moveRobot( DELTALENGTH, 0.0, 0.0)
-                self.writerow(dist_list)
-            self.zigzag_yz(round_number)
+            self.zigzag_yz()
+            for j in range(10):
+                for k in range(int(self.iteration_num/10)):
+                    dist_list = self.moveRobot(DELTALENGTH, 0.0, 0.0)
+                    self.writerow(dist_list)
+                self.zigzag_yz()
 
-        self.zigzag_zx(round_number)
-        for j in range(10):
-            for k in range(int(self.iteration_num/10)):
-                dist_list = self.moveRobot( 0.0, DELTALENGTH, 0.0)
+            self.zigzag_zx()
+            for j in range(10):
+                for k in range(int(self.iteration_num/10)):
+                    dist_list = self.moveRobot(0.0, DELTALENGTH, 0.0)
+                    self.writerow(dist_list)
+                self.zigzag_zx()
+
+            for k in range(139):
+                dist_list = self.moveRobot(-DELTALENGTH/1.7320508, -DELTALENGTH/1.7320508, -DELTALENGTH/1.7320508)
                 self.writerow(dist_list)
-            self.zigzag_zx(round_number)
 
     def drawSquarePath(self, round_number):
         for j in range(round_number):
@@ -279,128 +290,128 @@ class CSVWriter():
             dist_list = self.moveRobot(0.0, -DELTALENGTH, 0.0)
             self.writerow(dist_list)
         # 0, 0
-        print(self.kobuki.x, self.kobuki.y)
+        print(self.drone.x, self.drone.y)
         for i in range(231):
             dist_list = self.moveRobot(-DELTALENGTH * 1.25 / 2.31, -DELTALENGTH * 1.95 / 2.31, 0.0)
             self.writerow(dist_list)
-        print(self.kobuki.x, self.kobuki.y)
+        print(self.drone.x, self.drone.y)
 
     def drawPolyPath(self):
         # 0,0 -> (1.5,0,1.5)
         for i in range(30):
-            dist_list = self.moveRobot(DELTALENGTH, 0.0, (0.667*(self.kobuki.x + DELTALENGTH) ** 2) - self.kobuki.z)
+            dist_list = self.moveRobot(DELTALENGTH, 0.0, (0.667*(self.drone.x + DELTALENGTH) ** 2) - self.drone.z)
             self.writerow(dist_list)
-        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+        print(self.drone.x, self.drone.y, self.drone.z)
             # (1.5,0,1.5) -> (0,0,3)
 
         for i in range(30):
-            dist_list = self.moveRobot(- DELTALENGTH, 0.0, (0.667 * (self.kobuki.x - DELTALENGTH -1.5) ** 2 +1.5) - self.kobuki.z)
+            dist_list = self.moveRobot(- DELTALENGTH, 0.0, (0.667 * (self.drone.x - DELTALENGTH -1.5) ** 2 +1.5) - self.drone.z)
             self.writerow(dist_list)
-        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+        print(self.drone.x, self.drone.y, self.drone.z)
 
         #draw a square
         for i in range(30):
             dist_list = self.moveRobot(0,DELTALENGTH,0)
             self.writerow(dist_list)
-        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+        print(self.drone.x, self.drone.y, self.drone.z)
 
         for i in range(30):
             dist_list = self.moveRobot(-DELTALENGTH,0,0)
             self.writerow(dist_list)
-        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+        print(self.drone.x, self.drone.y, self.drone.z)
 
         for i in range(60):
             dist_list = self.moveRobot(0,-DELTALENGTH,0)
             self.writerow(dist_list)
-        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+        print(self.drone.x, self.drone.y, self.drone.z)
 
         for i in range(60):
             dist_list = self.moveRobot(+DELTALENGTH,0,0)
             self.writerow(dist_list)
-        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+        print(self.drone.x, self.drone.y, self.drone.z)
 
         for i in range(60):
             dist_list = self.moveRobot(0,+DELTALENGTH,0)
             self.writerow(dist_list)
-        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+        print(self.drone.x, self.drone.y, self.drone.z)
 
         for i in range(30):
             dist_list = self.moveRobot(-DELTALENGTH,0,0)
             self.writerow(dist_list)
-        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+        print(self.drone.x, self.drone.y, self.drone.z)
 
 
     def drawSpiralPath(self):
         # (0,0,0)=>(1.2,0,0.7) z=0.486*x^2
         for i in range(24):
-            dist_list = self.moveRobot(DELTALENGTH, 0.0, (0.486*(self.kobuki.x+DELTALENGTH)**2 )- self.kobuki.z)
+            dist_list = self.moveRobot(DELTALENGTH, 0.0, (0.486*(self.drone.x+DELTALENGTH)**2 )- self.drone.z)
             self.writerow(dist_list)
-        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+        print(self.drone.x, self.drone.y, self.drone.z)
 
         #spiral 48*0.05 =2.4 / radius = 1.2  # CCW
         for i in range(48):
-            dist_list = self.moveRobot(-DELTALENGTH, math.sqrt((1.2*1.2+0.001) - (self.kobuki.x -DELTALENGTH)**2) -self.kobuki.y, DELTALENGTH*(0.2))
+            dist_list = self.moveRobot(-DELTALENGTH, math.sqrt((1.2*1.2+0.001) - (self.drone.x -DELTALENGTH)**2) -self.drone.y, DELTALENGTH*(0.2))
             self.writerow(dist_list)
-        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+        print(self.drone.x, self.drone.y, self.drone.z)
 
         for i in range(48):
-            #print(math.sqrt((1.2 * 1.2 + 0.001) - (self.kobuki.x + DELTALENGTH) ** 2))
-            dist_list = self.moveRobot(+DELTALENGTH, -1*math.sqrt((1.2*1.2+0.001) - (self.kobuki.x +DELTALENGTH)**2)-self.kobuki.y, DELTALENGTH*(0.2))
+            #print(math.sqrt((1.2 * 1.2 + 0.001) - (self.drone.x + DELTALENGTH) ** 2))
+            dist_list = self.moveRobot(+DELTALENGTH, -1*math.sqrt((1.2*1.2+0.001) - (self.drone.x +DELTALENGTH)**2)-self.drone.y, DELTALENGTH*(0.2))
             self.writerow(dist_list)
-        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+        print(self.drone.x, self.drone.y, self.drone.z)
 
         for i in range(48):
-            dist_list = self.moveRobot(-DELTALENGTH, math.sqrt((1.2 * 1.2 + 0.001) - (self.kobuki.x - DELTALENGTH)**2) - self.kobuki.y, DELTALENGTH * (0.2))
+            dist_list = self.moveRobot(-DELTALENGTH, math.sqrt((1.2 * 1.2 + 0.001) - (self.drone.x - DELTALENGTH)**2) - self.drone.y, DELTALENGTH * (0.2))
             self.writerow(dist_list)
-        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+        print(self.drone.x, self.drone.y, self.drone.z)
 
         for i in range(48):
-            dist_list = self.moveRobot(+DELTALENGTH, -1 * math.sqrt((1.2 * 1.2 + 0.001) - (self.kobuki.x + DELTALENGTH)**2) - self.kobuki.y, DELTALENGTH * (0.2))
+            dist_list = self.moveRobot(+DELTALENGTH, -1 * math.sqrt((1.2 * 1.2 + 0.001) - (self.drone.x + DELTALENGTH)**2) - self.drone.y, DELTALENGTH * (0.2))
             self.writerow(dist_list)
-        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+        print(self.drone.x, self.drone.y, self.drone.z)
 
         for i in range(38):
-            dist_list = self.moveRobot(-DELTALENGTH, math.sqrt((1.2 * 1.2 + 0.001) - (self.kobuki.x - DELTALENGTH)**2) - self.kobuki.y, DELTALENGTH * (0.2))
+            dist_list = self.moveRobot(-DELTALENGTH, math.sqrt((1.2 * 1.2 + 0.001) - (self.drone.x - DELTALENGTH)**2) - self.drone.y, DELTALENGTH * (0.2))
             self.writerow(dist_list)
-        print(self.kobuki.x, self.kobuki.y, self.kobuki.z)
+        print(self.drone.x, self.drone.y, self.drone.z)
 
 
 
-
-
-#uwb1 = UWB( -2.4, -2.4, 0.1)
-#uwb2 = UWB( 2.4, -2.4, 2.7)
-#uwb3 = UWB( 2.4, 2.4, 1.4)
-#uwb4 = UWB( -2.4, 2.4, 4.2)
+'''Should be fixed!!'''
+uwb1 = UWB( -2.4, -2.4, 0.1)
+uwb2 = UWB( 2.4, -2.4, 2.7)
+uwb3 = UWB( 2.4, 2.4, 1.4)
+uwb4 = UWB( -2.4, 2.4, 4.2)
 
 
 #uwb_list = [uwb1, uwb2, uwb3, uwb4]
 # Below :
-uwb1 = UWB( 0.9, 0.9, 0)
-uwb2 = UWB( 4.5,-0.9, 0)
-uwb3 = UWB( 4.5, 4.5, 0)
-uwb4 = UWB( 0.9, 2.7, 0)
+# uwb1 = UWB( 0.9, 0.9, 0)
+# uwb2 = UWB( 4.5,-0.9, 0)
+# uwb3 = UWB( 4.5, 4.5, 0)
+# uwb4 = UWB( 0.9, 2.7, 0)
 
 uwb_list = [uwb1, uwb2, uwb3, uwb4]
 
-file_name = '3D_path_poly ' + DIMENSION # file name
+file_name = 'spiral_' + DIMENSION # file name
 # file_name = 'test_data_arbitrary_path' + DIMENSION
 if (ISZIGZAG):
-    file_name = file_name +'_' + 'zigzag'
+    file_name = file_name +'_' + 'zigzag_200'
 file_name = file_name + '.csv'
 
-kobuki = Robot(0.0, 0.0, 0.0) #initial position
+drone = Robot(0.0, 0.0, 0.0) #initial position
 
 
 #train_file = open(file_name,'w',encoding = 'utf-8', newline ='')
 train_file = open(file_name,'w')
 wr = csv.writer(train_file)
 
-dataWriter = CSVWriter(wr, kobuki)
+dataWriter = CSVWriter(wr, drone)
 
-#dataWriter.drawZigzagPath_3D(10)
+# dataWriter.drawZigzagPath_3D(30)
 #dataWriter.drawTestPath()
-dataWriter.drawPolyPath()
+# dataWriter.drawPolyPath()
+dataWriter.drawSpiralPath()
 
 print ("Make "+file_name)
 

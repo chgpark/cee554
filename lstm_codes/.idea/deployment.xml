@@ -9,13 +9,6 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="shapelim@143.248.122.59:3390">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/home/shapelim/workspace/cee554" local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
     </serverData>
     <option name="myAutoUpload" value="ALWAYS" />
   </component>

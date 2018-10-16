@@ -7,11 +7,11 @@ import os
 from scipy import interpolate
 from scipy.interpolate import spline
 p =argparse.ArgumentParser()
-# p.add_argument('--save_dir', type=str, default="results/RiTA/graphs/")
-p.add_argument('--gt_dir', type=str, default="inputs/test_data_arbitrary_square_uwb_2D_e10.csv")
+p.add_argument('--save_dir', type=str, default="results/multimodal")
+p.add_argument('--gt_dir', type=str, default="inputs/3D_path_poly.csv")
 # p.add_argument('--gt_dir', type=str, default="inputs/test_data_diagonal_curve2D.csv")
 #In case of test 1
-# p.add_argument('--bidirectional_LSTM_csv', type=str, default="results/RiTA/bidirectional_wo_fcn_well_trained.csv")
+p.add_argument('--prototype', type=str, default="train_3D_zigzag_200.csv")
 # p.add_argument('--stacked_bi_LSTM_csv', type=str, default="results/RiTA/stack_bi_2.csv")
 # p.add_argument('--unidirectional_LSTM_csv', type=str, default= "results/RiTA/unidirectional_wo_fcn.csv")
 # p.add_argument('--gru_csv', type=str, default= "results/RiTA/gru.csv")
@@ -25,7 +25,7 @@ p.add_argument('--gt_dir', type=str, default="inputs/test_data_arbitrary_square_
 # p.add_argument('--trilateration_csv', type=str, default="results/RiTA/trilateration.csv")
 p.add_argument('--save_MSE_name', type=str, default="Distance_error_result__test1.png")
 p.add_argument('--save_error_percent_name', type=str, default="test_stack.png")
-p.add_argument('--save_trajectory_name', type=str, default="Test_trajectory11_legend.png") #""Trajectory_result_refined_interval_10_smoothed_test_stack.png")
+p.add_argument('--save_trajectory_name', type=str, default="Test_trajectory11.png") #""Trajectory_result_refined_interval_10_smoothed_test_stack.png")
 p.add_argument('--data_interval', type=int, default= 21)
 
 args = p.parse_args()
@@ -55,15 +55,15 @@ class Visualization:
         self.folder_name = "results/"
         if not os.path.isdir(self.folder_name):
             os.mkdir(self.folder_name)
-        # self.setGT()
+        self.setGT()
         self.color_set = COLORSET
         self.label = LABEL
 
     def setGT(self):
-        gt_xy = np.loadtxt(args.gt_dir, delimiter=',')
+        gt_xyz = np.loadtxt(args.gt_dir, delimiter=',')
         #x_array: gt_xy[:,0]
         #y_array: gt_xy[:,1]
-        self.gt_xy = gt_xy[4:,4:]
+        self.gt_xyz = gt_xyz[:, 4:7]
 
     def _calDistanceError(self, predicted_result_dir):
         predicted_xy = np.loadtxt(predicted_result_dir, delimiter=',')
@@ -119,18 +119,20 @@ class Visualization:
         plt.show()
         fig.savefig(saved_file_name)
         print ("Done")
-    def getSmoothedData(self,x_data, y_data):
+    def getSmoothedData_3D(self,x_data, y_data, z_data):
         x_data = np.array(x_data)
         y_data = np.array(y_data)
+        z_data = np.array(z_data)
 
-        tck, u = interpolate.splprep([x_data, y_data], s=0)
+        tck, u = interpolate.splprep([x_data, y_data, z_data], s=0)
         unew = np.arange(0, 1.01, 0.01)
         out = interpolate.splev(unew, tck)
 
         smoothed_x = out[0].tolist()
         smoothed_y = out[1].tolist()
+        smoothed_z = out[2].tolist()
 
-        return smoothed_x, smoothed_y
+        return smoothed_x, smoothed_y, smoothed_z
 
     def getRefinedData(self, data, interval):
         count = 0
@@ -201,8 +203,8 @@ class Visualization:
         saved_file_name = self.args.save_trajectory_name
         plot_title = "Trajectory"
         # plt.title(plot_title)
-        gt_x = self.gt_xy[:,0]
-        gt_y = self.gt_xy[:,1]
+        gt_x = self.gt_xyz[:,0]
+        gt_y = self.gt_xyz[:,1]
 
         plt.figure(figsize=(8, 6))
         plt.plot(gt_x, gt_y,'k',linestyle='--' , label = 'GT')
@@ -236,32 +238,42 @@ class Visualization:
         fig.savefig(saved_file_name)
         print ("Done")
 
-    def drawResult3D(self, X_list, Y_list, Z_list, c):
+    def drawResult3D(self, *target_files_csv):
+        save_file_name = self.args.save_trajectory_name
 
         self.fig = plt.figure()
         self.ax1 = self.fig.add_subplot(111, projection='3d')
+
+        # gt_x = self.gt_xyz[:,0]
+        # gt_y = self.gt_xyz[:,1]
+        # gt_z = self.gt_xyz[:,2]
+        # self.ax1.plot(gt_x, gt_y, gt_z, 'k', linestyle = '--', label = 'GT')
+
+        for i, csv in enumerate(target_files_csv):
+            predicted_xyz = np.loadtxt(csv, delimiter = ',')
+            # print (predicted_xyz)
+            predicted_x = predicted_xyz[:,4]
+            print (predicted_x)
+            predicted_y = predicted_xyz[:,5]
+            predicted_z = predicted_xyz[:,6]
+
+            # predicted_x = self.getRefinedData( predicted_x, self.args.data_interval)
+            # predicted_y = self.getRefinedData( predicted_y, self.args.data_interval)
+            # predicted_z = self.getRefinedData( predicted_z, self.args.data_interval)
+            #
+            # predicted_x, predicted_y, predicted_z = self.getSmoothedData_3D(predicted_x, predicted_y, predicted_z)
+
+            plt.plot(predicted_x, predicted_y, predicted_z, color = self.color_set[i], #marker= marker,
+                            linestyle = LINE[i],label = self.label[i])
+        plt.legend()
+
         # self.ax1.scatter(X_list, Y_list, Z_list, c=c)
-        self.ax1.plot(X_list, Y_list, Z_list, c= c)
-        # plt.subplot(221)
-        # self.ax1 = self.fig.gca(projection = '3d') #add_subplot(111, projection='3d')
-        # self.ax1.scatter(X_list, Y_list, Z_list)
-        # plt.subplot(221)
-        # plt.plot(X_list, Y_list)
-        # plt.xlabel("X_axis")
-        # plt.ylabel("Y_axis")
-        # plt.subplot(222)
-        # plt.plot(Z_list, Y_list)
-        # plt.xlabel("Z_axis")
-        # plt.ylabel("Y_axis")
-        # plt.subplot(223)
-        # plt.plot(X_list, Z_list)
-        # plt.xlabel("X_axis")
-        # plt.ylabel("Z_axis")
+
         self.ax1.set_xlabel('X_axis')
         self.ax1.set_ylabel('Y_axis')
         self.ax1.set_zlabel('Z_axis')
         self.fig = plt.gcf()
-        self.fig.savefig(self.folder_name +"/Results2.png")
+        self.fig.savefig(self.folder_name +"/Results_test.png")
 
 
 
@@ -287,11 +299,11 @@ if __name__ == "__main__":
     # Z = test[:, 6]
     # viz.drawResult3D(X, Y, Z)
     # input = np.loadtxt("./inputs/3D_path_spiral.csv", delimiter = ',')
-    input = np.loadtxt("./inputs/3D_path_poly.csv", delimiter = ',')
-    x = input[:, 4]
-    y = input[:, 5]
-    z = input[:, 6]
-    viz.drawResult3D(x,y,z, 'b')
+    # input = np.loadtxt("./inputs/3D_path_poly.csv", delimiter = ',')
+    # x = input[:, 4]
+    # y = input[:, 5]
+    # z = input[:, 6]
+    viz.drawResult3D(args.prototype)
     # viz.plotDistanceError(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)
     # viz.plotErrorPercent(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)
     # viz.plot2DTrajectory(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)

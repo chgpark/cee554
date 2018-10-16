@@ -13,15 +13,16 @@ tf.set_random_seed(777)  # reproducibilityb
 # hyper parameters
 p =argparse.ArgumentParser()
 #FOR TRAIN
-p.add_argument('--train_data', type=str, default="inputs/train_3D_zigzag_uncertainty_0_03.csv")
-p.add_argument('--board_dir', type=str, default="/home/shapelim/git_files/RONet_result/board/multimodal/stacked_bi_epoch_2000_lr_0_02")
-p.add_argument('--save_dir', type=str, default="/home/shapelim/git_flies/RONet_result/model/multimodal/stacked_bi_epoch_2000_lr_0_02/")
+p.add_argument('--train_data', type=str, default="inputs/train_3D_zigzag_250.csv")
+p.add_argument('--board_dir', type=str, default="/home/shapelim/git_files/RONet_result/board/multimodal/stacked_bi_e2500_lr0_02/")
+p.add_argument('--save_dir', type=str, default="/home/shapelim/git_flies/RONet_result/model/multimodal/stacked_bi_e2500_lr0_02/")
 
 p.add_argument('--lr', type=float, default = 0.02)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 7)
-p.add_argument('--epoches', type=int, default = 2000)
-p.add_argument('--batch_size', type=int, default = 500)
+p.add_argument('--epoches', type=int, default = 2500)
+p.add_argument('--batch_size', type=int, default = 1000)
+
 #NETWORK PARAMETERS
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
 p.add_argument('--hidden_size', type=int, default = 3) # RNN output size
@@ -31,12 +32,13 @@ p.add_argument('--first_layer_output_size', type=int, default = 10)
 p.add_argument('--second_layer_output_size', type=int, default = 3)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 3) #final output size (RNN or softmax, etc)
+
 #FOR TEST
 p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet_result/model/multimodal/stacked_bi_epoch_2500_lr_0_02/model_0_00013-132500")
-p.add_argument('--test_data', type=str, default='inputs/3D_path_poly.csv')
+p.add_argument('--test_data', type=str, default='inputs/poly_3D_zigzag.csv')
 p.add_argument('--output_results', type=str, default= 'results/multimodal/multimodal_poly.csv')
 ###########
-p.add_argument('--mode', type=str, default = "test") #train or test
+p.add_argument('--mode', type=str, default = "train") #train or test
 args = p.parse_args()
 
 data_parser = DataPreprocessing.DataManager(args.train_data, args.sequence_length, args.input_size)
@@ -44,11 +46,12 @@ data_parser.fitDataForMinMaxScaler()
 
 d0_data, d1_data, d2_data, d3_data = data_parser.set_range_data_for_4_uwb()
 
-# print(d0_data.shape) #Data size / sequence length / uwb num
+print(d0_data.shape) #Data size / sequence length / uwb num
 
 robot_pose_gt, relative_anchor_position_gt = data_parser.set_gt_data()
 
 # d0_data, d1_data, d2_data, d3_data, robot_pose_gt = data_parser.suffle_array_in_the_same_order(d0_data, d1_data, d2_data, d3_data, robot_pose_gt)
+
 # print(X_data[2])
 # print(X_data[-1])
 # print(robot_pose_data[-1])
@@ -118,6 +121,7 @@ with tf.Session() as sess:
                                                           ro_net.d2_data: d2_data,
                                                           ro_net.d3_data: d3_data}) #prediction : type: list, [ [[[hidden_size]*sequence_length] ... ] ]
 
-        print (prediction)
-        data_parser.write_file_data(args.output_results, prediction)
+        print ((prediction))
+        data_parser.inverse_transform_by_train_data(prediction)
+        data_parser.write_file_data(args.output_results)
 

@@ -22,8 +22,10 @@ class DataManager:
         xy = np.loadtxt(self.dir, delimiter=',')
         # if (not prediction):
         self.scaler.fit(xy)
-        '''Below one is essential for test!!'''
-        self.scaler_for_prediction.fit(xy[:, 4:6])
+        '''Below one is essential for test!!
+            The reason why its range is self.num_uwb: self.num_uwb*3 is to able to operate wheter gt is position or pose.
+        '''
+        self.scaler_for_prediction.fit(xy[:, self.num_uwb:-self.num_uwb*3])
 
     def set_range_data_for_4_uwb(self):
         xy = np.loadtxt(self.dir, delimiter=',')
@@ -130,24 +132,15 @@ class DataManager:
         #return numpy array
         return X_data, Y_data
 
+    def inverse_transform_by_train_data(self, prediction):
+        # scaler for inverse transform of prediction
+        self.inverse_transformed_sequence = self.scaler_for_prediction.inverse_transform(list(prediction[0]))
 
-    def write_file_data(self, out_dir, prediction):
+    def write_file_data(self, out_dir):
         result_file = open(out_dir, 'w', encoding='utf-8', newline='')
+
         wr = csv.writer(result_file)
-
-        # for sequence_list in prediction[0]: # bc shape of prediction is "[" [[[hidden_size]*sequence_length], ... ] "]"
-            # np_sequence = np.array(sequence_list, dtype=np.float32)
-            #
-            # # scaler for inverse transform of prediction
-            # transformed_sequence = self.scaler_for_prediction.inverse_transform(np_sequence)
-            # for i in transformed_sequence:
-            #     wr.writerow([i[0], i[1]])
-
-
-            # scaler for inverse transform of prediction
-        transformed_sequence = self.scaler_for_prediction.inverse_transform(prediction)
-
-        for i in transformed_sequence:
+        for i in self.inverse_transformed_sequence:
             wr.writerow(i)
 
         result_file.close()
@@ -157,20 +150,33 @@ class DataManager:
 #Below Line : Extract colums that we want to extract#
 #
 if __name__ == '__main__':
-    file_name = 'inputs/multimodal_poly.csv'
+    file_name = 'inputs/3D_path_poly.csv'
+    file  = np.loadtxt(file_name, delimiter= ',')
     seq_length = 10
+
     num_uwb = 4
     data_parser = DataManager(file_name,seq_length, num_uwb)
+
+
+    data_parser.fitDataForMinMaxScaler()
     x = np.array([[1,3],[2,7],[3, 10], [4, 1313],[5,1]])
     y = np.array(['a','b','c','d', 'e'])
     z = np.array([111,222,333,444,555])
-    x,y,z = data_parser.suffle_array_in_the_same_order(x, y, z)
-    print (x,y,z)
+    # x,y,z = data_parser.suffle_array_in_the_same_order(x, y, z)
 
+    gt, _ = data_parser.set_gt_data()
+    print (gt)
+    data_parser.inverse_transform_by_train_data(list(gt))
+    print ()
+    # gt2 = []
+    # for j in gt:
+    #     gt2.append(list(j))
+    # gt2 = tuple(gt2)
 
-    a= [([1,2,3],[4,5,6],[6,8,9])]
+    # b = data_parser.scaler_for_prediction.inverse_transform(gt2)
 
-    total_length = 0
+    # total_length = 0
+    # data_parser.write_file_data("hello.csv", b)
 
     # with open('results/test_diagonal_gt.csv' ,'w') as fp:
     #     for i in range(int( total_length/seq_length) ):

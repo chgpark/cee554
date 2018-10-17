@@ -28,11 +28,11 @@ p.add_argument('--batch_size', type=int, default = 200)
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
 p.add_argument('--hidden_size', type=int, default = 3) # RNN output size
 p.add_argument('--input_size', type=int, default = 4) #RNN input size: number of uwb
-p.add_argument('--preprocessing_output_size', type=int, default = 3)
-p.add_argument('--first_layer_output_size', type=int, default = 10)
-p.add_argument('--second_layer_output_size', type=int, default = 3)
+p.add_argument('--preprocessing_output_size', type=int, default = 4)
+p.add_argument('--first_layer_output_size', type=int, default = 32)
+p.add_argument('--second_layer_output_size', type=int, default = 8)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
-p.add_argument('--output_size', type=int, default = 3) #final output size (RNN or softmax, etc)
+p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
 
 #FOR TEST
 p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet_result/model/multimodal/stacked_bi_epoch_2500_lr_0_02/model_0_00013-132500")
@@ -58,13 +58,8 @@ data_parser.set_dir(args.val_data)
 val_d0_data, val_d1_data, val_d2_data, val_d3_data = data_parser.set_range_data_for_4_uwb()
 val_robot_pose_gt, _ = data_parser.set_gt_data()
 print ("Complete!")
-# d0_data, d1_data, d2_data, d3_data, robot_pose_gt = data_parser.suffle_array_in_the_same_order(d0_data, d1_data, d2_data, d3_data, robot_pose_gt)
 
-# print(X_data[2])
-# print(X_data[-1])
-# print(robot_pose_data[-1])
-# print(relative_position_anchor_data[-1])
-# data : size of data - sequence length + 1
+d0_data, d1_data, d2_data, d3_data, robot_pose_gt = data_parser.suffle_array_in_the_same_order(d0_data, d1_data, d2_data, d3_data, robot_pose_gt)
 
 writer_val = tf.summary.FileWriter('./logs/val') #, sess.graph)
 writer_train = tf.summary.FileWriter('./logs/train') #, sess.graph)
@@ -88,7 +83,6 @@ for variable in tf.trainable_variables():
 print("number of trainable parameters: {}".format(total_num_parameters))
 
 ###########for using tensorboard########
-
 merged = tf.summary.merge_all()
 ########################################
 
@@ -99,8 +93,6 @@ with tf.Session() as sess:
     if (args.mode=='train'):
 
         sess.run(tf.global_variables_initializer())
-
-
 
         step = 0
         min_loss = 2

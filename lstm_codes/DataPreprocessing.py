@@ -36,6 +36,30 @@ class DataManager:
 
         x = xy[:,:self.num_uwb]
 
+        X_data = []
+        for i in range(self.seq_length - 1):
+            _x = []
+            for k in range(i+1):
+                _x.append(x[k, :])
+
+            _x = _x + [[0]*4]*(self.seq_length - i - 1)
+            X_data.append(_x)
+
+
+        for i in range(len(x) - self.seq_length + 1):
+            _x = x[i:i+self.seq_length]
+            X_data.append(_x)
+
+        X_data = np.array(X_data)
+
+        return X_data
+
+    def set_range_data_for_4_uwb_multimodal(self):
+        xy = np.loadtxt(self.dir, delimiter=',')
+        xy = self.scaler.transform(xy)
+
+        x = xy[:,:self.num_uwb]
+
         d0_data =[]
         d1_data =[]
         d2_data =[]
@@ -147,7 +171,6 @@ class DataManager:
             wr.writerow(i)
 
         result_file.close()
-
 
 
 #Below Line : Extract colums that we want to extract#

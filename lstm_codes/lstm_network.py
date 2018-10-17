@@ -12,13 +12,32 @@ class RONet:
         self.output_size = args.output_size
         self.sequence_length = args.sequence_length
         self.output_type = args.output_type
+        self.is_multimodal = args.is_multimodal
+        self.network_type = args.network_type
 
-
-        self.set_placeholders()
-
-        self.buildRONet_bi_multimodal()
+        if args.is_multimodal:
+            self.set_placeholders_for_multimodal()
+            if self.network_type == 'uni':
+                self.build_RO_Net_multimodal()
+            elif self.network_type == 'bi':
+                self.build_RO_Net_bi_multimodal()
+        else:
+            self.set_placeholders()
+            if self.network_type == 'uni':
+                self.build_RO_Net_uni()
+            elif self.network_type == 'bi':
+                self.build_RO_Net_bi()
 
     def set_placeholders(self):
+        self.X_data = tf.placeholder(dtype=tf.float32,
+                                     shape=[None, self.sequence_length, self.input_size])
+
+        if self.output_type == 'position':
+            self.position_gt = tf.placeholder(dtype=tf.float32,
+                                            shape=[None, 3],
+                                            name='output_placeholder')
+
+    def set_placeholders_for_multimodal(self):
         self.d0_data = tf.placeholder(dtype=tf.float32,
                                            shape=[None, self.sequence_length, 1],
                                            name='input_placeholder0')
@@ -59,7 +78,7 @@ class RONet:
             cell = tf.contrib.rnn.BasicLSTMCell(num_units = self.preprocessing_size)
             #cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
 
-            self.output, _state = tf.nn.dynamic_rnn(cell, self.d0_data, dtype=tf.float32)
+            self.output, _state = tf.nn.dynamic_rnn(cell, self.X_data, dtype=tf.float32)
 
 ##################################################
 #Preprocessing: Bidirectional, non-multimodal
@@ -73,11 +92,11 @@ class RONet:
             #cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
 
             # outputs : tuple
-            output, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d0_data, dtype=tf.float32)
+            output, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.X_data, dtype=tf.float32)
             self.output_fw = output[0]
             self.output_bw = output[1]
 
-    def concatenate_preprocessed_data_forLSTM(self):
+    def concatenate_preprocessed_data_for_bi_LSTM(self):
         self.output = tf.concat([self.output_fw, self.output_bw], axis = 2)
 
 ##################################################
@@ -219,7 +238,7 @@ class RONet:
 
     def set_preprocessed_bi_LSTM(self):
         self.set_preprocessing_bi_LSTM_for_4_uwb()
-        self.concatenate_preprocessed_data()
+        self.concatenate_preprocessed_data_for_bi_LSTM()
         self.get_attentioned_preprocessed_data()
 
     def set_preprocessed_multimodal_LSTMs(self):
@@ -255,13 +274,13 @@ class RONet:
         self.output = tf.reshape(self.output, [-1, self.sequence_length*self.second_layer_output_size*2])
         self.pose_pred = tf.contrib.layers.fully_connected(self.output, self.output_size)
 
-    def buildRONet_multimodal(self):
+    def build_RO_Net_multimodal(self):
         self.set_preprocessed_multimodal_LSTMs()
         self.set_stacked_bi_LSTM_with_attention()
         self.output = tf.reshape(self.output, [-1, self.sequence_length*self.second_layer_output_size*2])
         self.pose_pred = tf.contrib.layers.fully_connected(self.output, self.output_size)
 
-    def buildRONet_bi_multimodal(self):
+    def build_RO_Net_bi_multimodal(self):
         self.set_preprocessed_multimodal_bi_LSTMs()
         self.set_stacked_bi_LSTM_with_attention()
 

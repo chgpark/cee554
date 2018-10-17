@@ -214,7 +214,7 @@ class RONet:
         with tf.variable_scope('lstm_loss'):
             # loss = tf.losses.mean_squared_error(Y, outputs, weights=weights)#reduction=tf.losses.Reduction.MEAN)
             # loss = tf.reduce_mean(tf.square(Y-outputs))
-            self.loss = tf.reduce_sum(tf.square(self.position_gt - self.pose_pred))
+            self.loss = tf.reduce_sum(tf.square(self.position_gt - self.pose_pred))/self.batch_size
             tf.summary.scalar('lstm_loss', self.loss)
 
         with tf.variable_scope('train'):

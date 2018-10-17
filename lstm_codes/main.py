@@ -14,14 +14,15 @@ tf.set_random_seed(777)  # reproducibilityb
 p =argparse.ArgumentParser()
 #FOR TRAIN
 p.add_argument('--train_data', type=str, default="train_3D_zigzag_1.csv")
-p.add_argument('--board_dir', type=str, default="/home/shapelim/git_files/RONet_result/board/multimodal/stacked_bi_e2500_lr0_02/")
-p.add_argument('--save_dir', type=str, default="/home/shapelim/git_flies/RONet_result/model/multimodal/stacked_bi_e2500_lr0_02/")
+p.add_argument('--val_data', type=str, default="./inputs/spiral_3D.csv")
+p.add_argument('--board_dir', type=str, default="/home/shapelim/RONet_result/board/multimodal/stacked_bi_e2500_lr0_02_1/")
+p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet_result/model/multimodal/stacked_bi_e2500_lr0_02_1/")
 
 p.add_argument('--lr', type=float, default = 0.02)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 7)
-p.add_argument('--epoches', type=int, default = 2500)
-p.add_argument('--batch_size', type=int, default = 5000)
+p.add_argument('--epoches', type=int, default = 10)
+p.add_argument('--batch_size', type=int, default = 200)
 
 #NETWORK PARAMETERS
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
@@ -46,11 +47,17 @@ data_parser = DataPreprocessing.DataManager(args.train_data, args.sequence_lengt
 data_parser.fitDataForMinMaxScaler()
 print ("Complete!")
 d0_data, d1_data, d2_data, d3_data = data_parser.set_range_data_for_4_uwb()
-
-print(d0_data.shape) #Data size / sequence length / uwb num
-
 robot_pose_gt, relative_anchor_position_gt = data_parser.set_gt_data()
 
+
+print(d0_data.shape) #Data size / sequence length / uwb num
+'''For validation'''
+
+print ("Loading val data...")
+data_parser.set_dir(args.val_data)
+val_d0_data, val_d1_data, val_d2_data, val_d3_data = data_parser.set_range_data_for_4_uwb()
+val_robot_pose_gt, _ = data_parser.set_gt_data()
+print ("Complete!")
 # d0_data, d1_data, d2_data, d3_data, robot_pose_gt = data_parser.suffle_array_in_the_same_order(d0_data, d1_data, d2_data, d3_data, robot_pose_gt)
 
 # print(X_data[2])
@@ -59,8 +66,10 @@ robot_pose_gt, relative_anchor_position_gt = data_parser.set_gt_data()
 # print(relative_position_anchor_data[-1])
 # data : size of data - sequence length + 1
 
-tf.reset_default_graph()
+writer_val = tf.summary.FileWriter('./logs/val') #, sess.graph)
+writer_train = tf.summary.FileWriter('./logs/train') #, sess.graph)
 
+tf.reset_default_graph()
 ro_net = RONet(args)
 
 #terms for learning rate decay
@@ -79,6 +88,7 @@ for variable in tf.trainable_variables():
 print("number of trainable parameters: {}".format(total_num_parameters))
 
 ###########for using tensorboard########
+
 merged = tf.summary.merge_all()
 ########################################
 
@@ -90,29 +100,45 @@ with tf.Session() as sess:
 
         sess.run(tf.global_variables_initializer())
 
-        writer = tf.summary.FileWriter(args.board_dir, sess.graph)
+
+
         step = 0
         min_loss = 2
         tqdm_range = trange(args.epoches, desc = 'Loss', leave = True)
         for ii in tqdm_range:
             loss_of_epoch = 0
+            loss_of_val = 0
             for i in range(iter): #iter = int(len(X_data)/batch_size)
                 step = step + 1
                 idx = i* args.batch_size
 
-                l, _,gt, prediction, summary = sess.run([ro_net.loss, ro_net.train, ro_net.position_gt, ro_net.pose_pred, merged ],
+                l, _, summary = sess.run([ro_net.loss, ro_net.train, merged],
                                                         feed_dict={ro_net.d0_data: d0_data[idx : idx + args.batch_size],
                                                                    ro_net.d1_data: d1_data[idx : idx + args.batch_size],
                                                                    ro_net.d2_data: d2_data[idx : idx + args.batch_size],
                                                                    ro_net.d3_data: d3_data[idx : idx + args.batch_size],
                                                                    ro_net.position_gt: robot_pose_gt[idx : idx + args.batch_size]})
-                writer.add_summary(summary, step)
-                loss_of_epoch += l/args.batch_size
-            loss_of_epoch /=iter
+                writer_train.add_summary(summary, step)
+                writer_train.flush()
+
+                loss_of_epoch += l
+
+                val_l, summary = sess.run([ro_net.loss, merged], feed_dict={ro_net.d0_data: val_d0_data,
+                                                      ro_net.d1_data: val_d1_data,
+                                                      ro_net.d2_data: val_d2_data,
+                                                      ro_net.d3_data: val_d3_data,
+                                                      ro_net.position_gt: val_robot_pose_gt} )
+                writer_val.add_summary(summary, step)
+                writer_val.flush()
+
+                loss_of_val += val_l
+
+            loss_of_epoch /= iter
+            loss_of_val /= iter
             if (loss_of_epoch < min_loss):
                 min_loss = loss_of_epoch
                 saver.save(sess, args.save_dir + 'model_'+'{0:.5f}'.format(loss_of_epoch).replace('.','_'), global_step=step)
-            tqdm_range.set_description('Loss ' +'{0:.7f}'.format(loss_of_epoch)+'  ')
+            tqdm_range.set_description('train ' +'{0:.7f}'.format(loss_of_epoch)+' /val '+'{0:.7f}'.format(loss_of_val) )
             tqdm_range.refresh()
 
     elif (args.mode =='test'):
@@ -121,9 +147,9 @@ with tf.Session() as sess:
         print ("Load success.")
 
 
-        data_parser.dir = args.test_data
+        data_parser.set_dir(args.test_data)
         d0_data, d1_data, d2_data, d3_data = data_parser.set_range_data_for_4_uwb()
-        prediction = sess.run([ro_net.pose_pred], feed_dict={ro_net.d0_data: d0_data,
+        prediction = sess.run(ro_net.pose_pred, feed_dict={ro_net.d0_data: d0_data,
                                                           ro_net.d1_data: d1_data,
                                                           ro_net.d2_data: d2_data,
                                                           ro_net.d3_data: d3_data}) #prediction : type: list, [ [[[hidden_size]*sequence_length] ... ] ]

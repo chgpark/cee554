@@ -27,6 +27,9 @@ class DataManager:
         '''
         self.scaler_for_prediction.fit(xy[:, self.num_uwb:-self.num_uwb*3])
 
+    def set_dir(self, dir):
+        self.dir = dir
+
     def set_range_data_for_4_uwb(self):
         xy = np.loadtxt(self.dir, delimiter=',')
         xy = self.scaler.transform(xy)
@@ -134,7 +137,7 @@ class DataManager:
 
     def inverse_transform_by_train_data(self, prediction):
         # scaler for inverse transform of prediction
-        self.inverse_transformed_sequence = self.scaler_for_prediction.inverse_transform(list(prediction[0]))
+        self.inverse_transformed_sequence = self.scaler_for_prediction.inverse_transform(list(prediction))
 
     def write_file_data(self, out_dir):
         result_file = open(out_dir, 'w', encoding='utf-8', newline='')

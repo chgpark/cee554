@@ -72,6 +72,12 @@ saver = tf.train.Saver(max_to_keep = 5)
 
 # Use simple momentum for the optimization.
 
+# COUNT PARAMS
+total_num_parameters = 0
+for variable in tf.trainable_variables():
+    total_num_parameters += np.array(variable.get_shape().as_list()).prod()
+print("number of trainable parameters: {}".format(total_num_parameters))
+
 ###########for using tensorboard########
 merged = tf.summary.merge_all()
 ########################################

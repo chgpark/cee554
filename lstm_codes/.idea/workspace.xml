@@ -24,7 +24,7 @@
     <splitter split-orientation="horizontal" split-proportion="0.4551597">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="lstm_network.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="lstm_network.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/lstm_network.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="375">
@@ -40,7 +40,7 @@
             <entry file="file://$PROJECT_DIR$/main.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="1185">
-                  <caret line="88" column="19" selection-start-line="88" selection-start-column="19" selection-end-line="88" selection-end-column="19" />
+                  <caret line="94" column="19" selection-start-line="94" selection-start-column="19" selection-end-line="94" selection-end-column="19" />
                   <folding>
                     <element signature="e#32#55#0" expanded="true" />
                   </folding>
@@ -57,6 +57,18 @@
               </provider>
             </entry>
           </file>
+          <file leaf-file-name="output_print_test.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/output_print_test.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="330">
+                  <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
+                  <folding>
+                    <element signature="e#0#23#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
         </leaf>
       </split-first>
       <split-second>
@@ -64,8 +76,8 @@
           <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="450">
-                  <caret line="102" column="37" lean-forward="true" selection-start-line="102" selection-start-column="37" selection-end-line="102" selection-end-column="37" />
+                <state relative-caret-position="262">
+                  <caret line="74" selection-start-line="74" selection-end-line="74" />
                   <folding>
                     <element signature="e#32#55#0" expanded="true" />
                   </folding>
@@ -87,18 +99,6 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="90">
                   <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="output_print_test.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/output_print_test.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="600">
-                  <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
-                  <folding>
-                    <element signature="e#0#23#0" expanded="true" />
-                  </folding>
                 </state>
               </provider>
             </entry>
@@ -132,9 +132,9 @@
         <option value="$PROJECT_DIR$/plot_result.py" />
         <option value="$PROJECT_DIR$/dd.py" />
         <option value="$PROJECT_DIR$/make_dataset.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/output_print_test.py" />
         <option value="$PROJECT_DIR$/lstm_network.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -332,9 +332,9 @@
       <window_info anchor="bottom" id="File Transfer" order="12" weight="0.4294737" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27578947" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.27578947" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.122371964" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.122371964" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" weight="0.2986523" />
@@ -815,16 +815,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/output_print_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lstm_network.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -835,10 +825,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/output_print_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="102" column="37" lean-forward="true" selection-start-line="102" selection-start-column="37" selection-end-line="102" selection-end-column="37" />
+        <state relative-caret-position="262">
+          <caret line="74" selection-start-line="74" selection-end-line="74" />
           <folding>
             <element signature="e#32#55#0" expanded="true" />
           </folding>

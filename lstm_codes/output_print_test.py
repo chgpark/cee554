@@ -26,9 +26,9 @@ x_data2 = np.array([[1,1,0,0]],dtype = np.float32)
 x_data3 = [x_data1, x_data2]
 outputs_list = []
 with tf.variable_scope("1"):
-    outputs, _state = tf.nn.bidirectional_dynamic_rnn(cell1, cell2, x_data1, dtype = tf.float32)
+    outputs, _state = tf.nn.dynamic_rnn(cell1, x_data1, dtype = tf.float32)
 with tf.variable_scope("22"):
-    outputs2, _state2 = tf.nn.bidirectional_dynamic_rnn(cell3, cell4, x_data1, dtype = tf.float32)
+    outputs2, _state2 = tf.nn.dynamic_rnn(cell3, x_data1, dtype = tf.float32)
 
 # outputs_2, _state_2 = tf.nn.dynamic_rnn(cell1, x_data1, dtype = tf.float32)
 sess.run(tf.global_variables_initializer())
@@ -37,8 +37,8 @@ outputs = tf.convert_to_tensor(outputs)
 outputs2 = tf.convert_to_tensor(outputs2)
 pp.pprint(outputs.eval())
 pp.pprint(outputs2.eval())
-concat = tf.concat([outputs[0], outputs[1], outputs2[0], outputs2[1]], axis = 2 )
-print ("concatenate")
+concat = tf.concat([outputs, outputs2], axis = 2 )
+# print ("concatenate")
 pp.pprint(concat.eval())
 
 # pp.pprint(outputs[0].eval())

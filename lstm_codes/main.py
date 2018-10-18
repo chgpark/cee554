@@ -29,12 +29,12 @@ p.add_argument('--batch_size', type=int, default = 1000)
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
 p.add_argument('--hidden_size', type=int, default = 3) # RNN output size
 p.add_argument('--input_size', type=int, default = 4) #RNN input size: number of uwb
-p.add_argument('--preprocessing_output_size', type=int, default = 4)
-p.add_argument('--first_layer_output_size', type=int, default = 32)
-p.add_argument('--second_layer_output_size', type=int, default = 8)
+p.add_argument('--preprocessing_output_size', type=int, default = 53)
+p.add_argument('--first_layer_output_size', type=int, default = 100)
+p.add_argument('--second_layer_output_size', type=int, default = 16)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
-p.add_argument('--network_type', type=str, default = 'uni') #uni / bi
+p.add_argument('--network_type', type=str, default = 'bi') #uni / bi
 p.add_argument('--is_multimodal', type=bool, default = False) #True / False
 
 #FOR TEST
@@ -90,8 +90,8 @@ else:
     print (robot_pose_gt)
 
 
-writer_val = tf.summary.FileWriter('./logs/val') #, sess.graph)
-writer_train = tf.summary.FileWriter('./logs/train') #, sess.graph)
+writer_val = tf.summary.FileWriter(args.board_dir + '/val') #, sess.graph)
+writer_train = tf.summary.FileWriter(args.board_dir + '/train') #, sess.graph)
 
 tf.reset_default_graph()
 ro_net = RONet(args)
@@ -178,7 +178,7 @@ with tf.Session() as sess:
             if (loss_of_epoch < min_loss):
                 min_loss = loss_of_epoch
                 saver.save(sess, args.save_dir + 'model_'+'{0:.5f}'.format(loss_of_epoch).replace('.', '_'), global_step=step)
-            tqdm_range.set_description('train ' +'{0:.7f}'.format(loss_of_epoch)+' /val '+'{0:.7f}'.format(loss_of_val) )
+            tqdm_range.set_description('train ' +'{0:.7f}'.format(loss_of_epoch)+' | val '+'{0:.7f}'.format(loss_of_val))
             tqdm_range.refresh()
 
     elif (args.mode =='test'):

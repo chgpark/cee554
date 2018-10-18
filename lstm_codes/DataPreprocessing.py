@@ -37,14 +37,6 @@ class DataManager:
         x = xy[:,:self.num_uwb]
 
         X_data = []
-        for i in range(self.seq_length - 1):
-            _x = []
-            for k in range(i+1):
-                _x.append(x[k, :])
-
-            _x = _x + [[0]*4]*(self.seq_length - i - 1)
-            X_data.append(_x)
-
 
         for i in range(len(x) - self.seq_length + 1):
             _x = x[i:i+self.seq_length]
@@ -64,24 +56,6 @@ class DataManager:
         d1_data =[]
         d2_data =[]
         d3_data =[]
-
-        for i in range(self.seq_length - 1):
-            for j in range(self.num_uwb):
-                _x = []
-                for k in range(i+1):
-                    _x.append([x[k, j]])
-
-                _x = _x + [[0]]*(self.seq_length - i - 1)
-
-                if j == 0:
-                    d0_data.append(_x)
-                elif j == 1:
-                    d1_data.append(_x)
-                elif j == 2:
-                    d2_data.append(_x)
-                elif j == 3:
-                    d3_data.append(_x)
-
 
         for i in range(len(x) - self.seq_length + 1):
             for j in range(self.num_uwb):
@@ -116,7 +90,7 @@ class DataManager:
         robot_pose_data =[]
         relative_position_anchor_data = []
 
-        for i in range(len(robot_pose)):
+        for i in range(self.seq_length-1, len(robot_pose)):
             robot_pose_data.append(robot_pose[i])
             relative_position_anchor_data.append(relative_cartesian_position[i])
 

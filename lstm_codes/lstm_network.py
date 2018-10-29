@@ -300,8 +300,14 @@ class RONet:
         with tf.variable_scope('lstm_loss'):
             # loss = tf.losses.mean_squared_error(Y, outputs, weights=weights)#reduction=tf.losses.Reduction.MEAN)
             # loss = tf.reduce_mean(tf.square(Y-outputs))
-            self.loss = tf.reduce_sum(tf.square(self.position_gt - self.pose_pred))/self.batch_size
+            self.loss = tf.reduce_mean(tf.square(self.position_gt - self.pose_pred))
             tf.summary.scalar('lstm_loss', self.loss)
+
+        # with tf.variable_scope('lstm_validation_loss'):
+        #     # loss = tf.losses.mean_squared_error(Y, outputs, weights=weights)#reduction=tf.losses.Reduction.MEAN)
+        #     # loss = tf.reduce_mean(tf.square(Y-outputs))
+        #     self.val_loss = tf.reduce_mean(tf.square(self.position_gt - self.pose_pred))
+        #     tf.summary.scalar('lstm_val_loss', self.val_loss)
 
         with tf.variable_scope('train'):
             self.global_step = tf.contrib.framework.get_or_create_global_step()

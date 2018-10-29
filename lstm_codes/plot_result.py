@@ -7,14 +7,14 @@ import os
 from scipy import interpolate
 from scipy.interpolate import spline
 p =argparse.ArgumentParser()
-p.add_argument('--save_dir', type=str, default="results/multimodal")
-p.add_argument('--gt_dir', type=str, default="inputs/3D_path_poly.csv")
+p.add_argument('--save_dir', type=str, default="./")
+p.add_argument('--gt_dir', type=str, default="inputs/poly_3D.csv")
 # p.add_argument('--gt_dir', type=str, default="inputs/test_data_diagonal_curve2D.csv")
 #In case of test 1
-p.add_argument('--prototype', type=str, default="train_3D_zigzag_200.csv")
-# p.add_argument('--stacked_bi_LSTM_csv', type=str, default="results/RiTA/stack_bi_2.csv")
-# p.add_argument('--unidirectional_LSTM_csv', type=str, default= "results/RiTA/unidirectional_wo_fcn.csv")
-# p.add_argument('--gru_csv', type=str, default= "results/RiTA/gru.csv")
+p.add_argument('--non_multimodal_uni', type=str, default="./results/non_multimodal/uni_poly.csv")
+p.add_argument('--non_multimodal_bi', type=str, default="results/RiTA/stack_bi_2.csv")
+p.add_argument('--multimodal_uni', type=str, default= "results/RiTA/unidirectional_wo_fcn.csv")
+p.add_argument('--multimodal_bi', type=str, default= "results/RiTA/gru.csv")
 
 #In case of test 2
 # p.add_argument('--bidirectional_LSTM_csv', type=str, default="results/RiTA/bi_lstm_to_curve_test.csv")
@@ -244,18 +244,18 @@ class Visualization:
         self.fig = plt.figure()
         self.ax1 = self.fig.add_subplot(111, projection='3d')
 
-        # gt_x = self.gt_xyz[:,0]
-        # gt_y = self.gt_xyz[:,1]
-        # gt_z = self.gt_xyz[:,2]
-        # self.ax1.plot(gt_x, gt_y, gt_z, 'k', linestyle = '--', label = 'GT')
+        gt_x = self.gt_xyz[:,0]
+        gt_y = self.gt_xyz[:,1]
+        gt_z = self.gt_xyz[:,2]
+        self.ax1.plot(gt_x, gt_y, gt_z, 'k', linestyle = '--', label = 'GT')
 
         for i, csv in enumerate(target_files_csv):
             predicted_xyz = np.loadtxt(csv, delimiter = ',')
             # print (predicted_xyz)
-            predicted_x = predicted_xyz[:,4]
+            predicted_x = predicted_xyz[:,0]
             print (predicted_x)
-            predicted_y = predicted_xyz[:,5]
-            predicted_z = predicted_xyz[:,6]
+            predicted_y = predicted_xyz[:,1]
+            predicted_z = predicted_xyz[:,2]
 
             # predicted_x = self.getRefinedData( predicted_x, self.args.data_interval)
             # predicted_y = self.getRefinedData( predicted_y, self.args.data_interval)
@@ -303,7 +303,7 @@ if __name__ == "__main__":
     # x = input[:, 4]
     # y = input[:, 5]
     # z = input[:, 6]
-    viz.drawResult3D(args.prototype)
+    viz.drawResult3D(args.non_multimodal_uni)
     # viz.plotDistanceError(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)
     # viz.plotErrorPercent(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)
     # viz.plot2DTrajectory(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)

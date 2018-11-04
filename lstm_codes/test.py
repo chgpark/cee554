@@ -36,7 +36,7 @@ p.add_argument('--network_type', type=str, default = 'bi') #uni / bi
 p.add_argument('--is_multimodal', type=bool, default = True) #True / False
 
 #FOR TEST
-p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test1/model_0_01364-499")
+p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test2/model_3946_53516-50")
 p.add_argument('--test_data', type=str, default='inputs/np_test_data_1.csv')
 # p.add_argument('--test_data', type=str, default='inputs/np_test_2.csv')
 FILE_NAME = '1105_bimul'
@@ -88,7 +88,6 @@ with tf.Session() as sess:
             X_data = data_parser.set_range_data()
             prediction = sess.run(ro_net.pose_pred, feed_dict={ro_net.X_data: X_data}) #prediction : type: list, [ [[[hidden_size]*sequence_length] ... ] ]
 
-        print(prediction.shape, type(prediction))
 
 
         data_parser.inverse_transform_by_train_data(prediction)

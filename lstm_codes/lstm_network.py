@@ -412,7 +412,7 @@ class RONet:
 
         with tf.variable_scope('lstm_loss'):
             # loss = tf.losses.mean_squared_error(Y, outputs, weights=weights)#reduction=tf.losses.Reduction.MEAN)
-            self.loss = tf.reduce_mean(tf.square(self.position_gt - self.pose_pred))
+            self.loss = tf.reduce_sum(tf.square(self.position_gt - self.pose_pred))
             tf.summary.scalar('lstm_loss', self.loss)
 
         # with tf.variable_scope('lstm_validation_loss'):

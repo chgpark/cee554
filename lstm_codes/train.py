@@ -16,19 +16,19 @@ p =argparse.ArgumentParser()
 # p.add_argument('--train_data', type=str, default="train_3D_zigzag_for_debug.csv")
 p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/train_Karpe_181025/")
 p.add_argument('--val_data', type=str, default="./inputs/np_test_data_1.csv")
-p.add_argument('--board_dir', type=str, default="/home/shapelim/RONet/test1/")
-p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test1/")
+p.add_argument('--board_dir', type=str, default="/home/shapelim/RONet/test2/")
+p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test2/")
 
-p.add_argument('--lr', type=float, default = 0.00005)
+p.add_argument('--lr', type=float, default = 0.002)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 5)
-p.add_argument('--epoches', type=int, default = 1000)
+p.add_argument('--epoches', type=int, default = 50)
 p.add_argument('--batch_size', type=int, default = 11257)
 
 #NETWORK PARAMETERS
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
 p.add_argument('--hidden_size', type=int, default = 3) # RNN output size
-p.add_argument('--input_size', type=int, default = 4) #RNN input size: number of uwb
+p.add_argument('--input_size', type=int, default = 8) #RNN input size: number of uwb
 p.add_argument('--preprocessing_output_size', type=int, default = 16)
 p.add_argument('--first_layer_output_size', type=int, default = 100)
 p.add_argument('--second_layer_output_size', type=int, default = 16)
@@ -41,23 +41,20 @@ args = p.parse_args()
 
 data_parser = DataPreprocessing.DataManager(args.train_data, args.sequence_length, args.input_size)
 data_parser.fitDataForMinMaxScaler()
-data_parser.transform_all_data()
+# data_parser.transform_all_data()
 if args.is_multimodal:
     print ("Loading train data for multimodal...")
-    data_parser.set_train_data_for_4multimodal()
-    d0_data, d1_data, d2_data, d3_data = data_parser.get_range_data_for_4multimodal()
-    # d0_data, d1_data, d2_data, d3_data, d4_data, d5_data, d6_data, d7_data = data_parser.get_range_data_for_8multimodal()
+    data_parser.set_train_data_for_8multimodal()
+    d0_data, d1_data, d2_data, d3_data, d4_data, d5_data, d6_data, d7_data = data_parser.get_range_data_for_8multimodal()
     robot_position_gt, robot_quaternion_gt = data_parser.get_gt_data()
     print ("Complete!")
     print(d0_data.shape) #Data size / sequence length / uwb num
-    print (robot_position_gt.shape)
 
     print ("Loading val data...")
     data_parser.set_val_data(args.val_data)
     data_parser.transform_all_data()
-    data_parser.set_train_data_for_4multimodal()
-    val_d0_data, val_d1_data, val_d2_data, val_d3_data = data_parser.get_range_data_for_4multimodal()
-    # val_d0_data, val_d1_data, val_d2_data, val_d3_data, val_d4_data, val_d5_data, val_d6_data, val_d7_data = data_parser.get_range_data_for_8multimodal()
+    data_parser.set_train_data_for_8multimodal()
+    val_d0_data, val_d1_data, val_d2_data, val_d3_data, val_d4_data, val_d5_data, val_d6_data, val_d7_data = data_parser.get_range_data_for_8multimodal()
     val_robot_position_gt, val_robot_quaternion_gt = data_parser.get_gt_data()
     print ("Complete!")
 
@@ -124,12 +121,7 @@ with tf.Session() as sess:
         i = 1
 
         if args.is_multimodal:
-            # d0_data, d1_data, d2_data, d3_data,\
-            # d4_data, d5_data, d6_data, d7_data,\
-            d0_data, d1_data, d2_data, d3_data, robot_position_gt = data_parser.suffle_array_in_the_same_order(
-                                                                    d0_data, d1_data, d2_data, d3_data, robot_position_gt)
-                                                                    # d4_data, d5_data, d6_data, d7_data,
-                                                                    # robot_position_gt)
+            d0_data, d1_data, d2_data, d3_data, d4_data, d5_data, d6_data, d7_data, robot_position_gt = data_parser.suffle_array_in_the_same_order(d0_data, d1_data, d2_data, d3_data, d4_data, d5_data, d6_data, d7_data, robot_position_gt)
             for i in range(iter): #iter = int(len(X_data)/batch_size)
                 step = step + 1
                 idx = i* args.batch_size
@@ -138,11 +130,11 @@ with tf.Session() as sess:
                                                    ro_net.d1_data: d1_data[idx: idx + args.batch_size],
                                                    ro_net.d2_data: d2_data[idx: idx + args.batch_size],
                                                    ro_net.d3_data: d3_data[idx: idx + args.batch_size],
+                                                   ro_net.d4_data: d4_data[idx: idx + args.batch_size],
+                                                   ro_net.d5_data: d5_data[idx: idx + args.batch_size],
+                                                   ro_net.d6_data: d6_data[idx: idx + args.batch_size],
+                                                   ro_net.d7_data: d7_data[idx: idx + args.batch_size],
                                                    ro_net.position_gt: robot_position_gt[idx: idx + args.batch_size]})
-                                                   # ro_net.d4_data: d4_data[idx: idx + args.batch_size],
-                                                   # ro_net.d5_data: d5_data[idx: idx + args.batch_size],
-                                                   # ro_net.d6_data: d6_data[idx: idx + args.batch_size],
-                                                   # ro_net.d7_data: d7_data[idx: idx + args.batch_size],
                 writer_train.add_summary(summary, step)
                 writer_train.flush()
 
@@ -152,10 +144,10 @@ with tf.Session() as sess:
                                                                               ro_net.d1_data: val_d1_data,
                                                                               ro_net.d2_data: val_d2_data,
                                                                               ro_net.d3_data: val_d3_data,
-                                                                              # ro_net.d4_data: val_d4_data,
-                                                                              # ro_net.d5_data: val_d5_data,
-                                                                              # ro_net.d6_data: val_d6_data,
-                                                                              # ro_net.d7_data: val_d7_data,
+                                                                              ro_net.d4_data: val_d4_data,
+                                                                              ro_net.d5_data: val_d5_data,
+                                                                              ro_net.d6_data: val_d6_data,
+                                                                              ro_net.d7_data: val_d7_data,
                                                                               ro_net.position_gt: val_robot_position_gt})
             writer_val.add_summary(summary, step)
             writer_val.flush()

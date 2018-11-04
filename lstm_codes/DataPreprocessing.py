@@ -33,6 +33,7 @@ class DataManager:
 
         self.train_data_list = []
         for train_file_dir in self.train_files_dir:
+            print (train_file_dir)
             a = np.loadtxt(train_file_dir, delimiter=',')
             self.train_data_list.append(a)
 
@@ -61,6 +62,7 @@ class DataManager:
         for i, train_data in enumerate(train_data_list):
             xy = self.scaler.transform(train_data)
             self.train_data_list[i] = xy
+
 
     ##################################################
                  #Setting train data parts
@@ -119,9 +121,7 @@ class DataManager:
         self.d7_data =[]
 
         for train_data in self.train_data_list:
-            xy = train_data
-            xy = self.scaler.transform(xy)
-            x = xy[:,:self.num_uwb]
+            x = train_data[:,:self.num_uwb]
 
             for i in range(len(x) - self.seq_length + 1):
                 for j in range(self.num_uwb):

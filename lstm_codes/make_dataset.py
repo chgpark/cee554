@@ -76,42 +76,43 @@ class CSVWriter():
         dist4 = uwb4.getDistancewNoise(drone)
         return dist1,dist2,dist3,dist4
 
-    def zigzag_xy(self):
-        for j in range(5):
+    def zigzag_xy(self, round = 1):
+        for k in range(round):
+            for j in range(5):
+                for i in range(self.iteration_num):
+                    dist_list = self.moveRobot(DELTALENGTH, 0.0, 0.0)
+                    self.writerow(dist_list)
+                for i in range(int(self.iteration_num/10)):
+                    dist_list = self.moveRobot(0.0, DELTALENGTH, 0.0)
+                    self.writerow(dist_list)
+                for i in range(int(self.iteration_num)):
+                    dist_list = self.moveRobot(-DELTALENGTH, 0.0, 0.0)
+                    self.writerow(dist_list)
+                for i in range(int(self.iteration_num/10)):
+                    dist_list = self.moveRobot(0.0, DELTALENGTH, 0.0)
+                    self.writerow(dist_list)
+
             for i in range(self.iteration_num):
                 dist_list = self.moveRobot(DELTALENGTH, 0.0, 0.0)
                 self.writerow(dist_list)
-            for i in range(int(self.iteration_num/10)):
-                dist_list = self.moveRobot(0.0, DELTALENGTH, 0.0)
-                self.writerow(dist_list)
-            for i in range(int(self.iteration_num)):
-                dist_list = self.moveRobot(-DELTALENGTH, 0.0, 0.0)
-                self.writerow(dist_list)
-            for i in range(int(self.iteration_num/10)):
-                dist_list = self.moveRobot(0.0, DELTALENGTH, 0.0)
-                self.writerow(dist_list)
 
-        for i in range(self.iteration_num):
-            dist_list = self.moveRobot(DELTALENGTH, 0.0, 0.0)
-            self.writerow(dist_list)
+            for j in range(5):
+                for i in range(self.iteration_num):
+                    dist_list = self.moveRobot(0.0, -DELTALENGTH, 0.0)
+                    self.writerow(dist_list)
+                for i in range(int(self.iteration_num / 10)):
+                    dist_list = self.moveRobot(-DELTALENGTH, 0.0, 0.0)
+                    self.writerow(dist_list)
+                for i in range(self.iteration_num):
+                    dist_list = self.moveRobot( 0.0,DELTALENGTH, 0.0)
+                    self.writerow(dist_list)
+                for i in range(int(self.iteration_num / 10)):
+                    dist_list = self.moveRobot(-DELTALENGTH, 0.0,  0.0)
+                    self.writerow(dist_list)
 
-        for j in range(5):
             for i in range(self.iteration_num):
                 dist_list = self.moveRobot(0.0, -DELTALENGTH, 0.0)
                 self.writerow(dist_list)
-            for i in range(int(self.iteration_num / 10)):
-                dist_list = self.moveRobot(-DELTALENGTH, 0.0, 0.0)
-                self.writerow(dist_list)
-            for i in range(self.iteration_num):
-                dist_list = self.moveRobot( 0.0,DELTALENGTH, 0.0)
-                self.writerow(dist_list)
-            for i in range(int(self.iteration_num / 10)):
-                dist_list = self.moveRobot(-DELTALENGTH, 0.0,  0.0)
-                self.writerow(dist_list)
-
-        for i in range(self.iteration_num):
-            dist_list = self.moveRobot(0.0, -DELTALENGTH, 0.0)
-            self.writerow(dist_list)
 
     def zigzag_yz(self):
         for j in range(5):
@@ -378,10 +379,22 @@ class CSVWriter():
 
 
 '''Should be fixed!!'''
-uwb1 = UWB( -2.4, -2.4, 0.1)
-uwb2 = UWB( 2.4, -2.4, 2.7)
-uwb3 = UWB( 2.4, 2.4, 1.4)
-uwb4 = UWB( -2.4, 2.4, 4.2)
+# uwb1 = UWB( -2.4, -2.4, 0.1)
+# uwb2 = UWB( 2.4, -2.4, 2.7)
+# uwb3 = UWB( 2.4, 2.4, 1.4)
+# uwb4 = UWB( -2.4, 2.4, 4.2)
+
+# uwb1 = UWB(-0, -2.4, 2.7)
+# uwb2 = UWB(-2.4, 0, 0.1)
+# uwb3 = UWB(0, 2.4, 4.2)
+# uwb4 = UWB(2.4, 0, 1.4)
+
+uwb1 = UWB( -1.6, -2.4, 0.1)
+uwb2 = UWB( -2.4, -1.6, 4.2)
+uwb3 = UWB( 1.6, 2.4, 1.4)
+uwb4 = UWB( 2.4, 1.6, 2.7)
+
+
 
 
 #uwb_list = [uwb1, uwb2, uwb3, uwb4]
@@ -396,7 +409,7 @@ uwb_list = [uwb1, uwb2, uwb3, uwb4]
 file_name = 'train_' + DIMENSION # file name
 # file_name = 'test_data_arbitrary_path' + DIMENSION
 if (ISZIGZAG):
-    file_name = file_name +'_' + 'zigzag_1'
+    file_name = file_name +'_' + 'zigzag_3'
 file_name = file_name + '.csv'
 
 drone = Robot(-2.0, -2.0, 0.0) #initial position
@@ -408,7 +421,7 @@ wr = csv.writer(train_file)
 
 dataWriter = CSVWriter(wr, drone)
 
-dataWriter.drawZigzagPath_3D(1)
+dataWriter.zigzag_xy(10)
 #dataWriter.drawTestPath()
 # dataWriter.drawPolyPath()
 # dataWriter.drawSpiralPath()

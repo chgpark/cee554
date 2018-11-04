@@ -14,15 +14,15 @@ p =argparse.ArgumentParser()
 
 #FOR TRAIN
 # p.add_argument('--train_data', type=str, default="train_3D_zigzag_for_debug.csv")
-p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/train_181031/")
-p.add_argument('--val_data', type=str, default="./inputs/181031_3D_zigzag_2.csv")
-p.add_argument('--board_dir', type=str, default="/home/shapelim/RONet/board/multimodal/1031bi_w_4_multi_data_small_lr/")
-p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/model/multimodal/1031bi_w_4_multi_data_small_lr/")
+p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/train/")
+p.add_argument('--val_data', type=str, default="./inputs/poly_3D.csv")
+p.add_argument('--board_dir', type=str, default="/home/shapelim/RONet/KRoC/board/non_multimodal/bi/")
+p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/KRoC/model/non_multimodal/bi/")
 
-p.add_argument('--lr', type=float, default = 0.0001)
+p.add_argument('--lr', type=float, default = 0.00015)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 5)
-p.add_argument('--epoches', type=int, default = 2000)
+p.add_argument('--epoches', type=int, default = 2)
 p.add_argument('--batch_size', type=int, default = 11257)
 
 #NETWORK PARAMETERS

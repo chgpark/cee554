@@ -180,11 +180,108 @@ class RONet:
             self.output3_fw = output3[0]
             self.output3_bw = output3[1]
 
+
     def concatenate_preprocessed_data_for_multimodal_bi_LSTM(self):
         self.output = tf.concat([self.output0_fw, self.output0_bw,
                                                self.output1_fw, self.output1_bw,
                                                self.output2_fw, self.output2_bw,
                                                self.output3_fw, self.output3_bw], axis = 2)
+
+    def set_multimodal_Preprocessing_bi_LSTM_for_8_uwb(self):
+        with tf.variable_scope("preprocessing0"):
+            cell_forward = tf.contrib.rnn.BasicLSTMCell(num_units = self.preprocessing_size)
+            cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            cell_backward = tf.contrib.rnn.BasicLSTMCell(num_units = self.preprocessing_size)
+            cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
+
+            # outputs : tuple
+            output0, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d0_data, dtype=tf.float32)
+            self.output0_fw = output0[0]
+            self.output0_bw = output0[1]
+
+        with tf.variable_scope("preprocessing1"):
+            cell_forward = tf.contrib.rnn.BasicLSTMCell(num_units = self.preprocessing_size)
+            cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            cell_backward = tf.contrib.rnn.BasicLSTMCell(num_units = self.preprocessing_size)
+            cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
+
+            output1, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d1_data, dtype=tf.float32)
+            self.output1_fw = output1[0]
+            self.output1_bw = output1[1]
+
+        with tf.variable_scope("preprocessing2"):
+            cell_forward = tf.contrib.rnn.BasicLSTMCell(num_units = self.preprocessing_size)
+            cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            cell_backward = tf.contrib.rnn.BasicLSTMCell(num_units = self.preprocessing_size)
+            cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
+
+            output2, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d2_data, dtype=tf.float32)
+            self.output2_fw = output2[0]
+            self.output2_bw = output2[1]
+
+        with tf.variable_scope("preprocessing3"):
+            cell_forward = tf.contrib.rnn.BasicLSTMCell(num_units = self.preprocessing_size)
+            cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            cell_backward = tf.contrib.rnn.BasicLSTMCell(num_units = self.preprocessing_size)
+            cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
+
+            output3, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d3_data, dtype=tf.float32)
+
+            self.output3_fw = output3[0]
+            self.output3_bw = output3[1]
+
+        with tf.variable_scope("preprocessing4"):
+            cell_forward = tf.contrib.rnn.BasicLSTMCell(num_units = self.preprocessing_size)
+            cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            cell_backward = tf.contrib.rnn.BasicLSTMCell(num_units = self.preprocessing_size)
+            cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
+
+            # outputs : tuple
+            output4, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d4_data, dtype=tf.float32)
+            self.output4_fw = output4[0]
+            self.output4_bw = output4[1]
+
+        with tf.variable_scope("preprocessing5"):
+            cell_forward = tf.contrib.rnn.BasicLSTMCell(num_units = self.preprocessing_size)
+            cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            cell_backward = tf.contrib.rnn.BasicLSTMCell(num_units = self.preprocessing_size)
+            cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
+
+            output5, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d5_data, dtype=tf.float32)
+            self.output5_fw = output5[0]
+            self.output5_bw = output5[1]
+
+        with tf.variable_scope("preprocessing6"):
+            cell_forward = tf.contrib.rnn.BasicLSTMCell(num_units = self.preprocessing_size)
+            cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            cell_backward = tf.contrib.rnn.BasicLSTMCell(num_units = self.preprocessing_size)
+            cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
+
+            output6, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d6_data, dtype=tf.float32)
+            self.output6_fw = output6[0]
+            self.output6_bw = output6[1]
+
+        with tf.variable_scope("preprocessing7"):
+            cell_forward = tf.contrib.rnn.BasicLSTMCell(num_units = self.preprocessing_size)
+            cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            cell_backward = tf.contrib.rnn.BasicLSTMCell(num_units = self.preprocessing_size)
+            cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
+
+            output7, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d7_data, dtype=tf.float32)
+
+            self.output7_fw = output7[0]
+            self.output7_bw = output7[1]
+
+    def concatenate_preprocessed_data_for_8multimodal_bi_LSTM(self):
+        self.output = tf.concat([self.output0_fw, self.output0_bw,
+                                 self.output1_fw, self.output1_bw,
+                                 self.output2_fw, self.output2_bw,
+                                 self.output3_fw, self.output3_bw,
+                                 self.output4_fw, self.output4_bw,
+                                 self.output5_fw, self.output5_bw,
+                                 self.output6_fw, self.output6_bw,
+                                 self.output7_fw, self.output7_bw], axis = 2)
+
 
     def get_attentioned_preprocessed_data(self):
         with tf.variable_scope("preprocessed_data_attention"):
@@ -196,7 +293,9 @@ class RONet:
         with tf.variable_scope("Stacked_bi_lstm1"):
             # outputs : tuple
             cell_forward1 = tf.contrib.rnn.BasicLSTMCell(num_units = self.first_layer_output_size)
+            cell_forward1 = tf.nn.rnn_cell.DropoutWrapper(cell_forward1, output_keep_prob= 0.75)
             cell_backward1 = tf.contrib.rnn.BasicLSTMCell(num_units = self.first_layer_output_size)
+            cell_backward1 = tf.nn.rnn_cell.DropoutWrapper(cell_backward1, output_keep_prob= 0.75)
 
             # outputs : tuple
             outputs, _states = tf.nn.bidirectional_dynamic_rnn(cell_forward1, cell_backward1, self.attentioned_preprocessed_output, dtype=tf.float32)
@@ -216,7 +315,9 @@ class RONet:
     def set_second_layer_bi_LSTM(self):
         with tf.variable_scope("Stacked_bi_lstm2"):
             cell_forward2 = tf.contrib.rnn.BasicLSTMCell(num_units = self.second_layer_output_size)
+            cell_forward2 = tf.nn.rnn_cell.DropoutWrapper(cell_forward2, output_keep_prob= 0.8)
             cell_backward2 = tf.contrib.rnn.BasicLSTMCell(num_units = self.second_layer_output_size)
+            cell_backward2 = tf.nn.rnn_cell.DropoutWrapper(cell_backward2, output_keep_prob= 0.8)
             # outputs : tuple
             outputs, _states = tf.nn.bidirectional_dynamic_rnn(cell_forward2, cell_backward2, self.output, dtype=tf.float32)
             self.layer_output_fw = outputs[0]
@@ -249,6 +350,11 @@ class RONet:
     def set_preprocessed_multimodal_bi_LSTMs(self):
         self.set_multimodal_Preprocessing_bi_LSTM_for_4_uwb()
         self.concatenate_preprocessed_data_for_multimodal_bi_LSTM()
+        self.get_attentioned_preprocessed_data()
+
+    def set_preprocessed_8multimodal_bi_LSTMs(self):
+        self.set_multimodal_Preprocessing_bi_LSTM_for_8_uwb()
+        self.concatenate_preprocessed_data_for_8multimodal_bi_LSTM()
         self.get_attentioned_preprocessed_data()
 
     def set_stacked_bi_LSTM_with_attention(self):
@@ -287,6 +393,13 @@ class RONet:
         self.output = tf.reshape(self.output, [-1, self.sequence_length*self.second_layer_output_size*2])
         self.pose_pred = tf.contrib.layers.fully_connected(self.output, self.output_size)
 
+    def build_RO_Net_bi_8multimodal(self):
+        self.set_preprocessed_8multimodal_bi_LSTMs()
+        self.set_stacked_bi_LSTM_with_attention()
+
+        self.output = tf.reshape(self.output, [-1, self.sequence_length*self.second_layer_output_size*2])
+        self.pose_pred = tf.contrib.layers.fully_connected(self.output, self.output_size)
+
 
 ##################################################
             #Building loss
@@ -299,7 +412,6 @@ class RONet:
 
         with tf.variable_scope('lstm_loss'):
             # loss = tf.losses.mean_squared_error(Y, outputs, weights=weights)#reduction=tf.losses.Reduction.MEAN)
-            # loss = tf.reduce_mean(tf.square(Y-outputs))
             self.loss = tf.reduce_mean(tf.square(self.position_gt - self.pose_pred))
             tf.summary.scalar('lstm_loss', self.loss)
 

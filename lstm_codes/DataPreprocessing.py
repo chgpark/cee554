@@ -53,7 +53,7 @@ class DataManager:
         '''Below one is essential for test!!
             The reason why its range is self.num_uwb: self.num_uwb*3 is to able to operate wheter gt is position or pose.
         '''
-        self.scaler_for_prediction.fit(xy[:, self.num_uwb:-self.num_uwb*3])
+        self.scaler_for_prediction.fit(xy[:, self.num_uwb:self.num_uwb+3])
         del xy
 
     def transform_all_data(self):
@@ -120,7 +120,8 @@ class DataManager:
 
         for train_data in self.train_data_list:
             xy = train_data
-            x = self.scaler.transform(xy[:,:self.num_uwb])
+            xy = self.scaler.transform(xy)
+            x = xy[:,:self.num_uwb]
 
             for i in range(len(x) - self.seq_length + 1):
                 for j in range(self.num_uwb):
@@ -176,8 +177,9 @@ class DataManager:
     def set_train_data_for_4multimodal(self):
         self.set_range_data_for_4multimodal()
         self.set_gt_data()
+
     def set_train_data_for_8multimodal(self):
-        self.set_range_data_for_4multimodal()
+        self.set_range_data_for_8multimodal()
         self.set_gt_data()
 
     ##################################################

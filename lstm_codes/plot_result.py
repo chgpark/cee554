@@ -7,14 +7,14 @@ import os
 from scipy import interpolate
 from scipy.interpolate import spline
 p =argparse.ArgumentParser()
-p.add_argument('--save_dir', type=str, default="./")
-p.add_argument('--gt_dir', type=str, default="inputs/poly_3D.csv")
+p.add_argument('--output_dir', type=str, default="/home/shapelim/KRoC_Results")
+p.add_argument('--test_data', type=str, default="inputs/poly_3D.csv")
 # p.add_argument('--gt_dir', type=str, default="inputs/test_data_diagonal_curve2D.csv")
 #In case of test 1
-p.add_argument('--non_multimodal_uni', type=str, default="./results/non_multimodal/uni_poly.csv")
-p.add_argument('--non_multimodal_bi', type=str, default="results/RiTA/stack_bi_2.csv")
-p.add_argument('--multimodal_uni', type=str, default= "results/RiTA/unidirectional_wo_fcn.csv")
-p.add_argument('--multimodal_bi', type=str, default= "results/RiTA/gru.csv")
+p.add_argument('--uni', type=str, default= "/home/shapelim/KRoC_Results/1104_uni_poly.csv")
+p.add_argument('--bi', type=str, default= "/home/shapelim/KRoC_Results/1104_bi_poly.csv")
+p.add_argument('--multimodal_uni', type=str, default= "/home/shapelim/KRoC_Results/1104_unimul_poly.csv")
+p.add_argument('--multimodal_bi', type=str, default= "/home/shapelim/KRoC_Results/1104_bimul_poly.csv")
 
 #In case of test 2
 # p.add_argument('--bidirectional_LSTM_csv', type=str, default="results/RiTA/bi_lstm_to_curve_test.csv")
@@ -23,7 +23,7 @@ p.add_argument('--multimodal_bi', type=str, default= "results/RiTA/gru.csv")
 # p.add_argument('--gru_csv', type=str, default= "results/RiTA/gru_to_curve_test.csv")
 #
 # p.add_argument('--trilateration_csv', type=str, default="results/RiTA/trilateration.csv")
-p.add_argument('--save_MSE_name', type=str, default="Distance_error_result__test1.png")
+p.add_argument('--save_MSE_name', type=str, default="Distance_error_result__test2.png")
 p.add_argument('--save_error_percent_name', type=str, default="test_stack.png")
 p.add_argument('--save_trajectory_name', type=str, default="Test_trajectory11.png") #""Trajectory_result_refined_interval_10_smoothed_test_stack.png")
 p.add_argument('--data_interval', type=int, default= 21)
@@ -43,7 +43,8 @@ w white
 COLORSET = [(241/255.0, 101/255.0, 65/255.0), (19/255.0, 163/255.0, 153/255.0), (2/255.0, 23/255.0, 157/255.0), (191/255.0, 17/255.0, 46/255.0)]
 SOFT_COLORSET = [(241/255.0, 187/255.0, 165/255.0), (174/255.0, 245/255.0, 231/255.0), (115/255.0, 123/255.0, 173/255.0), (232/255.0, 138/255.0, 139/255.0)]
 LINE = ['-.', ':', '--', '-']
-LABEL = ['LSTM', 'GRU', 'Bi-LSTM', 'Stacked Bi-LSTM']
+# LABEL = ['LSTM', 'GRU', 'Bi-LSTM', 'Stacked Bi-LSTM']
+LABEL = ['uni', 'bi', 'multimodal_uni', 'multimodal_bi']
 
 SMOOTHNESS = 200
 
@@ -52,33 +53,35 @@ SMOOTHNESS = 200
 class Visualization:
     def __init__(self, args):
         self.args = args
-        self.folder_name = "results/"
+        self.folder_name = args.output_dir
         if not os.path.isdir(self.folder_name):
             os.mkdir(self.folder_name)
-        self.setGT()
+        self.setGT(self.args.test_data)
         self.color_set = COLORSET
         self.label = LABEL
 
-    def setGT(self):
-        gt_xyz = np.loadtxt(args.gt_dir, delimiter=',')
+    def setGT(self, raw_csv_file):
+        gt_xyz = np.loadtxt(raw_csv_file, delimiter=',')
         #x_array: gt_xy[:,0]
         #y_array: gt_xy[:,1]
-        self.gt_xyz = gt_xyz[:, 4:7]
+        self.gt_xyz = gt_xyz[:, -3:]
 
-    def _calDistanceError(self, predicted_result_dir):
-        predicted_xy = np.loadtxt(predicted_result_dir, delimiter=',')
+    def _calDistanceError3D(self, predicted_result_dir):
+        predicted_xyz = np.loadtxt(predicted_result_dir, delimiter=',')
         # gt_xy = np.random.randint(3,size = (4,2))
         # predicted_xy = np.random.randint(3, size = (4,2))
-        dx_dy_array = self.gt_xy - predicted_xy
+        dx_dy_dz_array = self.gt_xyz[4:] - predicted_xyz
 
-        distance_square = np.square(dx_dy_array[:,0]) + np.square(dx_dy_array[:,1])
+        distance_square = np.square(dx_dy_dz_array[:,0]) \
+                          + np.square(dx_dy_dz_array[:,1]) \
+                          + np.square(dx_dy_dz_array[:,2])
         MSE = np.sum(distance_square)/distance_square.shape
         RMSE = np.sqrt(MSE)
         print ("RMSE: " + str(RMSE*100) + " cm")
 
         return np.sqrt(distance_square)
 
-    def plotDistanceError(self, *target_files_csv):
+    def plotDistanceError3D(self, *target_files_csv):
         saved_file_name = self.args.save_MSE_name
         plot_title = "Distance Error"
         plt.title(plot_title)
@@ -86,7 +89,7 @@ class Visualization:
         plt.figure(figsize=(7,4.326))
         for i, csv in enumerate(target_files_csv):
 
-            distance_error = self._calDistanceError(csv)
+            distance_error = self._calDistanceError3D(csv)
             distance_error = distance_error*100
             distance_error_refined = self.getRefinedData(distance_error, 30)
 
@@ -109,11 +112,11 @@ class Visualization:
 
         plt.legend()
         plt.grid(True)
-        plt.xlim(0,1500)
+        plt.xlim(0,1300)
         # plt.xticks(np.linspace(-0.5,1.5,10, endpoint =True))
         # plt.xticks(np.linspace(-0.5,1.5,10, endpoint =True))
         plt.ylim(0.0,40)
-        plt.xlabel("Time Step t")
+        plt.xlabel("Time Step [t]")
         plt.ylabel("Distance Error [cm]")
         fig = plt.gcf()
         plt.show()
@@ -238,8 +241,9 @@ class Visualization:
         fig.savefig(saved_file_name)
         print ("Done")
 
+    def set_3D_plot_name(self, name):
+        self._3D_plot_name = name
     def drawResult3D(self, *target_files_csv):
-        save_file_name = self.args.save_trajectory_name
 
         self.fig = plt.figure()
         self.ax1 = self.fig.add_subplot(111, projection='3d')
@@ -268,12 +272,14 @@ class Visualization:
         plt.legend()
 
         # self.ax1.scatter(X_list, Y_list, Z_list, c=c)
-
-        self.ax1.set_xlabel('X_axis')
-        self.ax1.set_ylabel('Y_axis')
-        self.ax1.set_zlabel('Z_axis')
+        self.ax1.set_zlim(0, 1.0)
+        self.ax1.set_xlim(-0.75, 1.25)
+        self.ax1.set_ylim(-1.0, 1.0)
+        self.ax1.set_xlabel('X axis')
+        self.ax1.set_ylabel('Y axis')
+        self.ax1.set_zlabel('Z axis')
         self.fig = plt.gcf()
-        self.fig.savefig(self.folder_name +"/Results_test.png")
+        self.fig.savefig(self._3D_plot_name)
 
 
 
@@ -303,8 +309,8 @@ if __name__ == "__main__":
     # x = input[:, 4]
     # y = input[:, 5]
     # z = input[:, 6]
-    viz.drawResult3D(args.non_multimodal_uni)
-    # viz.plotDistanceError(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)
-    # viz.plotErrorPercent(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)
+    viz.drawResult3D(args.uni) #, args.bi, args.multimodal_uni, args.multimodal_bi)
+    # viz.plotDistanceError3D(args.multimodal_bi)
+    # viz.plotErrorPercent(args.multimodal_bi)
     # viz.plot2DTrajectory(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)
 

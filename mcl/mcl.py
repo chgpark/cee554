@@ -1,14 +1,11 @@
 #!/usr/bin/env python
 from math import *
 import random
-from environment_settings import UWB_LOC
-from environment_settings import MAP_X, MAP_Y, MAP_Z
+from environment_settings import *
 # UWB_LOC = [[0.90, 0.90, 0 ], [4.5 , -0.90, 0],
 #            [4.50, 4.50, 0 ], [0.90,   2.7, 0]] # temporary location input
+
 DISCONNECTED = -1
-SAMPLING_NUM = 1000
-UNCERTAINTY = 0.095
-SENSOR_NOISE = 0.002
 TOP_PARTICLE_RATIO = 10 # for estimate position via particles.
 
 class Position(object):
@@ -144,38 +141,6 @@ class MonteCarloLocalization(object):
 
         self.weights_list = self.normalizeList(self.weights_list)
 
-    def calculateDistanceDiffConsideringMultiPath(self, uwb_list):
-        z = []
-        for particle in self.particles:
-            error = 0
-            for uwb in uwb_list:
-                self.checker.setParticleAnchor(particle, uwb)
-                if uwb.isLOS:
-                    if self.checker.isObstaclesBlockBTWParticleAndAnchor():
-                        if self.checker.getEdgeValue(particle, uwb) == DISCONNECTED:
-                            self.checker.graph.resetAllStates()
-                            self.checker.setGraphEdges()
-                            self.checker.graph.doDijkstra(0)
-
-                            base = self.checker.graph.distance[-1]
-                            height = particle.z - uwb.z
-                            expected_z_value = self.checker.calculatebyPythagoreanTheorem(base, height)
-                        else:
-                            expected_z_value = self.getEuclidianDistance(particle, uwb)
-
-                    else:
-                        expected_z_value = self.getEuclidianDistance(particle, uwb)
-
-                    try:
-                        error += (expected_z_value - uwb.range)**2
-
-                    except UnboundLocalError:
-                        print (self.checker.isObstaclesBlockBTWParticleAndAnchor())
-                        print (self.checker.getEdgeValue(particle, uwb))
-                        print (particle.x, particle.y, particle.z, uwb.x, uwb.y, uwb.z)
-
-            z.append(error)
-        return z
 
     def calculateCosineSimilarity(self, uwb_list):
         z = []
@@ -212,11 +177,15 @@ class MonteCarloLocalization(object):
         particles_list = []
         for n in range(self.samples_num):
             random_value = random.random()
-            for i in range(self.samples_num):
-                if random_value <= probs[i]:
-                    particles_list.append(self.particles[i])
-                    weights_list.append(self.weights_list[i])
-                    break
+            try:
+                for i in range(self.samples_num):
+                    if random_value <= probs[i]:
+                        particles_list.append(self.particles[i])
+                        weights_list.append(self.weights_list[i])
+                        break
+            except ValueError:
+                print ("random: ", random_value)
+                print ("probs: ", probs[i])
 
         return particles_list, weights_list
 

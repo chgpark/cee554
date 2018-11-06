@@ -124,6 +124,23 @@ M.~Turan, Y.~Almalioglu, H.~Araujo, E.~Konukoglu, and M.~Sitti, ``Deep endovo:
   approach for endoscopic capsule robots,'' \emph{Neurocomputing}, vol. 275,
   pp. 1861--1870, 2018.
 
+\bibitem{djugash2006range}
+J.~Djugash, S.~Singh, G.~Kantor, and W.~Zhang, ``Range-only slam for robots
+  operating cooperatively with sensor networks,'' in \emph{Robotics and
+  Automation, 2006. ICRA 2006. Proceedings 2006 IEEE International Conference
+  on}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2006, pp. 2078--2084.
+
+\bibitem{yang2012efficient}
+P.~Yang, ``Efficient particle filter algorithm for ultrasonic sensor-based 2d
+  range-only simultaneous localisation and mapping application,'' \emph{IET
+  Wireless Sensor Systems}, vol.~2, no.~4, pp. 394--401, 2012.
+
+\bibitem{fabresse2014robust}
+F.~R. Fabresse, F.~Caballero, I.~Maza, and A.~Ollero, ``Robust range-only slam
+  for aerial vehicles,'' in \emph{Unmanned Aircraft Systems (ICUAS), 2014
+  International Conference on}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE,
+  2014, pp. 750--755.
+
 \bibitem{hochreiter1997long}
 S.~Hochreiter and J.~Schmidhuber, ``Long short-term memory,'' \emph{Neural
   computation}, vol.~9, no.~8, pp. 1735--1780, 1997.

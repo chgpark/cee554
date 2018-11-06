@@ -15,45 +15,45 @@ Database file #2: ./MyBib.bib
 Warning--empty journal in smith2018object
 
 Done.
-You've used 28 entries,
+You've used 31 entries,
             3975 wiz_defined-function locations,
-            1286 strings with 18972 characters,
-and the built_in function-call counts, 22453 in all, are:
-= -- 1773
-> -- 558
-< -- 203
-+ -- 313
-- -- 92
-* -- 1071
-:= -- 3253
-add.period$ -- 64
-call.type$ -- 28
-change.case$ -- 28
-chr.to.int$ -- 495
-cite$ -- 29
-duplicate$ -- 1598
-empty$ -- 1835
-format.name$ -- 117
-if$ -- 5213
+            1304 strings with 19640 characters,
+and the built_in function-call counts, 25288 in all, are:
+= -- 1997
+> -- 622
+< -- 234
++ -- 351
+- -- 101
+* -- 1205
+:= -- 3644
+add.period$ -- 72
+call.type$ -- 31
+change.case$ -- 31
+chr.to.int$ -- 573
+cite$ -- 32
+duplicate$ -- 1791
+empty$ -- 2070
+format.name$ -- 128
+if$ -- 5883
 int.to.chr$ -- 0
-int.to.str$ -- 28
-missing$ -- 267
-newline$ -- 104
-num.names$ -- 28
-pop$ -- 637
+int.to.str$ -- 31
+missing$ -- 297
+newline$ -- 113
+num.names$ -- 31
+pop$ -- 706
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 1750
+skip$ -- 1970
 stack$ -- 0
-substring$ -- 1194
-swap$ -- 1315
-text.length$ -- 38
+substring$ -- 1379
+swap$ -- 1484
+text.length$ -- 43
 text.prefix$ -- 0
 top$ -- 5
 type$ -- 0
 warning$ -- 1
-while$ -- 102
-width$ -- 30
-write$ -- 281
+while$ -- 117
+width$ -- 33
+write$ -- 310
 (There was 1 warning)

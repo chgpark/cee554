@@ -88,7 +88,7 @@ Range-only SLAM is a method for localizing a mobile robot and beacons by mainly 
 	\centering
 	%\subfigure[]{
 		%\includegraphics[height=4.5cm]{Drone_image_1}
-	\includegraphics[height=4.5cm]{Drone_image_1}
+	\includegraphics[height=5cm]{CE554_traditional_to_RNN}
 		
 		%\includegraphics[trim={0 0 0 1cm}height=4.5cm]{IROS2018_image_1}
 	\label{fig:example}
@@ -121,8 +121,16 @@ One of the popular SLAM techniques with deep learning is CNN-SLAM \cite{tateno20
 
 There are many variations of LSTM architecture. As studies of deep learning are getting popular, various modified architectures of LSTM have been proposed for many tasks in a wide area of science and engineering. Because LSTM is powerful when dealing with sequential data and infering output by using previous inputs, LSTM is utilized to estimate pose by being attached to the end part of deep learning architecture \cite{wang2017deepvo, kendall2015posenet, turan2018deep}  as a stacked form of LSTM. In addition, LSTM takes many various data as input; LSTM is exploited for sequential modeling using LiDAR scan data \cite{gladh2016deep}, images \cite{walch2017image, wang2017deepvo}, IMU \cite{ordonez2016deep}, a fusion of IMU and images \cite{clark2017vinet}.
 
-\section{Experiment}
+\section{Our approaches}
+\subsection{LSTM}
 
+\subsection{Bidirecional LSTM}
+
+\subsection{Stacked Architecture}
+
+\subsection{Multimodal Architecture}
+
+<<<<<<< HEAD
  Our experimental system consists of a UWB(ultra wideband) sensor tag and eight UWB sensor anchors that have a UWB transceiver, the motion capture system with 12 cameras, and a mobile robot and a small form-factor computer. The UWB tag and anchors are attached to a robot and landmarks respectively. The tag and anchor system operates like that an anchor transmits the Ultra wideband signal and a tag receives the signal and measures the range between two devices. Each UWB sensors have a UWB transceiver that is DW1000 UWB-chip made by Decawave and supports 6 RF bands from 3.5 GHz to 6.5 GHz and has centimeter-level accuracy. And The motion capture system is Eagle Digital Realtime system of motion analysis corporation that operates with the principle of stereo pattern recognition that is a kind of photogrammetry based on the epipolar geometry and the triangulation methodology. the system has < 1mm accuracy and > 500 frames/s frame rate. And a mobile robot is iClebo Kobuki from yujinrobot that has 70 cm/s maximum velocity. And the small form-factor computer is a gigabyte Ultra compact PC kit that CPU is intel dual core i7 / 2.7GHz and ram is DDR4SDRAM.
  Deep learning framework used for our network is pytorch 0.4.0 on python 3.6. The network is trained on the machine that OS is Ubuntu mate 16.04 LTS and GPUs are gtx 1080ti and gtx titan. The network inferences on the same machine that we used for training.
  
@@ -173,32 +181,68 @@ There are many variations of LSTM architecture. As studies of deep learning are 
  So, we check that RNN can estimate the position despite the variation of distance data as input and compare its result with traditional RO-slam method.
  
  Let $\Theta$ be the parameters of our RNN model, then our final goal is to find optimal parameters $\Theta^{*}$ for localization by minimizing Mean Square Error (MSE) of Euclidean distance between ground truth position $Y_k$ and estimated position $\hat{Y_k}$.
+=======
+\subsection{Training Loss}
+
+We set the experiment on the virtual situation and generate distance data set which corresponds to the position with 10\% noise error and let RNN be trained using these distance data. Train data are just zigzag paths and test data is an arbitrary path, so we also check if RNN can estimate the position despite the variation of distance data as input.
+
+Let $\Theta$ be the parameters of our RNN model, then our final goal is to find optimal parameters $\Theta^{*}$ for localization by minimizing Mean Square Error (MSE) of Euclidean distance between ground truth position $Y_k$ and estimated position $\hat{Y_k}$.
+>>>>>>> 23e687282393b6fa0d9e383b57f9a218e1fd18a6
 \begin{equation}
 \Theta^{*} = \underset{\Theta}{\mathrm{argmin}} \sum_{k=1}^N \parallel Y_k - \hat{Y_k} \parallel^{2}
 \end{equation}  
 
+\begin{figure*}[t]
+	
+	\centering
+	%\subfigure[]{
+	%\includegraphics[height=4.5cm]{Drone_image_1}
+	\includegraphics[height=10.2 cm]{CE554_networks}
+	
+	%\includegraphics[trim={0 0 0 1cm}height=4.5cm]{IROS2018_image_1}
+	\label{fig:example}
+	%	}
+	
+	\caption{Blabla. }
+	
+\end{figure*}
+
+\section{Experiment}
+\subsection{Training/Test Dataset}
+ 
+
+\subsection{RNN Architectures}
+
+Various kinds of RNN models are tested for robot localization through range measurements. We trained 4 kinds of RNNs; LSTM\cite{hochreiter1997long}, GRU\cite{cho2014learning}, Bi-LSTM\cite{schuster1997bidirectional}, stacked Bi-LSTM, which are basic architecture units in many RNNs researches. Using deep learning, these structures directly learn the end-to-end mapping between range data and robot position. 
+
 \section{Results}
+
+To verify our proposal that RNNs can estimate the robot's position through varying range data, we set the experiment on the simulated environment and generate range data set which corresponds to the position with 10\% noise error and let RNN be trained using these range data. Train data are just zigzag paths that generate ~\textit{$\Delta$x} or~\textit{$\Delta$y} changes respectively. Test data are two types; a diagonal oval path and an arbitrary path, which are shown as Fig. \ref{curve:trajectory} Fig. \ref{arbitrary:trajectory}. There's no same path between train data set and test data set. In addition, unlike train data set, ~\textit{$x$} and ~\textit{$y$} directions change at the same time. Thus, we also check the capability of RNNs to estimate the position in the regions not included in the train data set by variation of range data over time as input.
+
+
  
 \begin{table}[h]
 	\centering
-	\caption{RMSE of each RNN model from the test data.}
-	\begin{tabular}{cccc}
+	\begin{tabular}{cclcl}
 		\hline
-		\multicolumn{4}{c}{title {[}cm{]}}                                          \\ \hline
-		a                 & b              & c                  & d        \\
-		1               & 2              & 3                    & \textbf{4}                    \\ \hline
-		\multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{}
-		
+		\multicolumn{5}{c}{Results of RMSE{[}m{]}}                                                                  \\ \hline
+		\multicolumn{1}{c|}{Model}                    & \multicolumn{2}{c|}{Test1} & \multicolumn{2}{c}{Test2}      \\ \hline
+		\multicolumn{1}{c|}{Particle filter based}    & \multicolumn{2}{c|}{1}     & \multicolumn{2}{c}{2}          \\
+		\multicolumn{1}{c|}{Bidirectional Multimodal} & \multicolumn{2}{c|}{3}     & \multicolumn{2}{c}{\textbf{4}}
 	\end{tabular}
-	
-	\label{table:rmse}
-	
+	\label{table_rmse}
 \end{table}
 
-\section{Conclusions}
+The results of trajectory prediction are shown in Fig. \ref{curve:trajectory} and Fig. \ref{arbitrary:trajectory} and Root-Mean-Squared Error (RMSE) are shown in Table \ref{table:rmse}. Performance is better in order of stacked Bi-LSTM, Bi-LSTM, LSTM and GRU. In case of GRU, it has only two gates which is less complex structure than LSTM \cite{chung2014empirical}. However, due to GRU's less complexity, GRU has less the number of neurons than LSTM so their non-linear mapping achieves less performance. Likewise, Bi-LSTM consists of two LSTMs to process sequence in two directions so that infer output using the correlation of the backward information and the forward information of the sequences of each time step with its two separate hidden layers. Thus, Bi-LSTM has better nonlinear mapping capability than LSTM. For similar reasons, stacked Bi-LSTM is the architecture that stacks two Bi-LSTMs, so inference performance is better than Bi-LSTM. As a result, the stacked Bi-LSTM showed the best performance among unit RNN architectures. Therefore, we can conclude that the performance improves as the non-linearity of the architecture increases.
 
-We suggested a novel approach to range-based localization using recurrent neural network models. Results show that the RNN-based localization can reduce position error. As a future work, RNNs need to be tested in the real-world
 
+\section{Conclusion}
+
+In this paper, we proposed a novel approach to range-only measurements localization using recurrent neural network models and tested various types of LSTM models for more accurate localization of the mobile robot. 
+
+Using deep learning, our structure directly learns the end-to-end mapping between distance data and robot position. The stacked bidirectional LSTM structure exhibits the best estimates of robot positions than other RNN structure units. Therefore, we conclude that  the LSTM-based structure improves performance as non-linearity of structures increase and even if the robot position is not included in the ground truth dataset, our method is able to predict robot positions with small errors through sequential distance data. 
+
+As a future work, because train/test dataset are generated on simulated environment, the proposed method needs to be tested in the real-world to check whether RNNs can deal with multipath problems and line of non-line of sight(NLOS) issues.
 \bibliographystyle{IEEEtran}
 % argument is your BibTeX string definitions and bibliography database(s)
 \bibliography{./IEEEabrv,./MyBib}

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.8.29)  6 NOV 2018 10:41
+=======
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.8.13)  6 NOV 2018 02:28
+>>>>>>> 23e687282393b6fa0d9e383b57f9a218e1fd18a6
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -302,6 +306,7 @@ LaTeX Info: Redefining \nocite on input line 332.
 Package: cite 2015/02/27  v 5.5
 ) (./cee554.aux
 
+<<<<<<< HEAD
 LaTeX Warning: Label `fig:test' multiply defined.
 
 
@@ -318,6 +323,9 @@ LaTeX Warning: Label `sub@fig:sub2' multiply defined.
 
 
 LaTeX Warning: Label `fig:test' multiply defined.
+=======
+LaTeX Warning: Label `fig:example' multiply defined.
+>>>>>>> 23e687282393b6fa0d9e383b57f9a218e1fd18a6
 
 )
 \openout1 = `cee554.aux'.
@@ -374,7 +382,11 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <24> not available
 (Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
+<<<<<<< HEAD
  (/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+=======
+ (c:/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+>>>>>>> 23e687282393b6fa0d9e383b57f9a218e1fd18a6
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count113
 \scratchdimen=\dimen144
@@ -461,6 +473,7 @@ LaTeX Font Info:    Try loading font information for T1+pcr on input line 63.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
+<<<<<<< HEAD
 Package epstopdf Info: Source file: <Drone_image_1.eps>
 (epstopdf)                    date: 2018-10-28 16:39:15
 (epstopdf)                    size: 1454927 bytes
@@ -477,10 +490,22 @@ File: Drone_image_1-eps-converted-to.pdf Graphic file (type pdf)
 Package pdftex.def Info: Drone_image_1-eps-converted-to.pdf  used on input line
  91.
 (pdftex.def)             Requested size: 227.6223pt x 128.0374pt.
+=======
+<CE554_traditional_to_RNN.pdf, id=1, 963.6pt x 542.025pt>
+File: CE554_traditional_to_RNN.pdf Graphic file (type pdf)
+<use CE554_traditional_to_RNN.pdf>
+Package pdftex.def Info: CE554_traditional_to_RNN.pdf  used on input line 91.
+(pdftex.def)             Requested size: 252.91203pt x 142.26378pt.
+
+Overfull \hbox (7.19392pt too wide) in paragraph at lines 91--92
+ [][] 
+ []
+>>>>>>> 23e687282393b6fa0d9e383b57f9a218e1fd18a6
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+<<<<<<< HEAD
 [1{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
@@ -522,6 +547,42 @@ Overfull \hbox (7.22687pt too wide) in paragraph at lines 157--169
 
 [2 <./descriptionSystem.png> <./actualSystem.jpg> <./savingThread.png> <./calib
 .png> <./calib2.jpg>] (./cee554.bbl)
+=======
+[1{c:/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+ <./CE554_traditional_to_RNN.pdf>]
+<CE554_networks.pdf, id=60, 963.6pt x 542.025pt>
+File: CE554_networks.pdf Graphic file (type pdf)
+<use CE554_networks.pdf>
+Package pdftex.def Info: CE554_networks.pdf  used on input line 147.
+(pdftex.def)             Requested size: 515.95467pt x 290.21802pt.
+
+Overfull \hbox (10.06467pt too wide) in paragraph at lines 147--148
+ [][] 
+ []
+
+
+LaTeX Warning: Reference `curve:trajectory' on page 2 undefined on input line 1
+67.
+
+
+LaTeX Warning: Reference `arbitrary:trajectory' on page 2 undefined on input li
+ne 167.
+
+
+LaTeX Warning: Reference `curve:trajectory' on page 2 undefined on input line 1
+83.
+
+
+LaTeX Warning: Reference `arbitrary:trajectory' on page 2 undefined on input li
+ne 183.
+
+
+LaTeX Warning: Reference `table:rmse' on page 2 undefined on input line 183.
+
+(./cee554.bbl [2] [3 <./CE554_networks.pdf>])
+>>>>>>> 23e687282393b6fa0d9e383b57f9a218e1fd18a6
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -533,12 +594,22 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
+<<<<<<< HEAD
 [3] (./cee554.aux)
+=======
+[4
+
+] (./cee554.aux)
+
+LaTeX Warning: There were undefined references.
+
+>>>>>>> 23e687282393b6fa0d9e383b57f9a218e1fd18a6
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
+<<<<<<< HEAD
  5353 strings out of 492649
  80902 string characters out of 6129622
  156112 words of memory out of 5000000
@@ -567,4 +638,32 @@ PDF statistics:
  60 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
+=======
+ 5442 strings out of 494587
+ 81436 string characters out of 6177953
+ 148295 words of memory out of 5000000
+ 8983 multiletter control sequences out of 15000+600000
+ 117339 words of font info for 141 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 41i,9n,39p,1187b,301s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2018/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2018/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2018/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr10.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr6.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c
+:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2
+018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2018/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2018/texmf-dist/font
+s/type1/urw/courier/ucrr8a.pfb><c:/texlive/2018/texmf-dist/fonts/type1/urw/time
+s/utmb8a.pfb><c:/texlive/2018/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/
+texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2018/texmf
+-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on cee554.pdf (4 pages, 385502 bytes).
+PDF statistics:
+ 364 PDF objects out of 1000 (max. 8388607)
+ 175 compressed objects within 2 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+>>>>>>> 23e687282393b6fa0d9e383b57f9a218e1fd18a6
 

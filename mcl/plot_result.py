@@ -44,9 +44,9 @@ COLORSET = [(241/255.0, 101/255.0, 65/255.0), (19/255.0, 163/255.0, 153/255.0), 
 SOFT_COLORSET = [(241/255.0, 187/255.0, 165/255.0), (174/255.0, 245/255.0, 231/255.0), (115/255.0, 123/255.0, 173/255.0), (232/255.0, 138/255.0, 139/255.0)]
 LINE = ['-.', ':', '--', '-']
 # LABEL = ['LSTM', 'GRU', 'Bi-LSTM', 'Stacked Bi-LSTM']
-LABEL = ['uni', 'bi', 'multimodal_uni', 'multimodal_bi']
+LABEL = ['PF', 'bi', 'multimodal_uni', 'multimodal_bi']
 
-SMOOTHNESS = 200
+SMOOTHNESS = 20
 
 
 
@@ -55,7 +55,7 @@ class Visualization:
         self.folder_name = args.output_dir
         if not os.path.isdir(self.folder_name):
             os.mkdir(self.folder_name)
-        self.setGT(self.args.test_data)
+        self.setGT(args.test_data)
         self.color_set = COLORSET
         self.label = LABEL
 
@@ -69,7 +69,7 @@ class Visualization:
         predicted_xyz = np.loadtxt(predicted_result_dir, delimiter=',')
         # gt_xy = np.random.randint(3,size = (4,2))
         # predicted_xy = np.random.randint(3, size = (4,2))
-        dx_dy_dz_array = self.gt_xyz[4:] - predicted_xyz
+        dx_dy_dz_array = self.gt_xyz - predicted_xyz
 
         distance_square = np.square(dx_dy_dz_array[:,0]) \
                           + np.square(dx_dy_dz_array[:,1]) \
@@ -96,8 +96,8 @@ class Visualization:
             x_axis_refined = self.getRefinedData(x_axis, 30)
 
             # x_axis_refined, distance_error_refined = self.getSmoothedData(x_axis_refined, distance_error_refined)
-            # x_axis = self.getRefinedData( x_axis, self.args.data_interval)
-            # distance_error = self.getRefinedData( distance_error, self.args.data_interval)
+            # x_axis = self.getRefinedData( x_axis, SMOOTHNESS)
+            # distance_error = self.getRefinedData( distance_error, SMOOTHNESS)
             #marker o x + * s:square d:diamond p:five_pointed star
 
 
@@ -216,8 +216,8 @@ class Visualization:
             predicted_x = predicted_xy[:,0]
             predicted_y = predicted_xy[:,1]
 
-            predicted_x = self.getRefinedData( predicted_x, self.args.data_interval)
-            predicted_y = self.getRefinedData( predicted_y, self.args.data_interval)
+            predicted_x = self.getRefinedData( predicted_x, SMOOTHNESS)
+            predicted_y = self.getRefinedData( predicted_y, SMOOTHNESS)
 
             predicted_x, predicted_y = self.getSmoothedData(predicted_x, predicted_y)
             #marker o x + * s:square d:diamond p:five_pointed star
@@ -260,11 +260,11 @@ class Visualization:
             predicted_y = predicted_xyz[:,1]
             predicted_z = predicted_xyz[:,2]
 
-            # predicted_x = self.getRefinedData( predicted_x, self.args.data_interval)
-            # predicted_y = self.getRefinedData( predicted_y, self.args.data_interval)
-            # predicted_z = self.getRefinedData( predicted_z, self.args.data_interval)
-            #
-            # predicted_x, predicted_y, predicted_z = self.getSmoothedData_3D(predicted_x, predicted_y, predicted_z)
+            predicted_x = self.getRefinedData( predicted_x, SMOOTHNESS)
+            predicted_y = self.getRefinedData( predicted_y, SMOOTHNESS)
+            predicted_z = self.getRefinedData( predicted_z, SMOOTHNESS)
+
+            predicted_x, predicted_y, predicted_z = self.getSmoothedData_3D(predicted_x, predicted_y, predicted_z)
 
             plt.plot(predicted_x, predicted_y, predicted_z, color = self.color_set[i], #marker= marker,
                             linestyle = LINE[i],label = self.label[i])

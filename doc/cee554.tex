@@ -109,9 +109,6 @@ LSTM is a type of Recurrent Neural Networks(RNNs) that has loops so that infer o
 However, RNNs often have a \textit{vanishing gradient problem},i.e., RNNs fail to propagate the previous matter into present tasks as time step gap grows by. In other words, RNNs are not able to learn to store appropriate internal states and operate on long-term trends. That is the reason why the Long Short-Term Memory (LSTM) architecture was introduced to solve this long-term dependency problem and make the networks possible to learn longer-term contextual understandings\cite{hochreiter1997long}.
 By virtue of the LSTM architecture that has memory gates and units that enable learning of long-term dependencies\cite{zaremba2014learning}, LSTM are widely used in most of the deep learning research areas and numerous variations of LSTM architecutres have been studied.
 
-\subsubsection{Localization with Deep Learning}
-There have been many approaches combining Simultaneous Localization and Mapping (SLAM) with deep learning, aiming to overcome the limitations on SLAM only technique such as difficulty on tuning the proper parameters in different environments and recovering an exact scale. Actually, those researches are showing the superior performance to the traditional SLAM approaches.
-
 \begin{figure*}[ht]
 	
 	\centering
@@ -126,6 +123,11 @@ There have been many approaches combining Simultaneous Localization and Mapping 
 	\caption{Blabla. }
 	
 \end{figure*}
+
+
+\subsubsection{Localization with Deep Learning}
+There have been many approaches combining Simultaneous Localization and Mapping (SLAM) with deep learning, aiming to overcome the limitations on SLAM only technique such as difficulty on tuning the proper parameters in different environments and recovering an exact scale. Actually, those researches are showing the superior performance to the traditional SLAM approaches.
+
 
 One of the popular SLAM techniques with deep learning is CNN-SLAM \cite{tateno2017cnn} which takes Convolutional Neural Networks (CNNs) to precisely predict the depth from a single image without any scene-based assumptions or geometric constraints, allowing them to recover the absolute scale of the reconstruction. Another approach using deep learning for localization is Deep VO \cite{clark2017vinet} In this method, Recurrent Convolutional Neural Networks (RCNNs) is utilized. Specifically, feature representation is learned by Convolutional Neural Networks and Sequential information and motion dynamics are obtained by deep Recurrent Neural Networks without using any module in the classic VO pipeline.
 
@@ -213,11 +215,47 @@ In addition, to use the distance data for traditional RO-slam we calibrate the d
 
 \section{Results}
 
-To verify our proposal that RNNs can estimate the robot's position through varying range data, we trained our RNN-based multimodal architecture. Plus, to compare to previous traditional SLAM algorithm, we also estimate robot's position by particle filter(PF) based algorithm. Train data are our own data gathered by UWB sensors and motion capture camera, so neural networks take range-only measurements as input and outputs robot's position. Ground truth data is robot's position measured by eagle eye motion capturer, whose error is in mm units. The results of trajectory prediction are shown in Fig. \ref{curve:trajectory} and Fig. \ref{arbitrary:trajectory} and Root-Mean-Squared Error (RMSE) are shown in Table \ref{table:rmse}.
+To verify our proposal that RNNs can estimate the robot's position through varying range data, we trained our RNN-based multimodal architecture. Plus, to compare to previous traditional SLAM algorithm, we also estimate robot's position by particle filter(PF) based algorithm. Train data are our own data gathered by UWB sensors and motion capture camera, so neural networks take range-only measurements as input and outputs robot's position. Ground truth data is robot's position measured by eagle eye motion capturer, whose error is in mm units. The results of trajectory prediction are shown in Fig. \ref{fig:trajectory} and Root-Mean-Squared Error (RMSE) are shown in Table \ref{RMSE_table}.
 
 \subsection{Analysis of errors}
 
  We set two test trajectory cases. However, unexpectedly, Performance of PF based localization is better than performance of our architecture. In case of GRU, it has only two gates which is less complex structure than LSTM \cite{chung2014empirical}. However, due to GRU's less complexity, GRU has less the number of neurons than LSTM so their non-linear mapping achieves less performance. Likewise, Bi-LSTM consists of two LSTMs to process sequence in two directions so that infer output using the correlation of the backward information and the forward information of the sequences of each time step with its two separate hidden layers. Thus, Bi-LSTM has better nonlinear mapping capability than LSTM. For similar reasons, stacked Bi-LSTM is the architecture that stacks two Bi-LSTMs, so inference performance is better than Bi-LSTM. As a result, the stacked Bi-LSTM showed the best performance among unit RNN architectures. Therefore, we can conclude that the performance improves as the non-linearity of the architecture increases.
+ 
+ \begin{figure*}[h]
+ 	\centering
+ 	\begin{subfigure}[b]{.50\textwidth}
+ 		\centering
+ 		\includegraphics[width=.9\textwidth]{PF_multimodal_comparison1}
+ 		\label{fig:trajectory1} 	
+ 		\caption{Description.}
+ 	\end{subfigure}%
+ 	\begin{subfigure}[b]{.50\textwidth}
+ 		\centering
+ 		\includegraphics[width=0.9\textwidth]{PF_multimodal_comparison2}
+ 		\label{fig:trajectory2} 	
+ 		\caption{Actual}
+ 	\end{subfigure}
+ 	\caption{Sensor calibration overview.}
+ 	\label{fig:trajectory}
+ \end{figure*} 
+ 
+  \begin{figure*}[h]
+ 	\centering
+ 	\begin{subfigure}[b]{.50\textwidth}
+ 		\centering
+ 		\includegraphics[width=.9\textwidth]{PF_multimodal_error1}
+ 		\label{fig:error1} 	
+ 		\caption{Description.}
+ 	\end{subfigure}%
+ 	\begin{subfigure}[b]{.50\textwidth}
+ 		\centering
+ 		\includegraphics[width=0.9\textwidth]{PF_multimodal_error2}
+ 		\label{fig:error2} 	
+ 		\caption{Actual}
+ 	\end{subfigure}
+ 	\caption{Sensor calibration overview.}
+ 	\label{fig:error}
+ \end{figure*} 
  
 \begin{table}[h]
 	\centering
@@ -225,10 +263,10 @@ To verify our proposal that RNNs can estimate the robot's position through varyi
 		\hline
 		\multicolumn{5}{c}{Results of RMSE{[}cm{]}}                                                                  \\ \hline
 		\multicolumn{1}{c|}{Model}                    & \multicolumn{2}{c|}{Test1} & \multicolumn{2}{c}{Test2}      \\ \hline
-		\multicolumn{1}{c|}{Particle filter based}    & \multicolumn{2}{c|}{1}     & \multicolumn{2}{c}{2}          \\
-		\multicolumn{1}{c|}{Bidirectional Multimodal} & \multicolumn{2}{c|}{3}     & \multicolumn{2}{c}{\textbf{4}}
+		\multicolumn{1}{c|}{Particle filter-based}    & \multicolumn{2}{c|}{\textbf{9.1827}}     & \multicolumn{2}{c}{9.8803}          \\
+		\multicolumn{1}{c|}{Bidirectional Multimodal} & \multicolumn{2}{c|}{11.3301}     & \multicolumn{2}{c}{\textbf{9.7528}}
 	\end{tabular}
-	\label{table_rmse}
+	\label{RMSE_table}
 \end{table}
 
 

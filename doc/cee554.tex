@@ -100,7 +100,14 @@ Range-only SLAM is a method for localizing a mobile robot and beacons by mainly 
 \section{Related Works}
 
 In this section, we briefly survey previous researches closely focused on 
-Long Short-Term Memory(LSTM) model and applications of LSTMs to solve domain problems.
+RO-SLAM, Long Short-Term Memory(LSTM) model and applications of LSTMs to solve domain problems.
+
+\subsubsection{RO-SLAM}
+
+SLAM is widely used in autonomous vehicles, drones, intelligence field robots, and mobile phone applications. Thus, according to the smart city development plan, several technologies are required, and the importance and necessity of SLAM are increasing together. Various kinds of sensors are utilized to SLAM, such as GPS, LiDAR, ultrasonic-based sensor, camera and distance sensor.
+In 2006, the ad doc sensor network consisting of range detection beacon was applied to SLAM technology for various ranges. This technology integrates node-to-node measurements to reduce drift and expedite node-map convergence \cite{djugash2006range} In 2008, the technique to consistently combine the observation information considering the uncertainty was studied through comparing the experimental data with the actual robot and simulation using Ultra Wide-Band (UWB) devices and Rao-Balckwellized Particle Filter (RBPF) \cite{blanco2008pure}.  In 2012, a simple and efficient algorithm for position recognition with high accuracy and low computational complexity was researched with ultrasonic sensors \cite{yang2012efficient}. In recent years, 3-dimensional based SLAM has also been under active research and development. In 2013, a localization mapping approach of a wireless sensor network (WSN) node was studied through a centralized EKF-SLAM-based optimization research \cite{fabresse2013undelayed}. In addition, in 2014, a method of minimizing noise and localizing Unmanned Aerial Vehicle (UAV) by using only range measurement while simultaneously mapping the position of the wireless range sensors were proposed \cite{fabresse2014robust}. 
+SLAM based on range measurement has been continuously researched and developed then applied to various fields. In this paper, we propose a novel technology that applying deep-learning to range-only SLAM that derives accurate range and robot position measurement through in-depth learning. 
+
 
 \subsubsection{LSTM}
 
@@ -120,7 +127,7 @@ By virtue of the LSTM architecture that has memory gates and units that enable l
 	\label{fig:example}
 	%	}
 	
-	\caption{Blabla. }
+	\caption{Overall architecture of stacked Bi-LSTM. }
 	
 \end{figure*}
 
@@ -139,11 +146,28 @@ There are many variations of LSTM architecture. As studies of deep learning are 
 
 
 \section{Our approaches}
-\subsection{LSTM}
 
-\subsection{Bidirecional LSTM}
+In this chapter, we introduce our proposed neural network model which is used for estimating the robot’s pose and Landmarks’ position when only the range sensor data is given from each distance sensor. Firstly, the overall network architecture will be provided. Then, the details of each part will be explained.   
+
+\subsection{Network Architectures}
+
+As it is illustrated in Fig. 2, our proposed stacked Bi-LSTM can be decomposed into 3 parts: (1) Input part which accepts and preprocess the sequences of the sensor with multiple bidirectional LSTM layers. (2) Hidden layer part consisting of attention modules and bidirectional LSTM layer (3) Output part where a fully-connected output layer gives Robot’s pose and position of landmarks as its results. 
+
+\subsection{Multimodal LSTM}
+
+Since to effectively accept the input collected from the multiple sensors, instead of just using a single layer as an input layer, we use the number of LSTM layers, thinking that each single sensor represents a different modality. Each layer corresponds to the input of each distance sensor. In other words, if N sensors are used for measuring the distance of the robot, the number of input layer also would be N and the MTh layer accepts an input from the MTh sensor. By doing so, we can further expect that the input layers act as the sensor calibration process in traditional RO-SLAM, allowing the sensors to be tuned respectively with input layer’s parameters.
+
+\subsection{Bidirectional LSTM}
+
+As traditional RO-SLAM \cite{blanco2008pure,blanco2008efficient} takes an odometry which is an accumulated data from the beginning to the present point, our network takes the sensor data for the time period l. So, if the current time stamp is t, the input layers take the sensor data obtained from timestamp t-l to t. For dealing with such sequential information, we apply LSTM network with l cells which is one of the most appropriate network for the sequential data to our network. Furthermore, to take an advantage from the bidirectional time flow, normal time order and reverse time order, we design our network with 3 bidirectional LSTM layers that consist of 2 independent LSTMs corresponding to normal and reverse time order. Individual LSTM layers play a different role. LSTM layers of input part take and preprocess the sequence of sensor data. LSTM layer placed between input and output layer takes a spatial information from a previous spatial attention layer and send it to another temporal Attention layer. Lastly, LSTM layer of output layer outputs the results.
+
+\subsection{Attention layer}
+
+To precisely estimate the Robot’s pose and landmarks’ position, it is important for the network to distinguish which is more meaningful information and which is less for estimation and prevent to focus on less significant information. So, we add the two different types of attention modules \cite{luong2015effective} which extract something more important and related to the task information. The first attention modules placed between the input LSTM layer and the second LSTM layer are called “Spatial Attention layer“ and is represented as blue blocks in Fig. 2 These attention modules judge which sensor is more informative. The second attention module corresponding to the red blocks in Fig. 2 is the temporal attention module. These temporal attention modules determine which time stamp which has more useful information allowing the network to attend that time stamp more.  
 
 \subsection{Stacked Architecture}
+
+In deep learning, the number of layers stacked is getting large, intending to increase the non-linearity and correspondingly to improve the performance. Likewise, the multiple LSTM layers can be stacked as well \cite{dyer2015transition}, enabling more complex representation and higher performance. In stacked Bi-LSTM, total 3 LSTM layers are stacked in series. 
 
 \subsection{Multimodal Architecture}
 

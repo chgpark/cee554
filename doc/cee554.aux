@@ -8,15 +8,19 @@
 \citation{walch2017image}
 \citation{elman1990finding}
 \citation{walch2017image,gladh2016deep,wang2017deepvo,kendall2015posenet,turan2018deep}
-\citation{hochreiter1997long}
-\citation{zaremba2014learning}
+\citation{djugash2006range}
+\citation{blanco2008pure}
+\citation{yang2012efficient}
+\citation{fabresse2013undelayed}
+\citation{fabresse2014robust}
 \@writefile{toc}{\contentsline {section}{\numberline {I}INTRODUCTION}{1}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:example}{{\caption@xref {fig:example}{ on input line 95}}{1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces System overview. A robot localizes its own pose through distance data and the derivative of distance data. \relax }}{1}}
 \@writefile{toc}{\contentsline {section}{\numberline {II}Related Works}{1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {II-.1}LSTM}{1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {II-.2}Localization with Deep Learning}{1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {II-.1}RO-SLAM}{1}}
+\citation{hochreiter1997long}
+\citation{zaremba2014learning}
 \citation{tateno2017cnn}
 \citation{clark2017vinet}
 \citation{wang2017deepvo,kendall2015posenet,turan2018deep}
@@ -24,10 +28,13 @@
 \citation{walch2017image,wang2017deepvo}
 \citation{ordonez2016deep}
 \citation{clark2017vinet}
-\newlabel{fig:example}{{\caption@xref {fig:example}{ on input line 120}}{2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Blabla. \relax }}{2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {II-.3}Applications of LSTMs}{2}}
+\citation{blanco2008pure,blanco2008efficient}
+\citation{luong2015effective}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {II-.2}LSTM}{2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {II-.3}Localization with Deep Learning}{2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {II-.4}Applications of LSTMs}{2}}
 \@writefile{toc}{\contentsline {section}{\numberline {III}Our approaches}{2}}
+<<<<<<< HEAD
 \@writefile{toc}{\contentsline {subsection}{\numberline {III-A}LSTM}{2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {III-B}Bidirecional LSTM}{2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {III-C}Stacked Architecture}{2}}
@@ -52,12 +59,47 @@
 \newlabel{fig:test}{{5}{3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {IV-C}Comparison to traditional algorithm}{3}}
 \@writefile{toc}{\contentsline {section}{\numberline {V}Results}{3}}
+=======
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-A}Network Architectures}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-B}Multimodal LSTM}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-C}Bidirectional LSTM}{2}}
+\citation{dyer2015transition}
+\newlabel{fig:example}{{\caption@xref {fig:example}{ on input line 127}}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Overall architecture of stacked Bi-LSTM. \relax }}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-D}Attention layer}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-E}Stacked Architecture}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-F}Multimodal Architecture}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-G}Training Loss}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Experiment}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-A}Experiment settings}{3}}
+\citation{chung2014empirical}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-B}Training/Test Dataset}{4}}
+\newlabel{setting:sub1}{{\caption@xref {setting:sub1}{ on input line 201}}{4}}
+\newlabel{sub@setting:sub1}{{}{4}}
+\newlabel{setting:sub2}{{\caption@xref {setting:sub2}{ on input line 207}}{4}}
+\newlabel{sub@setting:sub2}{{a}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Experimental system overview.\relax }}{4}}
+\newlabel{setting}{{3}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Data syncronizing method.\relax }}{4}}
+\newlabel{fig:sync}{{4}{4}}
+\newlabel{calibration:sub1}{{\caption@xref {calibration:sub1}{ on input line 227}}{4}}
+\newlabel{sub@calibration:sub1}{{}{4}}
+\newlabel{calibration:sub2}{{\caption@xref {calibration:sub2}{ on input line 233}}{4}}
+\newlabel{sub@calibration:sub2}{{a}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Sensor calibration overview.\relax }}{4}}
+\newlabel{fig:test}{{5}{4}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Results}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {V-A}Analysis of errors}{4}}
+\newlabel{RMSE_table}{{\caption@xref {RMSE_table}{ on input line 293}}{4}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{4}}
+>>>>>>> 1ec7aa33929ab8378649ba64c0b107ee58f443d7
 \bibstyle{IEEEtran}
 \bibdata{./IEEEabrv,./MyBib}
 \bibcite{staras1972accuracy}{1}
 \bibcite{thomas2005revisiting}{2}
 \bibcite{cho2010mobile}{3}
 \bibcite{raghavan2010accurate}{4}
+<<<<<<< HEAD
 \newlabel{fig:trajectory1}{{\caption@xref {fig:trajectory1}{ on input line 234}}{4}}
 \newlabel{sub@fig:trajectory1}{{}{4}}
 \newlabel{fig:trajectory2}{{\caption@xref {fig:trajectory2}{ on input line 240}}{4}}
@@ -74,6 +116,8 @@
 \newlabel{RMSE_table}{{I}{4}}
 \@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{4}}
 \@writefile{toc}{\contentsline {section}{References}{4}}
+=======
+>>>>>>> 1ec7aa33929ab8378649ba64c0b107ee58f443d7
 \bibcite{blanco2008pure}{5}
 \bibcite{blanco2008efficient}{6}
 \bibcite{fabresse2013undelayed}{7}
@@ -83,6 +127,19 @@
 \bibcite{cai2016unified}{11}
 \bibcite{smith2018object}{12}
 \bibcite{zhu2017target}{13}
+\newlabel{fig:trajectory1}{{\caption@xref {fig:trajectory1}{ on input line 253}}{5}}
+\newlabel{sub@fig:trajectory1}{{}{5}}
+\newlabel{fig:trajectory2}{{\caption@xref {fig:trajectory2}{ on input line 259}}{5}}
+\newlabel{sub@fig:trajectory2}{{a}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Sensor calibration overview.\relax }}{5}}
+\newlabel{fig:trajectory}{{6}{5}}
+\newlabel{fig:error1}{{\caption@xref {fig:error1}{ on input line 271}}{5}}
+\newlabel{sub@fig:error1}{{}{5}}
+\newlabel{fig:error2}{{\caption@xref {fig:error2}{ on input line 277}}{5}}
+\newlabel{sub@fig:error2}{{a}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Sensor calibration overview.\relax }}{5}}
+\newlabel{fig:error}{{7}{5}}
+\@writefile{toc}{\contentsline {section}{References}{5}}
 \bibcite{hamandi2018deepmotion}{14}
 \bibcite{walch2017image}{15}
 \bibcite{elman1990finding}{16}
@@ -90,8 +147,22 @@
 \bibcite{wang2017deepvo}{18}
 \bibcite{kendall2015posenet}{19}
 \bibcite{turan2018deep}{20}
+<<<<<<< HEAD
 \bibcite{hochreiter1997long}{21}
 \bibcite{zaremba2014learning}{22}
 \bibcite{tateno2017cnn}{23}
 \bibcite{clark2017vinet}{24}
 \bibcite{ordonez2016deep}{25}
+=======
+\bibcite{djugash2006range}{21}
+\bibcite{yang2012efficient}{22}
+\bibcite{fabresse2014robust}{23}
+\bibcite{hochreiter1997long}{24}
+\bibcite{zaremba2014learning}{25}
+\bibcite{tateno2017cnn}{26}
+\bibcite{clark2017vinet}{27}
+\bibcite{ordonez2016deep}{28}
+\bibcite{luong2015effective}{29}
+\bibcite{dyer2015transition}{30}
+\bibcite{chung2014empirical}{31}
+>>>>>>> 1ec7aa33929ab8378649ba64c0b107ee58f443d7

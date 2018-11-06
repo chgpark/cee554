@@ -15,6 +15,7 @@ Database file #2: ./MyBib.bib
 Warning--empty journal in smith2018object
 
 Done.
+<<<<<<< HEAD
 You've used 25 entries,
             3975 wiz_defined-function locations,
             1274 strings with 18393 characters,
@@ -49,11 +50,53 @@ stack$ -- 0
 substring$ -- 1191
 swap$ -- 1246
 text.length$ -- 38
+=======
+You've used 31 entries,
+            3975 wiz_defined-function locations,
+            1304 strings with 19640 characters,
+and the built_in function-call counts, 25288 in all, are:
+= -- 1997
+> -- 622
+< -- 234
++ -- 351
+- -- 101
+* -- 1205
+:= -- 3644
+add.period$ -- 72
+call.type$ -- 31
+change.case$ -- 31
+chr.to.int$ -- 573
+cite$ -- 32
+duplicate$ -- 1791
+empty$ -- 2070
+format.name$ -- 128
+if$ -- 5883
+int.to.chr$ -- 0
+int.to.str$ -- 31
+missing$ -- 297
+newline$ -- 113
+num.names$ -- 31
+pop$ -- 706
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 1970
+stack$ -- 0
+substring$ -- 1379
+swap$ -- 1484
+text.length$ -- 43
+>>>>>>> 1ec7aa33929ab8378649ba64c0b107ee58f443d7
 text.prefix$ -- 0
 top$ -- 5
 type$ -- 0
 warning$ -- 1
+<<<<<<< HEAD
 while$ -- 99
 width$ -- 27
 write$ -- 257
+=======
+while$ -- 117
+width$ -- 33
+write$ -- 310
+>>>>>>> 1ec7aa33929ab8378649ba64c0b107ee58f443d7
 (There was 1 warning)

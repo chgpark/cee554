@@ -15,45 +15,45 @@ Database file #2: ./MyBib.bib
 Warning--empty journal in smith2018object
 
 Done.
-You've used 26 entries,
+You've used 28 entries,
             3975 wiz_defined-function locations,
-            1278 strings with 18591 characters,
-and the built_in function-call counts, 21541 in all, are:
-= -- 1707
-> -- 524
+            1286 strings with 18972 characters,
+and the built_in function-call counts, 22453 in all, are:
+= -- 1773
+> -- 558
 < -- 203
-+ -- 297
-- -- 84
-* -- 1029
-:= -- 3097
-add.period$ -- 60
-call.type$ -- 26
-change.case$ -- 26
++ -- 313
+- -- 92
+* -- 1071
+:= -- 3253
+add.period$ -- 64
+call.type$ -- 28
+change.case$ -- 28
 chr.to.int$ -- 495
-cite$ -- 27
-duplicate$ -- 1518
-empty$ -- 1753
-format.name$ -- 107
-if$ -- 5013
+cite$ -- 29
+duplicate$ -- 1598
+empty$ -- 1835
+format.name$ -- 117
+if$ -- 5213
 int.to.chr$ -- 0
-int.to.str$ -- 26
-missing$ -- 251
-newline$ -- 98
-num.names$ -- 26
-pop$ -- 591
+int.to.str$ -- 28
+missing$ -- 267
+newline$ -- 104
+num.names$ -- 28
+pop$ -- 637
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 1682
+skip$ -- 1750
 stack$ -- 0
-substring$ -- 1192
-swap$ -- 1269
+substring$ -- 1194
+swap$ -- 1315
 text.length$ -- 38
 text.prefix$ -- 0
 top$ -- 5
 type$ -- 0
 warning$ -- 1
-while$ -- 100
-width$ -- 28
-write$ -- 265
+while$ -- 102
+width$ -- 30
+write$ -- 281
 (There was 1 warning)

@@ -8,11 +8,11 @@ from scipy import interpolate
 from scipy.interpolate import spline
 p =argparse.ArgumentParser()
 p.add_argument('--output_dir', type=str, default="/home/shapelim/KRoC_Results")
-p.add_argument('--test_data', type=str, default="inputs/poly_3D.csv")
+p.add_argument('--test_data', type=str, default="/home/shapelim/git_files/cee554/lstm_codes/inputs/np_test_data_1.csv")
 # p.add_argument('--gt_dir', type=str, default="inputs/test_data_diagonal_curve2D.csv")
 #In case of test 1
-p.add_argument('--uni', type=str, default= "/home/shapelim/KRoC_Results/1104_uni_poly.csv")
-p.add_argument('--bi', type=str, default= "/home/shapelim/KRoC_Results/1104_bi_poly.csv")
+p.add_argument('--pf', type=str, default= "/home/shapelim/git_files/cee554/mcl/results/1105_np_test1_result_comparison.csv")
+p.add_argument('--bi', type=str, default= "/home/shapelim/git_files/cee554/lstm_codes/results/multimodal/181030_bimul_8_test1.csv")
 p.add_argument('--multimodal_uni', type=str, default= "/home/shapelim/KRoC_Results/1104_unimul_poly.csv")
 p.add_argument('--multimodal_bi', type=str, default= "/home/shapelim/KRoC_Results/1104_bimul_poly.csv")
 
@@ -40,13 +40,13 @@ k balck
 w white
 '''
 # COLORSET = [(0,0,1), 'g', 'r', 'm', 'c', 'y'] #, 'k','w']
-COLORSET = [(241/255.0, 101/255.0, 65/255.0), (19/255.0, 163/255.0, 153/255.0), (2/255.0, 23/255.0, 157/255.0), (191/255.0, 17/255.0, 46/255.0)]
+COLORSET = [(241/255.0, 101/255.0, 65/255.0),(2/255.0, 23/255.0, 157/255.0), (19/255.0, 163/255.0, 153/255.0),  (191/255.0, 17/255.0, 46/255.0)]
 SOFT_COLORSET = [(241/255.0, 187/255.0, 165/255.0), (174/255.0, 245/255.0, 231/255.0), (115/255.0, 123/255.0, 173/255.0), (232/255.0, 138/255.0, 139/255.0)]
-LINE = ['-.', ':', '--', '-']
+LINE = [':', '-.', ':', '--']
 # LABEL = ['LSTM', 'GRU', 'Bi-LSTM', 'Stacked Bi-LSTM']
-LABEL = ['PF', 'bi', 'multimodal_uni', 'multimodal_bi']
+LABEL = ['PF', 'Bi-Multimodal']
 
-SMOOTHNESS = 20
+SMOOTHNESS = 30
 
 
 
@@ -69,7 +69,7 @@ class Visualization:
         predicted_xyz = np.loadtxt(predicted_result_dir, delimiter=',')
         # gt_xy = np.random.randint(3,size = (4,2))
         # predicted_xy = np.random.randint(3, size = (4,2))
-        dx_dy_dz_array = self.gt_xyz - predicted_xyz
+        dx_dy_dz_array = self.gt_xyz[4:] - predicted_xyz
 
         distance_square = np.square(dx_dy_dz_array[:,0]) \
                           + np.square(dx_dy_dz_array[:,1]) \
@@ -81,7 +81,7 @@ class Visualization:
         return np.sqrt(distance_square)
 
     def plotDistanceError3D(self, *target_files_csv):
-        saved_file_name = self.args.save_MSE_name
+        saved_file_name = args.save_MSE_name
         plot_title = "Distance Error"
         plt.title(plot_title)
         # plt.rcParams['Figure.figsize'] = (14, 3)
@@ -242,6 +242,7 @@ class Visualization:
 
     def set_3D_plot_name(self, name):
         self._3D_plot_name = name
+
     def drawResult3D(self, *target_files_csv):
 
         self.fig = plt.figure()
@@ -272,8 +273,8 @@ class Visualization:
 
         # self.ax1.scatter(X_list, Y_list, Z_list, c=c)
         self.ax1.set_zlim(0, 1.0)
-        self.ax1.set_xlim(-0.75, 1.25)
-        self.ax1.set_ylim(-1.0, 1.0)
+        self.ax1.set_xlim(-1.0, 1.5)
+        self.ax1.set_ylim(-1.0, 1.5)
         self.ax1.set_xlabel('X axis')
         self.ax1.set_ylabel('Y axis')
         self.ax1.set_zlabel('Z axis')
@@ -291,6 +292,9 @@ if __name__ == "__main__":
         return (vmax - vmin)*np.random.rand(n) + vmin
 
     viz = Visualization(args)
+    viz.set_3D_plot_name("hello.png")
+    viz.drawResult3D(args.pf, args.bi)
+    viz.plotDistanceError3D(args.pf, args.bi)
     # test = np.loadtxt("train_yz3D.csv", delimiter= ',')
     # n = 10
     # for c, m, zlow, zhigh in [('r', 'o', -50, -25), ('b', '^', -30, -5)]:
@@ -308,7 +312,7 @@ if __name__ == "__main__":
     # x = input[:, 4]
     # y = input[:, 5]
     # z = input[:, 6]
-    viz.drawResult3D(args.uni) #, args.bi, args.multimodal_uni, args.multimodal_bi)
+    # viz.drawResult3D(args.uni) #, args.bi, args.multimodal_uni, args.multimodal_bi)
     # viz.plotDistanceError3D(args.multimodal_bi)
     # viz.plotErrorPercent(args.multimodal_bi)
     # viz.plot2DTrajectory(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)

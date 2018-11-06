@@ -25,14 +25,14 @@
     <SUITE FILE_PATH="coverage/lstm_codes$asd.coverage" NAME="asd Coverage Results" MODIFIED="1540718535925" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.4470135">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="DataPreprocessing.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="DataPreprocessing.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/DataPreprocessing.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-51">
-                  <caret line="246" column="27" selection-start-line="240" selection-start-column="8" selection-end-line="246" selection-end-column="27" />
+                <state relative-caret-position="234">
+                  <caret line="265" column="34" selection-start-line="265" selection-start-column="34" selection-end-line="265" selection-end-column="34" />
                   <folding>
                     <element signature="e#0#28#0" expanded="true" />
                   </folding>
@@ -40,10 +40,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="lstm_network.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="lstm_network.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/lstm_network.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="4389">
+                <state relative-caret-position="404">
                   <caret line="414" column="36" selection-start-line="414" selection-start-column="36" selection-end-line="414" selection-end-column="36" />
                 </state>
               </provider>
@@ -56,8 +56,8 @@
           <file leaf-file-name="train.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/train.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="615">
-                  <caret line="181" selection-start-line="181" selection-end-line="181" />
+                <state relative-caret-position="300">
+                  <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
                   <folding>
                     <element signature="e#0#23#0" expanded="true" />
                   </folding>
@@ -122,11 +122,11 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1985" />
-    <option name="y" value="-4" />
-    <option name="width" value="1855" />
-    <option name="height" value="1084" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="2307" />
+    <option name="y" value="111" />
+    <option name="width" value="928" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -311,18 +311,17 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1985" y="-4" width="1855" height="1084" extended-state="6" />
-    <editor active="true" />
+    <frame x="2307" y="111" width="928" height="1056" extended-state="0" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="File Transfer" order="12" weight="0.12678936" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2791411" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.28736842" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1606469" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17349137" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" weight="0.12884097" />
@@ -370,13 +369,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/train.py</url>
-          <line>123</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -681,13 +673,6 @@
     <entry file="file://$PROJECT_DIR$/results/RO_test/1105_bimul.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/lstm_network.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4389">
-          <caret line="414" column="36" selection-start-line="414" selection-start-column="36" selection-end-line="414" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="429">
@@ -708,22 +693,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train.py">
+    <entry file="file://$PROJECT_DIR$/DataPreprocessing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="181" selection-start-line="181" selection-end-line="181" />
+        <state relative-caret-position="234">
+          <caret line="265" column="34" selection-start-line="265" selection-start-column="34" selection-end-line="265" selection-end-column="34" />
           <folding>
-            <element signature="e#0#23#0" expanded="true" />
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataPreprocessing.py">
+    <entry file="file://$PROJECT_DIR$/lstm_network.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret line="246" column="27" selection-start-line="240" selection-start-column="8" selection-end-line="246" selection-end-column="27" />
+        <state relative-caret-position="404">
+          <caret line="414" column="36" selection-start-line="414" selection-start-column="36" selection-end-line="414" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>

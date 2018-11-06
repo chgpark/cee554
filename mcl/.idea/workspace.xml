@@ -11,60 +11,9 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/mcl$python_main.coverage" NAME="python_main Coverage Results" MODIFIED="1541420850893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/mcl$plot_result.coverage" NAME="plot_result Coverage Results" MODIFIED="1541420445793" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/mcl$plot_result.coverage" NAME="plot_result Coverage Results" MODIFIED="1541474865105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/mcl$mcl.coverage" NAME="mcl Coverage Results" MODIFIED="1541416086993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/mcl$test.coverage" NAME="test Coverage Results" MODIFIED="1541416505465" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-  </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <splitter split-orientation="horizontal" split-proportion="0.5">
-            <split-first>
-              <leaf>
-                <file leaf-file-name="plot_result.py" pinned="false" current-in-tab="true">
-                  <entry file="file://$PROJECT_DIR$/plot_result.py">
-                    <provider selected="true" editor-type-id="text-editor">
-                      <state relative-caret-position="430">
-                        <caret line="51" selection-start-line="51" selection-end-line="51" />
-                        <folding>
-                          <element signature="e#0#39#0" expanded="true" />
-                        </folding>
-                      </state>
-                    </provider>
-                  </entry>
-                </file>
-              </leaf>
-            </split-first>
-            <split-second>
-              <leaf>
-                <file leaf-file-name="plot_result.py" pinned="false" current-in-tab="false">
-                  <entry file="file://$PROJECT_DIR$/plot_result.py">
-                    <provider selected="true" editor-type-id="text-editor">
-                      <state relative-caret-position="270">
-                        <caret line="60" selection-start-line="60" selection-end-line="60" />
-                        <folding>
-                          <element signature="e#0#39#0" expanded="true" />
-                        </folding>
-                      </state>
-                    </provider>
-                  </entry>
-                </file>
-                <file leaf-file-name="environment_settings.py" pinned="false" current-in-tab="true">
-                  <entry file="file://$PROJECT_DIR$/environment_settings.py">
-                    <provider selected="true" editor-type-id="text-editor">
-                      <state relative-caret-position="135">
-                        <caret line="9" selection-start-line="9" selection-end-line="9" />
-                      </state>
-                    </provider>
-                  </entry>
-                </file>
-              </leaf>
-            </split-second>
-          </splitter>
-        </state>
-      </content>
-    </window>
   </component>
   <component name="FileEditorManager">
     <splitter split-orientation="horizontal" split-proportion="0.5027864">
@@ -82,8 +31,8 @@
           <file leaf-file-name="python_main.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/python_main.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="440">
-                  <caret line="96" selection-start-line="96" selection-end-line="96" />
+                <state relative-caret-position="274">
+                  <caret line="84" column="44" lean-forward="true" selection-start-line="84" selection-start-column="44" selection-end-line="84" selection-end-column="44" />
                   <folding>
                     <element signature="e#22#35#0" expanded="true" />
                   </folding>
@@ -144,8 +93,8 @@
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/mcl.py" />
         <option value="$PROJECT_DIR$/environment_settings.py" />
-        <option value="$PROJECT_DIR$/plot_result.py" />
         <option value="$PROJECT_DIR$/python_main.py" />
+        <option value="$PROJECT_DIR$/plot_result.py" />
       </list>
     </option>
   </component>
@@ -158,11 +107,11 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="65" />
-    <option name="y" value="-4" />
-    <option name="width" value="1855" />
-    <option name="height" value="1084" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="429" />
+    <option name="y" value="239" />
+    <option name="width" value="928" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -185,7 +134,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sensor_precalibration" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../lstm_codes" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -202,7 +151,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.python_main">
+  <component name="RunManager" selected="Python.plot_result">
     <configuration name="mcl" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="mcl" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -287,8 +236,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.python_main" />
         <item itemvalue="Python.plot_result" />
+        <item itemvalue="Python.python_main" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.mcl" />
       </list>
@@ -308,21 +257,21 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <frame x="429" y="239" width="928" height="1056" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32924336" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.33894736" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="right" id="Remote Host" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12075472" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2413793" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.008625337" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.01724138" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997955" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -359,13 +308,6 @@
     <entry file="file://$PROJECT_DIR$/python_main_performance_check.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/environment_settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/result.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -392,22 +334,35 @@
     <entry file="file://$PROJECT_DIR$/1105_np_test1_result.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/python_main.py">
+    <entry file="file://$PROJECT_DIR$/environment_settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="96" selection-start-line="96" selection-end-line="96" />
-          <folding>
-            <element signature="e#22#35#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="105">
+          <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/plot_result.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
+        <state relative-caret-position="-2514">
+          <caret line="95" column="24" lean-forward="true" selection-start-line="95" selection-start-column="24" selection-end-line="95" selection-end-column="24" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Distance_error_result__test2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hello.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="84" column="44" lean-forward="true" selection-start-line="84" selection-start-column="44" selection-end-line="84" selection-end-column="44" />
+          <folding>
+            <element signature="e#22#35#0" expanded="true" />
           </folding>
         </state>
       </provider>

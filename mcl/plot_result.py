@@ -8,11 +8,11 @@ from scipy import interpolate
 from scipy.interpolate import spline
 p =argparse.ArgumentParser()
 p.add_argument('--output_dir', type=str, default="/home/shapelim/KRoC_Results")
-p.add_argument('--test_data', type=str, default="/home/shapelim/git_files/cee554/lstm_codes/inputs/np_test_data_1.csv")
+p.add_argument('--test_data', type=str, default="/home/shapelim/git_files/cee554/lstm_codes/inputs/np_test_data_2.csv")
 # p.add_argument('--gt_dir', type=str, default="inputs/test_data_diagonal_curve2D.csv")
 #In case of test 1
-p.add_argument('--pf', type=str, default= "/home/shapelim/git_files/cee554/mcl/results/1105_np_test1_result_comparison.csv")
-p.add_argument('--bi', type=str, default= "/home/shapelim/git_files/cee554/lstm_codes/results/multimodal/181030_bimul_8_test1.csv")
+p.add_argument('--pf', type=str, default= "/home/shapelim/git_files/cee554/mcl/results/1105_np_test2_result_comparison.csv")
+p.add_argument('--bi', type=str, default= "/home/shapelim/git_files/cee554/lstm_codes/results/multimodal/181030_bimul_8_test2.csv")
 p.add_argument('--multimodal_uni', type=str, default= "/home/shapelim/KRoC_Results/1104_unimul_poly.csv")
 p.add_argument('--multimodal_bi', type=str, default= "/home/shapelim/KRoC_Results/1104_bimul_poly.csv")
 
@@ -257,7 +257,6 @@ class Visualization:
             predicted_xyz = np.loadtxt(csv, delimiter = ',')
             # print (predicted_xyz)
             predicted_x = predicted_xyz[:,0]
-            print (predicted_x)
             predicted_y = predicted_xyz[:,1]
             predicted_z = predicted_xyz[:,2]
 
@@ -293,7 +292,7 @@ if __name__ == "__main__":
 
     viz = Visualization(args)
     viz.set_3D_plot_name("hello.png")
-    viz.drawResult3D(args.pf, args.bi)
+    viz.drawResult3D(args.pf, args.bi) #, args.pargs.bi) #, args.bi)
     viz.plotDistanceError3D(args.pf, args.bi)
     # test = np.loadtxt("train_yz3D.csv", delimiter= ',')
     # n = 10
@@ -309,11 +308,5 @@ if __name__ == "__main__":
     # viz.drawResult3D(X, Y, Z)
     # input = np.loadtxt("./inputs/3D_path_spiral.csv", delimiter = ',')
     # input = np.loadtxt("./inputs/3D_path_poly.csv", delimiter = ',')
-    # x = input[:, 4]
-    # y = input[:, 5]
-    # z = input[:, 6]
-    # viz.drawResult3D(args.uni) #, args.bi, args.multimodal_uni, args.multimodal_bi)
-    # viz.plotDistanceError3D(args.multimodal_bi)
-    # viz.plotErrorPercent(args.multimodal_bi)
-    # viz.plot2DTrajectory(args.unidirectional_LSTM_csv, args.gru_csv, args.bidirectional_LSTM_csv, args.stacked_bi_LSTM_csv)
+
 

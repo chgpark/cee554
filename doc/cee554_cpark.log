@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.8.13)  6 NOV 2018 14:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.8.13)  6 NOV 2018 12:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**cee554.tex
-(./cee554.tex
+**cee554_cpark.tex
+(./cee554_cpark.tex
 LaTeX2e <2018-04-01> patch level 5
 (./ieeeconf.cls
 Document Class: ieeeconf 2016/4/23 revision V1.6b by Pradeep Misra
@@ -142,58 +142,6 @@ File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 \Gin@req@height=\dimen113
 \Gin@req@width=\dimen114
 )
-(c:/texlive/2018/texmf-dist/tex/latex/placeins/placeins.sty
-Package: placeins 2005/04/18  v 2.2
-)
-(c:/texlive/2018/texmf-dist/tex/latex/tools/multicol.sty
-Package: multicol 2018/04/20 v1.8s multicolumn formatting (FMi)
-\c@tracingmulticols=\count92
-\mult@box=\box27
-\multicol@leftmargin=\dimen115
-\c@unbalance=\count93
-\c@collectmore=\count94
-\doublecol@number=\count95
-\multicoltolerance=\count96
-\multicolpretolerance=\count97
-\full@width=\dimen116
-\page@free=\dimen117
-\premulticols=\dimen118
-\postmulticols=\dimen119
-\multicolsep=\skip47
-\multicolbaselineskip=\skip48
-\partial@page=\box28
-\last@line=\box29
-\maxbalancingoverflow=\dimen120
-\mult@rightbox=\box30
-\mult@grightbox=\box31
-\mult@gfirstbox=\box32
-\mult@firstbox=\box33
-\@tempa=\box34
-\@tempa=\box35
-\@tempa=\box36
-\@tempa=\box37
-\@tempa=\box38
-\@tempa=\box39
-\@tempa=\box40
-\@tempa=\box41
-\@tempa=\box42
-\@tempa=\box43
-\@tempa=\box44
-\@tempa=\box45
-\@tempa=\box46
-\@tempa=\box47
-\@tempa=\box48
-\@tempa=\box49
-\@tempa=\box50
-\c@columnbadness=\count98
-\c@finalcolumnbadness=\count99
-\last@try=\dimen121
-\multicolovershoot=\dimen122
-\multicolundershoot=\dimen123
-\mult@nat@firstbox=\box51
-\colbreak@box=\box52
-\mc@col@check@num=\count100
-)
 (c:/texlive/2018/texmf-dist/tex/latex/caption/subcaption.sty
 Package: subcaption 2018/05/01 v1.1-162 Sub-captions (AR)
 
@@ -203,13 +151,13 @@ Package: caption 2018/05/01 v3.3-147 Customizing captions (AR)
 (c:/texlive/2018/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2018/05/27 v1.8a caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 64.
-\captionmargin=\dimen124
-\captionmargin@=\dimen125
-\captionwidth=\dimen126
-\caption@tempdima=\dimen127
-\caption@indent=\dimen128
-\caption@parindent=\dimen129
-\caption@hangindent=\dimen130
+\captionmargin=\dimen115
+\captionmargin@=\dimen116
+\captionwidth=\dimen117
+\caption@tempdima=\dimen118
+\caption@indent=\dimen119
+\caption@parindent=\dimen120
+\caption@hangindent=\dimen121
 Package caption Info: Unknown document class (or package),
 (caption)             standard defaults will be used.
 )
@@ -226,32 +174,32 @@ mpboxa \hbox {\footnotesize #1.~~ }\parbox [t]{\hsize }{\footnotesize \noindent
  \unhbox \@tempboxa #2}\else \ifcenterfigcaptions \hbox to\hsize {\footnotesize
  \hfil \box \@tempboxa \hfil }\else \hbox to\hsize {\footnotesize \box \@tempbo
 xa \hfil }\fi \fi \fi .
-\c@ContinuedFloat=\count101
+\c@ContinuedFloat=\count92
 )
-\c@subfigure=\count102
-\c@subtable=\count103
+\c@subfigure=\count93
+\c@subtable=\count94
 ) (c:/texlive/2018/texmf-dist/tex/latex/mathtools/mathtools.sty
 Package: mathtools 2018/01/08 v1.21 mathematical typesetting tools
 
 (c:/texlive/2018/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count104
-\calc@Bcount=\count105
-\calc@Adimen=\dimen131
-\calc@Bdimen=\dimen132
-\calc@Askip=\skip49
-\calc@Bskip=\skip50
+\calc@Acount=\count95
+\calc@Bcount=\count96
+\calc@Adimen=\dimen122
+\calc@Bdimen=\dimen123
+\calc@Askip=\skip47
+\calc@Bskip=\skip48
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count106
-\calc@Cskip=\skip51
+\calc@Ccount=\count97
+\calc@Cskip=\skip49
 )
 (c:/texlive/2018/texmf-dist/tex/latex/mathtools/mhsetup.sty
 Package: mhsetup 2017/03/31 v1.3 programming setup (MH)
 )
 (c:/texlive/2018/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2017/09/02 v2.17a AMS math features
-\@mathmargin=\skip52
+\@mathmargin=\skip50
 
 For additional information on amsmath, use the `?' option.
 (c:/texlive/2018/texmf-dist/tex/latex/amsmath/amstext.sty
@@ -260,49 +208,49 @@ Package: amstext 2000/06/29 v2.01 AMS text
 (c:/texlive/2018/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks17
-\ex@=\dimen133
+\ex@=\dimen124
 ))
 (c:/texlive/2018/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen134
+\pmbraise@=\dimen125
 )
 (c:/texlive/2018/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count107
+\inf@bad=\count98
 LaTeX Info: Redefining \frac on input line 213.
-\uproot@=\count108
-\leftroot@=\count109
+\uproot@=\count99
+\leftroot@=\count100
 LaTeX Info: Redefining \overline on input line 375.
-\classnum@=\count110
-\DOTSCASE@=\count111
+\classnum@=\count101
+\DOTSCASE@=\count102
 LaTeX Info: Redefining \ldots on input line 472.
 LaTeX Info: Redefining \dots on input line 475.
 LaTeX Info: Redefining \cdots on input line 596.
-\Mathstrutbox@=\box53
-\strutbox@=\box54
-\big@size=\dimen135
+\Mathstrutbox@=\box27
+\strutbox@=\box28
+\big@size=\dimen126
 LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
-\macc@depth=\count112
-\c@MaxMatrixCols=\count113
+\macc@depth=\count103
+\c@MaxMatrixCols=\count104
 \dotsspace@=\muskip10
-\c@parentequation=\count114
-\dspbrk@lvl=\count115
+\c@parentequation=\count105
+\dspbrk@lvl=\count106
 \tag@help=\toks18
-\row@=\count116
-\column@=\count117
-\maxfields@=\count118
+\row@=\count107
+\column@=\count108
+\maxfields@=\count109
 \andhelp@=\toks19
-\eqnshift@=\dimen136
-\alignsep@=\dimen137
-\tagshift@=\dimen138
-\tagwidth@=\dimen139
-\totwidth@=\dimen140
-\lineht@=\dimen141
+\eqnshift@=\dimen127
+\alignsep@=\dimen128
+\tagshift@=\dimen129
+\tagwidth@=\dimen130
+\totwidth@=\dimen131
+\lineht@=\dimen132
 \@envbody=\toks20
-\multlinegap=\skip53
-\multlinetaggap=\skip54
+\multlinegap=\skip51
+\multlinetaggap=\skip52
 \mathdisplay@stack=\toks21
 LaTeX Info: Redefining \[ on input line 2817.
 LaTeX Info: Redefining \] on input line 2818.
@@ -311,117 +259,132 @@ LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
-\g_MT_multlinerow_int=\count119
-\l_MT_multwidth_dim=\dimen142
-\origjot=\skip55
-\l_MT_shortvdotswithinadjustabove_dim=\dimen143
-\l_MT_shortvdotswithinadjustbelow_dim=\dimen144
-\l_MT_above_intertext_sep=\dimen145
-\l_MT_below_intertext_sep=\dimen146
-\l_MT_above_shortintertext_sep=\dimen147
-\l_MT_below_shortintertext_sep=\dimen148
+\g_MT_multlinerow_int=\count110
+\l_MT_multwidth_dim=\dimen133
+\origjot=\skip53
+\l_MT_shortvdotswithinadjustabove_dim=\dimen134
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen135
+\l_MT_above_intertext_sep=\dimen136
+\l_MT_below_intertext_sep=\dimen137
+\l_MT_above_shortintertext_sep=\dimen138
+\l_MT_below_shortintertext_sep=\dimen139
 )
 (c:/texlive/2018/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2018/08/03 v2.3 Span multiple rows of a table
-\multirow@colwidth=\skip56
-\multirow@cntb=\count120
-\multirow@dima=\skip57
-\bigstrutjot=\dimen149
+\multirow@colwidth=\skip54
+\multirow@cntb=\count111
+\multirow@dima=\skip55
+\bigstrutjot=\dimen140
 )
 (c:/texlive/2018/texmf-dist/tex/latex/makecell/makecell.sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 
 (c:/texlive/2018/texmf-dist/tex/latex/tools/array.sty
 Package: array 2018/04/30 v2.4h Tabular extension package (FMi)
-\col@sep=\dimen150
-\ar@mcellbox=\box55
-\extrarowheight=\dimen151
+\col@sep=\dimen141
+\ar@mcellbox=\box29
+\extrarowheight=\dimen142
 \NC@list=\toks22
-\extratabsurround=\skip58
-\backup@length=\skip59
-\ar@cellbox=\box56
+\extratabsurround=\skip56
+\backup@length=\skip57
+\ar@cellbox=\box30
 )
-\rotheadsize=\dimen152
-\c@nlinenum=\count121
+\rotheadsize=\dimen143
+\c@nlinenum=\count112
 \TeXr@lab=\toks23
 )
-** ATTENTION: Overriding command lockouts (line 24).
-** ATTENTION: Overriding IEEE standard margins (line 27).
+** ATTENTION: Overriding command lockouts (line 21).
+** ATTENTION: Overriding IEEE standard margins (line 24).
 (c:/texlive/2018/texmf-dist/tex/latex/cite/cite.sty
 LaTeX Info: Redefining \cite on input line 302.
 LaTeX Info: Redefining \nocite on input line 332.
 Package: cite 2015/02/27  v 5.5
-) (./cee554.aux
+) (./cee554_cpark.aux
 
-LaTeX Warning: Label `fig:example' multiply defined.
+LaTeX Warning: Label `fig:test' multiply defined.
+
+
+LaTeX Warning: Label `fig:sub1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:sub1' multiply defined.
+
+
+LaTeX Warning: Label `fig:sub2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:sub2' multiply defined.
+
+
+LaTeX Warning: Label `fig:test' multiply defined.
 
 )
-\openout1 = `cee554.aux'.
+\openout1 = `cee554_cpark.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <5> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <7> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <8> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <9> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <10> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <11> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <11> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <12> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <16> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <16> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <20> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <20> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <24> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 61.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 58.
  (c:/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count122
-\scratchdimen=\dimen153
-\scratchbox=\box57
-\nofMPsegments=\count123
-\nofMParguments=\count124
+\scratchcounter=\count113
+\scratchdimen=\dimen144
+\scratchbox=\box31
+\nofMPsegments=\count114
+\nofMParguments=\count115
 \everyMPshowfont=\toks24
-\MPscratchCnt=\count125
-\MPscratchDim=\dimen154
-\MPnumerator=\count126
-\makeMPintoPDFobject=\count127
+\MPscratchCnt=\count116
+\MPscratchDim=\dimen145
+\MPnumerator=\count117
+\makeMPintoPDFobject=\count118
 \everyMPtoPDFconversion=\toks25
 ) (c:/texlive/2018/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -481,31 +444,38 @@ e
 ))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 66.
-LaTeX Font Info:    Try loading font information for U+msa on input line 66.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 63.
+LaTeX Font Info:    Try loading font information for U+msa on input line 63.
 
 (c:/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 66.
+LaTeX Font Info:    Try loading font information for U+msb on input line 63.
 
 (c:/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 66.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 63.
 
 (c:/texlive/2018/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-<CE554_traditional_to_RNN.pdf, id=1, 963.6pt x 542.025pt>
-File: CE554_traditional_to_RNN.pdf Graphic file (type pdf)
-<use CE554_traditional_to_RNN.pdf>
-Package pdftex.def Info: CE554_traditional_to_RNN.pdf  used on input line 94.
-(pdftex.def)             Requested size: 252.91203pt x 142.26378pt.
-
-Overfull \hbox (7.19392pt too wide) in paragraph at lines 94--96
- [][] 
- []
+Package epstopdf Info: Source file: <Drone_image_1.eps>
+(epstopdf)                    date: 2018-10-31 20:01:42
+(epstopdf)                    size: 1454927 bytes
+(epstopdf)             Output file: <Drone_image_1-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-10-31 20:01:42
+(epstopdf)                    size: 508342 bytes
+(epstopdf)             Command: <repstopdf --outfile=Drone_image_1-eps-converte
+d-to.pdf Drone_image_1.eps>
+(epstopdf)             \includegraphics on input line 91.
+Package epstopdf Info: Output file is already uptodate.
+<Drone_image_1-eps-converted-to.pdf, id=1, 963.6pt x 542.025pt>
+File: Drone_image_1-eps-converted-to.pdf Graphic file (type pdf)
+<use Drone_image_1-eps-converted-to.pdf>
+Package pdftex.def Info: Drone_image_1-eps-converted-to.pdf  used on input line
+ 91.
+(pdftex.def)             Requested size: 227.6223pt x 128.0374pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -513,69 +483,44 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [1{c:/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
- <./CE554_traditional_to_RNN.pdf>]
-<CE554_networks.pdf, id=60, 963.6pt x 542.025pt>
-File: CE554_networks.pdf Graphic file (type pdf)
-<use CE554_networks.pdf>
-Package pdftex.def Info: CE554_networks.pdf  used on input line 120.
-(pdftex.def)             Requested size: 505.83878pt x 284.52756pt.
-<descriptionSystem.png, id=61, 393.72093pt x 225.84375pt>
+ <./Drone_image_1-eps-converted-to.pdf>]
+<descriptionSystem.png, id=85, 393.72093pt x 225.84375pt>
 File: descriptionSystem.png Graphic file (type png)
 <use descriptionSystem.png>
-Package pdftex.def Info: descriptionSystem.png  used on input line 174.
+Package pdftex.def Info: descriptionSystem.png  used on input line 134.
 (pdftex.def)             Requested size: 113.82446pt x 65.28967pt.
-<actualSystem.jpg, id=62, 301.125pt x 225.84375pt>
+<actualSystem.jpg, id=86, 301.125pt x 225.84375pt>
 File: actualSystem.jpg Graphic file (type jpg)
 <use actualSystem.jpg>
-Package pdftex.def Info: actualSystem.jpg  used on input line 180.
+Package pdftex.def Info: actualSystem.jpg  used on input line 140.
 (pdftex.def)             Requested size: 113.82446pt x 85.37007pt.
 
-Overfull \hbox (7.22687pt too wide) in paragraph at lines 172--184
+Overfull \hbox (7.22687pt too wide) in paragraph at lines 132--144
  [][][] 
  []
 
-<savingThread.png, id=63, 205.5178pt x 104.64093pt>
+<savingThread.png, id=87, 205.5178pt x 104.64093pt>
 File: savingThread.png Graphic file (type png)
 <use savingThread.png>
-Package pdftex.def Info: savingThread.png  used on input line 190.
+Package pdftex.def Info: savingThread.png  used on input line 149.
 (pdftex.def)             Requested size: 221.14479pt x 112.59695pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<calib.png, id=64, 331.2375pt x 130.23656pt>
+<calib.png, id=88, 331.2375pt x 130.23656pt>
 File: calib.png Graphic file (type png)
 <use calib.png>
-Package pdftex.def Info: calib.png  used on input line 200.
+Package pdftex.def Info: calib.png  used on input line 159.
 (pdftex.def)             Requested size: 159.35703pt x 62.65591pt.
-<calib2.jpg, id=65, 169.38281pt x 225.84375pt>
+<calib2.jpg, id=89, 169.38281pt x 225.84375pt>
 File: calib2.jpg Graphic file (type jpg)
 <use calib2.jpg>
-Package pdftex.def Info: calib2.jpg  used on input line 206.
+Package pdftex.def Info: calib2.jpg  used on input line 165.
 (pdftex.def)             Requested size: 68.29189pt x 91.05957pt.
 
-Overfull \hbox (7.22687pt too wide) in paragraph at lines 198--210
+Overfull \hbox (7.22687pt too wide) in paragraph at lines 157--169
  [][][] 
  []
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: Reference `curve:trajectory' on page 2 undefined on input line 2
-16.
-
-
-LaTeX Warning: Reference `arbitrary:trajectory' on page 2 undefined on input li
-ne 216.
-
-
-LaTeX Warning: Reference `table:rmse' on page 2 undefined on input line 216.
-
-[2] [3 <./CE554_networks.pdf> <./descriptionSystem.png> <./actualSystem.jpg> <.
-/savingThread.png> <./calib.png> <./calib2.jpg>] (./cee554.bbl)
+[2 <./descriptionSystem.png> <./actualSystem.jpg> <./savingThread.png> <./calib
+.png> <./calib2.jpg>] (./cee554_cpark.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -587,22 +532,19 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[4] (./cee554.aux)
-
-LaTeX Warning: There were undefined references.
-
+[3] (./cee554_cpark.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5516 strings out of 494587
- 82890 string characters out of 6177953
- 156748 words of memory out of 5000000
- 9045 multiletter control sequences out of 15000+600000
- 118417 words of font info for 142 fonts, out of 8000000 for 9000
+ 5381 strings out of 494587
+ 80684 string characters out of 6177953
+ 151825 words of memory out of 5000000
+ 8908 multiletter control sequences out of 15000+600000
+ 117310 words of font info for 141 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 42i,9n,40p,1176b,463s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,9n,40p,1183b,463s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2018/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2018/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2018/texmf-dist/fonts/type1
@@ -616,10 +558,10 @@ s/type1/urw/courier/ucrr8a.pfb><c:/texlive/2018/texmf-dist/fonts/type1/urw/time
 s/utmb8a.pfb><c:/texlive/2018/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/
 texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2018/texmf
 -dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on cee554.pdf (4 pages, 476540 bytes).
+Output written on cee554_cpark.pdf (3 pages, 742711 bytes).
 PDF statistics:
- 369 PDF objects out of 1000 (max. 8388607)
- 175 compressed objects within 2 object streams
+ 148 PDF objects out of 1000 (max. 8388607)
+ 60 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

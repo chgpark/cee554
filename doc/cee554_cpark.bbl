@@ -148,9 +148,4 @@ F.~J. Ord{\'o}{\~n}ez and D.~Roggen, ``Deep convolutional and lstm recurrent
   neural networks for multimodal wearable activity recognition,''
   \emph{Sensors}, vol.~16, no.~1, p. 115, 2016.
 
-\bibitem{chung2014empirical}
-J.~Chung, C.~Gulcehre, K.~Cho, and Y.~Bengio, ``Empirical evaluation of gated
-  recurrent neural networks on sequence modeling,'' \emph{arXiv preprint
-  arXiv:1412.3555}, 2014.
-
 \end{thebibliography}

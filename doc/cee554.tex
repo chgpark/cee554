@@ -47,7 +47,7 @@
 \usepackage{cite}
 
 \title{\LARGE \bf
-Recurrent Neural Networks for Range-only SLAM}
+RO-Net: Recurrent Neural Networks for Range-only SLAM using range-only measurements}
 
 
 \author{Hyungtae Lim$^{1}$ , Junseok Lee$^{1}$, Changgyu Park$^{1}$, Ye Eun Kim$^{1}$, % <-this % stops a space
@@ -71,7 +71,12 @@ Recurrent Neural Networks for Range-only SLAM}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
 
-Range-only SLAM is a method for localizing a mobile robot and beacons by mainly utilizing distance measurements. Unlike the traditional probability-based range-only SLAM method, we present a novel approach using a recurrent neural network architecture that directly learns the end-to-end mapping between distance data and robot position.
+Range-only(RO) SLAM is a method for localizing a mobile robot and beacons by mainly utilizing distance measurements. Because range-only measurements have only magnitude so it has rank-deficiency. And distance is only measured by time of flight(TOA), data is noisy itselves.
+
+In this paper, we proposed a novel approach to range-only SLAM using multimodal bidirectional stacked LSTM models. Unlike the traditional probability-based range-only SLAM method, we present a novel approach using a recurrent neural network architecture that directly learns the end-to-end mapping between distance data and robot position.
+
+We gathered our own dataset and tested in 2 cases exploiting eagle eye motion capturer camera. The multimodal bidirectional stacked LSTM structure exhibits the precise estimates of robot positions, but one case, it is less accurate than traditional SLAM algorithm. 
+
 
 \end{abstract}
 
@@ -84,7 +89,7 @@ Range-only SLAM is a method for localizing a mobile robot and beacons by mainly 
  
  In the meantime, as deep learning age has come\cite{lecun2015deep}, various kinds of deep neural architectures have been proposed for many tasks related to robotics field, such as detection\cite{lenz2015deep,cai2016unified, smith2018object}, navigation\cite{zhu2017target, hamandi2018deepmotion}, pose estimation\cite{walch2017image}, and so on. Especially, recurrent neural networks (RNNs), originated from Natural Language Process(NLP) area\cite{elman1990finding}, have been shown to achieve better performance in case of dealing with time variant information, thereby RNNs are widely utilized such as not only speech recognition, but also pose estimation and localization\cite{walch2017image, gladh2016deep, wang2017deepvo, kendall2015posenet, turan2018deep}. 
  
- In this paper, we propose a deep learning-based localization method by stacked bidirectional Long Short-Term Memory(stacked Bi-LSTM) for more accurate localization of the robot. Using deep learning, our structure directly learns the end-to-end mapping between range measurements and robot position. This operation non-linearly maps the relationship not only considering the long-range dependence of sequential distance data by the LSTM, but also using the correlation of the backward information and the forward information of the sequence of each time step by virtue of its bidirectional architecture.
+ In this paper, we propose a deep learning-based SLAM method by multimodal stacked bidirectional Long Short-Term Memory(multimodal stacked Bi-LSTM) for more accurate localization of the robot. Using deep learning, our structure directly learns the end-to-end mapping between range measurements and robot position. This operation non-linearly maps the relationship not only considering the long-range dependence of sequential distance data by the LSTM, but also using the correlation of the backward information and the forward information of the sequence of each time step by virtue of its bidirectional architecture.
  
 \begin{figure}[h]
 	
@@ -127,7 +132,7 @@ By virtue of the LSTM architecture that has memory gates and units that enable l
 	\label{fig:example}
 	%	}
 	
-	\caption{Overall architecture of stacked Bi-LSTM. }
+	\caption{Overall architecture of multimodal stacked Bi-LSTM. }
 	
 \end{figure*}
 
@@ -168,18 +173,6 @@ To precisely estimate the Robot’s pose and landmarks’ position, it is import
 \subsection{Stacked Architecture}
 
 In deep learning, the number of layers stacked is getting large, intending to increase the non-linearity and correspondingly to improve the performance. Likewise, the multiple LSTM layers can be stacked as well \cite{dyer2015transition}, enabling more complex representation and higher performance. In stacked Bi-LSTM, total 3 LSTM layers are stacked in series. 
-
-\subsection{Multimodal Architecture}
-
-\subsection{Training Loss}
-
-We set the experiment on the virtual situation and generate distance data set which corresponds to the position with 10\% noise error and let RNN be trained using these distance data. Train data are just zigzag paths and test data is an arbitrary path, so we also check if RNN can estimate the position despite the variation of distance data as input.
-
-Let $\Theta$ be the parameters of our RNN model, then our final goal is to find optimal parameters $\Theta^{*}$ for localization by minimizing Mean Square Error (MSE) of Euclidean distance between ground truth position $Y_k$ and estimated position $\hat{Y_k}$.
-
-\begin{equation}
-\Theta^{*} = \underset{\Theta}{\mathrm{argmin}} \sum_{k=1}^N \parallel Y_k - \hat{Y_k} \parallel^{2}
-\end{equation}  
 
 
 \section{Experiment}
@@ -241,13 +234,23 @@ In addition, to use the distance data for traditional RO-slam we calibrate the d
 
 To verify our proposal that RNNs can estimate the robot's position through varying range data, we trained our RNN-based multimodal architecture. Plus, to compare to previous traditional SLAM algorithm, we also estimate robot's position by particle filter(PF) based algorithm.
 
+\subsection{Training Loss}
+
+The network is implemented based on the famous DL framework Tensorflow and trained by using a gtx 1080ti and gtx titan. The Adam optimizr is employed to train the network for up to 1000 epochs with 0.0002 learning rate, 0.7 decay rate, and 5 decay step. Besides, Dropout is introduced to prevent the models from overfitting. 
+
+Let $\Theta$ be the parameters of our RNN model, then our final goal is to find optimal parameters $\Theta^{*}$ for localization by minimizing Mean Square Error (MSE) of Euclidean distance between ground truth position $Y_k$ and estimated position $\hat{Y_k}$.
+
+\begin{equation}
+\Theta^{*} = \underset{\Theta}{\mathrm{argmin}} \sum_{k=1}^N \parallel Y_k - \hat{Y_k} \parallel^{2}
+\end{equation}  
+
 \section{Results}
 
  As illustrated in Experiment session, train data are our own data gathered by UWB sensors and motion capture camera, so neural networks take range-only measurements as input and output robot's position. Ground truth data is robot's position measured by eagle eye motion capturer, whose error is in mm units. The results of trajectory prediction are shown in Fig. \ref{fig:trajectory} and Root-Mean-Squared Error (RMSE) are shown in Table \ref{RMSE_table}.
 
  We set two test trajectory cases. However, unexpectedly, it was uncertain to say that which algorithm has better performance. In case of test1, Performance of PF based localization is better than performance of our architecture, whereas performance of RNN-based neural networks architecture is better in case of test2. 
  
- We analyzed the reason why our multimodal architecture is less accurate. First of all, We investigate distance error graph with time step, as shown in \ref{fig:error}. The graph indicates that our deep learning based RNN architecture have a tendency that sometimes it estimates wrong position that is far from the Ground truth. So we conclude that it is because train data is too small to infer position correctly. Due to little amount of train data that only just consist of 11258 time step, it is insufficient to cover all possible 3D space where robot can explore.
+ We analyzed the reason why our multimodal architecture is less accurate. First of all, We investigate distance error graph with time step, as shown in \ref{fig:error}. The graph indicates that our deep learning based RNN architecture have a tendency that sometimes it estimates wrong position that is far from the Ground truth. So we conclude that it is because train data is too small to infer position correctly. Due to little amount of train data that only just consist of 11258 time step, it is insufficient to cover all possible 3D space where robot can explore. Because neural networks infer outputs based on train data, neural networks do not estimate the space where is not included in train data. 
  
  
  \begin{figure*}[h]
@@ -287,7 +290,6 @@ To verify our proposal that RNNs can estimate the robot's position through varyi
  \end{figure*} 
   
  Secondly, we realized that many articles about estimating position using deep learning architecture tend to generate grid maps to reduce error caused by noise of that neural networks, but our neural networks outputs float directly. As shown in Fig. \ref{fig:error}. 
- %데이터가 커버하지 못하는 공간이 존재하기 떄문에 neural network가 인지하지 못했다.
  
  Therefore, we can conclude that the performance improves as the non-linearity of the architecture increases.
  
@@ -308,11 +310,12 @@ To verify our proposal that RNNs can estimate the robot's position through varyi
 
 \section{Conclusion}
 
-In this paper, we proposed a novel approach to range-only measurements localization using recurrent neural network models and tested various types of LSTM models for more accurate localization of the mobile robot. 
+In this paper, we proposed a novel approach to range-only SLAM using multimodal-based RNN models and tested our architectures in two test data.
 
-Using deep learning, our structure directly learns the end-to-end mapping between distance data and robot position. The stacked bidirectional LSTM structure exhibits the best estimates of robot positions than other RNN structure units. Therefore, we conclude that  the LSTM-based structure improves performance as non-linearity of structures increase and even if the robot position is not included in the ground truth dataset, our method is able to predict robot positions with small errors through sequential distance data. 
+Using deep learning, our structure directly learns the end-to-end mapping between distance data and robot position. The multimodal bidirectional stacked LSTM structure exhibits the precise estimates of robot positions, but some cases, it is less accurate than traditional SLAM algorithm. Therefore, we could check the possibility that our multimodal LSTM-based structure can substitute traditional algorithms if we make our train data more sufficient. 
 
-As a future work, because train/test dataset are generated on simulated environment, the proposed method needs to be tested in the real-world to check whether RNNs can deal with multipath problems and line of non-line of sight(NLOS) issues.
+As a future work, because train dataset is insufficient, the proposed method needs to be tested in more-rich train data situation. Besides, we will modify end parts of our neural networks architecturethe utilizing generating grid maps to check whether RNNs can deal with the rank-deficient range only measurements well.
+
 \bibliographystyle{IEEEtran}
 % argument is your BibTeX string definitions and bibliography database(s)
 \bibliography{./IEEEabrv,./MyBib}

@@ -165,8 +165,6 @@ F.~J. Ord{\'o}{\~n}ez and D.~Roggen, ``Deep convolutional and lstm recurrent
   neural networks for multimodal wearable activity recognition,''
   \emph{Sensors}, vol.~16, no.~1, p. 115, 2016.
 
-<<<<<<< HEAD
-=======
 \bibitem{luong2015effective}
 M.-T. Luong, H.~Pham, and C.~D. Manning, ``Effective approaches to
   attention-based neural machine translation,'' \emph{arXiv preprint
@@ -177,10 +175,4 @@ C.~Dyer, M.~Ballesteros, W.~Ling, A.~Matthews, and N.~A. Smith,
   ``Transition-based dependency parsing with stack long short-term memory,''
   \emph{arXiv preprint arXiv:1505.08075}, 2015.
 
-\bibitem{chung2014empirical}
-J.~Chung, C.~Gulcehre, K.~Cho, and Y.~Bengio, ``Empirical evaluation of gated
-  recurrent neural networks on sequence modeling,'' \emph{arXiv preprint
-  arXiv:1412.3555}, 2014.
-
->>>>>>> 1ec7aa33929ab8378649ba64c0b107ee58f443d7
 \end{thebibliography}

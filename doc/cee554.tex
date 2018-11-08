@@ -71,7 +71,7 @@ RO-Net: Recurrent Neural Networks for Range-only SLAM using range-only measureme
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
 
-Range-only(RO) SLAM is a method for localizing a mobile robot and beacons by mainly utilizing distance measurements. Because range-only measurements have only magnitude so it has rank-deficiency. And distance is only measured by time of flight(TOA), data is noisy itselves.
+Range-only(RO) SLAM is a method for localizing a mobile robot and beacons by mainly utilizing distance measurements. Because range-only measurements have only magnitude so it has rank-deficiency. And distance is only measured by the time of flight(TOA), data is noisy.
 
 In this paper, we proposed a novel approach to range-only SLAM using multimodal bidirectional stacked LSTM models. Unlike the traditional probability-based range-only SLAM method, we present a novel approach using a recurrent neural network architecture that directly learns the end-to-end mapping between distance data and robot position.
 
@@ -109,8 +109,8 @@ RO-SLAM, Long Short-Term Memory(LSTM) model and applications of LSTMs to solve d
 
 \subsubsection{RO-SLAM}
 
-SLAM is widely used in autonomous vehicles, drones, intelligence field robots, and mobile phone applications. Thus, according to the smart city development plan, several technologies are required, and the importance and necessity of SLAM are increasing together. Various kinds of sensors are utilized to SLAM, such as GPS, LiDAR, ultrasonic-based sensor, camera and distance sensor.
-In 2006, the ad doc sensor network consisting of range detection beacon was applied to SLAM technology for various ranges. This technology integrates node-to-node measurements to reduce drift and expedite node-map convergence \cite{djugash2006range} In 2008, the technique to consistently combine the observation information considering the uncertainty was studied through comparing the experimental data with the actual robot and simulation using Ultra Wide-Band (UWB) devices and Rao-Balckwellized Particle Filter (RBPF) \cite{blanco2008pure}.  In 2012, a simple and efficient algorithm for position recognition with high accuracy and low computational complexity was researched with ultrasonic sensors \cite{yang2012efficient}. In recent years, 3-dimensional based SLAM has also been under active research and development. In 2013, a localization mapping approach of a wireless sensor network (WSN) node was studied through a centralized EKF-SLAM-based optimization research \cite{fabresse2013undelayed}. In addition, in 2014, a method of minimizing noise and localizing Unmanned Aerial Vehicle (UAV) by using only range measurement while simultaneously mapping the position of the wireless range sensors were proposed \cite{fabresse2014robust}. 
+SLAM is widely used in autonomous vehicles, drones, intelligence field robots, and mobile phone applications. Thus, according to the smart city development plan, several technologies are required, and the importance and the necessity of SLAM are increasing together. Various kinds of sensors are utilized to SLAM, such as GPS, LiDAR, ultrasonic-based sensor, camera and distance sensor.
+In 2006, the ad doc sensor network consisting of range detection beacon was applied to SLAM technology for various ranges. This technology integrates node-to-node measurements to reduce drift and expedite node-map convergence \cite{djugash2006range} In 2008, the technique to consistently combine the observation information considering the uncertainty was studied through comparing the experimental data with the actual robot and simulation using Ultra Wide-Band (UWB) devices and Rao-Balckwellized Particle Filter (RBPF) \cite{blanco2008pure}.  In 2012, a simple and efficient algorithm for position recognition with high accuracy and low computational complexity was researched with ultrasonic sensors \cite{yang2012efficient}. In recent years, 3-dimensional-based SLAM has also been under active research and development. In 2013, a localization mapping approach of a wireless sensor network (WSN) node was studied through a centralized EKF-SLAM-based optimization research \cite{fabresse2013undelayed}. In addition, in 2014, a method of minimizing noise and localizing Unmanned Aerial Vehicle (UAV) by using  range-only measurement while simultaneously mapping the position of the wireless range sensors were proposed \cite{fabresse2014robust}. 
 SLAM based on range measurement has been continuously researched and developed then applied to various fields. In this paper, we propose a novel technology that applying deep-learning to range-only SLAM that derives accurate range and robot position measurement through in-depth learning. 
 
 
@@ -141,7 +141,7 @@ By virtue of the LSTM architecture that has memory gates and units that enable l
 There have been many approaches combining Simultaneous Localization and Mapping (SLAM) with deep learning, aiming to overcome the limitations on SLAM only technique such as difficulty on tuning the proper parameters in different environments and recovering an exact scale. Actually, those researches are showing the superior performance to the traditional SLAM approaches.
 
 
-One of the popular SLAM techniques with deep learning is CNN-SLAM \cite{tateno2017cnn} which takes Convolutional Neural Networks (CNNs) to precisely predict the depth from a single image without any scene-based assumptions or geometric constraints, allowing them to recover the absolute scale of the reconstruction. Another approach using deep learning for localization is Deep VO \cite{clark2017vinet} In this method, Recurrent Convolutional Neural Networks (RCNNs) is utilized. Specifically, feature representation is learned by Convolutional Neural Networks and Sequential information and motion dynamics are obtained by deep Recurrent Neural Networks without using any module in the classic VO pipeline.
+One of the popular SLAM techniques with deep learning is CNN-SLAM \cite{tateno2017cnn} which takes Convolutional Neural Networks (CNNs) to precisely predict the depth from a single image without any scene-based assumptions or geometric constraints, allowing them to recover the absolute scale of reconstruction. Another approach using deep learning for localization is Deep VO \cite{clark2017vinet} In this method, Recurrent Convolutional Neural Networks (RCNNs) is utilized. Specifically, feature representation is learned by Convolutional Neural Networks and Sequential information and motion dynamics are obtained by deep Recurrent Neural Networks without using any module in the classic VO pipeline.
 
 
 
@@ -156,23 +156,23 @@ In this chapter, we introduce our proposed neural network model which is used fo
 
 \subsection{Network Architectures}
 
-As it is illustrated in Fig. 2, our proposed stacked Bi-LSTM can be decomposed into 3 parts: (1) Input part which accepts and preprocess the sequences of the sensor with multiple bidirectional LSTM layers. (2) Hidden layer part consisting of attention modules and bidirectional LSTM layer (3) Output part where a fully-connected output layer gives Robot’s pose and position of landmarks as its results. 
+As it is illustrated in Fig. 2, our proposed stacked Bi-LSTM consist into 3 parts: (1) Input part, which accepts and preprocess the sequences of the sensor with multiple bidirectional LSTM layers. (2) Hidden layer part consisting of attention modules and bidirectional LSTM layer (3) Output part where a fully-connected output layer gives Robot’s pose and position of landmarks as its results. 
 
 \subsection{Multimodal LSTM}
 
-Since to effectively accept the input collected from the multiple sensors, instead of just using a single layer as an input layer, we use the number of LSTM layers, thinking that each single sensor represents a different modality. Each layer corresponds to the input of each distance sensor. In other words, if N sensors are used for measuring the distance of the robot, the number of input layer also would be N and the MTh layer accepts an input from the MTh sensor. By doing so, we can further expect that the input layers act as the sensor calibration process in traditional RO-SLAM, allowing the sensors to be tuned respectively with input layer’s parameters.
+Since to effectively accept the input collected from the multiple sensors, instead of just using a single layer as an input layer, we use the number of LSTM layers, thinking that each single sensor represents a different modality. Each layer corresponds to the input of each distance sensor. In other words, if N sensors are used for measuring the distance of the robot, the number of the input layer also would be N and the MTh layer accepts an input from the MTh sensor. By doing so, we can further expect that the input layers act as the sensor calibration process in traditional RO-SLAM, allowing the sensors to be tuned respectively with the input layer’s parameters.
 
 \subsection{Bidirectional LSTM}
 
-As traditional RO-SLAM \cite{blanco2008pure,blanco2008efficient} takes an odometry which is an accumulated data from the beginning to the present point, our network takes the sensor data for the time period l. So, if the current time stamp is t, the input layers take the sensor data obtained from timestamp t-l to t. For dealing with such sequential information, we apply LSTM network with l cells which is one of the most appropriate network for the sequential data to our network. Furthermore, to take an advantage from the bidirectional time flow, normal time order and reverse time order, we design our network with 3 bidirectional LSTM layers that consist of 2 independent LSTMs corresponding to normal and reverse time order. Individual LSTM layers play a different role. LSTM layers of input part take and preprocess the sequence of sensor data. LSTM layer placed between input and output layer takes a spatial information from a previous spatial attention layer and send it to another temporal Attention layer. Lastly, LSTM layer of output layer outputs the results.
+As traditional RO-SLAM \cite{blanco2008pure,blanco2008efficient} takes an odometry which is an accumulated data from the beginning to the present point, our network takes sensor data for the time period l. So, if the current time stamp is t, the input layers take the sensor data obtained from timestamp t-l to t. For dealing with such sequential information, we apply LSTM network with l cells which is one of the most appropriate network for sequential data to our network. Furthermore, to take advantage from the bidirectional time flow, normal time order and reverse time order, we design our network with 3 bidirectional LSTM layers that consist of 2 independent LSTMs corresponding to normal and reverse time order. Individual LSTM layers play a different role. The LSTM layers of input part take and preprocess the sequence of sensor data. LSTM layer placed between input and output layer takes a spatial information from a previous spatial attention layer and send it to another temporal Attention layer. Lastly, the end parts of LSTM outputs the position of robot.
 
 \subsection{Attention layer}
 
-To precisely estimate the Robot’s pose and landmarks’ position, it is important for the network to distinguish which is more meaningful information and which is less for estimation and prevent to focus on less significant information. So, we add the two different types of attention modules \cite{luong2015effective} which extract something more important and related to the task information. The first attention modules placed between the input LSTM layer and the second LSTM layer are called “Spatial Attention layer“ and is represented as blue blocks in Fig. 2 These attention modules judge which sensor is more informative. The second attention module corresponding to the red blocks in Fig. 2 is the temporal attention module. These temporal attention modules determine which time stamp which has more useful information allowing the network to attend that time stamp more.  
+To precisely estimate the Robot’s pose and landmarks’ position, it is important for the network to distinguish which is more meaningful information and which is less for estimation and prevent to focus on less significant information. So, we add the two different types of attention modules \cite{luong2015effective} which extract something more important and related to the task information. The first attention modules placed between the input LSTM layer and the second LSTM layer are called “Spatial Attention layer“ and is represented as blue blocks in Fig. 2 These attention modules judge which sensor is more informative. The second attention module corresponding to the red blocks in Fig. 2 is the temporal attention module. These temporal attention modules determine which time stamp which has more useful information, allowing the network to attend that time stamp more.  
 
 \subsection{Stacked Architecture}
 
-In deep learning, the number of layers stacked is getting large, intending to increase the non-linearity and correspondingly to improve the performance. Likewise, the multiple LSTM layers can be stacked as well \cite{dyer2015transition}, enabling more complex representation and higher performance. In stacked Bi-LSTM, total 3 LSTM layers are stacked in series. 
+In deep learning, the number of layers stacked is getting large, intending to increase the non-linearity and correspondingly to improve the performance. Likewise, the multiple LSTM layers can be stacked as well \cite{dyer2015transition}, enabling more complex representation and higher performance. In stacked Bi-LSTM, total 3 LSTM layers are stacked in the series. 
 
 
 \section{Experiment}
@@ -236,7 +236,7 @@ To verify our proposal that RNNs can estimate the robot's position through varyi
 
 \subsection{Training Loss}
 
-The network is implemented based on the famous DL framework Tensorflow and trained by using a gtx 1080ti and gtx titan. The Adam optimizr is employed to train the network for up to 1000 epochs with 0.0002 learning rate, 0.7 decay rate, and 5 decay step. Besides, Dropout is introduced to prevent the models from overfitting. 
+The network is programmed by Tensorflow, which is deep learning library of python trained by using a GTX 1080 Ti and GTX Titan. The Adam optimizr is exploited to train the network during 1000 epochs with 0.0002 learning rate, 0.7 decay rate, and 5 decay step. Besides, Dropout is introduced to prevent the models from overfitting. 
 
 Let $\Theta$ be the parameters of our RNN model, then our final goal is to find optimal parameters $\Theta^{*}$ for localization by minimizing Mean Square Error (MSE) of Euclidean distance between ground truth position $Y_k$ and estimated position $\hat{Y_k}$.
 
@@ -267,7 +267,7 @@ Let $\Theta$ be the parameters of our RNN model, then our final goal is to find 
  		\label{fig:trajectory2} 	
  		\caption{}
  	\end{subfigure}
- 	\caption{The trajectories estimated by particle filter-based algorithm and our neural networks architecture. (a)A trajectory of test1 data (b)A trajectory of test2 data}
+ 	\caption{Trajectories estimated by particle filter-based algorithm and our neural networks' architecture. (a)A trajectory of test1 data (b)A trajectory of test2 data}
  	\label{fig:trajectory}
  \end{figure*} 
  
@@ -285,11 +285,11 @@ Let $\Theta$ be the parameters of our RNN model, then our final goal is to find 
  		\label{fig:error2} 	
  		\caption{}
  	\end{subfigure}
- 	\caption{The distance error graphes with time step. (a) Distance error of test 1 data  and (b)distance error of test 2 data}
+ 	\caption{The distance error graphes with time step. (a) The Distance error of test 1 data  and (b)distance error of test 2 data}
  	\label{fig:error}
  \end{figure*} 
   
- Secondly, we realized that many articles about estimating position using deep learning architecture tend to generate grid maps to reduce error caused by noise of that neural networks, but our neural networks outputs float directly. As shown in Fig. \ref{fig:error}. 
+ Secondly, we realized that many articles about estimating position using deep learning architecture tend to generate grid maps to reduce error caused by the noise of that neural networks, but our neural networks output float directly. As shown in Fig. \ref{fig:error}. 
  
  Therefore, we can conclude that the performance improves as the non-linearity of the architecture increases.
  
@@ -298,7 +298,7 @@ Let $\Theta$ be the parameters of our RNN model, then our final goal is to find 
 	\centering
 	\begin{tabular}{cclcl}
 		\hline
-		\multicolumn{5}{c}{Results of RMSE{[}cm{]}}                                                                  \\ \hline
+		\multicolumn{5}{c}{The results of RMSE{[}cm{]}}                                                                  \\ \hline
 		\multicolumn{1}{c|}{Model}                    & \multicolumn{2}{c|}{Test1} & \multicolumn{2}{c}{Test2}      \\ \hline
 		\multicolumn{1}{c|}{Particle filter-based}    & \multicolumn{2}{c|}{\textbf{9.1827}}     & \multicolumn{2}{c}{9.8803}          \\
 		\multicolumn{1}{c|}{Bidirectional Multimodal} & \multicolumn{2}{c|}{11.3301}     & \multicolumn{2}{c}{\textbf{9.7528}}

@@ -8,7 +8,7 @@ from tqdm import tqdm, trange
 import os
 import argparse
 import csv
-os.environ['CUDA_VISIBLE_DEVICES'] = '0, 2' #,1,2,3'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0' #,1,2,3'
 tf.set_random_seed(777)  # reproducibilityb
 # hyper parameters
 p =argparse.ArgumentParser()
@@ -36,10 +36,10 @@ p.add_argument('--network_type', type=str, default = 'bi') #uni / bi
 p.add_argument('--is_multimodal', type=bool, default = True) #True / False
 
 #FOR TEST
-p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test2/model_3946_53516-50")
+p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test3/model_3485_11768-596")
 p.add_argument('--test_data', type=str, default='inputs/np_test_data_1.csv')
 # p.add_argument('--test_data', type=str, default='inputs/np_test_2.csv')
-FILE_NAME = '1105_bimul'
+FILE_NAME = '1108_bimul'
 p.add_argument('--output_dir', type=str, default= 'results/RO_test/')
 ###########
 args = p.parse_args()

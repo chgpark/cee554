@@ -17,7 +17,7 @@ p =argparse.ArgumentParser()
 #Train folder is essential for data_parser.fitDataForMinMaxScaler()!!
 p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/train_Karpe_181025/")
 
-p.add_argument('--lr', type=float, default = 0.00015)
+p.add_argument('--lr', type=float, default = 0.0001)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 5)
 p.add_argument('--epoches', type=int, default = 1500)
@@ -26,25 +26,25 @@ p.add_argument('--batch_size', type=int, default = 11257)
 #NETWORK PARAMETERS
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
 p.add_argument('--hidden_size', type=int, default = 3) # RNN output size
-p.add_argument('--input_size', type=int, default = 4) #RNN input size: number of uwb
-p.add_argument('--preprocessing_output_size', type=int, default = 16)
-p.add_argument('--first_layer_output_size', type=int, default = 100)
-p.add_argument('--second_layer_output_size', type=int, default = 16)
+p.add_argument('--num_uwb', type=int, default = 8) #RNN input size: number of uwb
+p.add_argument('--preprocessing_output_size', type=int, default = 50)
+p.add_argument('--first_layer_output_size', type=int, default = 500)
+p.add_argument('--second_layer_output_size', type=int, default = 400)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
-p.add_argument('--network_type', type=str, default = 'bi') #uni / bi
+p.add_argument('--network_type', type=str, default = 'test') #uni / bi
 p.add_argument('--is_multimodal', type=bool, default = True) #True / False
 
 #FOR TEST
-p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test3/model_3485_11768-596")
+p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test5/model_0_00153-1940")
 p.add_argument('--test_data', type=str, default='inputs/np_test_data_1.csv')
 # p.add_argument('--test_data', type=str, default='inputs/np_test_2.csv')
-FILE_NAME = '1108_bimul'
+FILE_NAME = '1109_bimul'
 p.add_argument('--output_dir', type=str, default= 'results/RO_test/')
 ###########
 args = p.parse_args()
 
-data_parser = DataPreprocessing.DataManager(args.train_data, args.sequence_length, args.input_size)
+data_parser = DataPreprocessing.DataManager(args.train_data, args.sequence_length, args.num_uwb)
 data_parser.fitDataForMinMaxScaler()
 data_parser.transform_all_data()
 
@@ -77,13 +77,17 @@ with tf.Session() as sess:
         if args.is_multimodal:
             data_parser.set_val_data(args.test_data)
             data_parser.transform_all_data()
-            data_parser.set_train_data_for_4multimodal()
-            d0_data, d1_data, d2_data, d3_data = data_parser.get_range_data_for_4multimodal()
+            data_parser.set_data_for_8multimodal()
+            d0_data, d1_data, d2_data, d3_data, d4_data, d5_data, d6_data, d7_data = data_parser.get_range_data_for_8multimodal()
 
             prediction = sess.run(ro_net.pose_pred, feed_dict={ro_net.d0_data: d0_data,
                                                                ro_net.d1_data: d1_data,
                                                                ro_net.d2_data: d2_data,
-                                                               ro_net.d3_data: d3_data}) #prediction : type: list, [ [[[hidden_size]*sequence_length] ... ] ]
+                                                               ro_net.d3_data: d3_data,
+                                                               ro_net.d4_data: d4_data,
+                                                               ro_net.d5_data: d5_data,
+                                                               ro_net.d6_data: d6_data,
+                                                               ro_net.d7_data: d7_data}) #prediction : type: list, [ [[[hidden_size]*sequence_length] ... ] ]
         else:
             X_data = data_parser.set_range_data()
             prediction = sess.run(ro_net.pose_pred, feed_dict={ro_net.X_data: X_data}) #prediction : type: list, [ [[[hidden_size]*sequence_length] ... ] ]
@@ -97,4 +101,5 @@ with tf.Session() as sess:
         data_parser.write_file_data(output_csv)
         viz.set_3D_plot_name(output_plot)
         viz.drawResult3D(output_csv)
-
+        viz.plotDistanceError3D(output_csv)
+        viz._calDistanceError3D(output_csv)

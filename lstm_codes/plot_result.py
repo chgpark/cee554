@@ -8,7 +8,7 @@ from scipy import interpolate
 from scipy.interpolate import spline
 p =argparse.ArgumentParser()
 p.add_argument('--output_dir', type=str, default="/home/shapelim/KRoC_Results")
-p.add_argument('--test_data', type=str, default="inputs/poly_3D.csv")
+p.add_argument('--test_data', type=str, default="inputs/np_test_data_1.csv")
 # p.add_argument('--gt_dir', type=str, default="inputs/test_data_diagonal_curve2D.csv")
 #In case of test 1
 p.add_argument('--uni', type=str, default= "/home/shapelim/KRoC_Results/1104_uni_poly.csv")
@@ -82,7 +82,6 @@ class Visualization:
         return np.sqrt(distance_square)
 
     def plotDistanceError3D(self, *target_files_csv):
-        saved_file_name = self.args.save_MSE_name
         plot_title = "Distance Error"
         plt.title(plot_title)
         # plt.rcParams['Figure.figsize'] = (14, 3)
@@ -91,10 +90,11 @@ class Visualization:
 
             distance_error = self._calDistanceError3D(csv)
             distance_error = distance_error*100
-            distance_error_refined = self.getRefinedData(distance_error, 30)
 
             x_axis = range(distance_error.shape[0])
-            x_axis_refined = self.getRefinedData(x_axis, 30)
+
+            # distance_error_refined = self.getRefinedData(distance_error, 30)
+            # x_axis_refined = self.getRefinedData(x_axis, 30)
 
             # x_axis_refined, distance_error_refined = self.getSmoothedData(x_axis_refined, distance_error_refined)
             # x_axis = self.getRefinedData( x_axis, self.args.data_interval)
@@ -105,7 +105,7 @@ class Visualization:
             # plt.plot(x_axis, distance_error, color= SOFT_COLORSET[i], #marker = marker,
             #                 linestyle = linestyle,label = self.label[i])
 
-            plt.plot(x_axis_refined, distance_error_refined, color= self.color_set[i], #marker = marker,
+            plt.plot(x_axis, distance_error, color= self.color_set[i], #marker = marker,
                             linestyle = LINE[i],label = self.label[i])
             # plt.scatter(x_for_marker, distance_error_for_marker, color= self.color_set[i], marker = marker,
             #                 linestyle = linestyle) #,label = self.label[i])
@@ -120,7 +120,7 @@ class Visualization:
         plt.ylabel("Distance Error [cm]")
         fig = plt.gcf()
         plt.show()
-        fig.savefig(saved_file_name)
+        fig.savefig(self._3D_plot_name[:-4]+'_error.png')
         print ("Done")
     def getSmoothedData_3D(self,x_data, y_data, z_data):
         x_data = np.array(x_data)
@@ -201,7 +201,6 @@ class Visualization:
         fig.savefig(saved_file_name)
         print("Done")
 
-
     def plot2DTrajectory(self, *target_files_csv):
         saved_file_name = self.args.save_trajectory_name
         plot_title = "Trajectory"
@@ -243,6 +242,8 @@ class Visualization:
 
     def set_3D_plot_name(self, name):
         self._3D_plot_name = name
+
+
     def drawResult3D(self, *target_files_csv):
 
         self.fig = plt.figure()
@@ -257,7 +258,6 @@ class Visualization:
             predicted_xyz = np.loadtxt(csv, delimiter = ',')
             # print (predicted_xyz)
             predicted_x = predicted_xyz[:,0]
-            print (predicted_x)
             predicted_y = predicted_xyz[:,1]
             predicted_z = predicted_xyz[:,2]
 
@@ -292,6 +292,8 @@ if __name__ == "__main__":
         return (vmax - vmin)*np.random.rand(n) + vmin
 
     viz = Visualization(args)
+    viz.set_3D_plot_name("hi.png")
+    viz.drawResult3D()
     # test = np.loadtxt("train_yz3D.csv", delimiter= ',')
     # n = 10
     # for c, m, zlow, zhigh in [('r', 'o', -50, -25), ('b', '^', -30, -5)]:

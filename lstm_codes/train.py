@@ -1,13 +1,13 @@
 import tensorflow as tf
 import tensorflow.contrib.seq2seq as seq2seq
-from lstm_network import RONet
+from lstm_network_Cudnn import RONet
 import numpy as np
 import DataPreprocessing
 from tqdm import tqdm, trange
 import os
 import argparse
 import csv
-os.environ['CUDA_VISIBLE_DEVICES'] = '0' #,1,2,3'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3' #,1,2,3'
 tf.set_random_seed(777)  # reproducibilityb
 # hyper parameters
 p =argparse.ArgumentParser()
@@ -16,14 +16,13 @@ p =argparse.ArgumentParser()
 # p.add_argument('--train_data', type=str, default="train_3D_zigzag_for_debug.csv")
 p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/train_Karpe_181025/")
 p.add_argument('--val_data', type=str, default="./inputs/np_test_data_1.csv")
-p.add_argument('--board_dir', type=str, default="/home/shapelim/RONet/test7/")
-p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test7/")
+p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/cudnn2/")
 
 p.add_argument('--lr', type=float, default = 0.0008)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 5)
-p.add_argument('--epoches', type=int, default = 1000)
-p.add_argument('--batch_size', type=int, default = 5628)
+p.add_argument('--epoches', type=int, default = 1)
+p.add_argument('--batch_size', type=int, default = 11257)
 
 #NETWORK PARAMETERS
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
@@ -63,8 +62,8 @@ print ("Complete!")
 
 print (robot_position_gt.shape)
 
-writer_val = tf.summary.FileWriter(args.board_dir + '/val') #, sess.graph)
-writer_train = tf.summary.FileWriter(args.board_dir + '/train') #, sess.graph)
+writer_val = tf.summary.FileWriter(args.save_dir + '/val') #, sess.graph)
+writer_train = tf.summary.FileWriter(args.save_dir + '/train') #, sess.graph)
 
 tf.reset_default_graph()
 ro_net = RONet(args)

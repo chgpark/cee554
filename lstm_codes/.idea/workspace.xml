@@ -2,20 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f1835e61-3df3-4ab1-b806-258558f39466" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/search_min_loss_file.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dataProcess/.idea/dataProcess.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dataProcess/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dataProcess/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dataProcess/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lstm_network_Cudnn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dataProcess/changed/data_1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dataProcess/changed/data_2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dataProcess/changed/data_3.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dataProcess/changed/test_data_1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dataProcess/changed/test_data_2.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataPreprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataPreprocessing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/etc/output_print_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/etc/output_print_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etc/scribble.py" beforeDir="false" afterPath="$PROJECT_DIR$/etc/scribble.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lstm_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/lstm_network.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plot_result.py" beforeDir="false" afterPath="$PROJECT_DIR$/plot_result.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/RO_test/1109_bimul.csv" beforeDir="false" afterPath="$PROJECT_DIR$/results/RO_test/1109_bimul.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/RO_test/1109_bimul.png" beforeDir="false" afterPath="$PROJECT_DIR$/results/RO_test/1109_bimul.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/RO_test/1109_bimul_error.png" beforeDir="false" afterPath="$PROJECT_DIR$/results/RO_test/1109_bimul_error.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mcl/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../mcl/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mcl/plot_result.py" beforeDir="false" afterPath="$PROJECT_DIR$/../mcl/plot_result.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,12 +30,12 @@
     <SUITE FILE_PATH="coverage/lstm_codes$make_dataset.coverage" NAME="make_dataset Coverage Results" MODIFIED="1540996898874" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lstm_codes$scribble.coverage" NAME="scribble Coverage Results" MODIFIED="1541815374264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/etc" />
     <SUITE FILE_PATH="coverage/lstm_codes$test_bidirectional_rnn.coverage" NAME="test_bidirectional_rnn Coverage Results" MODIFIED="1539330363809" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/lstm_codes$lstm_network.coverage" NAME="lstm_network Coverage Results" MODIFIED="1541745464166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/lstm_codes$lstm_network.coverage" NAME="lstm_network Coverage Results" MODIFIED="1541822473361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lstm_codes$plot_result.coverage" NAME="plot_result Coverage Results" MODIFIED="1541657867301" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lstm_codes$main.coverage" NAME="main Coverage Results" MODIFIED="1541041152612" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lstm_codes$train.coverage" NAME="train Coverage Results" MODIFIED="1541780912986" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lstm_codes$dd.coverage" NAME="dd Coverage Results" MODIFIED="1539810040527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/lstm_codes$output_print_test.coverage" NAME="output_print_test Coverage Results" MODIFIED="1541812819330" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/etc" />
+    <SUITE FILE_PATH="coverage/lstm_codes$output_print_test.coverage" NAME="output_print_test Coverage Results" MODIFIED="1541821730338" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/etc" />
     <SUITE FILE_PATH="coverage/lstm_codes$calculate_parameters.coverage" NAME="calculate_parameters Coverage Results" MODIFIED="1539811248297" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/etc" />
     <SUITE FILE_PATH="coverage/lstm_codes$search_min_loss_file.coverage" NAME="search_min_loss_file Coverage Results" MODIFIED="1541815580436" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lstm_codes$test.coverage" NAME="test Coverage Results" MODIFIED="1541816680325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -68,7 +70,7 @@
           <file leaf-file-name="DataPreprocessing.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/DataPreprocessing.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="365">
+                <state relative-caret-position="3240">
                   <caret line="221" column="12" selection-start-line="221" selection-start-column="12" selection-end-line="221" selection-end-column="12" />
                   <folding>
                     <element signature="e#0#28#0" expanded="true" />
@@ -80,7 +82,7 @@
           <file leaf-file-name="scribble.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/etc/scribble.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="270">
+                <state relative-caret-position="255">
                   <caret line="18" column="58" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
                   <folding>
                     <element signature="e#0#18#0" expanded="true" />
@@ -92,7 +94,7 @@
           <file leaf-file-name="search_min_loss_file.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/search_min_loss_file.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="270">
+                <state relative-caret-position="255">
                   <caret line="18" column="59" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
                   <folding>
                     <element signature="e#0#18#0" expanded="true" />
@@ -109,8 +111,8 @@
           <file leaf-file-name="lstm_network.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/lstm_network.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="454">
-                  <caret line="425" column="26" selection-start-line="425" selection-start-column="26" selection-end-line="425" selection-end-column="26" />
+                <state relative-caret-position="-1545">
+                  <caret line="299" column="51" lean-forward="true" selection-start-line="299" selection-start-column="51" selection-end-line="299" selection-end-column="51" />
                   <folding>
                     <element signature="e#0#18#0" expanded="true" />
                   </folding>
@@ -121,8 +123,8 @@
           <file leaf-file-name="test.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="299">
-                  <caret line="33" column="65" selection-start-line="33" selection-start-column="65" selection-end-line="33" selection-end-column="65" />
+                <state relative-caret-position="636">
+                  <caret line="64" column="23" selection-start-line="64" selection-start-column="23" selection-end-line="64" selection-end-column="23" />
                   <folding>
                     <element signature="e#0#23#0" expanded="true" />
                   </folding>
@@ -133,8 +135,8 @@
           <file leaf-file-name="plot_result.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/plot_result.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="990">
-                  <caret line="303" column="10" selection-start-line="303" selection-start-column="10" selection-end-line="303" selection-end-column="10" />
+                <state relative-caret-position="555">
+                  <caret line="44" column="10" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
                   <folding>
                     <element signature="e#0#39#0" expanded="true" />
                   </folding>
@@ -146,11 +148,11 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="train.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="train.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/train.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1290">
-                  <caret line="25" column="52" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="52" />
+                <state relative-caret-position="270">
+                  <caret line="18" column="80" selection-start-line="18" selection-start-column="80" selection-end-line="18" selection-end-column="80" />
                   <folding>
                     <element signature="e#0#23#0" expanded="true" />
                   </folding>
@@ -171,7 +173,7 @@
           <file leaf-file-name="DataPreprocessing.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/DataPreprocessing.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1560">
+                <state relative-caret-position="3330">
                   <caret line="222" column="24" selection-start-line="222" selection-start-column="24" selection-end-line="222" selection-end-column="24" />
                   <folding>
                     <element signature="e#0#28#0" expanded="true" />
@@ -183,8 +185,8 @@
           <file leaf-file-name="output_print_test.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/etc/output_print_test.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="510">
-                  <caret line="51" selection-start-line="51" selection-end-line="51" />
+                <state relative-caret-position="444">
+                  <caret line="66" selection-start-line="66" selection-end-line="66" />
                 </state>
               </provider>
             </entry>
@@ -192,7 +194,7 @@
           <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/test.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="435">
+                <state relative-caret-position="1575">
                   <caret line="107" column="41" selection-start-line="107" selection-start-column="41" selection-end-line="107" selection-end-column="41" />
                   <folding>
                     <element signature="e#0#23#0" expanded="true" />
@@ -201,13 +203,22 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/main.py">
+          <file leaf-file-name="lstm_network.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/lstm_network.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1695">
-                  <caret line="121" column="37" selection-start-line="121" selection-start-column="37" selection-end-line="121" selection-end-column="37" />
+                <state relative-caret-position="3090">
+                  <caret line="206" column="38" selection-start-line="206" selection-start-column="38" selection-end-line="206" selection-end-column="38" />
+                  <folding>
+                    <element signature="e#0#18#0" expanded="true" />
+                    <marker date="1541822774781" expanded="true" signature="24867:24872" ph="..." />
+                  </folding>
                 </state>
               </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="lstm_network_Cudnn.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/lstm_network_Cudnn.py">
+              <provider selected="true" editor-type-id="text-editor" />
             </entry>
           </file>
         </leaf>
@@ -237,12 +248,12 @@
         <option value="$PROJECT_DIR$/make_dataset.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/DataPreprocessing.py" />
-        <option value="$PROJECT_DIR$/etc/output_print_test.py" />
-        <option value="$PROJECT_DIR$/train.py" />
-        <option value="$PROJECT_DIR$/lstm_network.py" />
         <option value="$PROJECT_DIR$/etc/scribble.py" />
         <option value="$PROJECT_DIR$/search_min_loss_file.py" />
         <option value="$PROJECT_DIR$/plot_result.py" />
+        <option value="$PROJECT_DIR$/etc/output_print_test.py" />
+        <option value="$PROJECT_DIR$/lstm_network.py" />
+        <option value="$PROJECT_DIR$/train.py" />
         <option value="$PROJECT_DIR$/test.py" />
       </list>
     </option>
@@ -257,8 +268,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="296" />
-    <option name="y" value="54" />
+    <option name="x" value="359" />
+    <option name="y" value="192" />
     <option name="width" value="1160" />
     <option name="height" value="1056" />
   </component>
@@ -277,6 +288,11 @@
               <item name="lstm_codes" type="b2602c69:ProjectViewProjectNode" />
               <item name="lstm_codes" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="lstm_codes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lstm_codes" type="462c0819:PsiDirectoryNode" />
+              <item name="etc" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -286,7 +302,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mcl" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../dataProcess" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -311,7 +327,26 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test">
+  <component name="RunManager" selected="Python.lstm_network">
+    <configuration name="lstm_network" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="lstm_codes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lstm_network.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration name="output_print_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="lstm_codes" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -388,39 +423,20 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="train" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="lstm_codes" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <list>
-      <item itemvalue="Python.train" />
       <item itemvalue="Python.output_print_test" />
       <item itemvalue="Python.scribble" />
       <item itemvalue="Python.search_min_loss_file" />
       <item itemvalue="Python.test" />
+      <item itemvalue="Python.lstm_network" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.lstm_network" />
+        <item itemvalue="Python.output_print_test" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.search_min_loss_file" />
         <item itemvalue="Python.scribble" />
-        <item itemvalue="Python.output_print_test" />
-        <item itemvalue="Python.train" />
       </list>
     </recent_temporary>
   </component>
@@ -444,49 +460,49 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="File Transfer" order="13" weight="0.12678936" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.28688523" />
+      <window_info anchor="bottom" id="File Transfer" order="13" weight="0.12602459" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.29508197" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11051213" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11051213" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" weight="0.12884097" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.34016395" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.34016395" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11051213" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28688523" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.12884097" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="File Transfer" order="13" weight="0.12678936" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28688523" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3404908" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.12884097" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Python Console" order="12" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -515,6 +531,95 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/etc/scribble.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" column="58" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search_min_loss_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" column="59" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/RO_test/1109_bimul_error.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plot_result.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="44" column="10" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="18" column="74" selection-start-line="18" selection-start-column="74" selection-end-line="18" selection-end-column="74" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/RO_test/1108_bimul.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/RO_test/1108_bimul.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataPreprocessing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3240">
+          <caret line="221" column="12" selection-start-line="221" selection-start-column="12" selection-end-line="221" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="33" column="65" selection-start-line="33" selection-start-column="65" selection-end-line="33" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lstm_network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6795">
+          <caret line="455" column="44" selection-start-line="455" selection-start-column="44" selection-end-line="455" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lstm_network_Cudnn.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/etc/output_print_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/DataPreprocessing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3900">
@@ -610,66 +715,16 @@
     <entry file="file://$PROJECT_DIR$/results/RO_test/1108_bimul.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/results/RO_test/1109_bimul_error.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/results/RO_test/1109_bimul.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/results/RO_test/1108_bimul.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/etc/output_print_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/etc/scribble.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
+        <state relative-caret-position="255">
           <caret line="18" column="58" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/search_min_loss_file.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="59" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plot_result.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="303" column="10" selection-start-line="303" selection-start-column="10" selection-end-line="303" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1290">
-          <caret line="25" column="52" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lstm_network.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="425" column="26" selection-start-line="425" selection-start-column="26" selection-end-line="425" selection-end-column="26" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -685,7 +740,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DataPreprocessing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
+        <state relative-caret-position="3240">
           <caret line="221" column="12" selection-start-line="221" selection-start-column="12" selection-end-line="221" selection-end-column="12" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
@@ -693,10 +748,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lstm_network_Cudnn.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/RO_test/1109_bimul_error.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plot_result.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="44" column="10" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search_min_loss_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" column="59" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/etc/output_print_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lstm_network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1545">
+          <caret line="299" column="51" lean-forward="true" selection-start-line="299" selection-start-column="51" selection-end-line="299" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="80" selection-start-line="18" selection-start-column="80" selection-end-line="18" selection-end-column="80" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="33" column="65" selection-start-line="33" selection-start-column="65" selection-end-line="33" selection-end-column="65" />
+        <state relative-caret-position="636">
+          <caret line="64" column="23" selection-start-line="64" selection-start-column="23" selection-end-line="64" selection-end-column="23" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>

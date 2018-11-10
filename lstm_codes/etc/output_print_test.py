@@ -20,9 +20,9 @@ cell2 = tf.contrib.rnn.BasicLSTMCell(num_units = hidden_size)
 cell3 = tf.contrib.rnn.BasicLSTMCell(num_units = hidden_size)
 cell4 = tf.contrib.rnn.BasicLSTMCell(num_units = hidden_size)
 
-x_data1 = np.array([[[1],[0],[0],[3]],[[2],[0],[0],[0]], [[3],[0],[0],[0]]],dtype = np.float32)
+x_data1 = np.array([[[1, 2],[0,5],[0,7],[3,-2]],[[2,1],[0,1],[0,1],[0,1]]],dtype = np.float32)
+x_data2 = np.array([[[1, 2],[0,5],[0,7],[3,-2]],[[2,1],[0,1],[0,1],[0,1]]],dtype = np.float32)
 print (x_data1.shape)
-x_data2 = np.array([[1,1,0,0]],dtype = np.float32)
 x_data3 = [x_data1, x_data2]
 outputs_list = []
 with tf.variable_scope("1"):
@@ -41,17 +41,36 @@ pp.pprint(outputs.eval())
 # b = x_data1[:,-1,:]
 print (x_data1.shape, type(x_data1))
 print (x_data1)
-a = []
-for i in range(x_data1.shape[0]):
-    sequence = x_data1[i]
-    k = []
-    for j in range(x_data1.shape[1] - 1):
-         d = sequence[j+1] - sequence[j]
-         k.append(d.tolist())
-    a.append(k)
 
-a= np.array(a)
+
+def get_vector(sequence_input):
+    a = []
+    batch_size_of_seq = sequence_input.shape[0]
+    sequence_size_of_seq = sequence_input.shape[1]
+    for i in range(batch_size_of_seq):
+        sequence = sequence_input[i]
+        vector = []
+        for j in range(sequence_size_of_seq - 1):
+            v = sequence[j + 1] - sequence[j]
+            vector.append(v.tolist())
+        a.append(vector)
+
+    return np.array(a)
+
+a= get_vector(x_data1)
+b= get_vector(x_data2)
 print (a)
+print (tf.reduce_sum(tf.square(a)).eval())
+# print (np.linalg.norm([1,2]))
+norm_a =  np.linalg.norm(a, axis = 2)+0.00000001
+norm_b =  np.linalg.norm(b, axis = 2)+0.00000001
+
+
+print (a*b)
+print (tf.reduce_mean(1 - (tf.reduce_sum(a*b, axis = 2)/(norm_a*norm_b))).eval())
+# print (a*b/(norm_a*norm_b))
+# print (np.dot(a,b)/(norm_a* norm_b))
+# print (np.dot([1,2],[2,3])/np.linalg.norm([1,2]))
 # outputs2 = tf.convert_to_tensor(outputs2)
 
 # pp.pprint(outputs2.eval())

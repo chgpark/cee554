@@ -1,6 +1,6 @@
 import tensorflow as tf
 import tensorflow.contrib.seq2seq as seq2seq
-from lstm_network import RONet
+from lstm_network_Cudnn import RONet
 import numpy as np
 import DataPreprocessing
 from plot_result import Visualization
@@ -30,7 +30,7 @@ p.add_argument('--output_type', type = str, default = 'position') # position or 
 p.add_argument('--hidden_size', type=int, default = 3) # RNN output size
 p.add_argument('--num_uwb', type=int, default = 8) #RNN input size: number of uwb
 p.add_argument('--preprocessing_output_size', type=int, default = 50)
-p.add_argument('--first_layer_output_size', type=int, default = 500)
+p.add_argument('--first_layer_output_size', type=int, default = 400)
 p.add_argument('--second_layer_output_size', type=int, default = 500)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
@@ -38,7 +38,7 @@ p.add_argument('--network_type', type=str, default = 'test') #uni / bi
 p.add_argument('--is_multimodal', type=bool, default = True) #True / False
 
 #FOR TEST
-p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test8/")
+p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/cudnn2/")
 p.add_argument('--test_data', type=str, default='inputs/np_test_data_1.csv')
 # p.add_argument('--test_data', type=str, default='inputs/np_test_2.csv')
 FILE_NAME = '1109_bimul'
@@ -71,8 +71,8 @@ print("number of trainable parameters: {}".format(total_num_parameters))
 merged = tf.summary.merge_all()
 ########################################
 
-if not os.path.isdir(args.output_dir):
-    os.makedirs(args.output_dir)
+# if not os.path.isdir(args.output_dir):
+#     os.makedirs(args.output_dir)
 
 with tf.Session() as sess:
    #For save diagonal data

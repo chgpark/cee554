@@ -78,6 +78,7 @@ class DataManager:
 
         self.X_data = np.array(self.X_data)
 
+
     def set_range_data_for_4multimodal(self):
         self.d0_data =[]
         self.d1_data =[]
@@ -170,6 +171,26 @@ class DataManager:
         self.position_data = np.array(self.position_data)
         self.quaternion_data = np.array(self.quaternion_data)
 
+    def set_gt_data_for_all_sequences(self):
+            self.position_data =[]
+            self.quaternion_data = []
+
+            for train_data in self.train_data_list:
+                robot_position = train_data[:,self.num_uwb: self.num_uwb + 3]  # Close as label
+                robot_quaternion = train_data[:,self.num_uwb+3:]
+
+                for i in range(len(robot_position) - self.seq_length +1):
+                    _position = []
+                    _quaternion = []
+                    for j in range(self.seq_length):
+                        _position.append(robot_position[i+j,:])
+                        # _quaternion.append(robot_quaternion[:,i+j])
+                    self.position_data.append(_position)
+                    # self.quaternion_data.append(_quaternion)
+
+            self.position_data = np.array(self.position_data)
+            self.quaternion_data = np.array(self.quaternion_data)
+
     def set_data_for_non_multimodal(self):
         self.set_range_data()
         self.set_gt_data()
@@ -181,6 +202,10 @@ class DataManager:
     def set_data_for_8multimodal(self):
         self.set_range_data_for_8multimodal()
         self.set_gt_data()
+
+    def set_data_for_8multimodal_all_sequences(self):
+        self.set_range_data_for_8multimodal()
+        self.set_gt_data_for_all_sequences()
 
     ##################################################
                     #Getting data

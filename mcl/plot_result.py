@@ -90,10 +90,11 @@ class Visualization:
 
             distance_error = self._calDistanceError3D(csv)
             distance_error = distance_error*100
-            distance_error_refined = self.getRefinedData(distance_error, 30)
 
             x_axis = range(distance_error.shape[0])
-            x_axis_refined = self.getRefinedData(x_axis, 30)
+
+            # distance_error_refined = self.getRefinedData(distance_error, 30)
+            # x_axis_refined = self.getRefinedData(x_axis, 30)
 
             # x_axis_refined, distance_error_refined = self.getSmoothedData(x_axis_refined, distance_error_refined)
             # x_axis = self.getRefinedData( x_axis, SMOOTHNESS)
@@ -104,7 +105,7 @@ class Visualization:
             # plt.plot(x_axis, distance_error, color= SOFT_COLORSET[i], #marker = marker,
             #                 linestyle = linestyle,label = self.label[i])
 
-            plt.plot(x_axis_refined, distance_error_refined, color= self.color_set[i], #marker = marker,
+            plt.plot(x_axis, distance_error, color= self.color_set[i], #marker = marker,
                             linestyle = LINE[i],label = self.label[i])
             # plt.scatter(x_for_marker, distance_error_for_marker, color= self.color_set[i], marker = marker,
             #                 linestyle = linestyle) #,label = self.label[i])
@@ -293,7 +294,7 @@ if __name__ == "__main__":
     viz = Visualization(args)
     viz.set_3D_plot_name("hello.png")
     # viz.drawResult3D(args.pf, args.bi) #, args.pargs.bi) #, args.bi)
-    viz.plotDistanceError3D(args.pf, args.bi)
+    viz.plotDistanceError3D(args.pf)#, args.bi)
     # test = np.loadtxt("train_yz3D.csv", delimiter= ',')
     # n = 10
     # for c, m, zlow, zhigh in [('r', 'o', -50, -25), ('b', '^', -30, -5)]:

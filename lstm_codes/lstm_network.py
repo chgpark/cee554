@@ -1,3 +1,4 @@
+import numpy as np
 import tensorflow as tf
 import pprint
 
@@ -36,6 +37,7 @@ class RONet:
 
         if self.output_type == 'position':
             self.position_gt = tf.placeholder(dtype=tf.float32,
+                                            # shape=[None, 5, 3],
                                             shape=[None, 3],
                                             name='output_placeholder')
 
@@ -69,7 +71,8 @@ class RONet:
 
         if self.output_type == 'position':
             self.position_gt = tf.placeholder(dtype=tf.float32,
-                                            shape=[None, 3],
+                                            shape=[None,5, 3],
+                                              # shape=[None, 3],
                                             name='output_placeholder')
 ##################################################
 #Preprocessing: Unidirectional, non-multimodal
@@ -426,7 +429,10 @@ class RONet:
 
         self.output = tf.reshape(self.output, [-1, self.sequence_length*self.first_layer_output_size*2])
         # self.output = tf.reshape(self.output, [-1, self.sequence_length*self.second_layer_output_size*2])
-        self.pose_pred = tf.contrib.layers.fully_connected(self.output, self.output_size)
+        # self.pose_pred = tf.contrib.layers.fully_connected(self.output, self.output_size)
+        '''For test for all sequeneces!!'''
+        fc_layer = tf.contrib.layers.fully_connected(self.output, self.sequence_length*self.output_size)
+        self.pose_pred = tf.reshape(fc_layer, [-1, self.sequence_length, self.output_size])
 
 
 ##################################################
@@ -438,6 +444,20 @@ class RONet:
             return criteria
         else:
             return tf.reduce_mean(tf.square(self.position_gt - self.pose_pred))
+
+    def get_vector(self, sequence_input):
+        a = []
+        batch_size_of_seq = sequence_input.shape[0]
+        sequence_size_of_seq = sequence_input.shape[1]
+        for i in range(batch_size_of_seq):
+            sequence = sequence_input[i]
+            vector = []
+            for j in range(sequence_size_of_seq - 1):
+                v = sequence[j+1] - sequence[j]
+                vector.append(v.tolist())
+            a.append(vector)
+
+        return np.array(a)
 
     def build_loss(self, lr, lr_decay_rate, lr_decay_step):
         self.init_lr = lr

@@ -4,9 +4,9 @@ import numpy as np
 pp = pprint.PrettyPrinter(indent=4)
 sess = tf.InteractiveSession()
 
-hidden_size = 2
+hidden_size = 5
 num_anchor = 4
-
+seq_length = 4
 
 
 def getAttentionedOutput(tensor):
@@ -20,7 +20,7 @@ cell2 = tf.contrib.rnn.BasicLSTMCell(num_units = hidden_size)
 cell3 = tf.contrib.rnn.BasicLSTMCell(num_units = hidden_size)
 cell4 = tf.contrib.rnn.BasicLSTMCell(num_units = hidden_size)
 
-x_data1 = np.array([[[1],[0],[0],[0]],[[2],[0],[0],[0]], [[3],[0],[0],[0]]],dtype = np.float32)
+x_data1 = np.array([[[1],[0],[0],[3]],[[2],[0],[0],[0]], [[3],[0],[0],[0]]],dtype = np.float32)
 print (x_data1.shape)
 x_data2 = np.array([[1,1,0,0]],dtype = np.float32)
 x_data3 = [x_data1, x_data2]
@@ -34,12 +34,28 @@ with tf.variable_scope("22"):
 sess.run(tf.global_variables_initializer())
 
 outputs = tf.convert_to_tensor(outputs)
-outputs2 = tf.convert_to_tensor(outputs2)
+print(outputs.shape)
 pp.pprint(outputs.eval())
-pp.pprint(outputs2.eval())
-concat = tf.concat([outputs, outputs2], axis = 2 )
+
+
+# b = x_data1[:,-1,:]
+print (x_data1.shape, type(x_data1))
+print (x_data1)
+a = []
+for i in range(x_data1.shape[0]):
+    sequence = x_data1[i]
+    k = []
+    for j in range(x_data1.shape[1] - 1):
+         d = sequence[j+1] - sequence[j]
+         k.append(d.tolist())
+    a.append(k)
+
+a= np.array(a)
+print (a)
+# outputs2 = tf.convert_to_tensor(outputs2)
+
+# pp.pprint(outputs2.eval())
 # print ("concatenate")
-pp.pprint(concat.eval())
 
 # pp.pprint(outputs[0].eval())
 # print (outputs.shape)

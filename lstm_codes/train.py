@@ -16,8 +16,8 @@ p =argparse.ArgumentParser()
 # p.add_argument('--train_data', type=str, default="train_3D_zigzag_for_debug.csv")
 p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/train_Karpe_181025/")
 p.add_argument('--val_data', type=str, default="./inputs/np_test_data_1.csv")
-p.add_argument('--board_dir', type=str, default="/home/shapelim/RONet/test5/")
-p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test5/")
+p.add_argument('--board_dir', type=str, default="/home/shapelim/RONet/test7/")
+p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test7/")
 
 p.add_argument('--lr', type=float, default = 0.0008)
 p.add_argument('--decay_rate', type=float, default = 0.7)
@@ -30,8 +30,8 @@ p.add_argument('--output_type', type = str, default = 'position') # position or 
 p.add_argument('--hidden_size', type=int, default = 3) # RNN output size
 p.add_argument('--num_uwb', type=int, default = 8) #RNN input size: number of uwb
 p.add_argument('--preprocessing_output_size', type=int, default = 50)
-p.add_argument('--first_layer_output_size', type=int, default = 500)
-p.add_argument('--second_layer_output_size', type=int, default = 400)
+p.add_argument('--first_layer_output_size', type=int, default = 400)
+p.add_argument('--second_layer_output_size', type=int, default = 500)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
 p.add_argument('--network_type', type=str, default = 'test') #uni / bi
@@ -44,7 +44,8 @@ data_parser.fitDataForMinMaxScaler()
 data_parser.transform_all_data()
 
 print ("Loading train data for multimodal...")
-data_parser.set_data_for_8multimodal()
+# data_parser.set_data_for_8multimodal()
+data_parser.set_data_for_8multimodal_all_sequences()
 d0_data, d1_data, d2_data, d3_data, d4_data, d5_data, d6_data, d7_data = data_parser.get_range_data_for_8multimodal()
 robot_position_gt, robot_quaternion_gt = data_parser.get_gt_data()
 print ("Complete!")
@@ -53,12 +54,14 @@ print(d0_data.shape) #Data size / sequence length / uwb num
 print ("Loading val data...")
 data_parser.set_val_data(args.val_data)
 data_parser.transform_all_data()
-data_parser.set_data_for_8multimodal()
+# data_parser.set_data_for_8multimodal()
+data_parser.set_data_for_8multimodal_all_sequences()
 val_d0_data, val_d1_data, val_d2_data, val_d3_data, val_d4_data, val_d5_data, val_d6_data, val_d7_data = data_parser.get_range_data_for_8multimodal()
 val_robot_position_gt, val_robot_quaternion_gt = data_parser.get_gt_data()
 print ("Complete!")
 
 
+print (robot_position_gt.shape)
 
 writer_val = tf.summary.FileWriter(args.board_dir + '/val') #, sess.graph)
 writer_train = tf.summary.FileWriter(args.board_dir + '/train') #, sess.graph)

@@ -47,8 +47,8 @@ class dataProcess:
 	def writeCSV(self):
 		self.csvOutPath = os.path.join(self.outDirPath, self.csvName)
 		self.csvOutNpPath = os.path.join(self.outDirPath, self.csvNpName)
-		self.csvFile.to_csv(self.csvOutPath)
-		np.savetxt(self.csvOutNpPath, self.csvFile.values, delimiter=',')
+		# self.csvFile.to_csv(self.csvOutPath)
+		np.savetxt(self.csvOutNpPath, self.csvNP, delimiter=',')
 
 	def doProcess(self):
 		startIdx = 0
@@ -70,18 +70,39 @@ class dataProcess:
 			else:
 				firstFlag = True
 
-	def doTrainData(self):
+	def doTrainData(self, numOfMarker):
 		#self.csvFile['Z_M5'].apply(lambda x: x + 0.083)
 
 		varlist = []
 		for i in self.uwbSel:
 			for uwb in self.uwbList:
 				varlist.append(uwb + str(i))
+		self.csvNP = pd.concat([self.csvFile[varlist]], axis=1).values
 
-		varlist.append('X_M5')
-		varlist.append('Y_M5')
+		varlist = ['X_M1', 'Y_M1', 'Z_M1']
+		tmpNP = np.zeros((self.csvFile[varlist].values.reshape(-1,3).shape))
+		for idx in range(numOfMarker):
+			varlist = []
+			for var in self.varList:
+				varlist.append(var+str(idx+1))
+			tmpNP += self.csvFile[varlist].values.reshape(-1,3)
+		tmpNP /= numOfMarker
+		varlist = ['X_M1', 'Y_M1', 'Z_M1']
+		M1 = self.csvFile[varlist].values.reshape(-1,3) - tmpNP
+		varlist = ['X_M2', 'Y_M2', 'Z_M2']
+		M2 = self.csvFile[varlist].values.reshape(-1,3) - tmpNP
 
-		self.csvFile = pd.concat([self.csvFile[varlist], self.csvFile['Z_M5'].apply(lambda x: x + 0.083)], axis=1)
+		for idx in range(tmpNP.shape[0]):
+			tmpVec = self.normalize(np.cross(M2[idx,:].reshape(3), M1[idx,:].reshape(3)))
+			tmpNP[idx, :] += tmpVec * 0.204
+		self.csvNP = np.hstack((self.csvNP, tmpNP))
+
+	def normalize(self, v):
+		norm = np.linalg.norm(v)
+		if norm == 0:
+			return v
+		return v / norm
+
 
 
 			
@@ -93,23 +114,23 @@ class dataProcess:
 			self.doProcess()
 			self.writeCSV()
 
-	def iterTrainData(self):
+	def iterTrainData(self, numOfMarker):
 		for csvName in self.csvNameList:
 			self.readCSV(csvName)
-			self.doTrainData()
+			self.doTrainData(numOfMarker)
 			self.writeCSV()
 
 if __name__ == "__main__":
 	### data process
-	#dataP = dataProcess()
-	#dataP.outDirName = 'changed'
-	#dataP.setProcess(5)
-	#dataP.getFolder("181025_proto_data")
-	#dataP.iterProcess()
+	# dataP = dataProcess()
+	# dataP.outDirName = 'changed'
+	# dataP.setProcess(4)
+	# dataP.getFolder("181102_proto_data")
+	# dataP.iterProcess()
 
 	### train data
 	dataT = dataProcess()
-	dataT.outDirName = 'train'
+	dataT.outDirName = '181102_train'
 	dataT.setTrainData()
 	dataT.getFolder("changed")
-	dataT.iterTrainData()
+	dataT.iterTrainData(4)

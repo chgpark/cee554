@@ -1,6 +1,6 @@
 import tensorflow as tf
 import tensorflow.contrib.seq2seq as seq2seq
-from lstm_network import RONet
+from lstm_network_cudnn_with_loss import RONet
 import numpy as np
 import DataPreprocessing
 from tqdm import tqdm, trange
@@ -21,7 +21,7 @@ p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test_cudnn2
 p.add_argument('--lr', type=float, default = 0.0008)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 5)
-p.add_argument('--epoches', type=int, default = 3)
+p.add_argument('--epoches', type=int, default = 1500)
 p.add_argument('--batch_size', type=int, default = 11257)
 
 #NETWORK PARAMETERS
@@ -35,8 +35,11 @@ p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
 p.add_argument('--network_type', type=str, default = 'test') #uni / bi
 p.add_argument('--is_multimodal', type=bool, default = True) #True / False
-p.add_argument('--alpha', type=float, default = 1) #True / False
-p.add_argument('--gamma', type=float, default = 1) #True / False
+
+#Coefficients of loss term
+p.add_argument('--alpha', type=float, default = 1)
+p.add_argument('--beta', type=float, default = 0)
+p.add_argument('--gamma', type=float, default = 0)
 
 args = p.parse_args()
 
@@ -76,7 +79,7 @@ global_step = tf.Variable(0, trainable=False)
 iter = int(len(d0_data)/args.batch_size)
 num_total_steps = args.epoches*iter
 ro_net.build_loss(args.lr, args.decay_rate, num_total_steps/args.decay_step)
-saver = tf.train.Saver(max_to_keep = 5)
+saver = tf.train.Saver(max_to_keep = 3)
 
 # Use simple momentum for the optimization.
 
@@ -106,11 +109,12 @@ with tf.Session() as sess:
         loss_of_val = 0
         i = 1
 
-        # d0_data, d1_data, d2_data, d3_data, d4_data, d5_data, d6_data, d7_data, robot_position_gt = data_parser.suffle_array_in_the_same_order(d0_data, d1_data, d2_data, d3_data, d4_data, d5_data, d6_data, d7_data, robot_position_gt)
+        d0_data, d1_data, d2_data, d3_data, d4_data, d5_data, d6_data, d7_data, robot_position_gt = data_parser.suffle_array_in_the_same_order(d0_data, d1_data, d2_data, d3_data, d4_data, d5_data, d6_data, d7_data, robot_position_gt)
         for i in range(iter): #iter = int(len(X_data)/batch_size)
             step = step + 1
             idx = i* args.batch_size
-            l, _, summary = sess.run([ro_net.loss, ro_net.train, merged],
+            l, _, summary, position_e, mag_e, direction_e = sess.run([ro_net.loss, ro_net.optimize, merged, ro_net.error_btw_gt_and_pred,
+                                      ro_net.magnitude_of_pose_pred, ro_net.direction_error_btw_gt_and_pred],
                                     feed_dict={ro_net.d0_data: d0_data[idx: idx + args.batch_size],
                                                ro_net.d1_data: d1_data[idx: idx + args.batch_size],
                                                ro_net.d2_data: d2_data[idx: idx + args.batch_size],
@@ -144,7 +148,11 @@ with tf.Session() as sess:
             saver.save(sess, args.save_dir + 'model_'+'{0:.5f}'.format(loss_of_epoch).replace('.', '_'), global_step=step)
         tqdm_range.set_description('train ' +'{0:.7f}'.format(loss_of_epoch)+' | val '+'{0:.7f}'.format(loss_of_val))
         tqdm_range.refresh()
-
-
+    f = open(args.save_dir + "final_losses.txt", 'w')
+    f.write("Alpha : " + str(args.alpha) + " Beta : " +str(args.beta) + ' Gamma: ' + str(args.gamma) + '\n')
+    f.write("Position error: " + str(position_e) +'\n')
+    f.write("Mag error: " + str(mag_e) +'\n')
+    f.write("Direction error: " + str(direction_e) +'\n')
+    f.close()
 
 

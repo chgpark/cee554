@@ -291,9 +291,9 @@ if __name__ == "__main__":
     def randrange(n, vmin, vmax):
         return (vmax - vmin)*np.random.rand(n) + vmin
 
-    # viz = Visualization(args)
-    # viz.set_3D_plot_name("hi.png")
-    # viz.drawResult3D()
+    viz = Visualization(args)
+    viz.set_3D_plot_name("hi.png")
+    viz.drawResult3D()
     # test = np.loadtxt("train_yz3D.csv", delimiter= ',')
     # n = 10
     # for c, m, zlow, zhigh in [('r', 'o', -50, -25), ('b', '^', -30, -5)]:

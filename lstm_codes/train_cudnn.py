@@ -146,5 +146,3 @@ with tf.Session() as sess:
         tqdm_range.refresh()
 
 
-
-

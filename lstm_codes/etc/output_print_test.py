@@ -41,33 +41,44 @@ pp.pprint(outputs.eval())
 # b = x_data1[:,-1,:]
 print (x_data1.shape, type(x_data1))
 print (x_data1)
-
-
-def get_vector(sequence_input):
-    a = []
-    batch_size_of_seq = sequence_input.shape[0]
-    sequence_size_of_seq = sequence_input.shape[1]
-    for i in range(batch_size_of_seq):
-        sequence = sequence_input[i]
-        vector = []
-        for j in range(sequence_size_of_seq - 1):
-            v = sequence[j + 1] - sequence[j]
-            vector.append(v.tolist())
-        a.append(vector)
-
-    return np.array(a)
-
-a= get_vector(x_data1)
-b= get_vector(x_data2)
+a = x_data1[:,:-1,:]
+b = x_data1[:,1:,:]
+print ("hello")
 print (a)
-print (tf.reduce_sum(tf.square(a)).eval())
-# print (np.linalg.norm([1,2]))
-norm_a =  np.linalg.norm(a, axis = 2)+0.00000001
-norm_b =  np.linalg.norm(b, axis = 2)+0.00000001
+print ("hello")
+print (b)
+c= tf.subtract(b,a)
+print ("answer", c.eval())
 
 
-print (a*b)
-print (tf.reduce_mean(1 - (tf.reduce_sum(a*b, axis = 2)/(norm_a*norm_b))).eval())
+# def get_vector(sequence_input):
+#     a = []
+#     batch_size_of_seq = sequence_input.shape[0]
+#     sequence_size_of_seq = sequence_input.shape[1]
+#     for i in range(batch_size_of_seq):
+#         sequence = sequence_input[i]
+#         vector = []
+#         for j in range(sequence_size_of_seq - 1):
+#             v = sequence[j + 1] - sequence[j]
+#             vector.append(v.tolist())
+#         a.append(vector)
+#
+#     return np.array(a)
+#
+# a= get_vector(x_data1)
+# b= get_vector(x_data2)
+# print (a)
+# # print (tf.reduce_sum(tf.square(a)).eval())
+# # print (np.linalg.norm([1,2]))
+# norm_a =  np.linalg.norm(a, axis = 2)+0.00000001
+# norm_b =  np.linalg.norm(b, axis = 2)+0.00000001
+
+
+# d = tf.constant(10, dtype= tf.float64)
+# print (a*b)
+# print (tf.reduce_mean(1 - (tf.reduce_sum(a*b, axis = 2)/(norm_a*norm_b))).eval())
+# c = tf.add(a,d)
+# print (c.eval())
 # print (a*b/(norm_a*norm_b))
 # print (np.dot(a,b)/(norm_a* norm_b))
 # print (np.dot([1,2],[2,3])/np.linalg.norm([1,2]))
@@ -75,18 +86,4 @@ print (tf.reduce_mean(1 - (tf.reduce_sum(a*b, axis = 2)/(norm_a*norm_b))).eval()
 
 # pp.pprint(outputs2.eval())
 # print ("concatenate")
-
-# pp.pprint(outputs[0].eval())
-# print (outputs.shape)
-# print (outputs.shape[1])
-# print (outputs[0].shape)
-# print (outputs[0].shape[0])
-# array = []
-# for i in range(outputs.shape[1]):
-#     a = tf.concat([outputs[0][i], outputs[1][i]], axis = 1)
-#     array.append(a)
-# array = tf.convert_to_tensor(array)
-# pp.pprint(array.eval())
-# array2 = getAttentionedOutput(array)
-# pp.pprint(array2.eval())
 

@@ -5,7 +5,7 @@
       <paths name="shapelim@143.248.122.59:22">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/shapelim/workspace/Attention_LSTM" local="$PROJECT_DIR$" />
+            <mapping deploy="/home/shapelim/workspace/KRoC_LSTM" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>

@@ -1,6 +1,6 @@
 import tensorflow as tf
 import tensorflow.contrib.seq2seq as seq2seq
-from lstm_network_cudnn_with_loss import RONet
+from lstm_network import RONet
 import numpy as np
 import DataPreprocessing
 from tqdm import tqdm, trange

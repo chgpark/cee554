@@ -96,7 +96,8 @@ class dataProcess:
 		for idx in range(tmpNP.shape[0]):
 			tmpVec = self.normalize(np.cross(M2[idx,:].reshape(3), M1[idx,:].reshape(3)))
 			tmpNP[idx, :] += tmpVec * 0.204
-		self.csvNP = np.hstack((self.csvNP, tmpNP))
+		self.csvNP = np.hstack((self.csvNP, tmpNP[:,2].reshape(-1,1)))
+		self.csvNP = np.hstack((self.csvNP, tmpNP[:,0:2]))
 
 	def normalize(self, v):
 		norm = np.linalg.norm(v)

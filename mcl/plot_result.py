@@ -7,12 +7,12 @@ import os
 from scipy import interpolate
 from scipy.interpolate import spline
 p =argparse.ArgumentParser()
-p.add_argument('--output_dir', type=str, default="/home/shapelim/KRoC_Results")
-p.add_argument('--test_data', type=str, default="/home/shapelim/git_files/cee554/lstm_codes/inputs/np_test_data_1.csv")
+p.add_argument('--output_dir', type=str, default=".")
+p.add_argument('--test_data', type=str, default="../dataProcess/181102_train/np_data_0.csv")
 # p.add_argument('--gt_dir', type=str, default="inputs/test_data_diagonal_curve2D.csv")
 #In case of test 1
-p.add_argument('--pf', type=str, default= "/home/shapelim/git_files/cee554/mcl/results/1105_np_test1_result_comparison.csv")
-p.add_argument('--bi', type=str, default= "/home/shapelim/KRoC_Results/KRoC_15/1109_bimul.csv")
+p.add_argument('--pf', type=str, default= ".")
+p.add_argument('--bi', type=str, default= ".")
 # p.add_argument('--multimodal_uni', type=str, default= "/home/shapelim/KRoC_Results/1104_unimul_poly.csv")
 # p.add_argument('--multimodal_bi', type=str, default= "/home/shapelim/KRoC_Results/1104_bimul_poly.csv")
 
@@ -272,14 +272,15 @@ class Visualization:
         plt.legend(prop={'size':12})
 
         # self.ax1.scatter(X_list, Y_list, Z_list, c=c)
-        self.ax1.set_xlim(-0.8, 1.2)
-        self.ax1.set_ylim(-1.0, 1.5)
-        self.ax1.set_zlim(0.65, 0.7)
+        self.ax1.set_xlim(-4, 4)
+        self.ax1.set_ylim(-4, 4)
+        self.ax1.set_zlim(0, 2)
         self.ax1.set_xlabel('X axis [m]', fontsize =14)
         self.ax1.set_ylabel('Y axis [m]', fontsize =14)
         self.ax1.set_zlabel('Z axis [m]', fontsize =14)
         self.fig = plt.gcf()
         self.fig.savefig(self._3D_plot_name)
+        plt.show()
 
 
 
@@ -293,8 +294,8 @@ if __name__ == "__main__":
 
     viz = Visualization(args)
     viz.set_3D_plot_name("hello.png")
-    viz.drawResult3D(args.pf, args.bi) #, args.pargs.bi) #, args.bi)
-    viz.plotDistanceError3D(args.pf, args.bi)#, args.bi)
+    viz.drawResult3D('results/1105_np_test1_result.csv') #, args.pargs.bi) #, args.bi)
+    # viz.plotDistanceError3D(args.pf, args.bi)#, args.bi)
     # test = np.loadtxt("train_yz3D.csv", delimiter= ',')
     # n = 10
     # for c, m, zlow, zhigh in [('r', 'o', -50, -25), ('b', '^', -30, -5)]:

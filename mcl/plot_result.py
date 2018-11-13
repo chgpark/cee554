@@ -12,9 +12,9 @@ p.add_argument('--test_data', type=str, default="/home/shapelim/git_files/cee554
 # p.add_argument('--gt_dir', type=str, default="inputs/test_data_diagonal_curve2D.csv")
 #In case of test 1
 p.add_argument('--pf', type=str, default= "/home/shapelim/git_files/cee554/mcl/results/1105_np_test1_result_comparison.csv")
-p.add_argument('--bi', type=str, default= "/home/shapelim/git_files/cee554/lstm_codes/results/multimodal/181030_bimul_8_test1.csv")
-p.add_argument('--multimodal_uni', type=str, default= "/home/shapelim/KRoC_Results/1104_unimul_poly.csv")
-p.add_argument('--multimodal_bi', type=str, default= "/home/shapelim/KRoC_Results/1104_bimul_poly.csv")
+p.add_argument('--bi', type=str, default= "/home/shapelim/KRoC_Results/KRoC_15/1109_bimul.csv")
+# p.add_argument('--multimodal_uni', type=str, default= "/home/shapelim/KRoC_Results/1104_unimul_poly.csv")
+# p.add_argument('--multimodal_bi', type=str, default= "/home/shapelim/KRoC_Results/1104_bimul_poly.csv")
 
 #In case of test 2
 # p.add_argument('--bidirectional_LSTM_csv', type=str, default="results/RiTA/bi_lstm_to_curve_test.csv")
@@ -40,7 +40,7 @@ k balck
 w white
 '''
 # COLORSET = [(0,0,1), 'g', 'r', 'm', 'c', 'y'] #, 'k','w']
-COLORSET = [(241/255.0, 101/255.0, 65/255.0),(2/255.0, 23/255.0, 157/255.0), (19/255.0, 163/255.0, 153/255.0),  (191/255.0, 17/255.0, 46/255.0)]
+COLORSET = [(241/255.0, 50/255.0, 50/255.0),(2/255.0, 23/255.0, 157/255.0), (19/255.0, 163/255.0, 153/255.0),  (191/255.0, 17/255.0, 46/255.0)]
 SOFT_COLORSET = [(241/255.0, 187/255.0, 165/255.0), (174/255.0, 245/255.0, 231/255.0), (115/255.0, 123/255.0, 173/255.0), (232/255.0, 138/255.0, 139/255.0)]
 LINE = [':', '-.', ':', '--']
 # LABEL = ['LSTM', 'GRU', 'Bi-LSTM', 'Stacked Bi-LSTM']
@@ -90,10 +90,11 @@ class Visualization:
 
             distance_error = self._calDistanceError3D(csv)
             distance_error = distance_error*100
-            distance_error_refined = self.getRefinedData(distance_error, 30)
 
             x_axis = range(distance_error.shape[0])
-            x_axis_refined = self.getRefinedData(x_axis, 30)
+
+            distance_error = self.getRefinedData(distance_error, 15)
+            x_axis = self.getRefinedData(x_axis, 15)
 
             # x_axis_refined, distance_error_refined = self.getSmoothedData(x_axis_refined, distance_error_refined)
             # x_axis = self.getRefinedData( x_axis, SMOOTHNESS)
@@ -104,19 +105,19 @@ class Visualization:
             # plt.plot(x_axis, distance_error, color= SOFT_COLORSET[i], #marker = marker,
             #                 linestyle = linestyle,label = self.label[i])
 
-            plt.plot(x_axis_refined, distance_error_refined, color= self.color_set[i], #marker = marker,
+            plt.plot(x_axis, distance_error, color= self.color_set[i], #marker = marker,
                             linestyle = LINE[i],label = self.label[i])
             # plt.scatter(x_for_marker, distance_error_for_marker, color= self.color_set[i], marker = marker,
             #                 linestyle = linestyle) #,label = self.label[i])
 
-        plt.legend()
+        plt.legend(prop={'size':12})
         plt.grid(True)
         plt.xlim(0,1300)
         # plt.xticks(np.linspace(-0.5,1.5,10, endpoint =True))
         # plt.xticks(np.linspace(-0.5,1.5,10, endpoint =True))
         plt.ylim(0.0,40)
-        plt.xlabel("Time Step [t]")
-        plt.ylabel("Distance Error [cm]")
+        plt.xlabel("Time Step [t]" ,fontsize=14)
+        plt.ylabel("Distance Error [cm]", fontsize= 14)
         fig = plt.gcf()
         plt.show()
         fig.savefig(saved_file_name)
@@ -267,16 +268,16 @@ class Visualization:
             predicted_x, predicted_y, predicted_z = self.getSmoothedData_3D(predicted_x, predicted_y, predicted_z)
 
             plt.plot(predicted_x, predicted_y, predicted_z, color = self.color_set[i], #marker= marker,
-                            linestyle = LINE[i],label = self.label[i])
-        plt.legend()
+                            linestyle = LINE[i],label = self.label[i] )
+        plt.legend(prop={'size':12})
 
         # self.ax1.scatter(X_list, Y_list, Z_list, c=c)
-        self.ax1.set_zlim(0, 1.0)
-        self.ax1.set_xlim(-1.0, 1.5)
+        self.ax1.set_xlim(-0.8, 1.2)
         self.ax1.set_ylim(-1.0, 1.5)
-        self.ax1.set_xlabel('X axis')
-        self.ax1.set_ylabel('Y axis')
-        self.ax1.set_zlabel('Z axis')
+        self.ax1.set_zlim(0.65, 0.7)
+        self.ax1.set_xlabel('X axis [m]', fontsize =14)
+        self.ax1.set_ylabel('Y axis [m]', fontsize =14)
+        self.ax1.set_zlabel('Z axis [m]', fontsize =14)
         self.fig = plt.gcf()
         self.fig.savefig(self._3D_plot_name)
 
@@ -292,8 +293,8 @@ if __name__ == "__main__":
 
     viz = Visualization(args)
     viz.set_3D_plot_name("hello.png")
-    # viz.drawResult3D(args.pf, args.bi) #, args.pargs.bi) #, args.bi)
-    viz.plotDistanceError3D(args.pf, args.bi)
+    viz.drawResult3D(args.pf, args.bi) #, args.pargs.bi) #, args.bi)
+    viz.plotDistanceError3D(args.pf, args.bi)#, args.bi)
     # test = np.loadtxt("train_yz3D.csv", delimiter= ',')
     # n = 10
     # for c, m, zlow, zhigh in [('r', 'o', -50, -25), ('b', '^', -30, -5)]:

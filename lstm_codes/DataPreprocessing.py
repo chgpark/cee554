@@ -33,7 +33,7 @@ class DataManager:
 
         self.train_data_list = []
         for train_file_dir in self.train_files_dir:
-            print (train_file_dir)
+            print ("Load " + train_file_dir)
             a = np.loadtxt(train_file_dir, delimiter=',')
             self.train_data_list.append(a)
 
@@ -77,6 +77,7 @@ class DataManager:
                 self.X_data.append(_x)
 
         self.X_data = np.array(self.X_data)
+
 
     def set_range_data_for_4multimodal(self):
         self.d0_data =[]
@@ -170,17 +171,41 @@ class DataManager:
         self.position_data = np.array(self.position_data)
         self.quaternion_data = np.array(self.quaternion_data)
 
-    def set_train_data_for_non_multimodal(self):
+    def set_gt_data_for_all_sequences(self):
+            self.position_data =[]
+            self.quaternion_data = []
+
+            for train_data in self.train_data_list:
+                robot_position = train_data[:,self.num_uwb: self.num_uwb + 3]  # Close as label
+                robot_quaternion = train_data[:,self.num_uwb+3:]
+
+                for i in range(len(robot_position) - self.seq_length +1):
+                    _position = []
+                    _quaternion = []
+                    for j in range(self.seq_length):
+                        _position.append(robot_position[i+j,:])
+                        # _quaternion.append(robot_quaternion[:,i+j])
+                    self.position_data.append(_position)
+                    # self.quaternion_data.append(_quaternion)
+
+            self.position_data = np.array(self.position_data)
+            self.quaternion_data = np.array(self.quaternion_data)
+
+    def set_data_for_non_multimodal(self):
         self.set_range_data()
         self.set_gt_data()
 
-    def set_train_data_for_4multimodal(self):
+    def set_data_for_4multimodal(self):
         self.set_range_data_for_4multimodal()
         self.set_gt_data()
 
-    def set_train_data_for_8multimodal(self):
+    def set_data_for_8multimodal(self):
         self.set_range_data_for_8multimodal()
         self.set_gt_data()
+
+    def set_data_for_8multimodal_all_sequences(self):
+        self.set_range_data_for_8multimodal()
+        self.set_gt_data_for_all_sequences()
 
     ##################################################
                     #Getting data
@@ -209,30 +234,6 @@ class DataManager:
 
         return output_argv
 
-    def set_test_data(self, isRaw = False):
-        #set depends on sequence length
-        #Just do MinMax Scaler to whole data
-
-        xy = np.loadtxt(self.dir, delimiter=',')
-        if (not isRaw):
-            xy = self.scaler.transform(xy)
-        x = xy[:, :4]
-        y = xy[:, 4:]  # Close as label
-        # print (type(x))
-        # print (type(y))
-        X_data=[]
-        Y_data=[]
-        for i in range(int(len(y)/self.seq_length)):
-            idx = i*self.seq_length
-            _x = x[idx:idx+self.seq_length]
-            _y = y[idx:idx+self.seq_length]
-            X_data.append(_x)
-            Y_data.append(_y)
-        X_data = np.array(X_data)
-        Y_data = np.array(Y_data)
-        #return numpy array
-        return X_data, Y_data
-
     def inverse_transform_by_train_data(self, prediction):
         # scaler for inverse transform of prediction
         self.inverse_transformed_sequence = self.scaler_for_prediction.inverse_transform(list(prediction))
@@ -250,67 +251,54 @@ class DataManager:
 #Below Line : Extract colums that we want to extract#
 #
 if __name__ == '__main__':
-    file_name = '/home/shapelim/RONet/train_test/'
+    file_name = '/home/shapelim/RONet/train_debug/'
+    file_name2 = '/home/shapelim/RONet/train_debug/np_data_2.csv'
+    test_name = 'inputs/np_test_data_2.csv'
+    aa = np.loadtxt(file_name2, delimiter= ',')
 
-    b = os.listdir(file_name)
-    total_np = np.array([[None]*19])
-    for i, file in enumerate(b):
-        adsd = os.path.join(file_name, file)
-        if (i == 0):
-
-            c = np.loadtxt(adsd, delimiter=',')
-
-        elif (i == 1):
-            d = np.loadtxt(adsd, delimiter=',')
-
-        zzzz= np.loadtxt(adsd, delimiter = ',')
-        total_np = np.concatenate((total_np, zzzz), axis = 0)
-    print (len(total_np), total_np[0])
-    total_np = total_np[1:]
-
-    print (total_np[0])
-    # print (c[0], len(c[0]))
-    # print (len(c))
-    # print (c)
-    # print ("heelo")
-    # e = np.concatenate((c,d), axis = 0)
-    # print (len(c), len(d), len(e))
-            # total_np = np.concatenate([total_np, c], axis = 0)
-
-        # print (np, np.shape)
-
-        # print (adsd)
-
-    # file  = np.loadtxt(file_name, delimiter= ',')
-
-
-
-    seq_length = 10
-    num_uwb = 4
-    # data_parser = DataManager(file_name, seq_length, num_uwb)
+    # scalar = MinMaxScaler()
+    # scalar_prediction = MinMaxScaler()
+    # scalar.fit(aa)
     #
-    # data_parser.fitDataForMinMaxScaler()
-    # x = np.array([[1,3],[2,7],[3, 10], [4, 1313],[5,1]])
-    # y = np.array(['a','b','c','d', 'e'])
-    # z = np.array([111,222,333,444,555])
-    # x,y,z = data_parser.suffle_array_in_the_same_order(x, y, z)
+    # position =  aa[:,8:]
+    # scalar_prediction.fit(position)
+    # dd = scalar_prediction.transform(position)
+    # dd =scalar_prediction.inverse_transform(dd)
+    # a = scalar.transform(aa)
+    # b = scalar.inverse_transform(a)
+    # print (b)
+    # print (dd)
+    # print (aa)
+    data_parser = DataManager(file_name, 5, 8)
+    data_parser.fitDataForMinMaxScaler()
+    # #
+    data_parser.transform_all_data()
+    c = data_parser.scaler.inverse_transform(data_parser.train_data_list[0])
+    # print (c)
+    # #
+    data_parser.set_data_for_8multimodal()
+    d0_data, d1_data, d2_data, d3_data, d4_data, d5_data, d6_data, d7_data = data_parser.get_range_data_for_8multimodal()
+    robot_position_gt, robot_quaternion_gt = data_parser.get_gt_data()
 
-    # gt, _ = data_parser.set_gt_data()
-    # print (gt)
-    # data_parser.inverse_transform_by_train_data(list(gt))
-    # gt2 = []
-    # for j in gt:
-    #     gt2.append(list(j))
-    # gt2 = tuple(gt2)
-
-    # b = data_parser.scaler_for_prediction.inverse_transform(gt2)
-
-    # total_length = 0
-    # data_parser.write_file_data("hello.csv", b)
-
-    # with open('results/test_diagonal_gt.csv' ,'w') as fp:
-    #     for i in range(int( total_length/seq_length) ):
-    #         np.savetxt(fp,Y_test[i],delimiter=",")
-#
+    data_parser.set_val_data(test_name)
+    data_parser.transform_all_data()
+    data_parser.set_data_for_8multimodal()
+    d0_data, d1_data, d2_data, d3_data, d4_data, d5_data, d6_data, d7_data = data_parser.get_range_data_for_8multimodal()
+    val_robot_position_gt, val_robot_quaternion_gt = data_parser.get_gt_data()
 
 
+    data_parser.inverse_transform_by_train_data(val_robot_position_gt)
+    a = data_parser.inverse_transformed_sequence
+    print (data_parser.inverse_transformed_sequence)
+    # #
+    # #
+    # # data_parser.set_val_data(test_name)
+    # # data_parser.set_train_data_for_8multimodal()
+    # # data_parser.transform_all_data()
+    # # gt, _ = data_parser.get_gt_data()
+    # #
+    # # print (gt)
+
+    # print (a)
+    # b = data_parser.scaler.inverse_transform(data_parser.train_data_list[0])
+    # print (b)

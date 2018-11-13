@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 
 class dataProcess:
+
 	def __init__(self):
 		self.cwd = os.getcwd()
 		self.varList = ['X_M', 'Y_M', 'Z_M']
@@ -134,3 +135,4 @@ if __name__ == "__main__":
 	dataT.setTrainData()
 	dataT.getFolder("changed")
 	dataT.iterTrainData(4)
+

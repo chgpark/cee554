@@ -1,6 +1,6 @@
 import tensorflow as tf
 import tensorflow.contrib.seq2seq as seq2seq
-from lstm_network import RONet
+from lstm_network_cudnn_with_loss import RONet
 import numpy as np
 import DataPreprocessing
 from plot_result import Visualization
@@ -10,7 +10,7 @@ import argparse
 import csv
 from search_min_loss_file import search_min_loss_meta_file
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0' #,1,2,3'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3' #,1,2,3'
 tf.set_random_seed(777)  # reproducibilityb
 # hyper parameters
 p =argparse.ArgumentParser()
@@ -18,12 +18,12 @@ p =argparse.ArgumentParser()
 #FOR TRAIN
 #Train folder is essential for data_parser.fitDataForMinMaxScaler()!!
 p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/train_Karpe_181025/")
-#
-# p.add_argument('--lr', type=float, default = 0.0001)
-# p.add_argument('--decay_rate', type=float, default = 0.7)
-# p.add_argument('--decay_step', type=int, default = 5)
-# p.add_argument('--epoches', type=int, default = 1500)
-# p.add_argument('--batch_size', type=int, default = 11257)
+
+p.add_argument('--lr', type=float, default = 0.0001)
+p.add_argument('--decay_rate', type=float, default = 0.7)
+p.add_argument('--decay_step', type=int, default = 5)
+p.add_argument('--epoches', type=int, default = 1500)
+p.add_argument('--batch_size', type=int, default = 11257)
 
 #NETWORK PARAMETERS
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
@@ -38,6 +38,7 @@ p.add_argument('--network_type', type=str, default = 'test') #uni / bi
 p.add_argument('--is_multimodal', type=bool, default = True) #True / False
 p.add_argument('--alpha', type=float, default = 1) #True / False
 p.add_argument('--gamma', type=float, default = 1) #True / False
+
 #FOR TEST
 p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test_cudnn2/")
 p.add_argument('--test_data', type=str, default='inputs/np_test_data_1.csv')

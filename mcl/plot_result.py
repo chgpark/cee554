@@ -8,7 +8,7 @@ from scipy import interpolate
 from scipy.interpolate import spline
 p =argparse.ArgumentParser()
 p.add_argument('--output_dir', type=str, default=".")
-p.add_argument('--test_data', type=str, default="../dataProcess/181102_train/np_data_0.csv")
+p.add_argument('--test_data', type=str, default="../dataProcess/181102_train/np_data_15.csv")
 # p.add_argument('--gt_dir', type=str, default="inputs/test_data_diagonal_curve2D.csv")
 #In case of test 1
 

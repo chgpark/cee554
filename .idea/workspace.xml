@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66eeafae-09ad-42c8-820a-633fd337adc9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/mcl/hello.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cortex/cortex_ros_bridge" beforeDir="false" afterPath="$PROJECT_DIR$/cortex/cortex_ros_bridge" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cortex/cortex_ros_bridge/README.md" beforeDir="false" />
@@ -9,46 +10,52 @@
       <change beforePath="$PROJECT_DIR$/cortex/cortex_ros_bridge/launch/cortex_bridge.launch" beforeDir="false" afterPath="$PROJECT_DIR$/cortex/cortex_ros_bridge/launch/cortex_bridge.launch" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cortex/cortex_ros_bridge/src/CortexHandler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cortex/cortex_ros_bridge/src/CortexHandler.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cortex/cortex_ros_bridge/src/cortex_bridge.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cortex/cortex_ros_bridge/src/cortex_bridge.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_0.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_0.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_10.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_10.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_11.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_11.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_12.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_12.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_13.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_13.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_14.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_14.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_15.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_15.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_16.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_16.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_17.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_17.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_18.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_18.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_proto_data/data_26.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_proto_data/data_26.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_0.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_10.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_11.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_12.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_13.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_14.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_15.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_16.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_17.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_18.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_19.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_20.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_21.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_22.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_23.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_24.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_25.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_26.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_27.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_28.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_29.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_3.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_30.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_31.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_32.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_33.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_34.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_35.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_36.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_4.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_5.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_6.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_8.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_9.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_test1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_test2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/data_test3.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_19.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_19.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_2.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_20.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_20.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_21.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_21.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_22.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_22.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_23.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_23.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_24.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_24.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_25.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_25.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_26.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_26.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_27.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_27.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_28.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_28.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_29.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_29.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_3.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_30.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_30.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_31.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_31.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_32.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_32.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_33.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_33.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_34.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_34.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_35.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_35.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_36.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_36.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_5.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_5.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_6.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_6.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_7.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_7.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_8.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_8.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_9.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_9.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_test1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_test1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_test2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_test2.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_test3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_test3.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess/changed/data_26.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/changed/data_26.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataProcess/dataProcess.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/dataProcess.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mcl/plot_result.py" beforeDir="false" afterPath="$PROJECT_DIR$/mcl/plot_result.py" afterDir="false" />
     </list>
@@ -60,21 +67,36 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/cee554$plot_result.coverage" NAME="plot_result Coverage Results" MODIFIED="1539566059732" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lstm_codes" />
-    <SUITE FILE_PATH="coverage/cee554$plot_result__1_.coverage" NAME="plot_result (1) Coverage Results" MODIFIED="1542107492558" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mcl" />
-    <SUITE FILE_PATH="coverage/cee554$dataProcess.coverage" NAME="dataProcess Coverage Results" MODIFIED="1542107466189" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataProcess" />
+    <SUITE FILE_PATH="coverage/cee554$plot_result__1_.coverage" NAME="plot_result (1) Coverage Results" MODIFIED="1542192720307" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mcl" />
+    <SUITE FILE_PATH="coverage/cee554$dataProcess.coverage" NAME="dataProcess Coverage Results" MODIFIED="1542194694214" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataProcess" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="1090832291">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.0" value="3" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="csv" value="1" />
+          <entry key="csv" value="2" />
           <entry key="png" value="4" />
           <entry key="py" value="4" />
         </counts>
@@ -82,18 +104,18 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Image" value="4" />
-          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="PLAIN_TEXT" value="2" />
           <entry key="Python" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1896" />
+          <entry key="py" value="2492" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="1896" />
+          <entry key="Python" value="2492" />
         </counts>
       </usages-collector>
     </session>
@@ -109,23 +131,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dataProcess/dataProcess.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="126" column="26" selection-start-line="126" selection-start-column="26" selection-end-line="126" selection-end-column="26" />
+            <state relative-caret-position="285">
+              <caret line="19" column="27" lean-forward="true" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
+                <marker date="1542194268077" expanded="true" signature="4269:4470" ph="..." />
+                <marker date="1542194268077" expanded="true" signature="4531:4540" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mcl/plot_result.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="72" selection-start-line="11" selection-start-column="72" selection-end-line="11" selection-end-column="72" />
+            <state relative-caret-position="150">
+              <caret line="276" column="6" selection-start-line="276" selection-start-column="6" selection-end-line="276" selection-end-column="6" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -142,8 +166,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/lstm_codes/plot_result.py" />
-        <option value="$PROJECT_DIR$/dataProcess/dataProcess.py" />
         <option value="$PROJECT_DIR$/mcl/plot_result.py" />
+        <option value="$PROJECT_DIR$/dataProcess/dataProcess.py" />
       </list>
     </option>
   </component>
@@ -154,10 +178,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1730" />
-    <option name="y" value="146" />
+    <option name="x" value="1786" />
+    <option name="y" value="228" />
     <option name="width" value="1551" />
-    <option name="height" value="905" />
+    <option name="height" value="898" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -187,6 +211,12 @@
             <path>
               <item name="cee554" type="b2602c69:ProjectViewProjectNode" />
               <item name="cee554" type="462c0819:PsiDirectoryNode" />
+              <item name="dataProcess" type="462c0819:PsiDirectoryNode" />
+              <item name="changed" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cee554" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cee554" type="462c0819:PsiDirectoryNode" />
               <item name="mcl" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -206,7 +236,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -220,7 +250,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.plot_result (1)">
+  <component name="RunManager" selected="Python.dataProcess">
     <configuration name="dataProcess" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="cee554" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -294,8 +324,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.plot_result (1)" />
         <item itemvalue="Python.dataProcess" />
+        <item itemvalue="Python.plot_result (1)" />
         <item itemvalue="Python.plot_result" />
       </list>
     </recent_temporary>
@@ -315,14 +345,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1730" y="146" width="1551" height="905" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25615436" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25948104" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32860824" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32860824" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -337,7 +366,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" weight="0.32934132" />
-      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32934132" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -347,13 +376,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lstm_codes/plot_result.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="277" column="36" selection-start-line="277" selection-start-column="36" selection-end-line="277" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mcl/hello.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -367,22 +389,34 @@
     <entry file="file://$PROJECT_DIR$/dataProcess/changed/data_2.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/dataProcess/dataProcess.py">
+    <entry file="file://$PROJECT_DIR$/lstm_codes/plot_result.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="126" column="26" selection-start-line="126" selection-start-column="26" selection-end-line="126" selection-end-column="26" />
+        <state relative-caret-position="410">
+          <caret line="277" column="36" selection-start-line="277" selection-start-column="36" selection-end-line="277" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataProcess/181102_train/data_26.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mcl/plot_result.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="276" column="6" selection-start-line="276" selection-start-column="6" selection-end-line="276" selection-end-column="6" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mcl/plot_result.py">
+    <entry file="file://$PROJECT_DIR$/dataProcess/dataProcess.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="72" selection-start-line="11" selection-start-column="72" selection-end-line="11" selection-end-column="72" />
+        <state relative-caret-position="285">
+          <caret line="19" column="27" lean-forward="true" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
+            <marker date="1542194268077" expanded="true" signature="4269:4470" ph="..." />
+            <marker date="1542194268077" expanded="true" signature="4531:4540" ph="..." />
           </folding>
         </state>
       </provider>

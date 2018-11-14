@@ -13,7 +13,6 @@ tf.set_random_seed(777)  # reproducibilityb
 p =argparse.ArgumentParser()
 
 #FOR TRAIN
-# p.add_argument('--train_data', type=str, default="train_3D_zigzag_for_debug.csv")
 p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/train_Karpe_181025/")
 p.add_argument('--val_data', type=str, default="./inputs/np_test_data_1.csv")
 p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test_cudnn2/")

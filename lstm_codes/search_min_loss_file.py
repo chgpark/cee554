@@ -16,4 +16,4 @@ def search_min_loss_meta_file(dirname):
 
     return min_meta
 if __name__ == '__main__':
-    search_min_loss_meta_file("/home/shapelim/RONet/test5/")
+    search_min_loss_meta_file("/home/shapelim/RONet/")

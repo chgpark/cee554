@@ -11,9 +11,11 @@ p.add_argument('--output_dir', type=str, default=".")
 p.add_argument('--test_data', type=str, default="../dataProcess/181102_train/np_data_0.csv")
 # p.add_argument('--gt_dir', type=str, default="inputs/test_data_diagonal_curve2D.csv")
 #In case of test 1
-p.add_argument('--pf', type=str, default= ".")
-p.add_argument('--bi', type=str, default= ".")
-# p.add_argument('--multimodal_uni', type=str, default= "/home/shapelim/KRoC_Results/1104_unimul_poly.csv")
+
+p.add_argument('--pf', type=str, default= "/home/shapelim/git_files/cee554/mcl/results/1105_np_test1_result_comparison.csv")
+p.add_argument('--bi', type=str, default= "/home/shapelim/KRoC_Results/KRoC_15/1109_bimul.csv")
+p.add_argument('--non_multimodal', type=str, default= "/home/shapelim/KRoC_Results/non_multimodal3/1109_bi_non_mul.csv")
+
 # p.add_argument('--multimodal_bi', type=str, default= "/home/shapelim/KRoC_Results/1104_bimul_poly.csv")
 
 #In case of test 2
@@ -40,11 +42,11 @@ k balck
 w white
 '''
 # COLORSET = [(0,0,1), 'g', 'r', 'm', 'c', 'y'] #, 'k','w']
-COLORSET = [(241/255.0, 50/255.0, 50/255.0),(2/255.0, 23/255.0, 157/255.0), (19/255.0, 163/255.0, 153/255.0),  (191/255.0, 17/255.0, 46/255.0)]
+COLORSET = [(241/255.0, 50/255.0, 50/255.0), (19/255.0, 163/255.0, 153/255.0),(2/255.0, 23/255.0, 157/255.0),  (191/255.0, 17/255.0, 46/255.0)]
 SOFT_COLORSET = [(241/255.0, 187/255.0, 165/255.0), (174/255.0, 245/255.0, 231/255.0), (115/255.0, 123/255.0, 173/255.0), (232/255.0, 138/255.0, 139/255.0)]
-LINE = [':', '-.', ':', '--']
+LINE = [':', '-.', '--', '--']
 # LABEL = ['LSTM', 'GRU', 'Bi-LSTM', 'Stacked Bi-LSTM']
-LABEL = ['PF', 'Bi-Multimodal']
+LABEL = ['PF', 'Non-multimodal', 'Bi-multimodal']
 
 SMOOTHNESS = 30
 
@@ -269,7 +271,7 @@ class Visualization:
 
             plt.plot(predicted_x, predicted_y, predicted_z, color = self.color_set[i], #marker= marker,
                             linestyle = LINE[i],label = self.label[i] )
-        plt.legend(prop={'size':12})
+        plt.legend(prop={'size':11})
 
         # self.ax1.scatter(X_list, Y_list, Z_list, c=c)
         self.ax1.set_xlim(-4, 4)
@@ -294,8 +296,13 @@ if __name__ == "__main__":
 
     viz = Visualization(args)
     viz.set_3D_plot_name("hello.png")
+
     viz.drawResult3D('results/1105_np_test1_result.csv') #, args.pargs.bi) #, args.bi)
     # viz.plotDistanceError3D(args.pf, args.bi)#, args.bi)
+
+    viz.drawResult3D(args.pf, args.non_multimodal, args.bi) #, args.pargs.bi) #, args.bi)
+    viz.plotDistanceError3D(args.pf, args.non_multimodal, args.bi)#, args.bi)
+
     # test = np.loadtxt("train_yz3D.csv", delimiter= ',')
     # n = 10
     # for c, m, zlow, zhigh in [('r', 'o', -50, -25), ('b', '^', -30, -5)]:

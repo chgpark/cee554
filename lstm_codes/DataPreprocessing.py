@@ -191,9 +191,9 @@ class DataManager:
             self.position_data = np.array(self.position_data)
             self.quaternion_data = np.array(self.quaternion_data)
 
-    def set_data_for_non_multimodal(self):
+    def set_data_for_non_multimodal_all_sequences(self):
         self.set_range_data()
-        self.set_gt_data()
+        self.set_gt_data_for_all_sequences()
 
     def set_data_for_4multimodal(self):
         self.set_range_data_for_4multimodal()

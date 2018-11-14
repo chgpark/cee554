@@ -36,15 +36,16 @@ p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
 p.add_argument('--network_type', type=str, default = 'test') #uni / bi
 p.add_argument('--is_multimodal', type=bool, default = True) #True / False
+#Loss terms
 p.add_argument('--alpha', type=float, default = 1) #True / False
-p.add_argument('--gamma', type=float, default = 1) #True / False
+p.add_argument('--beta', type=float, default = 0)
+p.add_argument('--gamma', type=float, default = 0) #True / False
 
 #FOR TEST
 p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test_cudnn2/")
 p.add_argument('--test_data', type=str, default='inputs/np_test_data_1.csv')
 # p.add_argument('--test_data', type=str, default='inputs/np_test_2.csv')
 FILE_NAME = '1109_bimul'
-p.add_argument('--output_dir', type=str, default= 'results/RO_test/')
 ###########
 args = p.parse_args()
 
@@ -72,9 +73,6 @@ print("number of trainable parameters: {}".format(total_num_parameters))
 ###########for using tensorboard########
 merged = tf.summary.merge_all()
 ########################################
-
-# if not os.path.isdir(args.output_dir):
-#     os.makedirs(args.output_dir)
 
 with tf.Session() as sess:
    #For save diagonal data

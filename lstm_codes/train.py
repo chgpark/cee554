@@ -21,7 +21,7 @@ p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test_cudnn2
 p.add_argument('--lr', type=float, default = 0.0008)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 5)
-p.add_argument('--epoches', type=int, default = 1500)
+p.add_argument('--epoches', type=int, default = 10)
 p.add_argument('--batch_size', type=int, default = 11257)
 
 #NETWORK PARAMETERS
@@ -33,7 +33,7 @@ p.add_argument('--first_layer_output_size', type=int, default = 400)
 p.add_argument('--second_layer_output_size', type=int, default = 500)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
-p.add_argument('--network_type', type=str, default = 'test') #uni / bi
+p.add_argument('--network_type', type=str, default = 'bi') #uni / bi
 p.add_argument('--is_multimodal', type=bool, default = True) #True / False
 
 #Coefficients of loss term

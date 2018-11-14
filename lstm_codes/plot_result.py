@@ -53,7 +53,7 @@ SMOOTHNESS = 200
 class Visualization:
     def __init__(self, args):
         self.args = args
-        self.folder_name = args.output_dir
+        self.folder_name = args.load_model_dir
         if not os.path.isdir(self.folder_name):
             os.mkdir(self.folder_name)
         self.setGT(self.args.test_data)

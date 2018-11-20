@@ -2,66 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66eeafae-09ad-42c8-820a-633fd337adc9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/cee554.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cee554.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cortex/cortex_ros_bridge" beforeDir="false" afterPath="$PROJECT_DIR$/cortex/cortex_ros_bridge" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cortex/cortex_ros_bridge/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cortex/cortex_ros_bridge/include/CortexHandler.h" beforeDir="false" afterPath="$PROJECT_DIR$/cortex/cortex_ros_bridge/include/CortexHandler.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cortex/cortex_ros_bridge/launch/cortex_bridge.launch" beforeDir="false" afterPath="$PROJECT_DIR$/cortex/cortex_ros_bridge/launch/cortex_bridge.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cortex/cortex_ros_bridge/src/CortexHandler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cortex/cortex_ros_bridge/src/CortexHandler.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cortex/cortex_ros_bridge/src/cortex_bridge.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cortex/cortex_ros_bridge/src/cortex_bridge.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_0.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_0.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_10.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_10.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_11.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_11.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_12.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_12.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_13.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_13.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_14.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_14.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_15.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_15.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_16.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_16.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_17.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_17.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_18.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_18.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_19.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_19.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_2.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_20.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_20.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_21.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_21.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_22.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_22.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_23.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_23.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_24.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_24.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_25.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_25.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_26.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_26.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_27.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_27.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_28.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_28.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_29.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_29.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_3.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_30.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_30.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_31.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_31.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_32.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_32.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_33.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_33.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_34.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_34.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_35.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_35.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_36.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_36.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_5.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_5.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_6.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_6.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_7.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_7.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_8.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_8.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_9.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_9.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_test1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_test1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_test2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_test2.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/181102_train/np_data_test3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/181102_train/np_data_test3.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataProcess/dataProcess.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess/dataProcess.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mcl/plot_result.py" beforeDir="false" afterPath="$PROJECT_DIR$/mcl/plot_result.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lstm_codes/etc/dd.py" beforeDir="false" afterPath="$PROJECT_DIR$/lstm_codes/etc/dd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lstm_codes/lstm_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/lstm_codes/lstm_network.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lstm_codes/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/lstm_codes/train.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/cee554$dd.coverage" NAME="dd Coverage Results" MODIFIED="1542183772974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lstm_codes/etc" />
+    <SUITE FILE_PATH="coverage/cee554$dataProcess.coverage" NAME="dataProcess Coverage Results" MODIFIED="1542107466189" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataProcess" />
     <SUITE FILE_PATH="coverage/cee554$plot_result.coverage" NAME="plot_result Coverage Results" MODIFIED="1539566059732" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lstm_codes" />
     <SUITE FILE_PATH="coverage/cee554$plot_result__1_.coverage" NAME="plot_result (1) Coverage Results" MODIFIED="1542107492558" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mcl" />
-    <SUITE FILE_PATH="coverage/cee554$dataProcess.coverage" NAME="dataProcess Coverage Results" MODIFIED="1542107466189" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataProcess" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="1090832291">
@@ -100,19 +59,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="plot_result.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lstm_codes/plot_result.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
+            <state relative-caret-position="4050">
               <caret line="277" column="36" selection-start-line="277" selection-start-column="36" selection-end-line="277" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="dataProcess.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dataProcess/dataProcess.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
+            <state relative-caret-position="1860">
               <caret line="126" column="26" selection-start-line="126" selection-start-column="26" selection-end-line="126" selection-end-column="26" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -121,14 +80,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file leaf-file-name="plot_result.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mcl/plot_result.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="72" selection-start-line="11" selection-start-column="72" selection-end-line="11" selection-end-column="72" />
+            <state relative-caret-position="285">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dd.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lstm_codes/etc/dd.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -144,6 +112,7 @@
         <option value="$PROJECT_DIR$/lstm_codes/plot_result.py" />
         <option value="$PROJECT_DIR$/dataProcess/dataProcess.py" />
         <option value="$PROJECT_DIR$/mcl/plot_result.py" />
+        <option value="$PROJECT_DIR$/lstm_codes/etc/dd.py" />
       </list>
     </option>
   </component>
@@ -153,11 +122,14 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1730" />
-    <option name="y" value="146" />
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="157" />
+    <option name="y" value="39" />
     <option name="width" value="1551" />
-    <option name="height" value="905" />
+    <option name="height" value="877" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -165,7 +137,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -181,32 +152,33 @@
             <path>
               <item name="cee554" type="b2602c69:ProjectViewProjectNode" />
               <item name="cee554" type="462c0819:PsiDirectoryNode" />
-              <item name="dataProcess" type="462c0819:PsiDirectoryNode" />
-              <item name="181102_train" type="462c0819:PsiDirectoryNode" />
+              <item name="lstm_codes" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="cee554" type="b2602c69:ProjectViewProjectNode" />
               <item name="cee554" type="462c0819:PsiDirectoryNode" />
-              <item name="mcl" type="462c0819:PsiDirectoryNode" />
+              <item name="lstm_codes" type="462c0819:PsiDirectoryNode" />
+              <item name="etc" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="cee554" type="b2602c69:ProjectViewProjectNode" />
               <item name="cee554" type="462c0819:PsiDirectoryNode" />
-              <item name="mcl" type="462c0819:PsiDirectoryNode" />
-              <item name="results" type="462c0819:PsiDirectoryNode" />
+              <item name="lstm_codes" type="462c0819:PsiDirectoryNode" />
+              <item name="inputs" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lstm_codes" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -220,7 +192,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.plot_result (1)">
+  <component name="RunManager" selected="Python.dd">
     <configuration name="dataProcess" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="cee554" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -239,9 +211,25 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
+    </configuration>
+    <configuration name="dd" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="cee554" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lstm_codes/etc" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lstm_codes/etc/dd.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration name="plot_result (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="cee554" />
@@ -261,9 +249,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
     </configuration>
     <configuration name="plot_result" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="cee554" />
@@ -283,17 +268,16 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Python.plot_result" />
       <item itemvalue="Python.dataProcess" />
       <item itemvalue="Python.plot_result (1)" />
+      <item itemvalue="Python.dd" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.dd" />
         <item itemvalue="Python.plot_result (1)" />
         <item itemvalue="Python.dataProcess" />
         <item itemvalue="Python.plot_result" />
@@ -314,30 +298,29 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1730" y="146" width="1551" height="905" extended-state="6" />
-    <editor active="true" />
+    <frame x="157" y="39" width="1551" height="877" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25615436" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32860824" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32769832" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30625403" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.32934132" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.50715214" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.32934132" />
-      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,30 +329,28 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lstm_codes/etc/dd.py</url>
+          <line>10</line>
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/lstm_codes/plot_result.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
+        <state relative-caret-position="4050">
           <caret line="277" column="36" selection-start-line="277" selection-start-column="36" selection-end-line="277" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mcl/hello.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/tensorflow/lib/python3.6/site-packages/pandas/core/generic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="2626" selection-start-line="2626" selection-end-line="2626" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataProcess/changed/data_2.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/dataProcess/dataProcess.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
+        <state relative-caret-position="1860">
           <caret line="126" column="26" selection-start-line="126" selection-start-column="26" selection-end-line="126" selection-end-column="26" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -379,11 +360,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mcl/plot_result.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
+        <state relative-caret-position="60">
           <caret line="11" column="72" selection-start-line="11" selection-start-column="72" selection-end-line="11" selection-end-column="72" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lstm_codes/plot_result.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4050">
+          <caret line="277" column="36" selection-start-line="277" selection-start-column="36" selection-end-line="277" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mcl/hello.png" />
+    <entry file="file://$USER_HOME$/anaconda3/envs/tensorflow/lib/python3.6/site-packages/pandas/core/generic.py" />
+    <entry file="file://$PROJECT_DIR$/dataProcess/changed/data_2.csv" />
+    <entry file="file://$PROJECT_DIR$/dataProcess/dataProcess.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1860">
+          <caret line="126" column="26" selection-start-line="126" selection-start-column="26" selection-end-line="126" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mcl/plot_result.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lstm_codes/etc/dd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
         </state>
       </provider>
     </entry>

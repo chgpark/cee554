@@ -7,21 +7,21 @@ from tqdm import tqdm, trange
 import os
 import argparse
 import csv
-os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3' #,1,2,3'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0' #,1,2,3' #,1,2,3'
 tf.set_random_seed(777)  # reproducibilityb
 # hyper parameters
 p =argparse.ArgumentParser()
 
 #FOR TRAIN
-p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/train_Karpe_181025/")
-p.add_argument('--val_data', type=str, default="./inputs/np_test_data_1.csv")
-p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test_cudnn2/")
+p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/train_Karpe_181102/")
+p.add_argument('--val_data', type=str, default="/home/shapelim/RONet/val_Karpe_181102/")
+p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test_karpe_1102/")
 
-p.add_argument('--lr', type=float, default = 0.0008)
-p.add_argument('--decay_rate', type=float, default = 0.7)
+p.add_argument('--lr', type=float, default = 0.00001)
+p.add_argument('--decay_rate', type=float, default = 0.78)
 p.add_argument('--decay_step', type=int, default = 5)
-p.add_argument('--epoches', type=int, default = 10)
-p.add_argument('--batch_size', type=int, default = 11257)
+p.add_argument('--epoches', type=int, default = 600)
+p.add_argument('--batch_size', type=int, default = 10570)
 
 #NETWORK PARAMETERS
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
@@ -34,12 +34,15 @@ p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
 p.add_argument('--network_type', type=str, default = 'bi') #uni / bi
 p.add_argument('--is_multimodal', type=bool, default = True) #True / False
+p.add_argument('--dropout_prob', type = float, default = 0.9)
 
 #Coefficients of loss term
 p.add_argument('--alpha', type=float, default = 1)
 p.add_argument('--beta', type=float, default = 0)
 p.add_argument('--gamma', type=float, default = 0)
 
+#
+p.add_argument('--grid', type=float, default = 0.01)
 args = p.parse_args()
 
 data_parser = DataPreprocessing.DataManager(args.train_data, args.sequence_length, args.num_uwb)
@@ -55,7 +58,8 @@ print ("Complete!")
 print(d0_data.shape) #Data size / sequence length / uwb num
 
 print ("Loading val data...")
-data_parser.set_val_data(args.val_data)
+data_parser.set_dir(args.val_data)
+data_parser.set_all_train_data_list()
 data_parser.transform_all_data()
 # data_parser.set_data_for_8multimodal()
 data_parser.set_data_for_8multimodal_all_sequences()

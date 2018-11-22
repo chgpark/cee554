@@ -45,9 +45,12 @@ p.add_argument('--gamma', type=float, default = 0) #True / False
 p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test_cudnn2/")
 p.add_argument('--test_data', type=str, default='inputs/np_test_data_1.csv')
 # p.add_argument('--test_data', type=str, default='inputs/np_test_2.csv')
-FILE_NAME = '1109_bimul'
+
+p.add_argument('--file_name', type=str, default='1123_test_1_bimul')
 ###########
 args = p.parse_args()
+
+FILE_NAME = args.file_name
 
 min_loss_meta_file_name = search_min_loss_meta_file(args.load_model_dir)
 

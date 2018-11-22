@@ -199,9 +199,9 @@ class RONet:
     def set_multimodal_Preprocessing_bi_LSTM_for_8_uwb(self):
         with tf.variable_scope("preprocessing0"):
             cell_forward = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.preprocessing_size)
-            cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            # cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
             cell_backward = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.preprocessing_size)
-            cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
+            # cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
 
             # outputs : tuple
             output0, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d0_data, dtype=tf.float32)
@@ -210,9 +210,9 @@ class RONet:
 
         with tf.variable_scope("preprocessing1"):
             cell_forward = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.preprocessing_size)
-            cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            # cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
             cell_backward = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.preprocessing_size)
-            cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
+            # cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
 
             output1, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d1_data, dtype=tf.float32)
             self.output1_fw = output1[0]
@@ -220,9 +220,9 @@ class RONet:
 
         with tf.variable_scope("preprocessing2"):
             cell_forward = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.preprocessing_size)
-            cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            # cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
             cell_backward = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.preprocessing_size)
-            cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
+            # cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
 
             output2, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d2_data, dtype=tf.float32)
             self.output2_fw = output2[0]
@@ -230,9 +230,9 @@ class RONet:
 
         with tf.variable_scope("preprocessing3"):
             cell_forward = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.preprocessing_size)
-            cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            # cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
             cell_backward = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.preprocessing_size)
-            cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
+            # cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
 
             output3, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d3_data, dtype=tf.float32)
 
@@ -241,9 +241,9 @@ class RONet:
 
         with tf.variable_scope("preprocessing4"):
             cell_forward = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.preprocessing_size)
-            cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            # cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
             cell_backward = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.preprocessing_size)
-            cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
+            # cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
 
             # outputs : tuple
             output4, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d4_data, dtype=tf.float32)
@@ -252,9 +252,9 @@ class RONet:
 
         with tf.variable_scope("preprocessing5"):
             cell_forward = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.preprocessing_size)
-            cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            # cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
             cell_backward = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.preprocessing_size)
-            cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
+            # cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
 
             output5, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d5_data, dtype=tf.float32)
             self.output5_fw = output5[0]
@@ -262,9 +262,9 @@ class RONet:
 
         with tf.variable_scope("preprocessing6"):
             cell_forward = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.preprocessing_size)
-            cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            # cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
             cell_backward = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.preprocessing_size)
-            cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
+            # cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
 
             output6, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d6_data, dtype=tf.float32)
             self.output6_fw = output6[0]
@@ -272,9 +272,9 @@ class RONet:
 
         with tf.variable_scope("preprocessing7"):
             cell_forward = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.preprocessing_size)
-            cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
+            # cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
             cell_backward = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.preprocessing_size)
-            cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
+            # cell_backward = tf.nn.rnn_cell.DropoutWrapper(cell_backward, output_keep_prob= 0.7)
 
             output7, _state = tf.nn.bidirectional_dynamic_rnn(cell_forward, cell_backward, self.d7_data, dtype=tf.float32)
 
@@ -302,9 +302,9 @@ class RONet:
         with tf.variable_scope("Stacked_bi_lstm1"):
             # outputs : tuple
             cell_forward1 = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.first_layer_output_size)
-            cell_forward1 = tf.nn.rnn_cell.DropoutWrapper(cell_forward1, output_keep_prob= 0.75)
+            # cell_forward1 = tf.nn.rnn_cell.DropoutWrapper(cell_forward1, output_keep_prob= 0.75)
             cell_backward1 = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.first_layer_output_size)
-            cell_backward1 = tf.nn.rnn_cell.DropoutWrapper(cell_backward1, output_keep_prob= 0.75)
+            # cell_backward1 = tf.nn.rnn_cell.DropoutWrapper(cell_backward1, output_keep_prob= 0.75)
 
             # outputs : tuple
             outputs, _states = tf.nn.bidirectional_dynamic_rnn(cell_forward1, cell_backward1, self.preprocessed_output, dtype=tf.float32)
@@ -324,9 +324,9 @@ class RONet:
     def set_second_layer_bi_LSTM(self):
         with tf.variable_scope("Stacked_bi_lstm2"):
             cell_forward2 = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.second_layer_output_size)
-            cell_forward2 = tf.nn.rnn_cell.DropoutWrapper(cell_forward2, output_keep_prob= 0.8)
+            # cell_forward2 = tf.nn.rnn_cell.DropoutWrapper(cell_forward2, output_keep_prob= 0.8)
             cell_backward2 = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.second_layer_output_size)
-            cell_backward2 = tf.nn.rnn_cell.DropoutWrapper(cell_backward2, output_keep_prob= 0.8)
+            # cell_backward2 = tf.nn.rnn_cell.DropoutWrapper(cell_backward2, output_keep_prob= 0.8)
             # outputs : tuple
             outputs, _states = tf.nn.bidirectional_dynamic_rnn(cell_forward2, cell_backward2, self.output, dtype=tf.float32)
             self.layer_output_fw = outputs[0]
@@ -453,14 +453,14 @@ class RONet:
 
     def set_loss_terms(self):
         print ("Bulding loss terms...")
-        self.vec_pose_pred = tf.subtract(self.pose_pred[:, 1:, :], self.pose_pred[:, :-1, :])
-        self.vec_position_gt = tf.subtract(self.position_gt[:, 1:, :], self.position_gt[:, :-1, :])
-        epsilon = tf.constant(0.0000000000001, dtype= tf.float32)
-        norm_gt = tf.add(tf.norm(self.position_gt, axis = 2) , epsilon)
-        norm_pred = tf.add(tf.norm(self.pose_pred, axis = 2) , epsilon)
-        self.magnitude_of_pose_pred = tf.reduce_mean(tf.square(self.pose_pred))
-
-        self.direction_error_btw_gt_and_pred = tf.reduce_mean(1 - tf.divide((tf.reduce_sum(self.position_gt* self.pose_pred, axis = 2)), norm_gt*norm_pred))
+        # self.vec_pose_pred = tf.subtract(self.pose_pred[:, 1:, :], self.pose_pred[:, :-1, :])
+        # self.vec_position_gt = tf.subtract(self.position_gt[:, 1:, :], self.position_gt[:, :-1, :])
+        # epsilon = tf.constant(0.0000000000001, dtype= tf.float32)
+        # norm_gt = tf.add(tf.norm(self.position_gt, axis = 2) , epsilon)
+        # norm_pred = tf.add(tf.norm(self.pose_pred, axis = 2) , epsilon)
+        # self.magnitude_of_pose_pred = tf.reduce_mean(tf.square(self.pose_pred))
+        #
+        # self.direction_error_btw_gt_and_pred = tf.reduce_mean(1 - tf.divide((tf.reduce_sum(self.position_gt* self.pose_pred, axis = 2)), norm_gt*norm_pred))
 
         self.error_btw_gt_and_pred = tf.reduce_mean(tf.square(self.position_gt - self.pose_pred))
 
@@ -474,7 +474,7 @@ class RONet:
         batch_size = self.batch_size
 
         with tf.variable_scope('lstm_loss'):
-            self.loss = self.alpha*self.error_btw_gt_and_pred + + self.beta*self.direction_error_btw_gt_and_pred + self.gamma * self.magnitude_of_pose_pred
+            self.loss = self.alpha*self.error_btw_gt_and_pred #+ self.beta*self.direction_error_btw_gt_and_pred + self.gamma * self.magnitude_of_pose_pred
             tf.summary.scalar('lstm_loss', self.loss)
 
         with tf.variable_scope('train'):

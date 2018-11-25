@@ -8,7 +8,9 @@ from scipy import interpolate
 from scipy.interpolate import spline
 p =argparse.ArgumentParser()
 p.add_argument('--output_dir', type=str, default=".")
-p.add_argument('--test_data', type=str, default="/home/shapelim/git_files/cee554/lstm_codes/inputs/1025_Karpe_test1.csv")
+
+p.add_argument('--test_data', type=str, default="../dataProcess/181102_train/np_data_15.csv")
+>>>>>>> ac7f402f40a7002ce6cd084eb13cc054281adec7
 # p.add_argument('--gt_dir', type=str, default="inputs/test_data_diagonal_curve2D.csv")
 #In case of test 1
 

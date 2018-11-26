@@ -24,7 +24,7 @@ class RONet:
             if self.network_type == 'uni':
                 self.build_RO_Net_multimodal()
             elif self.network_type == 'bi':
-                self.build_RO_Net_test()
+                self.build_RO_Net_bi_multimodal()
 
         else:
             self.set_placeholders()
@@ -397,29 +397,6 @@ class RONet:
         self.pose_pred = tf.contrib.layers.fully_connected(self.output, self.output_size)
 
     def build_RO_Net_bi_multimodal(self):
-        self.set_preprocessed_multimodal_bi_LSTMs()
-        self.set_stacked_bi_LSTM_with_attention()
-
-        self.output = tf.reshape(self.output, [-1, self.sequence_length*self.second_layer_output_size*2])
-        self.pose_pred = tf.contrib.layers.fully_connected(self.output, self.output_size)
-
-    def build_RO_Net_bi_8multimodal(self):
-        self.set_multimodal_Preprocessing_bi_LSTM_for_8_uwb()
-        self.concatenate_preprocessed_data_for_8multimodal_bi_LSTM()
-        self.get_attentioned_preprocessed_data()
-
-        self.set_first_layer_bi_LSTM()
-        self.concatenate_first_layer_output()
-        self.get_attentioned_first_layer_output()
-
-        self.set_second_layer_bi_LSTM()
-        self.concatenate_second_layer_output()
-        self.get_attentioned_second_layer_output()
-
-        self.output = tf.reshape(self.output, [-1, self.sequence_length*self.second_layer_output_size*2])
-        self.pose_pred = tf.contrib.layers.fully_connected(self.output, self.output_size)
-
-    def build_RO_Net_test(self):
         self.set_multimodal_Preprocessing_bi_LSTM_for_8_uwb()
         self.concatenate_preprocessed_data_for_8multimodal_bi_LSTM()
         self.get_attentioned_preprocessed_data()

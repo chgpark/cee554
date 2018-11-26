@@ -31,24 +31,15 @@ with tf.variable_scope("22"):
     outputs2, _state2 = tf.nn.dynamic_rnn(cell3, x_data1, dtype = tf.float32)
 
 # outputs_2, _state_2 = tf.nn.dynamic_rnn(cell1, x_data1, dtype = tf.float32)
-sess.run(tf.global_variables_initializer())
+indices = [[1,2,],[0,1]]
 
-outputs = tf.convert_to_tensor(outputs)
-print(outputs.shape)
-pp.pprint(outputs.eval())
+depth = 3
+b = tf.one_hot(indices, depth, on_value = 1.0, off_value = 0.0, axis = -1)
 
 
-# b = x_data1[:,-1,:]
-print (x_data1.shape, type(x_data1))
-print (x_data1)
-a = x_data1[:,:-1,:]
-b = x_data1[:,1:,:]
-print ("hello")
-print (a)
-print ("hello")
-print (b)
-c= tf.subtract(b,a)
-print ("answer", c.eval())
+
+#
+print (b.eval())
 
 
 # def get_vector(sequence_input):

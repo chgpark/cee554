@@ -9,15 +9,13 @@ from scipy.interpolate import spline
 p =argparse.ArgumentParser()
 p.add_argument('--output_dir', type=str, default=".")
 
-p.add_argument('--test_data', type=str, default="../dataProcess/181102_train/np_data_15.csv")
->>>>>>> ac7f402f40a7002ce6cd084eb13cc054281adec7
+p.add_argument('--test_data', type=str, default="/home/shapelim/RONet/val_Karpe_181102/1103_Karpe_test3.csv")
 # p.add_argument('--gt_dir', type=str, default="inputs/test_data_diagonal_curve2D.csv")
 #In case of test 1
 
-p.add_argument('--pf', type=str, default= "/home/shapelim/git_files/cee554/mcl/results/1105_np_test1_result_comparison.csv")
-p.add_argument('--mul', type=str, default= "/home/shapelim/git_files/cee554/mcl/results/1025_Karpe_test1.csv")
-p.add_argument('--mul_wo_A', type=str, default= "/home/shapelim/git_files/cee554/mcl/results/1025_Karpe_test1_wo_A.csv")
-p.add_argument('--non_mul', type=str, default= "/home/shapelim/KRoC_Results/non_multimodal3/1109_bi_non_mul.csv")
+p.add_argument('--pf_wo_z', type=str, default= "/home/shapelim/git_files/cee554/mcl/cc510_results/1103_test3_result_no_fixed_z.csv")
+p.add_argument('--pf', type=str, default= "/home/shapelim/git_files/cee554/mcl/cc510_results/1103_test3_result.csv")
+p.add_argument('--mul', type=str, default= "/home/shapelim/git_files/cee554/mcl/cc510_results/1103_LSTM_test3.csv")
 
 # p.add_argument('--multimodal_bi', type=str, default= "/home/shapelim/KRoC_Results/1104_bimul_poly.csv")
 
@@ -49,7 +47,7 @@ COLORSET = [(241/255.0, 50/255.0, 50/255.0), (19/255.0, 163/255.0, 153/255.0),(2
 # COLORSET = [(241/255.0, 50/255.0, 50/255.0), (2/255.0, 23/255.0, 157/255.0)]
 SOFT_COLORSET = [(241/255.0, 187/255.0, 165/255.0), (174/255.0, 245/255.0, 231/255.0), (115/255.0, 123/255.0, 173/255.0), (232/255.0, 138/255.0, 139/255.0)]
 LINE = [':', '-.', '--', '--']
-LABEL = ['PF', 'Non-multimodal', 'Multimodal', 'Multimodal+A.']
+LABEL = ['PF w/o z', 'PF', 'Multimodal']
 # LABEL = ['PF', 'Multimodal+A.'] #Non-multimodal', 'Bi-multimodal']
 MARKER = ['o','v','s','*']
 SMOOTHNESS = 43
@@ -70,12 +68,15 @@ class Visualization:
         #y_array: gt_xy[:,1]
         self.gt_xyz = gt_xyz[:, -3:]
 
-    def _calDistanceError3D(self, predicted_result_dir):
+    def _calDistanceError3D(self, predicted_result_dir, is_for_comparison = False):
         predicted_xyz = np.loadtxt(predicted_result_dir, delimiter=',')
         # gt_xy = np.random.randint(3,size = (4,2))
         # predicted_xy = np.random.randint(3, size = (4,2))
-        dx_dy_dz_array = self.gt_xyz[4:] - predicted_xyz
+        if is_for_comparison:
+            dx_dy_dz_array = self.gt_xyz[4:] - predicted_xyz
 
+        else:
+            dx_dy_dz_array = self.gt_xyz - predicted_xyz
         distance_square = np.square(dx_dy_dz_array[:,0]) \
                           + np.square(dx_dy_dz_array[:,1]) \
                           + np.square(dx_dy_dz_array[:,2])
@@ -95,7 +96,7 @@ class Visualization:
         plt.figure(figsize=(7,4.326))
         for i, csv in enumerate(target_files_csv):
 
-            distance_error = self._calDistanceError3D(csv)
+            distance_error = self._calDistanceError3D(csv, is_for_comparison = True)
             distance_error = distance_error*100
 
             x_axis = range(distance_error.shape[0])
@@ -119,7 +120,7 @@ class Visualization:
 
         plt.legend(prop={'size':12})
         plt.grid(True)
-        plt.xlim(0,1300)
+        plt.xlim(0,1000)
         # plt.xticks(np.linspace(-0.5,1.5,10, endpoint =True))
         # plt.xticks(np.linspace(-0.5,1.5,10, endpoint =True))
         plt.ylim(0.0,30)
@@ -276,12 +277,12 @@ class Visualization:
 
             plt.plot(predicted_x, predicted_y, predicted_z, color = self.color_set[i],# marker= ".",
                             linestyle = LINE[i],label = self.label[i] )
-        plt.legend(prop={'size':12})
+        plt.legend(prop={'size':10})
 
         # self.ax1.scatter(X_list, Y_list, Z_list, c=c)
-        self.ax1.set_xlim(-0.75, 1)
+        self.ax1.set_xlim(-1.2, 1.0)
         self.ax1.set_ylim(-1.0, 1.5)
-        self.ax1.set_zlim(0.65, 0.7)
+        self.ax1.set_zlim(0, 0.7)
         self.ax1.set_xlabel('X axis [m]', fontsize =14)
         self.ax1.set_ylabel('Y axis [m]', fontsize =14)
         self.ax1.set_zlabel('Z axis [m]', fontsize =14)
@@ -305,7 +306,9 @@ if __name__ == "__main__":
     # viz.plotDistanceError3D(args.pf, args.bi)#, args.bi)
 
     # viz.drawResult3D(args.pf, args.bi) #, args.pargs.bi) #, args.bi)
-    viz.plotDistanceError3D(args.pf, args.non_mul, args.mul_wo_A, args.mul)#, args.bi)
+
+    viz.drawResult3D(args.pf_wo_z, args.pf,  args.mul)#, args.bi)
+    viz.plotDistanceError3D(args.pf_wo_z, args.pf,  args.mul)#, args.bi)
 
     # test = np.loadtxt("train_yz3D.csv", delimiter= ',')
     # n = 10

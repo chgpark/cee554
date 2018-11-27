@@ -29,8 +29,8 @@ class UWBAnchor(Position):
 
 class Particle(Position):
     def __init__(self):
-        x = random.random() * MAP_X
-        y = random.random() * MAP_Y
+        x = random.random() * 4.5 - 2.5
+        y = random.random() * 4.5 - 2.5
         z = random.random() * MAP_Z
 
         super(Particle, self).__init__(x, y, z)

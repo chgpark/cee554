@@ -10,13 +10,14 @@ from environment_settings import UWB_LOC, MAP_X, MAP_Y, MAP_Z
 from environment_settings import SAMPLING_NUM, UNCERTAINTY, SENSOR_NOISE
 from environment_settings import DIFFERENCE_TAG_LiDAR
 from environment_settings import MEASUREMENT_LiDAR_WEIGHT
+from particle_drawer import MCLVisualization
 import argparse
 import csv
 import numpy as np
 
 p =argparse.ArgumentParser()
 p.add_argument('--output_dir', type=str, default="./")
-p.add_argument('--test_data', type=str, default="/home/shapelim/git_files/cee554/lstm_codes/inputs/np_test_data_2.csv")
+p.add_argument('--test_data', type=str, default="/home/shapelim/RONet/val_Karpe_181102/1103_Karpe_test3.csv")
 #In case of test 1
 # p.add_argument('--uni', type=str, default= "/home/shapelim/KRoC_Results/1104_uni_poly.csv")
 # p.add_argument('--bi', type=str, default= "/home/shapelim/KRoC_Results/1104_bi_poly.csv")
@@ -29,7 +30,7 @@ p.add_argument('--save_trajectory_name', type=str, default="Test_trajectory11.pn
 p.add_argument('--data_interval', type=int, default= 21)
 
 args = p.parse_args()
-FILE_NAME = '1105_np_test2_result'
+FILE_NAME = '1103_test3_result_no_fixed_z'
 OUTPUTDIR = "./" + str(SAMPLING_NUM) + "_" + str(UNCERTAINTY).replace('.','_')
 
 class DataContainer:
@@ -54,8 +55,11 @@ for uwb_position in UWB_LOC:
     uwb_list.append(uwb)
 MCL = MonteCarloLocalization()
 viz = Visualization(args)
+MCLviz = MCLVisualization(uwb_list, 'particles' )
 result_container = DataContainer()
 MSE = 0
+
+# MCLviz.show(MCL)
 ##################################################
 #                     PF
 ##################################################
@@ -69,11 +73,13 @@ for i in range(len(test_csv)):#1143): #(2318):
     MCL.setWeights(z)
     particles_list, weights_list = MCL.resampling()
     position = MCL.getEstimate(particles_list, weights_list)
-    MCL.scatterParticleWithLiDAR(particles_list,0.68)
+    MCL.scatterParticle(particles_list)
+    # MCL.scatterParticleWithLiDAR(particles_list, 0.60)
 
     result_container.append_data(position.x, position.y, position.z)
-
+    # MCLviz.show(MCL)
     print ("step :  %d"%i)
+
 ##################################################
 #              Set files names
 ##################################################

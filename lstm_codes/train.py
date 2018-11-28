@@ -21,8 +21,8 @@ p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test_222322
 p.add_argument('--lr', type=float, default = 0.0009)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 5)
-p.add_argument('--epoches', type=int, default = 1)
-p.add_argument('--batch_size', type=int, default = 2) #11257)
+p.add_argument('--epoches', type=int, default = 1000)
+p.add_argument('--batch_size', type=int, default = 12080) #11257)
 
 #NETWORK PARAMETERS
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
@@ -76,8 +76,10 @@ writer_train = tf.summary.FileWriter(args.save_dir + '/train') #, sess.graph)
 tf.reset_default_graph()
 ro_net = RONet(args)
 
+#For Generating grid!!!
 ro_net.get_scale_for_round(data_parser.scaler_for_prediction.scale_)
 ro_net.round_predicted_position()
+
 #terms for learning rate decay
 global_step = tf.Variable(0, trainable=False)
 

@@ -60,12 +60,16 @@ min_loss_meta_file_name = search_min_loss_meta_file(args.load_model_dir)
 print ("Meta files: ", min_loss_meta_file_name)
 
 data_parser = DataPreprocessing.DataManager(args)
-data_parser.fitDataForMinMaxScaler()
+data_parser.fitDataForMinMaxScaler(generating_grid = True)
 data_parser.transform_all_data()
 
 print ("Set transformation complete")
 tf.reset_default_graph()
 ro_net = RONet(args)
+#For Generating grid!!!
+ro_net.get_scale_for_round(data_parser.scaler_for_prediction.scale_)
+ro_net.round_predicted_position()
+
 viz = Visualization(args)
 saver = tf.train.Saver(max_to_keep = 5)
 

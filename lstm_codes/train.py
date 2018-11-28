@@ -35,6 +35,8 @@ p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
 p.add_argument('--network_type', type=str, default = 'bi') #uni / bi
 p.add_argument('--is_multimodal', type=bool, default = True) #True / False
+
+p.add_argument('--dropout_prob', type=float, default = 0.95)
 p.add_argument('--grid_size', type=float, default = 0.01)
 #Coefficients of loss term
 p.add_argument('--alpha', type=float, default = 1)

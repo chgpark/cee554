@@ -16,4 +16,13 @@ def search_min_loss_meta_file(dirname):
 
     print (min_meta)
 if __name__ == '__main__':
-    search_min_loss_meta_file("/home/shapelim/RONet/test5")
+    # search_min_loss_meta_file("/home/shapelim/RONet/test5")
+    txt = np.loadtxt("/home/shapelim/RONet/val_Karpe_181102/1103_Karpe_test2.csv", delimiter=',')
+    print (txt)
+    position = txt[:,-3:]
+    print (position)
+    rounded_position = np.round(position/0.1)*0.1
+    print(rounded_position)
+    all_txt = np.concatenate((txt[:,:-3], rounded_position), axis = 1)
+    print (all_txt)
+    print ("hi!")

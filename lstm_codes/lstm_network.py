@@ -18,6 +18,7 @@ class RONet:
         self.alpha = args.alpha
         self.beta = args.beta
         self.gamma = args.gamma
+        self.grid = args.grid_size
 
         if args.is_multimodal:
             self.set_placeholders_for_multimodal()
@@ -78,6 +79,8 @@ class RONet:
                                             shape=[None,5, 3],
                                               # shape=[None, 3],
                                             name='output_placeholder')
+    def get_scale_for_round(self, scale):
+        self.position_scale = scale
 ##################################################
 #Preprocessing: Unidirectional, non-multimodal
 ##################################################
@@ -374,6 +377,29 @@ class RONet:
         self.concatenate_second_layer_output()
         self.get_attentioned_second_layer_output()
 
+    def round_position(self):
+        '''
+        range : 1 = grid_size : transformed_grid_size
+        transformed_grid_size = grid_size / range
+        scale = 1 / range
+
+        Therefore, transformed_grid_size = grid_size * scale
+
+        '''
+        transformed_grid_x_size = self.position_scale[0]*self.grid
+        transformed_grid_y_size = self.position_scale[1]*self.grid
+        transformed_grid_z_size = self.position_scale[2]*self.grid
+
+        round_x = tf.round(tf.divide(self.pose_pred[:,:,0], transformed_grid_x_size))*transformed_grid_x_size
+        round_y = tf.round(tf.divide(self.pose_pred[:,:,1], transformed_grid_y_size))*transformed_grid_y_size
+        round_z = tf.round(tf.divide(self.pose_pred[:,:,2], transformed_grid_z_size))*transformed_grid_z_size
+
+        round_x = tf.reshape(round_x, [-1, self.sequence_length, 1])
+        round_y = tf.reshape(round_y, [-1, self.sequence_length, 1])
+        round_z = tf.reshape(round_z, [-1, self.sequence_length, 1])
+
+        self.pose_pred = tf.concat((round_x,round_y, round_z), axis = 2)
+
 ##################################################
             #Builing RO Nets
 ##################################################
@@ -417,6 +443,7 @@ class RONet:
         self.pose_pred = tf.reshape(fc_layer, [-1, self.sequence_length, self.output_size])
 
 
+        self.round_position()
 ##################################################
             #Building loss
 ##################################################

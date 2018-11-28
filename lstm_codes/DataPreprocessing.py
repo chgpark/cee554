@@ -5,10 +5,11 @@ import numpy as np
 from random import shuffle
 import os
 class DataManager:
-    def __init__(self, train_files_dir, sequence_length, num_uwb):
-        self.dir = train_files_dir
-        self.seq_length = sequence_length
-        self.num_uwb = num_uwb
+    def __init__(self, args):
+        self.dir = args.train_data
+        self.seq_length = args.sequence_length
+        self.num_uwb = args.num_uwb
+        self.grid = args.grid_size
         # scaler saves min / max value of data
        ##########Usage##########
         # scalar = MinMaxScaler()
@@ -24,26 +25,37 @@ class DataManager:
    ##################################################
                  #Preprocessing parts
    ##################################################
-    def set_all_train_data_list(self):
+    def set_all_train_data_list(self, generating_grid):
         train_file_list = os.listdir(self.dir)
 
         self.train_files_dir= []
         for train_file in train_file_list:
            self.train_files_dir.append(os.path.join(self.dir, train_file))
 
-        self.train_data_list = []
-        for train_file_dir in self.train_files_dir:
-            print ("Load " + train_file_dir)
-            a = np.loadtxt(train_file_dir, delimiter=',')
-            self.train_data_list.append(a)
+        if generating_grid:
+            self.train_data_list = []
+            for train_file_dir in self.train_files_dir:
+                print ("Load " + train_file_dir)
+                train_data = np.loadtxt(train_file_dir, delimiter=',')
+                position_in_train_data = train_data[:, self.num_uwb : self.num_uwb + 3]
+                rounded_position = np.round(position_in_train_data/self.grid) * self.grid
+                rounded_train_data = np.concatenate((train_data[:,:self.num_uwb], rounded_position), axis = 1)
+                self.train_data_list.append(rounded_train_data)
+
+        else:
+            self.train_data_list = []
+            for train_file_dir in self.train_files_dir:
+                print ("Load " + train_file_dir)
+                train_data = np.loadtxt(train_file_dir, delimiter=',')
+                self.train_data_list.append(train_data)
 
     def set_val_data(self, val_data_dir):
         self.train_data_list = []
         val_data = np.loadtxt(val_data_dir, delimiter=',')
         self.train_data_list.append(val_data)
 
-    def fitDataForMinMaxScaler(self):
-        self.set_all_train_data_list()
+    def fitDataForMinMaxScaler(self, generating_grid = True):
+        self.set_all_train_data_list(generating_grid)
 
         xy = self.train_data_list[0].copy()
         if (len(self.train_data_list) > 1):

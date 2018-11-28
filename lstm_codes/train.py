@@ -35,7 +35,7 @@ p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
 p.add_argument('--network_type', type=str, default = 'bi') #uni / bi
 p.add_argument('--is_multimodal', type=bool, default = True) #True / False
-
+p.add_argument('--grid_size', type=float, default = 0.01)
 #Coefficients of loss term
 p.add_argument('--alpha', type=float, default = 1)
 p.add_argument('--beta', type=float, default = 0)
@@ -43,8 +43,8 @@ p.add_argument('--gamma', type=float, default = 0)
 
 args = p.parse_args()
 
-data_parser = DataPreprocessing.DataManager(args.train_data, args.sequence_length, args.num_uwb)
-data_parser.fitDataForMinMaxScaler()
+data_parser = DataPreprocessing.DataManager(args)
+data_parser.fitDataForMinMaxScaler(generating_grid = True)
 data_parser.transform_all_data()
 
 print ("Loading train data for multimodal...")
@@ -72,6 +72,7 @@ writer_train = tf.summary.FileWriter(args.save_dir + '/train') #, sess.graph)
 
 tf.reset_default_graph()
 ro_net = RONet(args)
+ro_net.get_scale_for_round(data_parser.scaler_for_prediction.scale_)
 
 #terms for learning rate decay
 global_step = tf.Variable(0, trainable=False)

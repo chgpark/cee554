@@ -4,7 +4,7 @@ import numpy as np
 pp = pprint.PrettyPrinter(indent=4)
 sess = tf.InteractiveSession()
 
-hidden_size = 5
+hidden_size = 3
 num_anchor = 4
 seq_length = 4
 
@@ -34,47 +34,20 @@ with tf.variable_scope("22"):
 indices = [[1,2,],[0,1]]
 
 depth = 3
-b = tf.one_hot(indices, depth, on_value = 1.0, off_value = 0.0, axis = -1)
 
+with tf.Session() as sess:
+    sess.run(tf.global_variables_initializer())
+    print (outputs.eval())
+    round_value0 = tf.round(tf.divide(outputs[:,:,0], 0.001))
+    round_value1 = tf.round(tf.divide(outputs[:,:,1], 0.001))
+    round_value2 = tf.round(tf.divide(outputs[:,:,2], 0.001))
+    round_value0 = tf.reshape(round_value0, [2, 4, 1])
+    round_value1 = tf.reshape(round_value1, [2, 4, 1])
+    round_value2 = tf.reshape(round_value2, [2, 4, 1])
 
-
-#
-print (b.eval())
-
-
-# def get_vector(sequence_input):
-#     a = []
-#     batch_size_of_seq = sequence_input.shape[0]
-#     sequence_size_of_seq = sequence_input.shape[1]
-#     for i in range(batch_size_of_seq):
-#         sequence = sequence_input[i]
-#         vector = []
-#         for j in range(sequence_size_of_seq - 1):
-#             v = sequence[j + 1] - sequence[j]
-#             vector.append(v.tolist())
-#         a.append(vector)
-#
-#     return np.array(a)
-#
-# a= get_vector(x_data1)
-# b= get_vector(x_data2)
-# print (a)
-# # print (tf.reduce_sum(tf.square(a)).eval())
-# # print (np.linalg.norm([1,2]))
-# norm_a =  np.linalg.norm(a, axis = 2)+0.00000001
-# norm_b =  np.linalg.norm(b, axis = 2)+0.00000001
-
-
-# d = tf.constant(10, dtype= tf.float64)
-# print (a*b)
-# print (tf.reduce_mean(1 - (tf.reduce_sum(a*b, axis = 2)/(norm_a*norm_b))).eval())
-# c = tf.add(a,d)
-# print (c.eval())
-# print (a*b/(norm_a*norm_b))
-# print (np.dot(a,b)/(norm_a* norm_b))
-# print (np.dot([1,2],[2,3])/np.linalg.norm([1,2]))
-# outputs2 = tf.convert_to_tensor(outputs2)
-
-# pp.pprint(outputs2.eval())
-# print ("concatenate")
+    round_val = tf.concat((round_value0*0.001, round_value1*0.001, round_value2*0.001), axis = 2)
+    print (round_val.eval())
+    #
+    # print (outputs.shape)
+# #
 

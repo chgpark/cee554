@@ -25,7 +25,7 @@ class DataManager:
    ##################################################
                  #Preprocessing parts
    ##################################################
-    def set_all_train_data_list(self, generating_grid):
+    def set_all_target_data_list(self, generating_grid):
         train_file_list = os.listdir(self.dir)
 
         self.train_files_dir= []
@@ -55,7 +55,7 @@ class DataManager:
         self.train_data_list.append(val_data)
 
     def fitDataForMinMaxScaler(self, generating_grid = True):
-        self.set_all_train_data_list(generating_grid)
+        self.set_all_target_data_list(generating_grid)
 
         xy = self.train_data_list[0].copy()
         if (len(self.train_data_list) > 1):
@@ -173,9 +173,8 @@ class DataManager:
         self.quaternion_data = []
 
         for train_data in self.train_data_list:
-            robot_position = train_data[:,self.num_uwb: self.num_uwb + 3]  # Close as label
-            robot_quaternion = train_data[:,self.num_uwb+3:]
-
+            robot_position = train_data[:, self.num_uwb: self.num_uwb + 3]  # Close as label
+            robot_quaternion = train_data[:, self.num_uwb+3:]
 
             for i in range(self.seq_length-1, len(robot_position)):
                 self.position_data.append(robot_position[i])

@@ -10,14 +10,14 @@ import argparse
 import csv
 from search_min_loss_file import search_min_loss_meta_file
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3' #,1,2,3'
+os.environ['CUDA_VISIBLE_DEVICES'] = '2' #,1,2,3'
 tf.set_random_seed(777)  # reproducibilityb
 # hyper parameters
 p =argparse.ArgumentParser()
 
 #FOR TRAIN
 #Train folder is essential for data_parser.fitDataForMinMaxScaler()!!
-p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/train_Karpe_181025/")
+p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/train_Karpe_181102/")
 
 p.add_argument('--lr', type=float, default = 0.0001)
 p.add_argument('--decay_rate', type=float, default = 0.7)
@@ -34,8 +34,11 @@ p.add_argument('--first_layer_output_size', type=int, default = 400)
 p.add_argument('--second_layer_output_size', type=int, default = 500)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
-p.add_argument('--network_type', type=str, default = 'test') #uni / bi
+p.add_argument('--network_type', type=str, default = 'bi') #uni / bi
 p.add_argument('--is_multimodal', type=bool, default = True) #True / False
+
+p.add_argument('--dropout_prob', type=float, default = 0.95)
+p.add_argument('--grid_size', type=float, default = 0.01)
 #Loss terms
 p.add_argument('--alpha', type=float, default = 1) #True / False
 p.add_argument('--beta', type=float, default = 0)
@@ -43,7 +46,7 @@ p.add_argument('--gamma', type=float, default = 0) #True / False
 
 #FOR TEST
 p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test_cudnn2/")
-p.add_argument('--test_data', type=str, default='inputs/np_test_data_1.csv')
+p.add_argument('--test_data', type=str, default='/home/shapelim/RONet/val_Karpe_181102/1103_Karpe_test1.csv')
 # p.add_argument('--test_data', type=str, default='inputs/np_test_2.csv')
 
 p.add_argument('--file_name', type=str, default='1123_test_1_bimul')
@@ -56,7 +59,7 @@ min_loss_meta_file_name = search_min_loss_meta_file(args.load_model_dir)
 
 print ("Meta files: ", min_loss_meta_file_name)
 
-data_parser = DataPreprocessing.DataManager(args.train_data, args.sequence_length, args.num_uwb)
+data_parser = DataPreprocessing.DataManager(args)
 data_parser.fitDataForMinMaxScaler()
 data_parser.transform_all_data()
 

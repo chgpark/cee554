@@ -37,6 +37,9 @@ class RONet:
 
         self.set_loss_terms()
 
+    def get_scale_for_round(self, scale):
+        self.position_scale = scale
+
     def set_placeholders(self):
         self.X_data = tf.placeholder(dtype=tf.float32,
                                      shape=[None, self.sequence_length, self.input_size])
@@ -80,8 +83,7 @@ class RONet:
                                             shape=[None,5, 3],
                                               # shape=[None, 3],
                                             name='output_placeholder')
-    def get_scale_for_round(self, scale):
-        self.position_scale = scale
+
 ##################################################
 #Preprocessing: Unidirectional, non-multimodal
 ##################################################
@@ -378,7 +380,7 @@ class RONet:
         self.concatenate_second_layer_output()
         self.get_attentioned_second_layer_output()
 
-    def round_position(self):
+    def round_predicted_position(self):
         '''
         range : 1 = grid_size : transformed_grid_size
         transformed_grid_size = grid_size / range
@@ -440,10 +442,11 @@ class RONet:
         # self.output = tf.reshape(self.output, [-1, self.sequence_length*self.second_layer_output_size*2])
         # self.pose_pred = tf.contrib.layers.fully_connected(self.output, self.output_size)
         '''For test for all sequeneces!!'''
-        fc_layer = tf.contrib.layers.fully_connected(self.output, self.sequence_length*self.output_size)
+        fc_layer = tf.contrib.layers.fully_connected(self.output, self.second_layer_output_size)
+        fc_layer = tf.contrib.layers.fully_connected(fc_layer, self.sequence_length*self.output_size)
         self.pose_pred = tf.reshape(fc_layer, [-1, self.sequence_length, self.output_size])
 
-        self.round_position()
+        # self.round_position()
 ##################################################
             #Building loss
 ##################################################

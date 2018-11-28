@@ -63,7 +63,7 @@ MSE = 0
 ##################################################
 #                     PF
 ##################################################
-for i in range(len(test_csv)):#1143): #(2318):
+for i in range(len(test_csv)):
     range_data = test_csv[:,:-3]
 
     for j, uwb in enumerate(uwb_list):
@@ -74,7 +74,7 @@ for i in range(len(test_csv)):#1143): #(2318):
     particles_list, weights_list = MCL.resampling()
     position = MCL.getEstimate(particles_list, weights_list)
     MCL.scatterParticle(particles_list)
-    # MCL.scatterParticleWithLiDAR(particles_list, 0.60)
+    # MCL.scatterParticleWithZ(particles_list, 0.60)
 
     result_container.append_data(position.x, position.y, position.z)
     # MCLviz.show(MCL)

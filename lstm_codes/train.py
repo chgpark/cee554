@@ -14,15 +14,15 @@ tf.set_random_seed(777)  # reproducibilityb
 p =argparse.ArgumentParser()
 
 #FOR TRAIN
-p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/train_Karpe_181025/")
-p.add_argument('--val_data', type=str, default="./inputs/np_test_data_1.csv")
-p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test_cudnn2/")
+p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/train_Karpe_181102/")
+p.add_argument('--val_data', type=str, default="/home/shapelim/RONet/val_Karpe_181102/")
+p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test_222322/")
 
-p.add_argument('--lr', type=float, default = 0.0008)
+p.add_argument('--lr', type=float, default = 0.0009)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 5)
-p.add_argument('--epoches', type=int, default = 10)
-p.add_argument('--batch_size', type=int, default = 11257)
+p.add_argument('--epoches', type=int, default = 1)
+p.add_argument('--batch_size', type=int, default = 2) #11257)
 
 #NETWORK PARAMETERS
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
@@ -58,7 +58,8 @@ print ("Complete!")
 print(d0_data.shape) #Data size / sequence length / uwb num
 
 print ("Loading val data...")
-data_parser.set_val_data(args.val_data)
+data_parser.set_dir(args.val_data)
+data_parser.set_all_target_data_list(generating_grid=True)
 data_parser.transform_all_data()
 # data_parser.set_data_for_8multimodal()
 data_parser.set_data_for_8multimodal_all_sequences()
@@ -74,8 +75,9 @@ writer_train = tf.summary.FileWriter(args.save_dir + '/train') #, sess.graph)
 
 tf.reset_default_graph()
 ro_net = RONet(args)
-ro_net.get_scale_for_round(data_parser.scaler_for_prediction.scale_)
 
+ro_net.get_scale_for_round(data_parser.scaler_for_prediction.scale_)
+ro_net.round_predicted_position()
 #terms for learning rate decay
 global_step = tf.Variable(0, trainable=False)
 
@@ -116,8 +118,7 @@ with tf.Session() as sess:
         for i in range(iter): #iter = int(len(X_data)/batch_size)
             step = step + 1
             idx = i* args.batch_size
-            l, _, summary, position_e, mag_e, direction_e = sess.run([ro_net.loss, ro_net.optimize, merged, ro_net.error_btw_gt_and_pred,
-                                      ro_net.magnitude_of_pose_pred, ro_net.direction_error_btw_gt_and_pred],
+            l, _, summary = sess.run([ro_net.loss, ro_net.optimize, merged],
                                     feed_dict={ro_net.d0_data: d0_data[idx: idx + args.batch_size],
                                                ro_net.d1_data: d1_data[idx: idx + args.batch_size],
                                                ro_net.d2_data: d2_data[idx: idx + args.batch_size],
@@ -152,10 +153,7 @@ with tf.Session() as sess:
         tqdm_range.set_description('train ' +'{0:.7f}'.format(loss_of_epoch)+' | val '+'{0:.7f}'.format(loss_of_val))
         tqdm_range.refresh()
     f = open(args.save_dir + "final_losses.txt", 'w')
-    f.write("Alpha : " + str(args.alpha) + " Beta : " +str(args.beta) + ' Gamma: ' + str(args.gamma) + '\n')
-    f.write("Position error: " + str(position_e) +'\n')
-    f.write("Mag error: " + str(mag_e) +'\n')
-    f.write("Direction error: " + str(direction_e) +'\n')
+    f.write("loss : " + str(loss_of_epoch) + '\n')
     f.close()
 
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="shapelim@143.248.122.59:22">
+  <component name="PublishConfigData" autoUpload="Always" serverName="shapelim@143.248.122.59:22" showNewOnSourceInSync="false" showNewOnTargetInSync="false">
     <serverData>
       <paths name="shapelim@143.248.122.59:22">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/shapelim/workspace/KRoC" local="$PROJECT_DIR$" />
+            <mapping deploy="/home/shapelim/workspace/2019IROS" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>

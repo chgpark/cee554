@@ -45,10 +45,10 @@ SOFT_COLORSET = [(241/255.0, 187/255.0, 165/255.0), (174/255.0, 245/255.0, 231/2
 LINE = ['-', ':', '--', '-']
 # LABEL = ['LSTM', 'GRU', 'Bi-LSTM', 'Stacked Bi-LSTM']
 LABEL = ['uni', 'bi', 'multimodal_uni', 'multimodal_bi']
-
+  #marker o x + * s:square d:diamond p:five_pointed star
 SMOOTHNESS = 200
 
-
+DATA_INTERVAL = 20
 
 class Visualization:
     def __init__(self, args):
@@ -93,23 +93,14 @@ class Visualization:
 
             x_axis = range(distance_error.shape[0])
 
-            # distance_error_refined = self.getRefinedData(distance_error, 30)
-            # x_axis_refined = self.getRefinedData(x_axis, 30)
+            distance_error_refined = self.getRefinedData(distance_error, 30)
+            x_axis_refined = self.getRefinedData(x_axis, 30)
 
             # x_axis_refined, distance_error_refined = self.getSmoothedData(x_axis_refined, distance_error_refined)
-            # x_axis = self.getRefinedData( x_axis, self.args.data_interval)
             # distance_error = self.getRefinedData( distance_error, self.args.data_interval)
-            #marker o x + * s:square d:diamond p:five_pointed star
-
-
-            # plt.plot(x_axis, distance_error, color= SOFT_COLORSET[i], #marker = marker,
-            #                 linestyle = linestyle,label = self.label[i])
 
             plt.plot(x_axis, distance_error, color= self.color_set[i], #marker = marker,
                             linestyle = LINE[i],label = self.label[i])
-            # plt.scatter(x_for_marker, distance_error_for_marker, color= self.color_set[i], marker = marker,
-            #                 linestyle = linestyle) #,label = self.label[i])
-
         plt.legend()
         plt.grid(True)
         plt.xlim(0,1300)
@@ -265,7 +256,7 @@ class Visualization:
             # predicted_y = self.getRefinedData( predicted_y, self.args.data_interval)
             # predicted_z = self.getRefinedData( predicted_z, self.args.data_interval)
             #
-            # predicted_x, predicted_y, predicted_z = self.getSmoothedData_3D(predicted_x, predicted_y, predicted_z)
+            predicted_x, predicted_y, predicted_z = self.getSmoothedData_3D(predicted_x, predicted_y, predicted_z)
 
             plt.plot(predicted_x, predicted_y, predicted_z, color = self.color_set[i], #marker= marker,
                             linestyle = LINE[i],label = self.label[i])
@@ -293,7 +284,6 @@ if __name__ == "__main__":
 
     viz = Visualization(args)
     viz.set_3D_plot_name("hi.png")
-    viz.drawResult3D()
     # test = np.loadtxt("train_yz3D.csv", delimiter= ',')
     # n = 10
     # for c, m, zlow, zhigh in [('r', 'o', -50, -25), ('b', '^', -30, -5)]:

@@ -37,7 +37,7 @@ p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
 p.add_argument('--network_type', type=str, default = 'bi') #uni / bi
 p.add_argument('--is_multimodal', type=bool, default = True) #True / False
 
-p.add_argument('--dropout_prob', type=float, default = 0.95)
+p.add_argument('--dropout_prob', type=float, default = 1.0)
 p.add_argument('--grid_size', type=float, default = 0.01)
 #Loss terms
 p.add_argument('--alpha', type=float, default = 1) #True / False
@@ -48,12 +48,10 @@ p.add_argument('--gamma', type=float, default = 0) #True / False
 p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test_cudnn2/")
 p.add_argument('--test_data', type=str, default='/home/shapelim/RONet/val_Karpe_181102/1103_Karpe_test1.csv')
 # p.add_argument('--test_data', type=str, default='inputs/np_test_2.csv')
-
-p.add_argument('--file_name', type=str, default='1123_test_1_bimul')
 ###########
 args = p.parse_args()
 
-FILE_NAME = args.file_name
+FILE_NAME = args.test_data.split('.')[0].split('/')[-1]
 
 min_loss_meta_file_name = search_min_loss_meta_file(args.load_model_dir)
 

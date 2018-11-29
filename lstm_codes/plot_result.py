@@ -256,7 +256,7 @@ class Visualization:
             # predicted_y = self.getRefinedData( predicted_y, self.args.data_interval)
             # predicted_z = self.getRefinedData( predicted_z, self.args.data_interval)
             #
-            predicted_x, predicted_y, predicted_z = self.getSmoothedData_3D(predicted_x, predicted_y, predicted_z)
+            # predicted_x, predicted_y, predicted_z = self.getSmoothedData_3D(predicted_x, predicted_y, predicted_z)
 
             plt.plot(predicted_x, predicted_y, predicted_z, color = self.color_set[i], #marker= marker,
                             linestyle = LINE[i],label = self.label[i])

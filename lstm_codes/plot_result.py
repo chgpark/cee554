@@ -282,7 +282,7 @@ if __name__ == "__main__":
     def randrange(n, vmin, vmax):
         return (vmax - vmin)*np.random.rand(n) + vmin
 
-    viz = Visualization(args)
+    viz = Visualization()
     viz.set_3D_plot_name("hi.png")
     # test = np.loadtxt("train_yz3D.csv", delimiter= ',')
     # n = 10

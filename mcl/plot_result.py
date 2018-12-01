@@ -94,16 +94,23 @@ class Visualization:
         plt.title(plot_title)
         # plt.rcParams['Figure.figsize'] = (14, 3)
         plt.figure(figsize=(7,4.326))
-        for i, csv in enumerate(target_files_csv):
+        for i, csv_file in enumerate(target_files_csv):
 
-            distance_error = self._calDistanceError3D(csv, is_for_comparison = True)
+            distance_error = self._calDistanceError3D(csv_file, is_for_comparison = True)
             distance_error = distance_error*100
 
             x_axis = range(distance_error.shape[0])
 
-            distance_error = self.getRefinedData(distance_error, SMOOTHNESS)
-            x_axis = self.getRefinedData(x_axis, SMOOTHNESS)
+            # distance_error = self.getRefinedData(distance_error, SMOOTHNESS)
+            # x_axis = self.getRefinedData(x_axis, SMOOTHNESS)
 
+
+            file_name = str(i) +'.csv'
+            result_file = open(file_name, 'w', encoding='utf-8', newline='')
+            wr = csv.writer(result_file)
+            for j in range(len(x_axis)):
+                wr.writerow([distance_error[j]])
+            result_file.close()
             # x_axis_refined, distance_error_refined = self.getSmoothedData(x_axis_refined, distance_error_refined)
             # x_axis = self.getRefinedData( x_axis, SMOOTHNESS)
             # distance_error = self.getRefinedData( distance_error, SMOOTHNESS)
@@ -307,7 +314,6 @@ if __name__ == "__main__":
 
     # viz.drawResult3D(args.pf, args.bi) #, args.pargs.bi) #, args.bi)
 
-    viz.drawResult3D(args.pf_wo_z, args.pf,  args.mul)#, args.bi)
     viz.plotDistanceError3D(args.pf_wo_z, args.pf,  args.mul)#, args.bi)
 
     # test = np.loadtxt("train_yz3D.csv", delimiter= ',')

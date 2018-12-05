@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.9.3)  5 DEC 2018 20:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.9.3)  5 DEC 2018 22:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -528,18 +528,12 @@ Overfull \hbox (7.19392pt too wide) in paragraph at lines 100--102
 
 
  <./CE554_traditional_to_RNN.pdf>]
-<CE554_networks.pdf, id=60, 963.6pt x 542.025pt>
+<CE554_networks.pdf, id=59, 963.6pt x 542.025pt>
 File: CE554_networks.pdf Graphic file (type pdf)
 <use CE554_networks.pdf>
 Package pdftex.def Info: CE554_networks.pdf  used on input line 130.
 (pdftex.def)             Requested size: 505.83878pt x 284.52756pt.
-
-Underfull \vbox (badness 1895) has occurred while \output is active []
-
- [2]
-Underfull \vbox (badness 1590) has occurred while \output is active []
-
- [3 <./CE554_networks.pdf>]
+ [2] [3 <./CE554_networks.pdf>]
 <descriptionSystem.png, id=309, 393.72093pt x 225.84375pt>
 File: descriptionSystem.png Graphic file (type png)
 <use descriptionSystem.png>
@@ -560,6 +554,12 @@ File: savingThread.png Graphic file (type png)
 <use savingThread.png>
 Package pdftex.def Info: savingThread.png  used on input line 210.
 (pdftex.def)             Requested size: 221.14479pt x 112.59695pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 <calib.png, id=312, 331.2375pt x 130.23656pt>
 File: calib.png Graphic file (type png)
 <use calib.png>
@@ -578,8 +578,7 @@ Overfull \hbox (7.22687pt too wide) in paragraph at lines 218--230
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[4 <./descriptionSystem.png> <./actualSystem.jpg> <./savingThread.png> <./calib
-.png> <./calib2.jpg>]
+[4 <./descriptionSystem.png> <./actualSystem.jpg> <./savingThread.png>]
 <PF_multimodal_comparison2.png, id=324, 462.528pt x 346.896pt>
 File: PF_multimodal_comparison2.png Graphic file (type png)
 <use PF_multimodal_comparison2.png>
@@ -608,7 +607,7 @@ Package pdftex.def Info: PF_multimodal_error2.png  used on input line 285.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-(./cee554.bbl
+(./cee554.bbl [5 <./calib.png> <./calib2.jpg>]
 Underfull \hbox (badness 2875) in paragraph at lines 169--172
 []\T1/ptm/m/n/8 M.-T. Lu-ong, H. Pham, and C. D. Man-ning, ``Ef-fec-tive ap-
  []
@@ -625,8 +624,8 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[5] [6 <./PF_multimodal_comparison2.png> <./PF_multimodal_error1.png> <./PF_mul
-timodal_error2.png>] (./cee554.aux)
+[6 <./PF_multimodal_comparison2.png> <./PF_multimodal_error1.png> <./PF_multimo
+dal_error2.png>] (./cee554.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -634,11 +633,11 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  6006 strings out of 494587
  88761 string characters out of 6177954
- 169219 words of memory out of 5000000
+ 168219 words of memory out of 5000000
  9527 multiletter control sequences out of 15000+600000
  117310 words of font info for 141 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 42i,10n,40p,1323b,483s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,10n,40p,1705b,483s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2018/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2018/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2018/texmf-dist/fonts/type1
@@ -652,7 +651,7 @@ s/type1/urw/courier/ucrr8a.pfb><c:/texlive/2018/texmf-dist/fonts/type1/urw/time
 s/utmb8a.pfb><c:/texlive/2018/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/
 texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2018/texmf
 -dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on cee554.pdf (6 pages, 618491 bytes).
+Output written on cee554.pdf (6 pages, 620021 bytes).
 PDF statistics:
  382 PDF objects out of 1000 (max. 8388607)
  180 compressed objects within 2 object streams

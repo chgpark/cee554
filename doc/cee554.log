@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.8.29)  6 DEC 2018 14:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.8.29)  6 DEC 2018 14:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -538,41 +538,35 @@ Package pdftex.def Info: CE554_networks.pdf  used on input line 130.
 <descriptionSystem.png, id=309, 393.72093pt x 225.84375pt>
 File: descriptionSystem.png Graphic file (type png)
 <use descriptionSystem.png>
-Package pdftex.def Info: descriptionSystem.png  used on input line 194.
+Package pdftex.def Info: descriptionSystem.png  used on input line 191.
 (pdftex.def)             Requested size: 113.82446pt x 65.28967pt.
 <actualSystem.jpg, id=310, 301.125pt x 225.84375pt>
 File: actualSystem.jpg Graphic file (type jpg)
 <use actualSystem.jpg>
-Package pdftex.def Info: actualSystem.jpg  used on input line 200.
+Package pdftex.def Info: actualSystem.jpg  used on input line 197.
 (pdftex.def)             Requested size: 113.82446pt x 85.37007pt.
 
-Overfull \hbox (7.22687pt too wide) in paragraph at lines 192--204
+Overfull \hbox (7.22687pt too wide) in paragraph at lines 189--201
  [][][] 
  []
 
 <figure2.png, id=311, 1038.88126pt x 492.84125pt>
 File: figure2.png Graphic file (type png)
 <use figure2.png>
-Package pdftex.def Info: figure2.png  used on input line 210.
+Package pdftex.def Info: figure2.png  used on input line 211.
 (pdftex.def)             Requested size: 221.14479pt x 104.90598pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 <calib.png, id=312, 331.2375pt x 130.23656pt>
 File: calib.png Graphic file (type png)
 <use calib.png>
-Package pdftex.def Info: calib.png  used on input line 221.
+Package pdftex.def Info: calib.png  used on input line 223.
 (pdftex.def)             Requested size: 159.35703pt x 62.65591pt.
 <calib2.jpg, id=313, 169.38281pt x 225.84375pt>
 File: calib2.jpg Graphic file (type jpg)
 <use calib2.jpg>
-Package pdftex.def Info: calib2.jpg  used on input line 227.
+Package pdftex.def Info: calib2.jpg  used on input line 229.
 (pdftex.def)             Requested size: 68.29189pt x 91.05957pt.
 
-Overfull \hbox (7.22687pt too wide) in paragraph at lines 219--231
+Overfull \hbox (7.22687pt too wide) in paragraph at lines 221--233
  [][][] 
  []
 
@@ -581,12 +575,12 @@ Overfull \hbox (7.22687pt too wide) in paragraph at lines 219--231
 <PF_multimodal_comparison2.png, id=319, 462.528pt x 346.896pt>
 File: PF_multimodal_comparison2.png Graphic file (type png)
 <use PF_multimodal_comparison2.png>
-Package pdftex.def Info: PF_multimodal_comparison2.png  used on input line 260.
+Package pdftex.def Info: PF_multimodal_comparison2.png  used on input line 261.
 
 (pdftex.def)             Requested size: 227.64894pt x 170.73744pt.
 File: PF_multimodal_comparison2.png Graphic file (type png)
 <use PF_multimodal_comparison2.png>
-Package pdftex.def Info: PF_multimodal_comparison2.png  used on input line 266.
+Package pdftex.def Info: PF_multimodal_comparison2.png  used on input line 267.
 
 (pdftex.def)             Requested size: 227.64894pt x 170.73744pt.
 
@@ -596,12 +590,12 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <PF_multimodal_error1.png, id=321, 505.89pt x 312.2064pt>
 File: PF_multimodal_error1.png Graphic file (type png)
 <use PF_multimodal_error1.png>
-Package pdftex.def Info: PF_multimodal_error1.png  used on input line 278.
+Package pdftex.def Info: PF_multimodal_error1.png  used on input line 279.
 (pdftex.def)             Requested size: 227.64894pt x 140.49158pt.
 <PF_multimodal_error2.png, id=322, 505.89pt x 312.2064pt>
 File: PF_multimodal_error2.png Graphic file (type png)
 <use PF_multimodal_error2.png>
-Package pdftex.def Info: PF_multimodal_error2.png  used on input line 284.
+Package pdftex.def Info: PF_multimodal_error2.png  used on input line 285.
 (pdftex.def)             Requested size: 227.64894pt x 140.49158pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -652,7 +646,7 @@ ts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/u
 rw/times/utmbi8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/
 utmr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmri8a.pf
 b>
-Output written on cee554.pdf (6 pages, 644873 bytes).
+Output written on cee554.pdf (6 pages, 644880 bytes).
 PDF statistics:
  382 PDF objects out of 1000 (max. 8388607)
  180 compressed objects within 2 object streams

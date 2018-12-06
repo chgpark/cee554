@@ -181,12 +181,12 @@ In deep learning, the number of layers stacked is getting large, intending to in
 
 \subsection{Experimental environment} 
 
-Our experimental system consists of an UWB(ultra wideband) sensor tag and eight UWB sensor anchors, the motion capture system with 12 cameras, and a mobile robot and a small form-factor computer. UWB tag and anchors are attached to a robot and landmarks respectively. The tag and anchor system operates like that an anchor transmits Ultra wideband signal and a tag receives the signal and measures the range between two devices. Each UWB sensors have a transceiver that is DW1000 UWB-chip made by Decawave and supports 6 RF bands from 3.5 GHz to 6.5 GHz and has centimeter-level accuracy. The motion capture system is Eagle Digital Realtime System of Motion Analysis corporation that operates by using Stereo Pattern Recognition that is a kind of photogrammetry based on the epipolar geometry and the triangulation methodology and the system has < 1mm accuracy and > 500 frames/s frame rate. The mobile robot is iClebo Kobuki from Yujinrobot that has 70cm/s maximum velocity. The computer is a Gigabyte Ultra compact PC kit that CPU is Intel dual core i7 / 2.7GHz and RAM is DDR4SDRAM.
-A deep learning framework used for our network is Pytorch 0.4.0 on Python 3.6. The network is trained on the machine that OS is Ubuntu mate 16.04 LTS and GPUs are GTX 1080ti and GTX titan. The network inferences on the same machine that we used for training.
+\textcolor{red}{Our experimental system consists of a UWB(ultra wideband) sensor tag and eight anchors that have a UWB transceiver, the motion capture system with 12 cameras, a mobile robot and a small form-factor computer. UWB sensor anchors attached to landmarks become the end points of the range measurements. The anchors transmit the UWB signal. A UWB sensor tag attached to a robot becomes the opposite side end point of the measurements. The tag receives the signal and measures the range between two devices. Each UWB transceiver, DW1000 UWB-chip made by Decawave, supports 6 RF bands from 3.5 GHz to 6.5 GHz. It measures in centimeter-level accuracy . The motion capture system is Eagle Digital Realtime system of motion analysis corporation that operates with the principle of stereo pattern recognition that is a kind of photogrammetry based on the epipolar geometry and the triangulation methodology. The system has < 1mm accuracy. A mobile robot used in experiment is iClebo Kobuki from Yujinrobot that has 70 cm/s maximum velocity . The small form-factor computer is a gigabyte Ultra compact PC. Deep learning framework used for our network is pytorch 0.4.0 on python 3.6. The network inferences on the same setting.
+	Fig. \ref{setting} shows the description of experimental environment. The UWB tag is attached to mobile robot that has a small compact computer. The UWB anchors are attached to stands that have two different heights. The anchors are positioned randomly in the square space. Inside of the space, a mobile robot goes on various random paths by experimenters. During the robot is going on, the data is saved in the computer. The distance data used for input data is measured by the UWB sensors. The global position data used for ground truth is measured by the motion capture system. After time synchronizing these two kinds of data, these are paired in a dataset. Each path has one dataset. All the paths are different.}
 
 \subsection{Training/Test Dataset}
 
-Fig. \ref{setting} shows the description of experimental environment. The UWB tag and a small computer are attached to mobile robot. The UWB anchors are attached to stands that have two different heights and positioned randomly. Inside of the square space, a mobile robot goes on various random paths. And the distance data is measured by the UWB tag and the global position data is measured by the motion capture system. In the computer two different thread receive these two kinds of data separately. So, to synchronize these data, we make an independent thread that concatenates and saves these data and the thread is running at 20Hz frequency shown in Fig. 3. After the experiment, we separate the entire data to two types of dataset, some are the training datasets and others are test datasets. Each type of datasets is independent of each other.
+\textcolor{red}{In the computer there are two different thread. One receives UWB sensor data. The other one receives global position data. To synchronize time, we make an independent thread that concatenates and saves these data at the same time. The data is saved at 20Hz frequency. The description is shown in Fig. \ref{fig:sync}. After the experiment, we separate the entire dataset to two types, some are the training datasets and others are test datasets.}
 \begin{figure}[h]
 	\centering
 	\begin{subfigure}[b]{.25\textwidth}
@@ -201,39 +201,36 @@ Fig. \ref{setting} shows the description of experimental environment. The UWB ta
 		\label{setting:sub2} 	
 		\caption{Actual.}
 	\end{subfigure}
-	\caption{Experimental system overview.}
+	\caption{Experimental system overview. In (a), anchors are attached to landmarks. A tag is attached to a mobile robot. The robot goes on random paths in square space. (b) shows actual experiment situation.}
 	\label{setting}
 	
 \end{figure}
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=.9\linewidth]{savingThread}
-	\caption{Data syncronizing method.}
+	\includegraphics[width=.9\linewidth]{figure2}
+	\caption{\textcolor{blue}{Data syncronizing method. UWB distance data and the global position data are received to different thread. To syncronize time, another independent thread concatenates and saves these two kinds of data.}}
 	\label{fig:sync}
 \end{figure}
+\subsection{Sensor calibration}
+\textcolor{blue}{In addition, to use the distance data for traditional RO-slam we should calibrate the distance from each anchors. To calibrate it, we follow the method in the baseline paper.} \textcolor{red}{As you can see in Fig. \ref{calibration}(a), we measure the data from a tag to each anchors at the points where the actual distance was measured by 1m, 2m, 3m, 4m. Fig. \ref{calibration}(b) shows that four different anchors are measured at the same time.} By using the linear regression, we compute the ratio between the measurement and the actual distance. And the ratios of each anchor are used to calibrate it.
 
-In addition, to use the distance data for traditional RO-slam we calibrate the distance from each anchors. As you can see in Fig. 4, we measure the data from a tag to each anchors at the points where the actual distance was measured by 1m, 2m, 3m, 4m. By using the linear regression, we compute the ratio between the measurement and the actual distance. And the ratios of each anchor are used to calibrate it.
 \begin{figure}[h]
 	\centering
 	\begin{subfigure}[b]{.35\textwidth}
 		\centering
 		\includegraphics[width=.9\textwidth]{calib}
 		\label{calibration:sub1} 	
-		\caption{Description.}
+		\caption{}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.15\textwidth}
 		\centering
 		\includegraphics[width=0.9\textwidth]{calib2}
 		\label{calibration:sub2} 	
-		\caption{Actual}
+		\caption{}
 	\end{subfigure}
-	\caption{Sensor calibration overview.}
-	\label{fig:test}
+	\caption{Sensor calibration overview. (a) shows The formation between a tag and an anchor. (b) shows that four anchors are measured at the same time.}
+	\label{calibration}
 \end{figure} 
-
-\subsection{Comparison to traditional algorithm}
-
-To verify our proposal that RNNs can estimate the robot's position through varying range data, we trained our RNN-based multimodal architecture. Plus, to compare to previous traditional SLAM algorithm, we also estimate robot's position by particle filter(PF) based algorithm.
 
 \subsection{Training Loss}
 
@@ -246,6 +243,8 @@ Let $\Theta$ be the parameters of our RNN model, then our final goal is to find 
 \end{equation}  
 
 \section{Results}
+
+ \textcolor{green}{To verify our proposal that RNNs can estimate the robot's position through varying range data, we trained our RNN-based multimodal architecture. Plus, to compare to previous traditional SLAM algorithm, we also estimate robot's position by particle filter(PF) based algorithm.}
 
  As illustrated in Experiment session, train data are our own data gathered by UWB sensors and motion capture camera, so neural networks take range-only measurements as input and output robot's position. Ground truth data is robot's position measured by eagle eye motion capturer, whose error is in mm units. The results of trajectory prediction are shown in Fig. \ref{fig:trajectory} and Root-Mean-Squared Error (RMSE) are shown in Table \ref{RMSE_table}.
 

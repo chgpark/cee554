@@ -18,11 +18,6 @@
 \fi
 #2}}
 
-\bibitem{staras1972accuracy}
-H.~Staras and S.~Honickman, ``The accuracy of vehicle location by trilateration
-  in a dense urban environment,'' \emph{IEEE Transactions on Vehicular
-  Technology}, vol.~21, no.~1, pp. 38--43, 1972.
-
 \bibitem{thomas2005revisiting}
 F.~Thomas and L.~Ros, ``Revisiting trilateration for robot localization,''
   \emph{IEEE Transactions on robotics}, vol.~21, no.~1, pp. 93--101, 2005.

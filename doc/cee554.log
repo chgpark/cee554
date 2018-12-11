@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.7.23)  11 DEC 2018 15:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.7.23)  12 DEC 2018 07:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -514,10 +514,10 @@ File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 <CE554_traditional_to_RNN.pdf, id=1, 963.6pt x 542.025pt>
 File: CE554_traditional_to_RNN.pdf Graphic file (type pdf)
 <use CE554_traditional_to_RNN.pdf>
-Package pdftex.def Info: CE554_traditional_to_RNN.pdf  used on input line 100.
+Package pdftex.def Info: CE554_traditional_to_RNN.pdf  used on input line 101.
 (pdftex.def)             Requested size: 252.91203pt x 142.26378pt.
 
-Overfull \hbox (7.19392pt too wide) in paragraph at lines 100--102
+Overfull \hbox (7.19392pt too wide) in paragraph at lines 101--103
  [][] 
  []
 
@@ -528,21 +528,21 @@ Overfull \hbox (7.19392pt too wide) in paragraph at lines 100--102
 <CE554_networks.pdf, id=59, 963.6pt x 542.025pt>
 File: CE554_networks.pdf Graphic file (type pdf)
 <use CE554_networks.pdf>
-Package pdftex.def Info: CE554_networks.pdf  used on input line 130.
+Package pdftex.def Info: CE554_networks.pdf  used on input line 131.
 (pdftex.def)             Requested size: 505.83878pt x 284.52756pt.
  [2] [3 <./CE554_networks.pdf>]
 <descriptionSystem.png, id=309, 393.72093pt x 225.84375pt>
 File: descriptionSystem.png Graphic file (type png)
 <use descriptionSystem.png>
-Package pdftex.def Info: descriptionSystem.png  used on input line 191.
+Package pdftex.def Info: descriptionSystem.png  used on input line 192.
 (pdftex.def)             Requested size: 113.82446pt x 65.28967pt.
 <actualSystem.jpg, id=310, 301.125pt x 225.84375pt>
 File: actualSystem.jpg Graphic file (type jpg)
 <use actualSystem.jpg>
-Package pdftex.def Info: actualSystem.jpg  used on input line 197.
+Package pdftex.def Info: actualSystem.jpg  used on input line 198.
 (pdftex.def)             Requested size: 113.82446pt x 85.37007pt.
 
-Overfull \hbox (7.22687pt too wide) in paragraph at lines 189--201
+Overfull \hbox (7.22687pt too wide) in paragraph at lines 190--202
  [][][] 
  []
 
@@ -552,20 +552,20 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <figure2.png, id=311, 1038.88126pt x 492.84125pt>
 File: figure2.png Graphic file (type png)
 <use figure2.png>
-Package pdftex.def Info: figure2.png  used on input line 211.
+Package pdftex.def Info: figure2.png  used on input line 212.
 (pdftex.def)             Requested size: 221.14479pt x 104.90598pt.
 <calib.png, id=312, 331.2375pt x 130.23656pt>
 File: calib.png Graphic file (type png)
 <use calib.png>
-Package pdftex.def Info: calib.png  used on input line 223.
+Package pdftex.def Info: calib.png  used on input line 226.
 (pdftex.def)             Requested size: 159.35703pt x 62.65591pt.
 <calib2.jpg, id=313, 169.38281pt x 225.84375pt>
 File: calib2.jpg Graphic file (type jpg)
 <use calib2.jpg>
-Package pdftex.def Info: calib2.jpg  used on input line 229.
+Package pdftex.def Info: calib2.jpg  used on input line 232.
 (pdftex.def)             Requested size: 68.29189pt x 91.05957pt.
 
-Overfull \hbox (7.22687pt too wide) in paragraph at lines 221--233
+Overfull \hbox (7.22687pt too wide) in paragraph at lines 224--236
  [][][] 
  []
 
@@ -576,13 +576,13 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: 1103_Karpe_trajectory_test1.png Graphic file (type png)
 <use 1103_Karpe_trajectory_test1.png>
 Package pdftex.def Info: 1103_Karpe_trajectory_test1.png  used on input line 24
-2.
+5.
 (pdftex.def)             Requested size: 227.64894pt x 170.73744pt.
 <1103_Karpe_trajectory_test3.png, id=316, 462.528pt x 346.896pt>
 File: 1103_Karpe_trajectory_test3.png Graphic file (type png)
 <use 1103_Karpe_trajectory_test3.png>
-Package pdftex.def Info: 1103_Karpe_trajectory_test3.png  used on input line 24
-8.
+Package pdftex.def Info: 1103_Karpe_trajectory_test3.png  used on input line 25
+1.
 (pdftex.def)             Requested size: 227.64894pt x 170.73744pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -591,29 +591,26 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: 1103_Karpe_Distance_error_result__test1.png Graphic file (type png)
 <use 1103_Karpe_Distance_error_result__test1.png>
 Package pdftex.def Info: 1103_Karpe_Distance_error_result__test1.png  used on i
-nput line 260.
+nput line 263.
 (pdftex.def)             Requested size: 227.64894pt x 140.49158pt.
 <1103_Karpe_Distance_error_result__test3.png, id=318, 505.89pt x 312.2064pt>
 File: 1103_Karpe_Distance_error_result__test3.png Graphic file (type png)
 <use 1103_Karpe_Distance_error_result__test3.png>
 Package pdftex.def Info: 1103_Karpe_Distance_error_result__test3.png  used on i
-nput line 266.
+nput line 269.
 (pdftex.def)             Requested size: 227.64894pt x 140.49158pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [4 <./descriptionSystem.png> <./actualSystem.jpg> <./figure2.png (PNG copy)>]
 (./cee554.bbl [5 <./calib.png> <./calib2.jpg>]
-Underfull \hbox (badness 2875) in paragraph at lines 169--172
+Underfull \hbox (badness 2875) in paragraph at lines 164--167
 []\T1/ptm/m/n/8 M.-T. Lu-ong, H. Pham, and C. D. Man-ning, ``Ef-fec-tive ap-
  []
 
-
-Underfull \vbox (badness 3250) has occurred while \output is active []
-
- [6 <./1103_Karpe_trajectory_test1.png> <./1103_Karpe_trajectory_test3.png> <./
-1103_Karpe_Distance_error_result__test1.png> <./1103_Karpe_Distance_error_resul
-t__test3.png>])
+[6 <./1103_Karpe_trajectory_test1.png> <./1103_Karpe_trajectory_test3.png> <./1
+103_Karpe_Distance_error_result__test1.png> <./1103_Karpe_Distance_error_result
+__test3.png>])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -629,10 +626,10 @@ Before submitting the final camera ready copy, remember to:
 
 ] (./cee554.aux) ) 
 Here is how much of TeX's memory you used:
- 6016 strings out of 494587
- 89210 string characters out of 6177953
- 167240 words of memory out of 5000000
- 9536 multiletter control sequences out of 15000+600000
+ 6015 strings out of 494587
+ 89190 string characters out of 6177953
+ 167236 words of memory out of 5000000
+ 9535 multiletter control sequences out of 15000+600000
  117310 words of font info for 141 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  42i,10n,40p,1724b,483s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -649,7 +646,7 @@ xlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2018
 s/type1/urw/times/utmb8a.pfb><c:/texlive/2018/texmf-dist/fonts/type1/urw/times/
 utmbi8a.pfb><c:/texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/te
 xlive/2018/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on cee554.pdf (7 pages, 750542 bytes).
+Output written on cee554.pdf (7 pages, 750212 bytes).
 PDF statistics:
  389 PDF objects out of 1000 (max. 8388607)
  184 compressed objects within 2 object streams

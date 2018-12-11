@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2018)
+This is BibTeX, Version 0.99d (TeX Live 2018/W32TeX)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: cee554.aux
 The style file: IEEEtran.bst
@@ -15,45 +15,45 @@ Database file #2: ./MyBib.bib
 Warning--empty journal in smith2018object
 
 Done.
-You've used 30 entries,
+You've used 34 entries,
             3975 wiz_defined-function locations,
-            1300 strings with 19442 characters,
-and the built_in function-call counts, 24832 in all, are:
-= -- 1964
-> -- 605
-< -- 234
-+ -- 343
-- -- 97
-* -- 1184
-:= -- 3566
-add.period$ -- 70
-call.type$ -- 30
-change.case$ -- 30
-chr.to.int$ -- 573
-cite$ -- 31
-duplicate$ -- 1751
-empty$ -- 2029
-format.name$ -- 123
-if$ -- 5783
+            1320 strings with 20216 characters,
+and the built_in function-call counts, 28292 in all, are:
+= -- 2221
+> -- 701
+< -- 265
++ -- 397
+- -- 113
+* -- 1346
+:= -- 4033
+add.period$ -- 79
+call.type$ -- 34
+change.case$ -- 34
+chr.to.int$ -- 657
+cite$ -- 35
+duplicate$ -- 1993
+empty$ -- 2331
+format.name$ -- 143
+if$ -- 6601
 int.to.chr$ -- 0
-int.to.str$ -- 30
-missing$ -- 289
-newline$ -- 110
-num.names$ -- 30
-pop$ -- 683
+int.to.str$ -- 34
+missing$ -- 330
+newline$ -- 122
+num.names$ -- 34
+pop$ -- 792
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 1936
+skip$ -- 2203
 stack$ -- 0
-substring$ -- 1378
-swap$ -- 1461
-text.length$ -- 43
+substring$ -- 1578
+swap$ -- 1656
+text.length$ -- 46
 text.prefix$ -- 0
 top$ -- 5
 type$ -- 0
 warning$ -- 1
-while$ -- 116
-width$ -- 32
-write$ -- 302
+while$ -- 132
+width$ -- 36
+write$ -- 337
 (There was 1 warning)

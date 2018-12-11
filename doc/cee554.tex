@@ -98,8 +98,8 @@ We gathered our own dataset and tested in 2 cases exploiting eagle eye motion ca
 	%\subfigure[]{
 		%\includegraphics[height=4.5cm]{Drone_image_1}
 	\includegraphics[height=5cm]{CE554_traditional_to_RNN}
-	\label{fig:example}
-	\caption{System overview. A robot localizes its own pose through distance data and the derivative of distance data. }
+	\label{fig:example222}
+	\caption{System overview. A robot localizes its own pose through distance data and the derivative of distance data. \textcolor{green}{We replace whole probabilistic approach with the deep learning-based ene-to-end mapping.}}
 	
 \end{figure}
 
@@ -111,7 +111,7 @@ RO-SLAM, Long Short-Term Memory(LSTM) model and applications of LSTMs to solve d
 \subsubsection{RO-SLAM}
 
 
-\textcolor{red}{SLAM is a technique for building the map information while localizing the position of the robot while moving. Localization of the SLAM predicts the current position of the robot using the landmark measured by the sensor, and mapping locates the terrain object based on the pose of the robot. Research on this technology has been actively carried out, and researches and techniques have been summarized.}In 2006, the ad doc sensor network consisting of range detection beacon was applied to SLAM technology for various ranges. This technology integrates node-to-node measurements to reduce drift and expedite node-map convergence \cite{djugash2006range} In 2008, the technique to consistently combine the observation information considering the uncertainty was studied through comparing the experimental data with the actual robot and simulation using Ultra Wide-Band (UWB) devices and Rao-Balckwellized Particle Filter (RBPF) \cite{blanco2008pure}.  In 2012, a simple and efficient algorithm for position recognition with high accuracy and low computational complexity was researched with ultrasonic sensors \cite{yang2012efficient}. In recent years, 3-dimensional-based SLAM has also been under active research and development. In 2013, a localization mapping approach of a wireless sensor network (WSN) node was studied through a centralized EKF-SLAM-based optimization research \cite{fabresse2013undelayed}. In addition, in 2014, a method of minimizing noise and localizing Unmanned Aerial Vehicle (UAV) by using  range-only measurement while simultaneously mapping the position of the wireless range sensors were proposed \cite{fabresse2014robust}. 
+\textcolor{red}{SLAM is a technique for building the map information while localizing the position of the robot while moving. Localization of the SLAM predicts the current position of the robot using the landmark measured by the sensor, and mapping locates the terrain object based on the pose of the robot. Research on this technology has been actively carried out, and researches and techniques have been summarized.} In 2006, the \textcolor{blue}{ad hoc} sensor network consisting of range detection beacon was applied to SLAM technology for various ranges. This technology integrates node-to-node measurements to reduce drift and expedite node-map convergence \cite{djugash2006range} In 2008, the technique to consistently combine the observation information considering the uncertainty was studied through comparing the experimental data with the actual robot and simulation using Ultra Wide-Band (UWB) devices and Rao-Balckwellized Particle Filter (RBPF) \cite{blanco2008pure}.  In 2012, a simple and efficient algorithm for position recognition with high accuracy and low computational complexity was researched with ultrasonic sensors \cite{yang2012efficient}. In recent years, 3-dimensional-based SLAM has also been under active research and development. In 2013, a localization mapping approach of a wireless sensor network (WSN) node was studied through a centralized EKF-SLAM-based optimization research \cite{fabresse2013undelayed}. In addition, in 2014, a method of minimizing noise and localizing Unmanned Aerial Vehicle (UAV) by using  range-only measurement while simultaneously mapping the position of the wireless range sensors were proposed \cite{fabresse2014robust}. 
 SLAM based on range measurement has been continuously researched and developed then applied to various fields. In this paper, we propose a novel technology that applying deep-learning to range-only SLAM that derives accurate range and robot position measurement through in-depth learning. 
 
 
@@ -141,15 +141,15 @@ By virtue of the LSTM architecture that has memory gates and units that enable l
 \subsubsection{Localization with Deep Learning}
 There have been many approaches combining Simultaneous Localization and Mapping (SLAM) with deep learning, aiming to overcome the limitations on SLAM only technique such as difficulty on tuning the proper parameters in different environments and recovering an exact scale. Actually, those researches are showing the superior performance to the traditional SLAM approaches.
 
-
 One of the popular SLAM techniques with deep learning is CNN-SLAM \cite{tateno2017cnn} which takes Convolutional Neural Networks (CNNs) to precisely predict the depth from a single image without any scene-based assumptions or geometric constraints, allowing them to recover the absolute scale of reconstruction. Another approach using deep learning for localization is Deep VO \cite{clark2017vinet} In this method, Recurrent Convolutional Neural Networks (RCNNs) is utilized. Specifically, feature representation is learned by Convolutional Neural Networks and Sequential information and motion dynamics are obtained by deep Recurrent Neural Networks without using any module in the classic VO pipeline.
-
-
 
 \subsubsection{Applications of LSTMs}
 
 There are many variations of LSTM architecture. As studies of deep learning are getting popular, various modified architectures of LSTM have been proposed for many tasks in a wide area of science and engineering. Because LSTM is powerful when dealing with sequential data and infering output by using previous inputs, LSTM is utilized to estimate pose by being attached to the end part of deep learning architecture \cite{wang2017deepvo, kendall2015posenet, turan2018deep}  as a stacked form of LSTM. In addition, LSTM takes many various data as input; LSTM is exploited for sequential modeling using LiDAR scan data \cite{gladh2016deep}, images \cite{walch2017image, wang2017deepvo}, IMU \cite{ordonez2016deep}, a fusion of IMU and images \cite{clark2017vinet}. \textcolor{red}{Since existing RO-SLAM performs localization using low-dimensional data, it is difficult to estimate even if the value deviates slightly from the model. In addition, LSTM has the advantage of being able to solve long-term dependence problem of traditional RNN, and it is possible to model it by non-linear mapping through analyzing the current situation without modeling data characteristics separately. Therefore, we propose RO SLAM technology using deep learning based SLAM which applies the advantages of LSTM and deep learning to solve the disadvantages of RO SLAM.}
 
+\subsubsection{\textcolor{red}{Attention}}
+
+ \textit{Attention} is powerful module nowadays and mostly improves performance of neural network. Originally neural networks treats information equally. But, using attention layer, neural networks can be ATTENDED what it should be examined closely. At the first time, attention is utilized at natural language processing area for improving translation performance\cite{luong2015effective}. But nowadays, attention layer is employed in many areas to improve the performance of the networks. For example, Jaderbeg \textit{et al.}\cite{jaderberg2015spatial} introduced the attention layer to let the neural networks attend to spatial information. In addition, attention is even utilized to pose estimation and optimization\cite{parisotto2018global}, detection\cite{zhu2018towards}, and video captioning\cite{xu2017learning} 
 
 \section{Our approaches}
 
@@ -213,7 +213,7 @@ In deep learning, the number of layers stacked is getting large, intending to in
 	\label{fig:sync}
 \end{figure}
 
-\subsection{Sensor calibration}
+\subsection{Sensor calibration}c
  \textcolor{red}{In addition, to use the distance data for traditional RO-slam we should calibrate the distance from each anchors. To calibrate it, we follow the method in the baseline paper.} \textcolor{blue}{As you can see in Fig. \ref{calibration}(a), we measure the data from a tag to each anchors at the points where the actual distance was measured by 1m, 2m, 3m, 4m. Fig. \ref{calibration}(b) shows that four different anchors are measured at the same time.} By using the linear regression, we compute the ratio between the measurement and the actual distance. And the ratios of each anchor are used to calibrate it.
 
 \begin{figure}[h]
@@ -234,8 +234,45 @@ In deep learning, the number of layers stacked is getting large, intending to in
 	\label{calibration}
 \end{figure} 
 
+
+\begin{figure*}[h]
+	\centering
+	\begin{subfigure}[b]{.50\textwidth}
+		\centering
+		\includegraphics[width=.9\textwidth]{1103_Karpe_trajectory_test1}
+		\label{fig:trajectory1} 	
+		\caption{}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.50\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{1103_Karpe_trajectory_test3}
+		\label{fig:trajectory2} 	
+		\caption{}
+	\end{subfigure}
+	\caption{Trajectories estimated by particle filter-based algorithm and our neural networks' architecture. (a)A trajectory of test1 data (b)A trajectory of test2 data}
+	\label{fig:trajectory}
+\end{figure*} 
+
+\begin{figure*}[h]
+	\centering
+	\begin{subfigure}[b]{.50\textwidth}
+		\centering
+		\includegraphics[width=.9\textwidth]{1103_Karpe_Distance_error_result__test1}
+		\label{fig:error1} 	
+		\caption{}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.50\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{1103_Karpe_Distance_error_result__test3}
+		\label{fig:error2} 	
+		\caption{}
+	\end{subfigure}
+	\caption{The distance error graphes with time step. (a) The Distance error of test 1 data  and (b)distance error of test 2 data}
+	\label{fig:error}
+\end{figure*} 
+
 \subsection{Training Loss}
-The network is programmed by Tensorflow, which is deep learning library of python trained by using a GTX 1080 Ti and GTX Titan. The Adam optimizr is exploited to train the network during 1000 epochs with 0.0002 learning rate, 0.7 decay rate, and 5 decay step. Besides, Dropout is introduced to prevent the models from overfitting. 
+The network is programmed by Tensorflow, which is deep learning library of python trained by using a GTX 1080 Ti and GTX Titan. The Adam optimizr is exploited to train the network during 1300 epochs with 0.00025 learning rate, 0.7 decay rate, and 5 decay step. Besides, Dropout is introduced to prevent the models from overfitting. 
 
 Let $\Theta$ be the parameters of our RNN model, then our final goal is to find optimal parameters $\Theta^{*}$ for localization by minimizing Mean Square Error (MSE) of Euclidean distance between ground truth position $Y_k$ and estimated position $\hat{Y_k}$.
 
@@ -247,79 +284,48 @@ Let $\Theta$ be the parameters of our RNN model, then our final goal is to find 
 
  \textcolor{green}{To verify our proposal that RNNs can estimate the robot's position through varying range data, we trained our RNN-based multimodal architecture. Plus, to compare to previous traditional SLAM algorithm, we also estimate robot's position by particle filter(PF) based algorithm.}
 
- As illustrated in Experiment session, train data are our own data gathered by UWB sensors and motion capture camera, so neural networks take range-only measurements as input and output robot's position. Ground truth data is robot's position measured by eagle eye motion capturer, whose error is in mm units. The results of trajectory prediction are shown in Fig. \ref{fig:trajectory} and Root-Mean-Squared Error (RMSE) are shown in Table \ref{RMSE_table}.
+ As illustrated in Experiment session, train data are our own data gathered by UWB sensors and motion capture camera, so neural networks take range-only measurements as input and output robot's position. Ground truth data is robot's position measured by eagle eye motion capturer, whose error is in mm units. The results of trajectory prediction are shown in Fig. \ref{fig:trajectory} and Root-Mean-Squared Error (RMSE) are shown in Table \ref{table:RMSE_table}. Note that out experiment is conducted on mobile robot, so we can pre-estimates that z position of robot is almost similar while robot is running. 
 
- We set two test trajectory cases. However, unexpectedly, it was uncertain to say that which algorithm has better performance. In case of test1, Performance of PF based localization is better than performance of our architecture, whereas performance of RNN-based neural networks architecture is better in case of test2. 
+ We set two test trajectory cases: an square path and zigzag path. an The results shows that it has better performance than established probabilistic-based approach. In both cases, performance of our networks  is better that of particle filter. RMSE of our networks in test1 is 3.928cm and 4.119cm in test2.
  
- We analyzed the reason why our multimodal architecture is less accurate. First of all, We investigate distance error graph with time step, as shown in \ref{fig:error}. The graph indicates that our deep learning based RNN architecture have a tendency that sometimes it estimates wrong position that is far from the Ground truth. So we conclude that it is because train data is too small to infer position correctly. Due to little amount of train data that only just consist of 11258 time step, it is insufficient to cover all possible 3D space where robot can explore. Because neural networks infer outputs based on train data, neural networks do not estimate the space where is not included in train data. 
- 
- 
- \begin{figure*}[h]
- 	\centering
- 	\begin{subfigure}[b]{.50\textwidth}
- 		\centering
- 		\includegraphics[width=.9\textwidth]{PF_multimodal_comparison2}
- 		\label{fig:trajectory1} 	
- 		\caption{}
- 	\end{subfigure}%
- 	\begin{subfigure}[b]{.50\textwidth}
- 		\centering
- 		\includegraphics[width=0.9\textwidth]{PF_multimodal_comparison2}
- 		\label{fig:trajectory2} 	
- 		\caption{}
- 	\end{subfigure}
- 	\caption{Trajectories estimated by particle filter-based algorithm and our neural networks' architecture. (a)A trajectory of test1 data (b)A trajectory of test2 data}
- 	\label{fig:trajectory}
- \end{figure*} 
- 
- \begin{figure*}[h]
- 	\centering
- 	\begin{subfigure}[b]{.50\textwidth}
- 		\centering
- 		\includegraphics[width=.9\textwidth]{PF_multimodal_error1}
- 		\label{fig:error1} 	
- 		\caption{}
- 	\end{subfigure}%
- 	\begin{subfigure}[b]{.50\textwidth}
- 		\centering
- 		\includegraphics[width=0.9\textwidth]{PF_multimodal_error2}
- 		\label{fig:error2} 	
- 		\caption{}
- 	\end{subfigure}
- 	\caption{The distance error graphes with time step. (a) The Distance error of test 1 data  and (b)distance error of test 2 data}
- 	\label{fig:error}
- \end{figure*} 
+ We also verified effectiveness of attention layer. It was confirmed that the performance of the networks with the attention layer is improved compared to the networks without the attention layer.
   
- Secondly, we realized that many articles about estimating position using deep learning architecture tend to generate grid maps to reduce error caused by the noise of that neural networks, but our neural networks output float directly. As shown in Fig. \ref{fig:error}. 
- 
- Therefore, we can conclude that the performance improves as the non-linearity of the architecture increases.
- 
- 
-\begin{table}[h]
-	\centering
-	\begin{tabular}{cclcl}
-		\hline
-		\multicolumn{5}{c}{The results of RMSE{[}cm{]}}                                                                  \\ \hline
-		\multicolumn{1}{c|}{Model}                    & \multicolumn{2}{c|}{Test1} & \multicolumn{2}{c}{Test2}      \\ \hline
-		\multicolumn{1}{c|}{Particle filter-based}    & \multicolumn{2}{c|}{\textbf{9.1827}}     & \multicolumn{2}{c}{9.8803}          \\
-		\multicolumn{1}{c|}{Bidirectional Multimodal} & \multicolumn{2}{c|}{11.3301}     & \multicolumn{2}{c}{\textbf{9.7528}}
-	\end{tabular}
-	\caption{Root mean squared error of each case}
-	\label{RMSE_table}
-\end{table}
+ \begin{table}[h]
+ 	\begin{tabular}{lllcc}
+ 		\hline
+ 		\multicolumn{5}{c}{The results of RMSE{[}cm{]}}                                                                          \\ \hline
+ 		\multicolumn{3}{c|}{Model}                                        & \multicolumn{1}{c|}{Test1}          & Test2          \\ \hline
+ 		\multicolumn{3}{l|}{Particle Filter-based w/o pre-estimates of z} & \multicolumn{1}{c|}{11.253}         & 9.195          \\
+ 		\multicolumn{3}{l|}{Particle Filter-based}                        & \multicolumn{1}{c|}{5.525}          & 5.258          \\
+ 		\multicolumn{3}{l|}{Multimodal(Ours)}                                   & \multicolumn{1}{c|}{4.225}          & 4.311          \\
+ 		\multicolumn{3}{l|}{Multimodal(Ours) + attention}                       & \multicolumn{1}{c|}{\textbf{3.928}} & \textbf{4.119}
+ 	\end{tabular}
+ 	\caption{Root mean squared error of each case}
+ 	\label{table:RMSE_table}
+ \end{table}
+
 
 
 \section{Conclusion}
 
 In this paper, we proposed a novel approach to range-only SLAM using multimodal-based RNN models and tested our architectures in two test data.
 
-Using deep learning, our structure directly learns the end-to-end mapping between distance data and robot position. The multimodal bidirectional stacked LSTM structure exhibits the precise estimates of robot positions, but some cases, it is less accurate than traditional SLAM algorithm. Therefore, we could check the possibility that our multimodal LSTM-based structure can substitute traditional algorithms if we make our train data more sufficient. 
+Using deep learning, our structure directly learns the end-to-end mapping between distance data and robot position. The multimodal bidirectional stacked LSTM structure exhibits the precise estimates of robot positions. We set two test trajectory cases: an square path and zigzag path. an The results shows that it has better performance than established probabilistic-based approach. In both cases, performance of our networks  is better that of particle filter. RMSE of our networks in test1 is 3.928cm and 4.119cm in test2. Therefore, we could check the possibility that our multimodal LSTM-based structure can substitute traditional algorithms
 
-As a future work, because train dataset is insufficient, the proposed method needs to be tested in more-rich train data situation. Besides, we will modify end parts of our neural networks architecturethe utilizing generating grid maps to check whether RNNs can deal with the rank-deficient range only measurements well.
+As a future work, because we conducted on just localization, this approach may not be operated when locations of sensors are changed. Therefore, the proposed method needs to be revised for precise estimates even though locations of anchors are changed. 
 
 \bibliographystyle{IEEEtran}
 % argument is your BibTeX string definitions and bibliography database(s)
 \bibliography{./IEEEabrv,./MyBib}
 
+\section{Contribution}
+
+Hyungtae Lim: Implementing networks, drawing up a plan for experiment, planning experiment schedules, and extracting results.
+
+Junseok Lee: Survey on related works, producing the parts needed experiments by 3D printer, operating Kobuki robot for gathering train data
+
+Changgyu Park: Data preprocessing, writing code for result plotting, implementing the system that gathers dataset 
+
+Yeeun Kim: Survey on related works and established RO SLAM codes, study about LSTM.
 
 \end{document}

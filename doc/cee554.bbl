@@ -170,6 +170,27 @@ M.-T. Luong, H.~Pham, and C.~D. Manning, ``Effective approaches to
   attention-based neural machine translation,'' \emph{arXiv preprint
   arXiv:1508.04025}, 2015.
 
+\bibitem{jaderberg2015spatial}
+M.~Jaderberg, K.~Simonyan, A.~Zisserman, \emph{et~al.}, ``Spatial transformer
+  networks,'' in \emph{Advances in neural information processing systems},
+  2015, pp. 2017--2025.
+
+\bibitem{parisotto2018global}
+E.~Parisotto, D.~S. Chaplot, J.~Zhang, and R.~Salakhutdinov, ``Global pose
+  estimation with an attention-based recurrent network,'' \emph{arXiv preprint
+  arXiv:1802.06857}, 2018.
+
+\bibitem{zhu2018towards}
+X.~Zhu, J.~Dai, L.~Yuan, and Y.~Wei, ``Towards high performance video object
+  detection,'' in \emph{Proceedings of the IEEE Conference on Computer Vision
+  and Pattern Recognition}, 2018, pp. 7210--7218.
+
+\bibitem{xu2017learning}
+J.~Xu, T.~Yao, Y.~Zhang, and T.~Mei, ``Learning multimodal attention lstm
+  networks for video captioning,'' in \emph{Proceedings of the 2017 ACM on
+  Multimedia Conference}.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2017, pp.
+  537--545.
+
 \bibitem{dyer2015transition}
 C.~Dyer, M.~Ballesteros, W.~Ling, A.~Matthews, and N.~A. Smith,
   ``Transition-based dependency parsing with stack long short-term memory,''

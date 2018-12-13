@@ -35,8 +35,8 @@ p.add_argument('--second_layer_output_size', type=int, default = 500)
 p.add_argument('--third_layer_output_size', type=int, default = 500)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
-p.add_argument('--network_type', type=str, default = 'bi') #uni / bi
-p.add_argument('--is_multimodal', type=bool, default = True) #True / False
+p.add_argument('--network_type', type=str, default = 'fc') #uni / bi / fc
+p.add_argument('--is_multimodal', type=bool, default = False) #True / False
 
 p.add_argument('--dropout_prob', type=float, default = 1.0)
 p.add_argument('--grid_size', type=float, default = 0.01)

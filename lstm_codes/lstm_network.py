@@ -24,21 +24,16 @@ class RONet:
 
         if args.is_multimodal:
             self.set_placeholders_for_multimodal()
-            if self.network_type == 'uni':
-                self.build_RO_Net_multimodal()
-            elif self.network_type == 'bi':
-                self.build_RO_Net_bi_multimodal_one_layer()
-
+            if self.network_type == 'bi':
+                self.build_RO_Net_bi_multimodal()
         else:
             self.set_placeholders()
-            if self.network_type == 'uni':
-                self.build_RO_Net_uni()
-            elif self.network_type == 'bi':
-                self.build_RO_Net_bi()
-
+            if self.network_type == 'fc':
+                self.build_FC_layer()
         self.set_loss_terms()
 
     def get_scale_for_round(self, scale):
+        '''Utilized for grid generation'''
         self.position_scale = scale
 
     def set_placeholders(self):
@@ -351,38 +346,6 @@ class RONet:
             attention = tf.nn.sigmoid(self.output)
             self.output = attention*self.output + self.output
 
-    def set_preprocessed_uni_LSTM(self):
-        self.set_preprocessing_LSTM_for_4_uwb()
-        self.get_attentioned_preprocessed_data()
-
-    def set_preprocessed_bi_LSTM(self):
-        self.set_preprocessing_bi_LSTM_for_8_uwb()
-        self.concatenate_preprocessed_data_for_bi_LSTM()
-        self.get_attentioned_preprocessed_data()
-
-    def set_preprocessed_multimodal_LSTMs(self):
-        self.set_multimodal_Preprocessing_LSTM_for_4_uwb()
-        self.concatenate_preprocessed_data_for_multimodal_uni_LSTM()
-        self.get_attentioned_preprocessed_data()
-
-    def set_preprocessed_multimodal_bi_LSTMs(self):
-        self.set_multimodal_Preprocessing_bi_LSTM_for_4_uwb()
-        self.concatenate_preprocessed_data_for_multimodal_bi_LSTM()
-        self.get_attentioned_preprocessed_data()
-
-    def set_preprocessed_8multimodal_bi_LSTMs(self):
-        self.set_multimodal_Preprocessing_bi_LSTM_for_8_uwb()
-        self.concatenate_preprocessed_data_for_8multimodal_bi_LSTM()
-        self.get_attentioned_preprocessed_data()
-
-    def set_stacked_bi_LSTM_with_attention(self):
-        self.set_first_layer_bi_LSTM()
-        self.concatenate_first_layer_output()
-        self.get_attentioned_first_layer_output()
-        self.set_second_layer_bi_LSTM()
-        self.concatenate_second_layer_output()
-        self.get_attentioned_second_layer_output()
-
     def round_predicted_position(self):
         '''
         range : 1 = grid_size : transformed_grid_size
@@ -409,30 +372,10 @@ class RONet:
 ##################################################
             #Builing RO Nets
 ##################################################
-    def build_RO_Net_uni(self):
-        self.set_preprocessed_uni_LSTM()
-        self.set_stacked_bi_LSTM_with_attention()
-        self.output = tf.reshape(self.output, [-1, self.sequence_length*self.second_layer_output_size*2])
-        self.pose_pred = tf.contrib.layers.fully_connected(self.output, self.output_size)
-
-    def build_RO_Net_bi(self):
-        self.set_preprocessed_bi_LSTM()
-        self.set_stacked_bi_LSTM_with_attention()
-        self.output = tf.reshape(self.output, [-1, self.sequence_length*self.second_layer_output_size*2])
-        fc_layer = tf.contrib.layers.fully_connected(self.output, self.sequence_length*self.output_size)
-        self.pose_pred = tf.reshape(fc_layer, [-1, self.sequence_length, self.output_size])
-
-    def build_RO_Net_multimodal(self):
-        self.set_preprocessed_multimodal_LSTMs()
-        self.set_stacked_bi_LSTM_with_attention()
-        self.output = tf.reshape(self.output, [-1, self.sequence_length*self.second_layer_output_size*2])
-        self.pose_pred = tf.contrib.layers.fully_connected(self.output, self.output_size)
-
     def build_RO_Net_bi_multimodal(self):
         self.set_multimodal_Preprocessing_bi_LSTM_for_8_uwb()
         self.concatenate_preprocessed_data_for_8multimodal_bi_LSTM()
         self.get_attentioned_preprocessed_data()
-
         self.set_first_layer_bi_LSTM()
         self.concatenate_first_layer_output()
         self.get_attentioned_first_layer_output()
@@ -447,16 +390,39 @@ class RONet:
         fc_layer = tf.contrib.layers.fully_connected(fc_layer, self.sequence_length*self.output_size)
         self.pose_pred = tf.reshape(fc_layer, [-1, self.sequence_length, self.output_size])
 
+    def build_FC_layer(self):
+        self.output = tf.reshape(self.X_data, [-1, self.sequence_length * self.input_size])
+        fc_layer = tf.contrib.layers.fully_connected(self.output, 128)
+        fc_layer = tf.contrib.layers.fully_connected(fc_layer, 256)
+        fc_layer = tf.contrib.layers.fully_connected(fc_layer, 512)
+        fc_layer = tf.contrib.layers.fully_connected(fc_layer, 1024)
+        # fc_layer = tf.contrib.layers.fully_connected(fc_layer, 2048)
+        fc_layer = tf.contrib.layers.fully_connected(fc_layer, 2048)
+        fc_layer = tf.contrib.layers.fully_connected(fc_layer, 1024)
+        fc_layer = tf.contrib.layers.fully_connected(fc_layer, 256)
+        fc_layer = tf.contrib.layers.fully_connected(fc_layer, 128)
+        fc_layer = tf.contrib.layers.fully_connected(fc_layer, self.sequence_length * self.output_size)
+        self.pose_pred = tf.reshape(fc_layer, [-1, self.sequence_length, self.output_size])
+
     def build_RO_Net_bi_multimodal_one_layer(self):
+
         self.set_multimodal_Preprocessing_bi_LSTM_for_8_uwb()
         self.concatenate_preprocessed_data_for_8multimodal_bi_LSTM()
         self.get_attentioned_preprocessed_data()
 
-        self.set_first_layer_bi_LSTM()
+        with tf.variable_scope("Stacked_bi_lstm_1st_layer"):
+            # outputs : tuple
+            cell_forward1 = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.first_layer_output_size)
+            cell_forward1 = tf.nn.rnn_cell.DropoutWrapper(cell_forward1, output_keep_prob= self.dropout_prob)
+            cell_backward1 = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.first_layer_output_size)
+            cell_backward1 = tf.nn.rnn_cell.DropoutWrapper(cell_backward1, output_keep_prob= self.dropout_prob)
+
+            # outputs : tuple
+            outputs, _states = tf.nn.bidirectional_dynamic_rnn(cell_forward1, cell_backward1, self.preprocessed_output, dtype=tf.float32)
+            self.layer_output_fw = outputs[0]
+            self.layer_output_bw = outputs[1]
+
         self.concatenate_first_layer_output()
-        # self.get_attentioned_first_layer_output()
-        # self.set_second_layer_bi_LSTM()
-        # self.concatenate_second_layer_output()
 
         self.output = tf.reshape(self.output, [-1, self.sequence_length*self.first_layer_output_size*2])
         # self.output = tf.reshape(self.output, [-1, self.sequence_length*self.second_layer_output_size*2])
@@ -466,7 +432,7 @@ class RONet:
         fc_layer = tf.contrib.layers.fully_connected(fc_layer, self.sequence_length*self.output_size)
         self.pose_pred = tf.reshape(fc_layer, [-1, self.sequence_length, self.output_size])
 
-        # self.round_position()
+
 ##################################################
             #Building loss
 ##################################################

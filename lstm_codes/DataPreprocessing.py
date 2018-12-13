@@ -63,7 +63,8 @@ class DataManager:
                 xy = np.concatenate((xy, train_data), axis = 0)
         # if (not prediction):
         self.scaler.fit(xy)
-        '''Below one is essential for test!!
+        '''
+            Below one is essential for test!!
             The reason why its range is self.num_uwb: self.num_uwb*3 is to able to operate wheter gt is position or pose.
         '''
         self.scaler_for_prediction.fit(xy[:, self.num_uwb:self.num_uwb+3])
@@ -80,6 +81,7 @@ class DataManager:
                  #Setting train data parts
     ##################################################
     def set_range_data(self):
+        '''For non-multimodal!'''
         self.X_data = []
         for train_data in self.train_data_list:
             x = train_data[:,:self.num_uwb]
@@ -89,7 +91,6 @@ class DataManager:
                 self.X_data.append(_x)
 
         self.X_data = np.array(self.X_data)
-
 
     def set_range_data_for_4multimodal(self):
         self.d0_data =[]
@@ -213,6 +214,7 @@ class DataManager:
     def set_data_for_8multimodal(self):
         self.set_range_data_for_8multimodal()
         self.set_gt_data()
+
 
     def set_data_for_8multimodal_all_sequences(self):
         self.set_range_data_for_8multimodal()

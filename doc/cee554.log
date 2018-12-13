@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.7.23)  12 DEC 2018 07:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.7.23)  12 DEC 2018 08:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -511,145 +511,92 @@ LaTeX Font Info:    Try loading font information for T1+pcr on input line 67.
 (c:/texlive/2018/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-<CE554_traditional_to_RNN.pdf, id=1, 963.6pt x 542.025pt>
-File: CE554_traditional_to_RNN.pdf Graphic file (type pdf)
-<use CE554_traditional_to_RNN.pdf>
-Package pdftex.def Info: CE554_traditional_to_RNN.pdf  used on input line 101.
-(pdftex.def)             Requested size: 252.91203pt x 142.26378pt.
 
-Overfull \hbox (7.19392pt too wide) in paragraph at lines 101--103
- [][] 
- []
-
-[1{c:/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+LaTeX Warning: Citation `thomas2005revisiting' on page 1 undefined on input lin
+e 90.
 
 
- <./CE554_traditional_to_RNN.pdf>]
-<CE554_networks.pdf, id=59, 963.6pt x 542.025pt>
-File: CE554_networks.pdf Graphic file (type pdf)
-<use CE554_networks.pdf>
-Package pdftex.def Info: CE554_networks.pdf  used on input line 131.
-(pdftex.def)             Requested size: 505.83878pt x 284.52756pt.
- [2] [3 <./CE554_networks.pdf>]
-<descriptionSystem.png, id=309, 393.72093pt x 225.84375pt>
-File: descriptionSystem.png Graphic file (type png)
-<use descriptionSystem.png>
-Package pdftex.def Info: descriptionSystem.png  used on input line 192.
-(pdftex.def)             Requested size: 113.82446pt x 65.28967pt.
-<actualSystem.jpg, id=310, 301.125pt x 225.84375pt>
-File: actualSystem.jpg Graphic file (type jpg)
-<use actualSystem.jpg>
-Package pdftex.def Info: actualSystem.jpg  used on input line 198.
-(pdftex.def)             Requested size: 113.82446pt x 85.37007pt.
-
-Overfull \hbox (7.22687pt too wide) in paragraph at lines 190--202
- [][][] 
- []
+LaTeX Warning: Citation `cho2010mobile' on page 1 undefined on input line 90.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figure2.png, id=311, 1038.88126pt x 492.84125pt>
-File: figure2.png Graphic file (type png)
-<use figure2.png>
-Package pdftex.def Info: figure2.png  used on input line 212.
-(pdftex.def)             Requested size: 221.14479pt x 104.90598pt.
-<calib.png, id=312, 331.2375pt x 130.23656pt>
-File: calib.png Graphic file (type png)
-<use calib.png>
-Package pdftex.def Info: calib.png  used on input line 226.
-(pdftex.def)             Requested size: 159.35703pt x 62.65591pt.
-<calib2.jpg, id=313, 169.38281pt x 225.84375pt>
-File: calib2.jpg Graphic file (type jpg)
-<use calib2.jpg>
-Package pdftex.def Info: calib2.jpg  used on input line 232.
-(pdftex.def)             Requested size: 68.29189pt x 91.05957pt.
-
-Overfull \hbox (7.22687pt too wide) in paragraph at lines 224--236
- [][][] 
- []
+LaTeX Warning: Citation `raghavan2010accurate' on page 1 undefined on input lin
+e 90.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: Citation `blanco2008pure' on page 1 undefined on input line 90.
 
-<1103_Karpe_trajectory_test1.png, id=314, 462.528pt x 346.896pt>
-File: 1103_Karpe_trajectory_test1.png Graphic file (type png)
-<use 1103_Karpe_trajectory_test1.png>
-Package pdftex.def Info: 1103_Karpe_trajectory_test1.png  used on input line 24
-5.
-(pdftex.def)             Requested size: 227.64894pt x 170.73744pt.
-<1103_Karpe_trajectory_test3.png, id=316, 462.528pt x 346.896pt>
-File: 1103_Karpe_trajectory_test3.png Graphic file (type png)
-<use 1103_Karpe_trajectory_test3.png>
-Package pdftex.def Info: 1103_Karpe_trajectory_test3.png  used on input line 25
-1.
-(pdftex.def)             Requested size: 227.64894pt x 170.73744pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: Citation `blanco2008efficient' on page 1 undefined on input line
+ 90.
 
-<1103_Karpe_Distance_error_result__test1.png, id=317, 505.89pt x 312.2064pt>
-File: 1103_Karpe_Distance_error_result__test1.png Graphic file (type png)
-<use 1103_Karpe_Distance_error_result__test1.png>
-Package pdftex.def Info: 1103_Karpe_Distance_error_result__test1.png  used on i
-nput line 263.
-(pdftex.def)             Requested size: 227.64894pt x 140.49158pt.
-<1103_Karpe_Distance_error_result__test3.png, id=318, 505.89pt x 312.2064pt>
-File: 1103_Karpe_Distance_error_result__test3.png Graphic file (type png)
-<use 1103_Karpe_Distance_error_result__test3.png>
-Package pdftex.def Info: 1103_Karpe_Distance_error_result__test3.png  used on i
-nput line 269.
-(pdftex.def)             Requested size: 227.64894pt x 140.49158pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: Citation `fabresse2013undelayed' on page 1 undefined on input li
+ne 90.
 
-[4 <./descriptionSystem.png> <./actualSystem.jpg> <./figure2.png (PNG copy)>]
-(./cee554.bbl [5 <./calib.png> <./calib2.jpg>]
-Underfull \hbox (badness 2875) in paragraph at lines 164--167
-[]\T1/ptm/m/n/8 M.-T. Lu-ong, H. Pham, and C. D. Man-ning, ``Ef-fec-tive ap-
- []
 
-[6 <./1103_Karpe_trajectory_test1.png> <./1103_Karpe_trajectory_test3.png> <./1
-103_Karpe_Distance_error_result__test1.png> <./1103_Karpe_Distance_error_result
-__test3.png>])
+LaTeX Warning: Citation `shetty2018particle' on page 1 undefined on input line 
+90.
 
-** Conference Paper **
-Before submitting the final camera ready copy, remember to:
 
- 1. Manually equalize the lengths of two columns on the last page
- of your paper;
+LaTeX Warning: Citation `lecun2015deep' on page 1 undefined on input line 92.
 
- 2. Ensure that any PostScript and/or PDF output post-processing
- uses only Type 1 fonts and that every step in the generation
- process uses the US letter (8.5in X 11in) paper size.
 
-[7
+LaTeX Warning: Citation `lenz2015deep' on page 1 undefined on input line 92.
 
-] (./cee554.aux) ) 
+
+LaTeX Warning: Citation `cai2016unified' on page 1 undefined on input line 92.
+
+
+LaTeX Warning: Citation `smith2018object' on page 1 undefined on input line 92.
+
+
+
+LaTeX Warning: Citation `zhu2017target' on page 1 undefined on input line 92.
+
+
+LaTeX Warning: Citation `hamandi2018deepmotion' on page 1 undefined on input li
+ne 92.
+
+
+LaTeX Warning: Citation `walch2017image' on page 1 undefined on input line 92.
+
+
+LaTeX Warning: Citation `elman1990finding' on page 1 undefined on input line 92
+.
+
+
+LaTeX Warning: Citation `walch2017image' on page 1 undefined on input line 92.
+
+
+LaTeX Warning: Citation `gladh2016deep' on page 1 undefined on input line 92.
+
+
+LaTeX Warning: Citation `wang2017deepvo' on page 1 undefined on input line 92.
+
+
+LaTeX Warning: Citation `kendall2015posenet' on page 1 undefined on input line 
+92.
+
+
+LaTeX Warning: Citation `turan2018deep' on page 1 undefined on input line 92.
+
+! I can't write on file `cee554.pdf'.
+(Press Enter to retry, or Control-Z to exit; default file extension is `.pdf')
+Please type another file name for output
+! Emergency stop.
+<argument> \pdfximage 
+                      \ifnum 0\ifx \Gin@decode \@empty \else 1\fi \ifGin@int...
+l.101 ...ics[height=5cm]{CE554_traditional_to_RNN}
+                                                  
+*** (job aborted, file error in nonstop mode)
+
+ 
 Here is how much of TeX's memory you used:
- 6015 strings out of 494587
- 89190 string characters out of 6177953
- 167236 words of memory out of 5000000
- 9535 multiletter control sequences out of 15000+600000
- 117310 words of font info for 141 fonts, out of 8000000 for 9000
+ 5883 strings out of 494587
+ 86522 string characters out of 6177953
+ 161574 words of memory out of 5000000
+ 9433 multiletter control sequences out of 15000+600000
+ 104956 words of font info for 125 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 42i,10n,40p,1724b,483s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/t
-exlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/20
-18/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2018/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2018/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2018/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr6.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr7.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.p
-fb><c:/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/te
-xlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2018
-/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2018/texmf-dist/font
-s/type1/urw/times/utmb8a.pfb><c:/texlive/2018/texmf-dist/fonts/type1/urw/times/
-utmbi8a.pfb><c:/texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/te
-xlive/2018/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on cee554.pdf (7 pages, 750212 bytes).
-PDF statistics:
- 389 PDF objects out of 1000 (max. 8388607)
- 184 compressed objects within 2 object streams
- 0 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 42i,10n,40p,1361b,309s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!

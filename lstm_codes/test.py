@@ -10,6 +10,7 @@ import argparse
 import csv
 from search_min_loss_file import search_min_loss_meta_file
 
+os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
 os.environ['CUDA_VISIBLE_DEVICES'] = '2' #,1,2,3'
 tf.set_random_seed(777)  # reproducibilityb
 # hyper parameters
@@ -32,10 +33,13 @@ p.add_argument('--num_uwb', type=int, default = 8) #RNN input size: number of uw
 p.add_argument('--preprocessing_output_size', type=int, default = 50)
 p.add_argument('--first_layer_output_size', type=int, default = 400)
 p.add_argument('--second_layer_output_size', type=int, default = 500)
+p.add_argument('--third_layer_output_size', type=int, default = 500)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
 p.add_argument('--network_type', type=str, default = 'bi') #uni / bi
 p.add_argument('--is_multimodal', type=bool, default = True) #True / False
+
+p.add_argument('--clip', type=float, default = 5.0)
 
 p.add_argument('--dropout_prob', type=float, default = 1.0)
 p.add_argument('--grid_size', type=float, default = 0.01)
@@ -45,7 +49,7 @@ p.add_argument('--beta', type=float, default = 0)
 p.add_argument('--gamma', type=float, default = 0) #True / False
 
 #FOR TEST
-p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test_cudnn2/")
+p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/1_layer_1/")
 p.add_argument('--test_data', type=str, default='/home/shapelim/RONet/val_Karpe_181102/1103_Karpe_test1.csv')
 # p.add_argument('--test_data', type=str, default='inputs/np_test_2.csv')
 ###########
@@ -65,8 +69,8 @@ print ("Set transformation complete")
 tf.reset_default_graph()
 ro_net = RONet(args)
 #For Generating grid!!!
-ro_net.get_scale_for_round(data_parser.scaler_for_prediction.scale_)
-ro_net.round_predicted_position()
+# ro_net.get_scale_for_round(data_parser.scaler_for_prediction.scale_)
+# ro_net.round_predicted_position()
 
 viz = Visualization(args)
 saver = tf.train.Saver(max_to_keep = 5)

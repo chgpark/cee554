@@ -1,6 +1,6 @@
 import tensorflow as tf
 import tensorflow.contrib.seq2seq as seq2seq
-from lstm_network import RONet
+from lstm_network_no_attention import RONet
 import numpy as np
 import DataPreprocessing
 from tqdm import tqdm, trange
@@ -8,7 +8,7 @@ import os
 import argparse
 import csv
 os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
-os.environ['CUDA_VISIBLE_DEVICES'] = '0' #,1,2,3'
+os.environ['CUDA_VISIBLE_DEVICES'] = '3' #,1,2,3'
 tf.set_random_seed(777)  # reproducibilityb
 # hyper parameters
 p =argparse.ArgumentParser()

@@ -16,6 +16,7 @@ p.add_argument('--test_data', type=str, default="/home/shapelim/RONet/val_Karpe_
 p.add_argument('--pf_wo_z', type=str, default= "/home/shapelim/git_files/cee554/mcl/cc510_results/1103_test3_result_no_fixed_z.csv")
 p.add_argument('--pf', type=str, default= "/home/shapelim/git_files/cee554/mcl/cc510_results/1103_test3_result.csv")
 p.add_argument('--mul', type=str, default= "/home/shapelim/git_files/cee554/mcl/cc510_results/1103_LSTM_test3.csv")
+p.add_argument('--mul_no_attn', type=str, default= "/home/shapelim/git_files/cee554/mcl/cc510_results/1103_Karpe_test3_no_attn.csv")
 
 # p.add_argument('--multimodal_bi', type=str, default= "/home/shapelim/KRoC_Results/1104_bimul_poly.csv")
 
@@ -47,7 +48,7 @@ COLORSET = [(241/255.0, 50/255.0, 50/255.0), (19/255.0, 163/255.0, 153/255.0),(2
 # COLORSET = [(241/255.0, 50/255.0, 50/255.0), (2/255.0, 23/255.0, 157/255.0)]
 SOFT_COLORSET = [(241/255.0, 187/255.0, 165/255.0), (174/255.0, 245/255.0, 231/255.0), (115/255.0, 123/255.0, 173/255.0), (232/255.0, 138/255.0, 139/255.0)]
 LINE = [':', '-.', '--', '--']
-LABEL = ['PF w/o z', 'PF', 'Multimodal']
+LABEL = ['PF w/o z', 'PF', 'Multimodal w/o attn.','Multimodal']
 # LABEL = ['PF', 'Multimodal+A.'] #Non-multimodal', 'Bi-multimodal']
 MARKER = ['o','v','s','*']
 SMOOTHNESS = 43
@@ -101,8 +102,8 @@ class Visualization:
 
             x_axis = range(distance_error.shape[0])
 
-            # distance_error = self.getRefinedData(distance_error, SMOOTHNESS)
-            # x_axis = self.getRefinedData(x_axis, SMOOTHNESS)
+            distance_error = self.getRefinedData(distance_error, SMOOTHNESS)
+            x_axis = self.getRefinedData(x_axis, SMOOTHNESS)
 
 
             file_name = str(i) +'.csv'
@@ -125,7 +126,7 @@ class Visualization:
             # plt.scatter(x_for_marker, distance_error_for_marker, color= self.color_set[i], marker = marker,
             #                 linestyle = linestyle) #,label = self.label[i])
 
-        plt.legend(prop={'size':12})
+        plt.legend(prop={'size':13, 'weight':'bold'})
         plt.grid(True)
         plt.xlim(0,1000)
         # plt.xticks(np.linspace(-0.5,1.5,10, endpoint =True))
@@ -260,7 +261,7 @@ class Visualization:
         self._3D_plot_name = name
 
     def drawResult3D(self, *target_files_csv):
-
+        global SMOOTHNESS
         self.fig = plt.figure()
         self.ax1 = self.fig.add_subplot(111, projection='3d')
 
@@ -284,7 +285,7 @@ class Visualization:
 
             plt.plot(predicted_x, predicted_y, predicted_z, color = self.color_set[i],# marker= ".",
                             linestyle = LINE[i],label = self.label[i] )
-        plt.legend(prop={'size':10})
+        plt.legend(prop={'size':11, 'weight':'bold'})
 
         # self.ax1.scatter(X_list, Y_list, Z_list, c=c)
         self.ax1.set_xlim(-1.2, 1.0)
@@ -300,22 +301,17 @@ class Visualization:
 
 
 if __name__ == "__main__":
-    def drawResult3D(X_list, Y_list, Z_list, c):
-        fig = plt.figure()
-        ax1 = fig.add_subplot(111, projection='3d')
-        ax1.plot(X_list, Y_list, Z_list, c=c )
+
     def randrange(n, vmin, vmax):
         return (vmax - vmin)*np.random.rand(n) + vmin
 
     viz = Visualization(args)
     viz.set_3D_plot_name("hello.png")
 
-    # viz.plotDistanceError3D(args.pf, args.bi)#, args.bi)
 
-    # viz.drawResult3D(args.pf, args.bi) #, args.pargs.bi) #, args.bi)
-
-    viz.plotDistanceError3D(args.pf_wo_z, args.pf,  args.mul)#, args.bi)
-
+    # viz.drawResult3D(args.pf_wo_z, args.pf,  args.mul_no_attn, args.mul)
+    viz.plotDistanceError3D(args.pf_wo_z, args.pf,  args.mul_no_attn, args.mul)#, args.bi)
+    #
     # test = np.loadtxt("train_yz3D.csv", delimiter= ',')
     # n = 10
     # for c, m, zlow, zhigh in [('r', 'o', -50, -25), ('b', '^', -30, -5)]:

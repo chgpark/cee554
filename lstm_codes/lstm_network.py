@@ -27,24 +27,39 @@ class RONet:
             if self.network_type == 'bi':
                 self.build_RO_Net_bi_multimodal()
         else:
-            self.set_placeholders()
             if self.network_type == 'fc':
+                self.set_placeholders_for_fc_layer()
                 self.build_FC_layer()
+
+            if self.network_type == 'stacked_bi':
+                self.set_placeholders_for_non_multimodal()
+                self.build_non_multimodal_stacked_BiLSTM()
+
         self.set_loss_terms()
 
     def get_scale_for_round(self, scale):
         '''Utilized for grid generation'''
         self.position_scale = scale
 
-    def set_placeholders(self):
+    def set_placeholders_for_fc_layer(self):
+            self.X_data = tf.placeholder(dtype=tf.float32,
+                                         shape=[None, self.input_size])
+
+            if self.output_type == 'position':
+                self.position_gt = tf.placeholder(dtype=tf.float32,
+                                                shape=[None, 3],
+                                                # shape=[None, 3],
+                                                name='output_placeholder')
+
+    def set_placeholders_for_non_multimodal(self):
         self.X_data = tf.placeholder(dtype=tf.float32,
-                                     shape=[None, self.sequence_length, self.input_size])
+                                     shape=[None, self.sequence_length, self.input_size],
+                                     name='input_placeholder')
 
         if self.output_type == 'position':
-            self.position_gt = tf.placeholder(dtype=tf.float32,
-                                            shape=[None, 5, 3],
-                                            # shape=[None, 3],
-                                            name='output_placeholder')
+            self.position_gt= tf.placeholder(dtype=tf.float32,
+                                         shape=[None, self.sequence_length, self.output_size],
+                                         name='output_placeholder')
 
     def set_placeholders_for_multimodal(self):
         self.d0_data = tf.placeholder(dtype=tf.float32,
@@ -372,6 +387,19 @@ class RONet:
 ##################################################
             #Builing RO Nets
 ##################################################
+    def build_non_multimodal_stacked_BiLSTM(self):
+        with tf.variable_scope("Stacked_bi_lstm1"):
+            self.set_preprocessing_bi_LSTM_for_8_uwb()
+            self.concatenate_preprocessed_data_for_bi_LSTM()
+            self.get_attentioned_preprocessed_data()
+            self.set_first_layer_bi_LSTM()
+            self.concatenate_first_layer_output()
+            self.output = tf.reshape(self.output, [-1, self.sequence_length*self.first_layer_output_size*2])
+            '''For test for all sequeneces!!'''
+            fc_layer = tf.contrib.layers.fully_connected(self.output, self.second_layer_output_size)
+            fc_layer = tf.contrib.layers.fully_connected(fc_layer, self.sequence_length*self.output_size)
+            self.pose_pred = tf.reshape(fc_layer, [-1, self.sequence_length, self.output_size])
+
     def build_RO_Net_bi_multimodal(self):
         self.set_multimodal_Preprocessing_bi_LSTM_for_8_uwb()
         self.concatenate_preprocessed_data_for_8multimodal_bi_LSTM()
@@ -386,23 +414,17 @@ class RONet:
         # self.output = tf.reshape(self.output, [-1, self.sequence_length*self.second_layer_output_size*2])
         # self.pose_pred = tf.contrib.layers.fully_connected(self.output, self.output_size)
         '''For test for all sequeneces!!'''
-        fc_layer = tf.contrib.layers.fully_connected(self.output, self.second_layer_output_size)
+        fc_layer = tf.contrib.layers.fully_connected(self.output, 512*5)
+        fc_layer = tf.contrib.layers.fully_connected(self.output, 256*5)
         fc_layer = tf.contrib.layers.fully_connected(fc_layer, self.sequence_length*self.output_size)
         self.pose_pred = tf.reshape(fc_layer, [-1, self.sequence_length, self.output_size])
 
     def build_FC_layer(self):
-        self.output = tf.reshape(self.X_data, [-1, self.sequence_length * self.input_size])
-        fc_layer = tf.contrib.layers.fully_connected(self.output, 128)
-        fc_layer = tf.contrib.layers.fully_connected(fc_layer, 256)
-        fc_layer = tf.contrib.layers.fully_connected(fc_layer, 512)
-        fc_layer = tf.contrib.layers.fully_connected(fc_layer, 1024)
-        # fc_layer = tf.contrib.layers.fully_connected(fc_layer, 2048)
-        fc_layer = tf.contrib.layers.fully_connected(fc_layer, 2048)
-        fc_layer = tf.contrib.layers.fully_connected(fc_layer, 1024)
-        fc_layer = tf.contrib.layers.fully_connected(fc_layer, 256)
-        fc_layer = tf.contrib.layers.fully_connected(fc_layer, 128)
-        fc_layer = tf.contrib.layers.fully_connected(fc_layer, self.sequence_length * self.output_size)
-        self.pose_pred = tf.reshape(fc_layer, [-1, self.sequence_length, self.output_size])
+        with tf.variable_scope("FC_layer"):
+            fc_layer = tf.contrib.layers.fully_connected(self.X_data, 2048)
+            fc_layer = tf.contrib.layers.fully_connected(fc_layer, 2048)
+
+            self.pose_pred = tf.contrib.layers.fully_connected(fc_layer, self.output_size)
 
     def build_RO_Net_bi_multimodal_one_layer(self):
 

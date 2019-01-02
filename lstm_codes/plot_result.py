@@ -81,6 +81,8 @@ class Visualization:
 
         return np.sqrt(distance_square) , RMSE*100
 
+
+
     def plotDistanceError3D(self, *target_files_csv):
         plot_title = "Distance Error"
         plt.title(plot_title)
@@ -113,6 +115,54 @@ class Visualization:
         # plt.show()
         fig.savefig(self._3D_plot_name[:-4]+'_error.png')
         print ("Done")
+
+    def _calDistanceError3D_for_FC_layer(self, predicted_result_dir):
+        predicted_xyz = np.loadtxt(predicted_result_dir, delimiter=',')
+        # gt_xy = np.random.randint(3,size = (4,2))
+        # predicted_xy = np.random.randint(3, size = (4,2))
+        dx_dy_dz_array = self.gt_xyz - predicted_xyz
+
+        distance_square = np.square(dx_dy_dz_array[:,0]) \
+                          + np.square(dx_dy_dz_array[:,1]) \
+                          + np.square(dx_dy_dz_array[:,2])
+        MSE = np.sum(distance_square)/distance_square.shape
+        RMSE = np.sqrt(MSE)
+        print ("RMSE: " + str(RMSE*100) + " cm")
+
+        return np.sqrt(distance_square) , RMSE*100
+    def plotDistanceError3D_for_FC_layer(self, *target_files_csv):
+        plot_title = "Distance Error"
+        plt.title(plot_title)
+        # plt.rcParams['Figure.figsize'] = (14, 3)
+        plt.figure(figsize=(7,4.326))
+        for i, csv in enumerate(target_files_csv):
+
+            distance_error, _ = self._calDistanceError3D_for_FC_layer(csv)
+            distance_error = distance_error*100
+
+            x_axis = range(distance_error.shape[0])
+
+            distance_error_refined = self.getRefinedData(distance_error, 30)
+            x_axis_refined = self.getRefinedData(x_axis, 30)
+
+            # x_axis_refined, distance_error_refined = self.getSmoothedData(x_axis_refined, distance_error_refined)
+            # distance_error = self.getRefinedData( distance_error, self.args.data_interval)
+
+            plt.plot(x_axis, distance_error, color= self.color_set[i], #marker = marker,
+                            linestyle = LINE[i],label = self.label[i])
+        plt.legend()
+        plt.grid(True)
+        plt.xlim(0,1300)
+        # plt.xticks(np.linspace(-0.5,1.5,10, endpoint =True))
+        # plt.xticks(np.linspace(-0.5,1.5,10, endpoint =True))
+        plt.ylim(0.0,40)
+        plt.xlabel("Time Step [t]")
+        plt.ylabel("Distance Error [cm]")
+        fig = plt.gcf()
+        # plt.show()
+        fig.savefig(self._3D_plot_name[:-4]+'_error.png')
+        print ("Done")
+
     def getSmoothedData_3D(self,x_data, y_data, z_data):
         x_data = np.array(x_data)
         y_data = np.array(y_data)

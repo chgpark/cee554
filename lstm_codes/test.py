@@ -11,7 +11,7 @@ import csv
 from search_min_loss_file import search_min_loss_meta_file
 
 os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
-os.environ['CUDA_VISIBLE_DEVICES'] = '2' #,1,2,3'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0' #,1,2,3'
 tf.set_random_seed(777)  # reproducibilityb
 # hyper parameters
 p =argparse.ArgumentParser()
@@ -36,7 +36,7 @@ p.add_argument('--second_layer_output_size', type=int, default = 500)
 p.add_argument('--third_layer_output_size', type=int, default = 500)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
-p.add_argument('--network_type', type=str, default = 'fc') #uni / bi
+p.add_argument('--network_type', type=str, default = 'stacked_bi') #uni / bi
 p.add_argument('--is_multimodal', type=bool, default = False) #True / False
 
 p.add_argument('--clip', type=float, default = 5.0)
@@ -49,7 +49,7 @@ p.add_argument('--beta', type=float, default = 0)
 p.add_argument('--gamma', type=float, default = 0) #True / False
 
 #FOR TEST
-p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test_FC4/")
+p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test_stacked222/")
 p.add_argument('--test_data', type=str, default='/home/shapelim/RONet/val_Karpe_181102/1103_Karpe_test1.csv')
 # p.add_argument('--test_data', type=str, default='inputs/np_test_2.csv')
 ###########
@@ -73,7 +73,7 @@ ro_net = RONet(args)
 # ro_net.round_predicted_position()
 
 viz = Visualization(args)
-saver = tf.train.Saver(max_to_keep = 5)
+saver = tf.train.Saver(max_to_keep = 3)
 
 
 # COUNT PARAMS
@@ -92,8 +92,9 @@ with tf.Session() as sess:
         print ("Load success.")
 
         data_parser.set_dir(args.test_data)
+
+        data_parser.set_val_data(args.test_data)
         if args.is_multimodal:
-            data_parser.set_val_data(args.test_data)
             data_parser.transform_all_data()
             # data_parser.set_data_for_8multimodal()
             data_parser.set_data_for_8multimodal_all_sequences()
@@ -108,14 +109,17 @@ with tf.Session() as sess:
                                                                ro_net.d6_data: d6_data,
                                                                ro_net.d7_data: d7_data}) #prediction : type: list, [ [[[hidden_size]*sequence_length] ... ] ]
         else:
-
             data_parser.transform_all_data()
-            data_parser.set_data_for_non_multimodal_all_sequences()
+            if args.network_type == 'fc':
+                data_parser.set_data_for_fc_layer()
+            else:
+                data_parser.set_data_for_non_multimodal_all_sequences()
             X_data = data_parser.get_range_data_for_nonmultimodal()
             prediction = sess.run(ro_net.pose_pred, feed_dict={ro_net.X_data: X_data}) #prediction : type: list, [ [[[hidden_size]*sequence_length] ... ] ]
 
 
-        prediction = prediction[:, -1, :]
+        if args.network_type != 'fc':
+            prediction = prediction[:, -1, :]
 
         data_parser.inverse_transform_by_train_data(prediction)
 
@@ -124,8 +128,14 @@ with tf.Session() as sess:
         data_parser.write_file_data(output_csv)
         viz.set_3D_plot_name(output_plot)
         viz.drawResult3D(output_csv)
-        viz.plotDistanceError3D(output_csv)
-        _, rmse = viz._calDistanceError3D(output_csv)
+        if args.network_type != 'fc':
+            '''For LSTMs'''
+            viz.plotDistanceError3D(output_csv)
+            _, rmse = viz._calDistanceError3D(output_csv)
+        elif args.network_type == 'fc':
+            '''For FC layers'''
+            viz.plotDistanceError3D_for_FC_layer(output_csv)
+            _, rmse = viz._calDistanceError3D_for_FC_layer(output_csv)
 
         f = open(args.load_model_dir + FILE_NAME + "_RMSE.txt", 'w')
         f.write(str(rmse))

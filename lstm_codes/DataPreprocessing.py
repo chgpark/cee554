@@ -80,6 +80,8 @@ class DataManager:
     ##################################################
                  #Setting train data parts
     ##################################################
+
+
     def set_range_data(self):
         '''For non-multimodal!'''
         self.X_data = []
@@ -183,6 +185,7 @@ class DataManager:
         self.position_data = np.array(self.position_data)
         self.quaternion_data = np.array(self.quaternion_data)
 
+
     def set_gt_data_for_all_sequences(self):
             self.position_data =[]
             self.quaternion_data = []
@@ -206,6 +209,39 @@ class DataManager:
     def set_data_for_non_multimodal_all_sequences(self):
         self.set_range_data()
         self.set_gt_data_for_all_sequences()
+
+    ##################################################
+                    #For FC layer
+    ##################################################
+    def set_range_data_for_fc_layer(self):
+        '''For non-multimodal!'''
+        self.X_data = []
+        for train_data in self.train_data_list:
+            x = train_data[:,:self.num_uwb]
+
+            for i in range(len(x)):
+                _x = x[i]
+                self.X_data.append(_x)
+
+        self.X_data = np.array(self.X_data)
+
+    def set_gt_data_for_fc_layer(self):
+            self.position_data =[]
+            self.quaternion_data = []
+
+            for train_data in self.train_data_list:
+                robot_position = train_data[:, self.num_uwb: self.num_uwb + 3]  # Close as label
+                robot_quaternion = train_data[:, self.num_uwb+3:]
+
+                for i in range(len(robot_position)):
+                    self.position_data.append(robot_position[i])
+                    self.quaternion_data.append(robot_quaternion[i])
+            self.position_data = np.array(self.position_data)
+            self.quaternion_data = np.array(self.quaternion_data)
+
+    def set_data_for_fc_layer(self):
+        self.set_range_data_for_fc_layer()
+        self.set_gt_data_for_fc_layer()
 
     def set_data_for_4multimodal(self):
         self.set_range_data_for_4multimodal()
@@ -232,9 +268,9 @@ class DataManager:
 
     def get_range_data_for_nonmultimodal(self):
         return self.X_data
+
     def get_gt_data(self):
         return self.position_data, self.quaternion_data
-
 
     def suffle_array_in_the_same_order(self,*argv):
         index = np.arange((argv[0].shape[0]))

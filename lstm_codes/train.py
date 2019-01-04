@@ -8,27 +8,27 @@ import os
 import argparse
 import csv
 os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
-os.environ['CUDA_VISIBLE_DEVICES'] = '0' #,1,2,3'
+os.environ['CUDA_VISIBLE_DEVICES'] = '2' #,1,2,3'
 tf.set_random_seed(777)  # reproducibilityb
 # hyper parameters
 p =argparse.ArgumentParser()
 
 #FOR TRAIN
-p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/train_Karpe_181102/")
-p.add_argument('--val_data', type=str, default="/home/shapelim/RONet/val_Karpe_181102/")
-p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test_stacked2222/")
+p.add_argument('--train_data', type=str, default="/home/cpark/RONet/train_Karpe_181102/")
+p.add_argument('--val_data', type=str, default="/home/cpark/RONet/val_Karpe_181102/")
+p.add_argument('--save_dir', type=str, default="/home/cpark/RONet/test_stacked2222222/")
 
 p.add_argument('--lr', type=float, default = 0.001)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 5)
-p.add_argument('--epoches', type=int, default = 5)
+p.add_argument('--epoches', type=int, default = 10)
 p.add_argument('--batch_size', type=int, default = 10570) #11257)
 
 #NETWORK PARAMETERS
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
 p.add_argument('--hidden_size', type=int, default = 3) # RNN output size
 p.add_argument('--num_uwb', type=int, default = 8) #RNN input size: number of uwb
-p.add_argument('--preprocessing_output_size', type=int, default = 50)
+p.add_argument('--preprocessing_output_size', type=int, default = 512)
 p.add_argument('--first_layer_output_size', type=int, default = 512)
 p.add_argument('--second_layer_output_size', type=int, default = 500)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
@@ -36,7 +36,7 @@ p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
 '''
 network_type
 is_multimodal == True => stacked_bi
-is_multimodal == False => fc / stacked_bi
+is_multimodal == False => fc / stacked_bignvw`
 '''
 p.add_argument('--network_type', type=str, default = 'fc')
 p.add_argument('--is_multimodal', type=bool, default = False) #True / False

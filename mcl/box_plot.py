@@ -18,11 +18,11 @@ x = np.array([2,3,5,7,10])
 
 
 ''''''
-seq_2_result = [2, 3, 4]
-seq_3_result = [3, 4, 6]
-seq_5_result = [4, 5, 8]
-seq_7_result = [5, 6, 10]
-seq_10_result = [6, 7, 12]
+seq_2_result = [2.84, 2.93, 3.61]
+seq_3_result = [2.88, 3.21, 3.63]
+seq_5_result = [2.78, 3.03, 3.57]
+seq_7_result = [3.62, 3.65, 3.84]
+seq_10_result = [3.93, 4.16, 4.18]
 ''''''
 
 
@@ -33,7 +33,7 @@ lower_error = [y[0] - seq_2_result[0], y[1] - seq_3_result[0], y[2] - seq_5_resu
 upper_error = [seq_2_result[2] - y[0], seq_3_result[2] - y[1], seq_5_result[2] - y[2], seq_7_result[2] - y[3], seq_10_result[2] - y[4]]
 # upper_error = [1]*5
 z = [lower_error, upper_error]
-saved_file_name = "seq_result.png"
+saved_file_name = "seq_result2.png"
 plot_title = "RMSE According to Sequence Length"
 plt.title(plot_title)
 # plt.figure(figsize=(7,4.326))

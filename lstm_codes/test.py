@@ -30,7 +30,7 @@ p.add_argument('--batch_size', type=int, default = 11257)
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
 p.add_argument('--hidden_size', type=int, default = 3) # RNN output size
 p.add_argument('--num_uwb', type=int, default = 8) #RNN input size: number of uwb
-p.add_argument('--preprocessing_output_size', type=int, default = 50)
+p.add_argument('--preprocessing_output_size', type=int, default = 512)
 p.add_argument('--first_layer_output_size', type=int, default = 512)
 p.add_argument('--second_layer_output_size', type=int, default = 500)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
@@ -48,7 +48,7 @@ p.add_argument('--beta', type=float, default = 0)
 p.add_argument('--gamma', type=float, default = 0) #True / False
 
 #FOR TEST
-p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test_stacked2222/")
+p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test_stacked33/")
 p.add_argument('--test_data', type=str, default='/home/shapelim/RONet/val_Karpe_181102/1103_Karpe_test1.csv')
 # p.add_argument('--test_data', type=str, default='inputs/np_test_2.csv')
 ###########

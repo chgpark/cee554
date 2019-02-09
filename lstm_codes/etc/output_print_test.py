@@ -22,7 +22,7 @@ cell4 = tf.contrib.rnn.BasicLSTMCell(num_units = hidden_size)
 
 x_data1 = np.array([[[1, 2],[0,5],[0,7],[3,-2]],[[2,1],[0,1],[0,1],[0,1]]],dtype = np.float32)
 x_data2 = np.array([[[1, 2],[0,5],[0,7],[3,-2]],[[2,1],[0,1],[0,1],[0,1]]],dtype = np.float32)
-print (x_data1.shape)
+#print (x_data1.shape)
 x_data3 = [x_data1, x_data2]
 outputs_list = []
 with tf.variable_scope("1"):
@@ -38,15 +38,8 @@ depth = 3
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     print (outputs.eval())
-    round_value0 = tf.round(tf.divide(outputs[:,:,0], 0.001))
-    round_value1 = tf.round(tf.divide(outputs[:,:,1], 0.001))
-    round_value2 = tf.round(tf.divide(outputs[:,:,2], 0.001))
-    round_value0 = tf.reshape(round_value0, [2, 4, 1])
-    round_value1 = tf.reshape(round_value1, [2, 4, 1])
-    round_value2 = tf.reshape(round_value2, [2, 4, 1])
-
-    round_val = tf.concat((round_value0*0.001, round_value1*0.001, round_value2*0.001), axis = 2)
-    print (round_val.eval())
+    
+    print(tf.nn.l2_normalize(outputs, axis=2).eval())
     #
     # print (outputs.shape)
 # #

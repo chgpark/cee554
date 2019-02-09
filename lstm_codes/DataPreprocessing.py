@@ -324,7 +324,6 @@ if __name__ == '__main__':
     data_parser.transform_all_data()
     c = data_parser.scaler.inverse_transform(data_parser.train_data_list[0])
     # print (c)
-    # #
     data_parser.set_data_for_8multimodal()
     d0_data, d1_data, d2_data, d3_data, d4_data, d5_data, d6_data, d7_data = data_parser.get_range_data_for_8multimodal()
     robot_position_gt, robot_quaternion_gt = data_parser.get_gt_data()

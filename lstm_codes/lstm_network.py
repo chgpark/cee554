@@ -331,6 +331,7 @@ class RONet:
     def concatenate_first_layer_output(self):
         with tf.variable_scope("First_layer_concatenation"):
             self.output = tf.concat([self.layer_output_fw, self.layer_output_bw], axis = 2)
+            self.output = tf.nn.relu(self.output)
             #shape: batch, sequence_length, self.first_layer_output_size*2
 
     def get_attentioned_first_layer_output(self):
@@ -354,6 +355,7 @@ class RONet:
     def concatenate_second_layer_output(self):
         with tf.variable_scope("Second_layer_concatenation"):
             self.output = tf.concat([self.layer_output_fw, self.layer_output_bw], axis = 2)
+            self.output = tf.nn.relu(self.output)
             #shape: batch, sequence_length, self.first_layer_output_size*2
 
     def get_attentioned_second_layer_output(self):

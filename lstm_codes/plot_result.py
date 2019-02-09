@@ -44,7 +44,7 @@ COLORSET = [(241/255.0, 101/255.0, 65/255.0), (19/255.0, 163/255.0, 153/255.0), 
 SOFT_COLORSET = [(241/255.0, 187/255.0, 165/255.0), (174/255.0, 245/255.0, 231/255.0), (115/255.0, 123/255.0, 173/255.0), (232/255.0, 138/255.0, 139/255.0)]
 LINE = ['-', ':', '--', '-']
 # LABEL = ['LSTM', 'GRU', 'Bi-LSTM', 'Stacked Bi-LSTM']
-LABEL = ['uni', 'bi', 'multimodal_uni', 'multimodal_bi']
+LABEL = ['Estimated']
   #marker o x + * s:square d:diamond p:five_pointed star
 SMOOTHNESS = 200
 
@@ -59,13 +59,61 @@ class Visualization:
         self.setGT(self.args.test_data)
         self.color_set = COLORSET
         self.label = LABEL
-
+        self.input_size = args.num_uwb
+        self.seq_length = args.sequence_length
+    
     def setGT(self, raw_csv_file):
         gt_xyz = np.loadtxt(raw_csv_file, delimiter=',')
         #x_array: gt_xy[:,0]
         #y_array: gt_xy[:,1]
         self.gt_xyz = gt_xyz[:, self.args.num_uwb:self.args.num_uwb+3]
 
+    def _calDistanceError2D(self, predicted_result_dir):
+        predicted_xyz = np.loadtxt(predicted_result_dir, delimiter=',')
+        # gt_xy = np.random.randint(3,size = (4,2))
+        # predicted_xy = np.random.randint(3, size = (4,2))
+        dx_dy_array = self.gt_xyz[self.seq_length - 1:] - predicted_xyz
+
+        distance_square = np.square(dx_dy_array[:,0]) + np.square(dx_dy_array[:,1]) 
+        MSE = np.sum(distance_square)/distance_square.shape
+        RMSE = np.sqrt(MSE)
+        print ("RMSE: " + str(RMSE*100) + " cm")
+
+        return np.sqrt(distance_square) , RMSE*100
+    
+    def plotDistanceError2D(self, *target_files_csv):
+        plot_title = "Distance Error"
+        plt.title(plot_title)
+        # plt.rcParams['Figure.figsize'] = (14, 3)
+        plt.figure(figsize=(7,4.326))
+        for i, csv in enumerate(target_files_csv):
+
+            distance_error, _ = self._calDistanceError2D(csv)
+            distance_error = distance_error*100
+
+            x_axis = range(distance_error.shape[0])
+
+            # distance_error_refined = self.getRefinedData(distance_error, 30)
+            # x_axis_refined = self.getRefinedData(x_axis, 30)
+
+            # x_axis_refined, distance_error_refined = self.getSmoothedData(x_axis_refined, distance_error_refined)
+            # distance_error = self.getRefinedData( distance_error, self.args.data_interval)
+
+            plt.plot(x_axis, distance_error, color= self.color_set[i], #marker = marker,
+                            linestyle = LINE[i],label = self.label[i])
+        plt.legend()
+        plt.grid(True)
+        plt.xlim(0,1300)
+        # plt.xticks(np.linspace(-0.5,1.5,10, endpoint =True))
+        # plt.xticks(np.linspace(-0.5,1.5,10, endpoint =True))
+        plt.ylim(0.0,40)
+        plt.xlabel("Time Step [t]")
+        plt.ylabel("Distance Error [cm]")
+        fig = plt.gcf()
+        # plt.show()
+        fig.savefig(self._2d_plot_name[:-4]+'_error.png')
+        print ("Done")
+        
     def _calDistanceError3D(self, predicted_result_dir):
         predicted_xyz = np.loadtxt(predicted_result_dir, delimiter=',')
         # gt_xy = np.random.randint(3,size = (4,2))
@@ -163,6 +211,19 @@ class Visualization:
         fig.savefig(self._3D_plot_name[:-4]+'_error.png')
         print ("Done")
 
+    def getSmoothedData_2D(self,x_data, y_data):
+        x_data = np.array(x_data)
+        y_data = np.array(y_data)
+
+        tck, u = interpolate.splprep([x_data, y_data], s=0)
+        unew = np.arange(0, 1.01, 0.01)
+        out = interpolate.splev(unew, tck)
+
+        smoothed_x = out[0].tolist()
+        smoothed_y = out[1].tolist()
+
+        return smoothed_x, smoothed_y
+
     def getSmoothedData_3D(self,x_data, y_data, z_data):
         x_data = np.array(x_data)
         y_data = np.array(y_data)
@@ -242,12 +303,16 @@ class Visualization:
         fig.savefig(saved_file_name)
         print("Done")
 
-    def plot2DTrajectory(self, *target_files_csv):
-        saved_file_name = self.args.save_trajectory_name
+    def set_2D_plot_name(self, name):
+        self._2d_plot_name = name
+
+    def draw_2D_trajectory(self, *target_files_csv):
+        global DATA_INTERVAL
+        saved_file_name = self._2d_plot_name
         plot_title = "Trajectory"
         # plt.title(plot_title)
-        gt_x = self.gt_xyz[:,0]
-        gt_y = self.gt_xyz[:,1]
+        gt_x = self.gt_xyz[:, 0]
+        gt_y = self.gt_xyz[:, 1]
 
         plt.figure(figsize=(8, 6))
         plt.plot(gt_x, gt_y,'k',linestyle='--' , label = 'GT')
@@ -257,10 +322,11 @@ class Visualization:
             predicted_x = predicted_xy[:,0]
             predicted_y = predicted_xy[:,1]
 
-            predicted_x = self.getRefinedData( predicted_x, self.args.data_interval)
-            predicted_y = self.getRefinedData( predicted_y, self.args.data_interval)
-
-            predicted_x, predicted_y = self.getSmoothedData(predicted_x, predicted_y)
+            # predicted_x = self.getRefinedData( predicted_x, DATA_INTERVAL)
+            # predicted_y = self.getRefinedData( predicted_y, DATA_INTERVAL)
+            #
+            # predicted_x, predicted_y = self.getSmoothedData_2D(predicted_x, predicted_y)
+            
             #marker o x + * s:square d:diamond p:five_pointed star
 
             plt.plot(predicted_x, predicted_y, color = self.color_set[i], #marker= marker,

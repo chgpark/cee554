@@ -8,8 +8,11 @@ class DataManager:
     def __init__(self, args):
         self.dir = args.train_data
         self.seq_length = args.sequence_length
-        self.num_uwb = args.num_uwb
-        self.grid = args.grid_size
+        self.input_size = args.num_uwb
+        self.train_dir = args.train_data
+        self.val_dir = args.val_data
+        if args.mode == 'test':
+            self.test_dir = args.test_data
         # scaler saves min / max value of data
        ##########Usage##########
         # scalar = MinMaxScaler()
@@ -17,6 +20,9 @@ class DataManager:
         # a = scalar.transform(data)
         # b = scalar.inverse_transform(a)
 
+        self.train_files_dir = []
+        self.val_files_dir = []
+        
         self.scaler = MinMaxScaler()
         self.scaler_for_prediction = MinMaxScaler()
     def set_dir(self, dir):
@@ -25,75 +31,113 @@ class DataManager:
    ##################################################
                  #Preprocessing parts
    ##################################################
-    def set_all_target_data_list(self, generating_grid):
-        train_file_list = os.listdir(self.dir)
+    def set_all_target_data_list(self):
+        train_file_list = os.listdir(self.train_dir)
+        val_file_list = os.listdir(self.val_dir)
 
-        self.train_files_dir= []
         for train_file in train_file_list:
-           self.train_files_dir.append(os.path.join(self.dir, train_file))
+            self.train_files_dir.append(os.path.join(self.train_dir, train_file))
 
-        if generating_grid:
-            self.train_data_list = []
-            for train_file_dir in self.train_files_dir:
-                print ("Load " + train_file_dir)
-                train_data = np.loadtxt(train_file_dir, delimiter=',')
-                position_in_train_data = train_data[:, self.num_uwb : self.num_uwb + 3]
-                rounded_position = np.round(position_in_train_data/self.grid) * self.grid
-                rounded_train_data = np.concatenate((train_data[:,:self.num_uwb], rounded_position), axis = 1)
-                self.train_data_list.append(rounded_train_data)
+        for val_file in val_file_list:
+            self.val_files_dir.append(os.path.join(self.val_dir, val_file))
 
-        else:
-            self.train_data_list = []
-            for train_file_dir in self.train_files_dir:
-                print ("Load " + train_file_dir)
-                train_data = np.loadtxt(train_file_dir, delimiter=',')
-                self.train_data_list.append(train_data[:,:11])
+    def fit_train_data(self):
+        for train_file_dir in self.train_files_dir:
+            print("Fitting " + train_file_dir)
+            train_data = np.loadtxt(train_file_dir, delimiter=',')
+            uwb_data = train_data[:, :self.input_size]
+            self.scaler.partial_fit(uwb_data)
 
-    def set_val_data(self, val_data_dir):
-        self.train_data_list = []
-        val_data = np.loadtxt(val_data_dir, delimiter=',')
-        self.train_data_list.append(val_data[:,:11])
+            position_data = train_data[:, self.input_size:self.input_size + 2]
+            self.scaler_for_prediction.partial_fit(position_data)
 
-    def fitDataForMinMaxScaler(self, generating_grid = True):
-        self.set_all_target_data_list(generating_grid)
+    def fit_val_data(self):
+        for val_file_dir in self.val_files_dir:
+            print("Fitting " + val_file_dir)
+            val_data = np.loadtxt(val_file_dir, delimiter=',')
+            uwb_data = val_data[:, :self.input_size]
+            self.scaler.partial_fit(uwb_data)
 
-        xy = self.train_data_list[0].copy()
-        if (len(self.train_data_list) > 1):
-            for train_data in self.train_data_list[1:]:
-                xy = np.concatenate((xy, train_data), axis = 0)
-        # if (not prediction):
-        self.scaler.fit(xy)
-        '''
-            Below one is essential for test!!
-            The reason why its range is self.num_uwb: self.num_uwb*3 is to able to operate wheter gt is position or pose.
-        '''
-        self.scaler_for_prediction.fit(xy[:, self.num_uwb:self.num_uwb+3])
-        del xy
+            position_data = val_data[:, self.input_size:self.input_size + 2]
+            self.scaler_for_prediction.partial_fit(position_data)
 
-    def transform_all_data(self):
-        train_data_list = self.train_data_list.copy()
-        for i, train_data in enumerate(train_data_list):
-            xy = self.scaler.transform(train_data)
-            self.train_data_list[i] = xy
-
-
+    def fit_all_data(self):
+        print("On fitting all data...")
+        self.set_all_target_data_list()
+        self.fit_train_data()
+        self.fit_val_data()
     ##################################################
                  #Setting train data parts
     ##################################################
 
-
-    def set_range_data(self):
+    def set_train_data(self):
         '''For non-multimodal!'''
         self.X_data = []
-        for train_data in self.train_data_list:
-            x = train_data[:,:self.num_uwb]
+        self.position_data =[]
 
-            for i in range(len(x) - self.seq_length + 1):
-                _x = x[i:i+self.seq_length]
+        for train_file_dir in self.train_files_dir:
+            train_data = np.loadtxt(train_file_dir , delimiter=',')
+
+            range_data = train_data[:, :self.input_size]
+            p_data = train_data[:, self.input_size:self.input_size + 2]
+
+            range_data = self.scaler.transform(range_data)
+            p_data = self.scaler_for_prediction.transform(p_data)
+
+
+            for i in range(len(range_data) - self.seq_length + 1):
+                _x = range_data[i:i+self.seq_length]
+                _position = p_data[i:i+self.seq_length]
                 self.X_data.append(_x)
+                self.position_data.append(_position)
 
         self.X_data = np.array(self.X_data)
+        self.position_data = np.array(self.position_data)
 
+    def set_val_data(self):
+        '''For non-multimodal!'''
+        self.X_data = []
+        self.position_data = []
+
+        for val_file_dir in self.val_files_dir:
+            val_data = np.loadtxt(val_file_dir , delimiter=',')
+
+            range_data = val_data[:, :self.input_size]
+            p_data = val_data[:, self.input_size:self.input_size + 2]
+
+            range_data = self.scaler.transform(range_data)
+            p_data = self.scaler_for_prediction.transform(p_data)
+
+            for i in range(len(range_data) - self.seq_length + 1):
+                _x = range_data[i:i+self.seq_length]
+                _position = p_data[i:i+self.seq_length]
+                self.X_data.append(_x)
+                self.position_data.append(_position)
+
+        self.X_data = np.array(self.X_data)
+        self.position_data = np.array(self.position_data)
+    
+    def set_test_data(self):
+        self.X_data = []
+        self.position_data = []
+
+        test_data = np.loadtxt(self.test_dir, delimiter=',')
+
+        range_data = test_data[:, :self.input_size]
+        p_data = test_data[:, self.input_size:self.input_size + 2]
+
+        range_data = self.scaler.transform(range_data)
+        p_data = self.scaler_for_prediction.transform(p_data)
+
+        for i in range(len(range_data) - self.seq_length + 1):
+            _x = range_data[i:i+self.seq_length]
+            _position = p_data[i:i+self.seq_length]
+            self.X_data.append(_x)
+            self.position_data.append(_position)
+
+        self.X_data = np.array(self.X_data)
+        self.position_data = np.array(self.position_data)
+        
     def set_range_data_for_4multimodal(self):
         self.d0_data =[]
         self.d1_data =[]
@@ -185,27 +229,6 @@ class DataManager:
         self.position_data = np.array(self.position_data)
         self.quaternion_data = np.array(self.quaternion_data)
 
-
-    def set_gt_data_for_all_sequences(self):
-            self.position_data =[]
-            self.quaternion_data = []
-
-            for train_data in self.train_data_list:
-                robot_position = train_data[:,self.num_uwb: self.num_uwb + 3]  # Close as label
-                robot_quaternion = train_data[:,self.num_uwb+3:]
-
-                for i in range(len(robot_position) - self.seq_length +1):
-                    _position = []
-                    _quaternion = []
-                    for j in range(self.seq_length):
-                        _position.append(robot_position[i+j,:])
-                        # _quaternion.append(robot_quaternion[:,i+j])
-                    self.position_data.append(_position)
-                    # self.quaternion_data.append(_quaternion)
-
-            self.position_data = np.array(self.position_data)
-            self.quaternion_data = np.array(self.quaternion_data)
-
     def set_data_for_non_multimodal_all_sequences(self):
         self.set_range_data()
         self.set_gt_data_for_all_sequences()
@@ -270,7 +293,7 @@ class DataManager:
         return self.X_data
 
     def get_gt_data(self):
-        return self.position_data, self.quaternion_data
+        return self.position_data
 
     def suffle_array_in_the_same_order(self,*argv):
         index = np.arange((argv[0].shape[0]))

@@ -9,17 +9,14 @@ class RONet:
         self.preprocessing_size = args.preprocessing_output_size
         self.first_layer_output_size = args.first_layer_output_size
         self.second_layer_output_size = args.second_layer_output_size
-        self.hidden_size = args.hidden_size
         self.output_size = args.output_size
         self.sequence_length = args.sequence_length
         self.output_type = args.output_type
         self.is_multimodal = args.is_multimodal
         self.network_type = args.network_type
-        self.alpha = args.alpha
-        self.beta = args.beta
-        self.gamma = args.gamma
+
+        self.fc_layer_output_size = args.fc_layer_size
         self.dropout_prob = args.dropout_prob
-        self.grid = args.grid_size
         self.clip = args.clip
 
         if args.is_multimodal:
@@ -37,17 +34,13 @@ class RONet:
 
         self.set_loss_terms()
 
-    def get_scale_for_round(self, scale):
-        '''Utilized for grid generation'''
-        self.position_scale = scale
-
     def set_placeholders_for_fc_layer(self):
             self.X_data = tf.placeholder(dtype=tf.float32,
                                          shape=[None, self.input_size])
 
             if self.output_type == 'position':
                 self.position_gt = tf.placeholder(dtype=tf.float32,
-                                                shape=[None, 3],
+                                                shape=[None, 2],
                                                 # shape=[None, 3],
                                                 name='output_placeholder')
 
@@ -94,17 +87,6 @@ class RONet:
                                             shape=[None,5, 3],
                                               # shape=[None, 3],
                                             name='output_placeholder')
-
-##################################################
-#Preprocessing: Unidirectional, non-multimodal
-##################################################
-
-    def set_preprocessing_LSTM_for_4_uwb(self):
-        with tf.variable_scope("preprocessing"):
-            cell = tf.contrib.cudnn_rnn.CudnnCompatibleLSTMCell(num_units = self.preprocessing_size)
-            #cell_forward = tf.nn.rnn_cell.DropoutWrapper(cell_forward, output_keep_prob= 0.7)
-
-            self.output, _state = tf.nn.dynamic_rnn(cell, self.X_data, dtype=tf.float32)
 
 ##################################################
 #Preprocessing: Bidirectional, non-multimodal
@@ -363,29 +345,39 @@ class RONet:
             attention = tf.nn.sigmoid(self.output)
             self.output = attention*self.output + self.output
 
-    def round_predicted_position(self):
-        '''
-        range : 1 = grid_size : transformed_grid_size
-        transformed_grid_size = grid_size / range
-        scale = 1 / range
+    def set_fc_layer_for_seq_len_5(self):
+        with tf.variable_scope("fc1"):
+            fc_layer = tf.contrib.layers.fully_connected(self.output[:, :self.first_layer_output_size*2], self.fc_layer_output_size)
+            fc_layer = tf.contrib.layers.fully_connected(fc_layer, 2)
 
-        Therefore, transformed_grid_size = grid_size * scale
+            self.position_pred1 = tf.reshape(fc_layer, [-1, 1, 2])
 
-        '''
-        transformed_grid_x_size = self.position_scale[0]*self.grid
-        transformed_grid_y_size = self.position_scale[1]*self.grid
-        transformed_grid_z_size = self.position_scale[2]*self.grid
+        with tf.variable_scope("fc2"):
+            fc_layer = tf.contrib.layers.fully_connected(self.output[:, self.first_layer_output_size*2:2*self.first_layer_output_size*2], self.fc_layer_output_size)
+            fc_layer = tf.contrib.layers.fully_connected(fc_layer, 2)
 
-        round_x = tf.round(tf.divide(self.pose_pred[:,:,0], transformed_grid_x_size))*transformed_grid_x_size
-        round_y = tf.round(tf.divide(self.pose_pred[:,:,1], transformed_grid_y_size))*transformed_grid_y_size
-        round_z = tf.round(tf.divide(self.pose_pred[:,:,2], transformed_grid_z_size))*transformed_grid_z_size
+            self.position_pred2 = tf.reshape(fc_layer, [-1, 1, 2])
 
-        round_x = tf.reshape(round_x, [-1, self.sequence_length, 1])
-        round_y = tf.reshape(round_y, [-1, self.sequence_length, 1])
-        round_z = tf.reshape(round_z, [-1, self.sequence_length, 1])
+        with tf.variable_scope("fc3"):
+            fc_layer = tf.contrib.layers.fully_connected(self.output[:, 2*self.first_layer_output_size*2:3*self.first_layer_output_size*2], self.fc_layer_output_size)
+            fc_layer = tf.contrib.layers.fully_connected(fc_layer, 2)
 
-        self.pose_pred = tf.concat((round_x,round_y, round_z), axis = 2)
+            self.position_pred3 = tf.reshape(fc_layer, [-1, 1, 2])
 
+        with tf.variable_scope("fc4"):
+            fc_layer = tf.contrib.layers.fully_connected(self.output[:, 3*self.first_layer_output_size*2:4*self.first_layer_output_size*2], self.fc_layer_output_size)
+            fc_layer = tf.contrib.layers.fully_connected(fc_layer, 2)
+
+            self.position_pred4 = tf.reshape(fc_layer, [-1, 1, 2])
+
+        with tf.variable_scope("fc5"):
+            fc_layer = tf.contrib.layers.fully_connected(self.output[:, 4*self.first_layer_output_size*2:5*self.first_layer_output_size*2], self.fc_layer_output_size)
+            fc_layer = tf.contrib.layers.fully_connected(fc_layer, 2)
+
+            self.position_pred5 = tf.reshape(fc_layer, [-1, 1, 2])
+
+        self.pose_pred = tf.concat([self.position_pred1, self.position_pred2, self.position_pred3, self.position_pred4, self.position_pred5], axis=1)
+        
 ##################################################
             #Builing RO Nets
 ##################################################
@@ -398,10 +390,9 @@ class RONet:
             self.concatenate_first_layer_output()
             self.output = tf.reshape(self.output, [-1, self.sequence_length*self.first_layer_output_size*2])
             '''For test for all sequeneces!!'''
-            fc_layer = tf.contrib.layers.fully_connected(self.output, self.second_layer_output_size)
-            fc_layer = tf.contrib.layers.fully_connected(fc_layer, self.sequence_length*self.output_size)
-            self.pose_pred = tf.reshape(fc_layer, [-1, self.sequence_length, self.output_size])
-
+            self.set_fc_layer_for_seq_len_5()
+        
+        
     def build_RO_Net_bi_multimodal(self):
         self.set_multimodal_Preprocessing_bi_LSTM_for_8_uwb()
         self.concatenate_preprocessed_data_for_8multimodal_bi_LSTM()
@@ -491,7 +482,7 @@ class RONet:
         batch_size = self.batch_size
 
         with tf.variable_scope('lstm_loss'):
-            self.loss = self.alpha*self.error_btw_gt_and_pred #+ self.beta*self.direction_error_btw_gt_and_pred + self.gamma * self.magnitude_of_pose_pred
+            self.loss = self.error_btw_gt_and_pred
             tf.summary.scalar('lstm_loss', self.loss)
 
         with tf.variable_scope('train'):

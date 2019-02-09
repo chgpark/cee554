@@ -11,65 +11,65 @@ import csv
 from search_min_loss_file import search_min_loss_meta_file
 
 os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
-os.environ['CUDA_VISIBLE_DEVICES'] = '2' #,1,2,3'
 tf.set_random_seed(777)  # reproducibilityb
 # hyper parameters
 p =argparse.ArgumentParser()
 
-#FOR TRAIN
-#Train folder is essential for data_parser.fitDataForMinMaxScaler()!!
-p.add_argument('--train_data', type=str, default="/home/cpark/RONet/train_Karpe_181102/")
+#Train/val folder is essential for data_parser.fitDataForMinMaxScaler()!!
+p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/RO_train/")
+p.add_argument('--val_data', type=str, default="/home/shapelim/RONet/RO_val/")
 
-p.add_argument('--lr', type=float, default = 0.0001)
+p.add_argument('--lr', type=float, default = 0.001)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 5)
-p.add_argument('--epoches', type=int, default = 1500)
-p.add_argument('--batch_size', type=int, default = 11257)
+p.add_argument('--epoches', type=int, default = 5)
+p.add_argument('--batch_size', type=int, default = 4000) #11257)
 
 #NETWORK PARAMETERS
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
-p.add_argument('--hidden_size', type=int, default = 3) # RNN output size
-p.add_argument('--num_uwb', type=int, default = 8) #RNN input size: number of uwb
+p.add_argument('--num_uwb', type=int, default = 8) # RNN input size: number of uwb
 p.add_argument('--preprocessing_output_size', type=int, default = 512)
-p.add_argument('--first_layer_output_size', type=int, default = 512)
-p.add_argument('--second_layer_output_size', type=int, default = 500)
+p.add_argument('--first_layer_output_size', type=int, default = 128)
+# Second: not in use
+p.add_argument('--second_layer_output_size', type=int, default = 0)
+p.add_argument('--fc_layer_size', type=int, default=1024)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
-p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
-p.add_argument('--network_type', type=str, default = 'fc') #uni / bi
+p.add_argument('--output_size', type=int, default = 2) # We only infer x, y
+'''
+network_type
+is_multimodal == True => stacked_bi
+is_multimodal == False => fc / stacked_bi
+'''
 p.add_argument('--is_multimodal', type=bool, default = False) #True / False
-
+p.add_argument('--network_type', type=str, default = 'stacked_bi')
 p.add_argument('--clip', type=float, default = 5.0)
-
 p.add_argument('--dropout_prob', type=float, default = 1.0)
-p.add_argument('--grid_size', type=float, default = 0.01)
-#Loss terms
-p.add_argument('--alpha', type=float, default = 1) #True / False
-p.add_argument('--beta', type=float, default = 0)
-p.add_argument('--gamma', type=float, default = 0) #True / False
+
+p.add_argument('--gpu', type=str, default='0')
 
 #FOR TEST
-p.add_argument('--load_model_dir', type=str, default="/home/cpark/RONet/test_stacked2222/")
-p.add_argument('--test_data', type=str, default='/home/cpark/RONet/val_Karpe_181102/1103_Karpe_test1.csv')
+p.add_argument('--mode', type=str, default='test')
+p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/RO_test_3/")
+p.add_argument('--test_data', type=str, default='/home/shapelim/RONet/RO_test/02-38.csv')
 # p.add_argument('--test_data', type=str, default='inputs/np_test_2.csv')
 ###########
 args = p.parse_args()
+os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
 
 FILE_NAME = args.test_data.split('.')[0].split('/')[-1]
 
 min_loss_meta_file_name = search_min_loss_meta_file(args.load_model_dir)
+# If you want to test other meta file
+# min_loss_meta_file_name = args.load_model_dir + "model_0_05827-1155"
 
 print ("Meta files: ", min_loss_meta_file_name)
 
 data_parser = DataPreprocessing.DataManager(args)
-data_parser.fitDataForMinMaxScaler(generating_grid = False)
-data_parser.transform_all_data()
+data_parser.fit_all_data()
 
 print ("Set transformation complete")
 tf.reset_default_graph()
 ro_net = RONet(args)
-#For Generating grid!!!
-# ro_net.get_scale_for_round(data_parser.scaler_for_prediction.scale_)
-# ro_net.round_predicted_position()
 
 viz = Visualization(args)
 saver = tf.train.Saver(max_to_keep = 3)
@@ -90,9 +90,6 @@ with tf.Session() as sess:
         # saver.restore(sess, args.load_model_dir)
         print ("Load success.")
 
-        data_parser.set_dir(args.test_data)
-
-        data_parser.set_val_data(args.test_data)
         if args.is_multimodal:
             data_parser.transform_all_data()
             # data_parser.set_data_for_8multimodal()
@@ -108,14 +105,13 @@ with tf.Session() as sess:
                                                                ro_net.d6_data: d6_data,
                                                                ro_net.d7_data: d7_data}) #prediction : type: list, [ [[[hidden_size]*sequence_length] ... ] ]
         else:
-            data_parser.transform_all_data()
+            '''Non-multimodal case'''
             if args.network_type == 'fc':
                 data_parser.set_data_for_fc_layer()
             else:
-                data_parser.set_data_for_non_multimodal_all_sequences()
+                data_parser.set_test_data()
             X_data = data_parser.get_range_data_for_nonmultimodal()
             prediction = sess.run(ro_net.pose_pred, feed_dict={ro_net.X_data: X_data}) #prediction : type: list, [ [[[hidden_size]*sequence_length] ... ] ]
-
 
         if args.network_type != 'fc':
             prediction = prediction[:, -1, :]
@@ -125,16 +121,17 @@ with tf.Session() as sess:
         output_csv = args.load_model_dir + FILE_NAME +".csv"
         output_plot = args.load_model_dir + FILE_NAME +".png"
         data_parser.write_file_data(output_csv)
-        viz.set_3D_plot_name(output_plot)
-        viz.drawResult3D(output_csv)
+   
+        viz.set_2D_plot_name(output_plot)
+        viz.draw_2D_trajectory(output_csv)
         if args.network_type != 'fc':
             '''For LSTMs'''
-            viz.plotDistanceError3D(output_csv)
-            _, rmse = viz._calDistanceError3D(output_csv)
+            viz.plotDistanceError2D(output_csv)
+            _, rmse = viz._calDistanceError2D(output_csv)
         elif args.network_type == 'fc':
             '''For FC layers'''
-            viz.plotDistanceError3D_for_FC_layer(output_csv)
-            _, rmse = viz._calDistanceError3D_for_FC_layer(output_csv)
+            viz.plotDistanceError2D_for_FC_layer(output_csv)
+            _, rmse = viz._calDistanceError2D_for_FC_layer(output_csv)
 
         f = open(args.load_model_dir + FILE_NAME + "_RMSE.txt", 'w')
         f.write(str(rmse))

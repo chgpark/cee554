@@ -8,52 +8,51 @@ import os
 import argparse
 import csv
 os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
-os.environ['CUDA_VISIBLE_DEVICES'] = '2' #,1,2,3'
 tf.set_random_seed(777)  # reproducibilityb
 # hyper parameters
 p =argparse.ArgumentParser()
 
 #FOR TRAIN
-p.add_argument('--train_data', type=str, default="/home/cpark/RONet/train_Karpe_181102/")
-p.add_argument('--val_data', type=str, default="/home/cpark/RONet/val_Karpe_181102/")
-p.add_argument('--save_dir', type=str, default="/home/cpark/RONet/test_stacked2222222/")
+p.add_argument('--mode', type=str, default='train')
+p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/RO_train/")
+p.add_argument('--val_data', type=str, default="/home/shapelim/RONet/RO_val/")
+p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/RO_test_3/")
 
 p.add_argument('--lr', type=float, default = 0.001)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 5)
 p.add_argument('--epoches', type=int, default = 10)
-p.add_argument('--batch_size', type=int, default = 10570) #11257)
+p.add_argument('--batch_size', type=int, default = 4000) #11257)
 
 #NETWORK PARAMETERS
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
-p.add_argument('--hidden_size', type=int, default = 3) # RNN output size
-p.add_argument('--num_uwb', type=int, default = 8) #RNN input size: number of uwb
+p.add_argument('--num_uwb', type=int, default = 8) # RNN input size: number of uwb
 p.add_argument('--preprocessing_output_size', type=int, default = 512)
-p.add_argument('--first_layer_output_size', type=int, default = 512)
-p.add_argument('--second_layer_output_size', type=int, default = 500)
+p.add_argument('--first_layer_output_size', type=int, default = 128)
+# Second: not in use
+p.add_argument('--second_layer_output_size', type=int, default = 0)
+p.add_argument('--fc_layer_size', type=int, default=1024)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
-p.add_argument('--output_size', type=int, default = 3) #position: 3 / pose: 6
+p.add_argument('--output_size', type=int, default = 2) # We only infer x, y
 '''
 network_type
 is_multimodal == True => stacked_bi
-is_multimodal == False => fc / stacked_bignvw`
+is_multimodal == False => fc / stacked_bi
 '''
-p.add_argument('--network_type', type=str, default = 'stacked_bi')
 p.add_argument('--is_multimodal', type=bool, default = False) #True / False
+p.add_argument('--network_type', type=str, default = 'stacked_bi')
 p.add_argument('--clip', type=float, default = 5.0)
-
 p.add_argument('--dropout_prob', type=float, default = 1.0)
-p.add_argument('--grid_size', type=float, default = 0.01)
-#Coefficients of loss term
-p.add_argument('--alpha', type=float, default = 1)
-p.add_argument('--beta', type=float, default = 0)
-p.add_argument('--gamma', type=float, default = 0)
+
+p.add_argument('--gpu', type=str, default='0')
+
+
 
 args = p.parse_args()
+os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu #,1,2,3'
 
 data_parser = DataPreprocessing.DataManager(args)
-data_parser.fitDataForMinMaxScaler(generating_grid = False)
-data_parser.transform_all_data()
+data_parser.fit_all_data()
 
 if args.is_multimodal:
     print ("Loading train data for multimodal...")
@@ -173,24 +172,21 @@ else:
     if args.network_type == 'fc':
         data_parser.set_data_for_fc_layer()
     else:
-        data_parser.set_data_for_non_multimodal_all_sequences()
+        data_parser.set_train_data()
 
     X_data = data_parser.get_range_data_for_nonmultimodal()
-    robot_position_gt, robot_quaternion_gt = data_parser.get_gt_data()
+    robot_position_gt = data_parser.get_gt_data()
     print ("Complete!")
     print (X_data.shape, robot_position_gt.shape) #Data size / sequence length / uwb num or (batch, uwb_num)
 
-
     print ("Loading val data...")
-    data_parser.set_dir(args.val_data)
-    data_parser.set_all_target_data_list(generating_grid=False)
-    data_parser.transform_all_data()
     if args.network_type == 'fc':
         data_parser.set_data_for_fc_layer()
     else:
-        data_parser.set_data_for_non_multimodal_all_sequences()
+        data_parser.set_val_data()
+
     val_X_data = data_parser.get_range_data_for_nonmultimodal()
-    val_robot_position_gt, val_robot_quaternion_gt = data_parser.get_gt_data()
+    val_robot_position_gt = data_parser.get_gt_data()
     print ("Complete!")
 
     writer_val = tf.summary.FileWriter(args.save_dir + '/board/val') #, sess.graph)
@@ -198,10 +194,6 @@ else:
 
     tf.reset_default_graph()
     ro_net = RONet(args)
-
-    #For Generating grid!!!
-    # ro_net.get_scale_for_round(data_parser.scaler_for_prediction.scale_)
-    # ro_net.round_predicted_position()
 
     #terms for learning rate decay
     global_step = tf.Variable(0, trainable=False)
@@ -257,9 +249,9 @@ else:
             writer_val.flush()
 
             loss_of_epoch /= iter
-            if (loss_of_epoch < min_loss):
-                min_loss = loss_of_epoch
-                saver.save(sess, args.save_dir + 'model_'+'{0:.5f}'.format(loss_of_epoch).replace('.', '_'), global_step=step)
+            if (loss_of_val < min_loss):
+                min_loss = loss_of_val
+                saver.save(sess, args.save_dir + 'model_'+'{0:.5f}'.format(loss_of_val).replace('.', '_'), global_step=step)
             tqdm_range.set_description('train ' +'{0:.7f}'.format(loss_of_epoch)+' | val '+'{0:.7f}'.format(loss_of_val))
             tqdm_range.refresh()
         f = open(args.save_dir + "final_losses.txt", 'w')

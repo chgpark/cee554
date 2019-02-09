@@ -505,6 +505,7 @@ class RONet:
             tf.summary.scalar('global learning rate', self.cur_lr)
 
             self.optimizer = tf.train.AdamOptimizer(learning_rate= self.cur_lr)
+            '''Gradient clipping parts'''
             # gradients, variables = zip(*self.optimizer.compute_gradients(self.loss))
             # gradients, _ = tf.clip_by_global_norm(gradients, 5.0)
             # self.optimize = self.optimizer.apply_gradients(zip(gradients, variables))

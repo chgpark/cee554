@@ -11,14 +11,14 @@ import csv
 from search_min_loss_file import search_min_loss_meta_file
 
 os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
-os.environ['CUDA_VISIBLE_DEVICES'] = '0' #,1,2,3'
+os.environ['CUDA_VISIBLE_DEVICES'] = '2' #,1,2,3'
 tf.set_random_seed(777)  # reproducibilityb
 # hyper parameters
 p =argparse.ArgumentParser()
 
 #FOR TRAIN
 #Train folder is essential for data_parser.fitDataForMinMaxScaler()!!
-p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/train_Karpe_181102/")
+p.add_argument('--train_data', type=str, default="/home/cpark/RONet/train_Karpe_181102/")
 
 p.add_argument('--lr', type=float, default = 0.0001)
 p.add_argument('--decay_rate', type=float, default = 0.7)
@@ -48,8 +48,8 @@ p.add_argument('--beta', type=float, default = 0)
 p.add_argument('--gamma', type=float, default = 0) #True / False
 
 #FOR TEST
-p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test_stacked33/")
-p.add_argument('--test_data', type=str, default='/home/shapelim/RONet/val_Karpe_181102/1103_Karpe_test1.csv')
+p.add_argument('--load_model_dir', type=str, default="/home/cpark/RONet/test_stacked2222/")
+p.add_argument('--test_data', type=str, default='/home/cpark/RONet/val_Karpe_181102/1103_Karpe_test1.csv')
 # p.add_argument('--test_data', type=str, default='inputs/np_test_2.csv')
 ###########
 args = p.parse_args()

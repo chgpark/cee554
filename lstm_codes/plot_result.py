@@ -64,7 +64,7 @@ class Visualization:
         gt_xyz = np.loadtxt(raw_csv_file, delimiter=',')
         #x_array: gt_xy[:,0]
         #y_array: gt_xy[:,1]
-        self.gt_xyz = gt_xyz[:, -3:]
+        self.gt_xyz = gt_xyz[:, self.args.num_uwb:self.args.num_uwb+3]
 
     def _calDistanceError3D(self, predicted_result_dir):
         predicted_xyz = np.loadtxt(predicted_result_dir, delimiter=',')

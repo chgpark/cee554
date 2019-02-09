@@ -3,5 +3,9 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.5.2 (sftp://shapelim@143.248.122.59:22/usr/bin/python3.5)" project-jdk-type="Python SDK" />
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.5 (AVTDC_project)" project-jdk-type="Python SDK" />
+>>>>>>> 26339536ff94fbecf0a11fd896976cae13ef4976
 </project>

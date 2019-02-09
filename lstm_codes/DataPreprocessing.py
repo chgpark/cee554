@@ -47,12 +47,12 @@ class DataManager:
             for train_file_dir in self.train_files_dir:
                 print ("Load " + train_file_dir)
                 train_data = np.loadtxt(train_file_dir, delimiter=',')
-                self.train_data_list.append(train_data)
+                self.train_data_list.append(train_data[:,:11])
 
     def set_val_data(self, val_data_dir):
         self.train_data_list = []
         val_data = np.loadtxt(val_data_dir, delimiter=',')
-        self.train_data_list.append(val_data)
+        self.train_data_list.append(val_data[:,:11])
 
     def fitDataForMinMaxScaler(self, generating_grid = True):
         self.set_all_target_data_list(generating_grid)

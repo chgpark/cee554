@@ -15,5 +15,19 @@ def search_min_loss_meta_file(dirname):
                 min_meta = meta_name
 
     return min_meta
+
+def search_meta_file_list(dirname):
+    meta_file_list = []
+    filenames = os.listdir(dirname)
+    for i,filename in enumerate(filenames):
+        full_filename = os.path.join(dirname, filename)
+        ext = os.path.splitext(full_filename)[-1]
+        if ext == '.meta':
+            meta_name = os.path.splitext(full_filename)[0]
+            meta_file_list.append(meta_name)
+
+    return meta_file_list
 if __name__ == '__main__':
-    search_min_loss_meta_file("/home/shapelim/RONet/")
+    print(search_min_loss_meta_file("/home/shapelim/RONet/0209_3/"))
+    print(search_min_loss_meta_file("/home/shapelim/RONet/0209_3/")[-7:])
+    print(search_meta_file_list("/home/shapelim/RONet/0209_3/"))

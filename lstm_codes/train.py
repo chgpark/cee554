@@ -16,21 +16,21 @@ p =argparse.ArgumentParser()
 p.add_argument('--mode', type=str, default='train')
 p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/RO_train/")
 p.add_argument('--val_data', type=str, default="/home/shapelim/RONet/RO_val/")
-p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/RO_test_3/")
+p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test_1/")
 
 p.add_argument('--lr', type=float, default = 0.001)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 5)
-p.add_argument('--epoches', type=int, default = 10)
-p.add_argument('--batch_size', type=int, default = 4000) #11257)
+p.add_argument('--epoches', type=int, default = 1200)
+p.add_argument('--batch_size', type=int, default = 4353) #11257)
 
 #NETWORK PARAMETERS
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
 p.add_argument('--num_uwb', type=int, default = 8) # RNN input size: number of uwb
 p.add_argument('--preprocessing_output_size', type=int, default = 512)
-p.add_argument('--first_layer_output_size', type=int, default = 128)
+p.add_argument('--first_layer_output_size', type=int, default = 256)
 # Second: not in use
-p.add_argument('--second_layer_output_size', type=int, default = 0)
+p.add_argument('--second_layer_output_size', type=int, default = 128)
 p.add_argument('--fc_layer_size', type=int, default=1024)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 2) # We only infer x, y

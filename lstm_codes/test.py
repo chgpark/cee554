@@ -8,7 +8,7 @@ from tqdm import tqdm, trange
 import os
 import argparse
 import csv
-from search_min_loss_file import search_min_loss_meta_file
+from search_min_loss_file import search_min_loss_meta_file, search_meta_file_list
 
 os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
 tf.set_random_seed(777)  # reproducibilityb
@@ -22,16 +22,16 @@ p.add_argument('--val_data', type=str, default="/home/shapelim/RONet/RO_val/")
 p.add_argument('--lr', type=float, default = 0.001)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 5)
-p.add_argument('--epoches', type=int, default = 5)
+p.add_argument('--epoches', type=int, default = 1200)
 p.add_argument('--batch_size', type=int, default = 4000) #11257)
 
 #NETWORK PARAMETERS
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
 p.add_argument('--num_uwb', type=int, default = 8) # RNN input size: number of uwb
 p.add_argument('--preprocessing_output_size', type=int, default = 512)
-p.add_argument('--first_layer_output_size', type=int, default = 128)
+p.add_argument('--first_layer_output_size', type=int, default = 256)
 # Second: not in use
-p.add_argument('--second_layer_output_size', type=int, default = 0)
+p.add_argument('--second_layer_output_size', type=int, default = 128)
 p.add_argument('--fc_layer_size', type=int, default=1024)
 p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 2) # We only infer x, y
@@ -45,11 +45,11 @@ p.add_argument('--network_type', type=str, default = 'stacked_bi')
 p.add_argument('--clip', type=float, default = 5.0)
 p.add_argument('--dropout_prob', type=float, default = 1.0)
 
-p.add_argument('--gpu', type=str, default='0')
+p.add_argument('--gpu', type=str, default='4')
 
 #FOR TEST
 p.add_argument('--mode', type=str, default='test')
-p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/RO_test_3/")
+p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/0210_1/")
 p.add_argument('--test_data', type=str, default='/home/shapelim/RONet/RO_test/02-38.csv')
 # p.add_argument('--test_data', type=str, default='inputs/np_test_2.csv')
 ###########
@@ -58,11 +58,15 @@ os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
 
 FILE_NAME = args.test_data.split('.')[0].split('/')[-1]
 
-min_loss_meta_file_name = search_min_loss_meta_file(args.load_model_dir)
+# min_loss_meta_file_name = search_min_loss_meta_file(args.load_model_dir)
 # If you want to test other meta file
-# min_loss_meta_file_name = args.load_model_dir + "model_0_05827-1155"
+# min_loss_meta_file_name = args.load_model_dir + "model_0_03119-8386"
+# min_loss_meta_file_name = args.load_model_dir + "model_0_00003-6237"
+# print ("Meta files: ", min_loss_meta_file_name)
 
-print ("Meta files: ", min_loss_meta_file_name)
+# If you want to test all meta file
+meta_file_list = search_meta_file_list(args.load_model_dir)
+
 
 data_parser = DataPreprocessing.DataManager(args)
 data_parser.fit_all_data()
@@ -85,8 +89,9 @@ print("number of trainable parameters: {}".format(total_num_parameters))
 merged = tf.summary.merge_all()
 ########################################
 with tf.Session() as sess:
+    for meta_file_name in meta_file_list:
    #For save diagonal data
-        saver.restore(sess, min_loss_meta_file_name)
+        saver.restore(sess, meta_file_name)
         # saver.restore(sess, args.load_model_dir)
         print ("Load success.")
 
@@ -118,8 +123,9 @@ with tf.Session() as sess:
 
         data_parser.inverse_transform_by_train_data(prediction)
 
-        output_csv = args.load_model_dir + FILE_NAME +".csv"
-        output_plot = args.load_model_dir + FILE_NAME +".png"
+        target_model_name = meta_file_name[-7:]
+        output_csv = args.load_model_dir + FILE_NAME + target_model_name +".csv"
+        output_plot = args.load_model_dir + FILE_NAME + target_model_name +".png"
         data_parser.write_file_data(output_csv)
    
         viz.set_2D_plot_name(output_plot)
@@ -133,6 +139,6 @@ with tf.Session() as sess:
             viz.plotDistanceError2D_for_FC_layer(output_csv)
             _, rmse = viz._calDistanceError2D_for_FC_layer(output_csv)
 
-        f = open(args.load_model_dir + FILE_NAME + "_RMSE.txt", 'w')
+        f = open(args.load_model_dir + FILE_NAME + target_model_name + "_RMSE.txt", 'w')
         f.write(str(rmse))
         f.close()

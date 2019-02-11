@@ -345,33 +345,55 @@ class RONet:
             attention = tf.nn.sigmoid(self.output)
             self.output = attention*self.output + self.output
 
+    def set_fc_layer_for_dynamic_len(self):
+        feature_length = self.output.shape[1].value
+        interval = int(feature_length / self.sequence_length)
+
+        prediction_list = []
+
+        for i in range(self.sequence_length):
+            with tf.variable_scope("fc_{}".format(i+1)):
+                fc_layer = tf.contrib.layers.fully_connected(self.output[:, i * interval:(i+1) * interval], self.fc_layer_output_size)
+                fc_layer = tf.contrib.layers.fully_connected(fc_layer, 2)
+
+                self.partial_position_pred = tf.reshape(fc_layer, [-1, 1, 2])
+
+            prediction_list.append(self.partial_position_pred)
+
+
+        self.pose_pred = tf.concat(prediction_list, axis=1)
+
     def set_fc_layer_for_seq_len_5(self):
+        shape_1 = self.output.shape[1].value
+        interval = int(shape_1 / self.sequence_length)
+
+
         with tf.variable_scope("fc1"):
-            fc_layer = tf.contrib.layers.fully_connected(self.output[:, :self.first_layer_output_size*2], self.fc_layer_output_size)
+            fc_layer = tf.contrib.layers.fully_connected(self.output[:, :interval], self.fc_layer_output_size)
             fc_layer = tf.contrib.layers.fully_connected(fc_layer, 2)
 
             self.position_pred1 = tf.reshape(fc_layer, [-1, 1, 2])
 
         with tf.variable_scope("fc2"):
-            fc_layer = tf.contrib.layers.fully_connected(self.output[:, self.first_layer_output_size*2:2*self.first_layer_output_size*2], self.fc_layer_output_size)
+            fc_layer = tf.contrib.layers.fully_connected(self.output[:, interval:2*interval], self.fc_layer_output_size)
             fc_layer = tf.contrib.layers.fully_connected(fc_layer, 2)
 
             self.position_pred2 = tf.reshape(fc_layer, [-1, 1, 2])
 
         with tf.variable_scope("fc3"):
-            fc_layer = tf.contrib.layers.fully_connected(self.output[:, 2*self.first_layer_output_size*2:3*self.first_layer_output_size*2], self.fc_layer_output_size)
+            fc_layer = tf.contrib.layers.fully_connected(self.output[:, 2*interval:3*interval], self.fc_layer_output_size)
             fc_layer = tf.contrib.layers.fully_connected(fc_layer, 2)
 
             self.position_pred3 = tf.reshape(fc_layer, [-1, 1, 2])
 
         with tf.variable_scope("fc4"):
-            fc_layer = tf.contrib.layers.fully_connected(self.output[:, 3*self.first_layer_output_size*2:4*self.first_layer_output_size*2], self.fc_layer_output_size)
+            fc_layer = tf.contrib.layers.fully_connected(self.output[:, 3*interval:4*interval], self.fc_layer_output_size)
             fc_layer = tf.contrib.layers.fully_connected(fc_layer, 2)
 
             self.position_pred4 = tf.reshape(fc_layer, [-1, 1, 2])
 
         with tf.variable_scope("fc5"):
-            fc_layer = tf.contrib.layers.fully_connected(self.output[:, 4*self.first_layer_output_size*2:5*self.first_layer_output_size*2], self.fc_layer_output_size)
+            fc_layer = tf.contrib.layers.fully_connected(self.output[:, 4*interval:5*interval], self.fc_layer_output_size)
             fc_layer = tf.contrib.layers.fully_connected(fc_layer, 2)
 
             self.position_pred5 = tf.reshape(fc_layer, [-1, 1, 2])
@@ -388,10 +410,21 @@ class RONet:
             self.get_attentioned_preprocessed_data()
             self.set_first_layer_bi_LSTM()
             self.concatenate_first_layer_output()
-            self.output = tf.reshape(self.output, [-1, self.sequence_length*self.first_layer_output_size*2])
+
+            self.get_attentioned_preprocessed_data()
+
+            self.set_second_layer_bi_LSTM()
+            self.concatenate_second_layer_output()
+
+            self.get_attentioned_preprocessed_data()
+
+            # self.output = tf.reshape(self.output, [-1, self.sequence_length*self.first_layer_output_size*2])
+            self.output = tf.reshape(self.output, [-1, self.sequence_length*self.second_layer_output_size*2])
+            print(self.output.shape[1])
+            print("hello!")
             '''For test for all sequeneces!!'''
-            self.set_fc_layer_for_seq_len_5()
-        
+            # self.set_fc_layer_for_seq_len_5()
+            self.set_fc_layer_for_dynamic_len()
         
     def build_RO_Net_bi_multimodal(self):
         self.set_multimodal_Preprocessing_bi_LSTM_for_8_uwb()

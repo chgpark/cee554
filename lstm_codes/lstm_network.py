@@ -28,9 +28,13 @@ class RONet:
                 self.set_placeholders_for_fc_layer()
                 self.build_FC_layer()
 
-            if self.network_type == 'stacked_bi':
+            elif self.network_type == 'stacked_bi':
                 self.set_placeholders_for_non_multimodal()
-                self.build_non_multimodal_stacked_BiLSTM()
+                self.set_stacked_bi_LSTM()
+
+            elif self.network_type == 'RO':
+                self.set_placeholders_for_non_multimodal()
+                self.set_RO_Net()
 
         self.set_loss_terms()
 
@@ -399,11 +403,42 @@ class RONet:
             self.position_pred5 = tf.reshape(fc_layer, [-1, 1, 2])
 
         self.pose_pred = tf.concat([self.position_pred1, self.position_pred2, self.position_pred3, self.position_pred4, self.position_pred5], axis=1)
-        
+
+##################################################
+            #Builing RiTA's paper
+##################################################
+
+    def set_stacked_bi_LSTM(self):
+        with tf.variable_scope("Stacked_bi_lstm1"):
+            # outputs : tuple
+            first_layer_output_num = 100
+            cell_forward1 = tf.contrib.rnn.BasicLSTMCell(num_units=first_layer_output_num)
+            cell_backward1 = tf.contrib.rnn.BasicLSTMCell(num_units=first_layer_output_num)
+
+            # outputs : tuple
+            outputs, _states = tf.nn.bidirectional_dynamic_rnn(cell_forward1, cell_backward1, self.X_data,
+                                                               dtype=tf.float32)
+            # outputs = tf.concat([outputs[0], outputs[1]], axis=1)
+            outputs = tf.concat([outputs[0], outputs[1]], axis=2)
+
+        with tf.variable_scope("Stacked_bi_lstm2"):
+            cell_forward2 = tf.contrib.rnn.BasicLSTMCell(num_units=self.output_size)
+            cell_backward2 = tf.contrib.rnn.BasicLSTMCell(num_units=self.output_size)
+
+            # outputs : tuple
+            outputs, _states = tf.nn.bidirectional_dynamic_rnn(cell_forward2, cell_backward2, outputs, dtype=tf.float32)
+
+            outputs = tf.concat([outputs[0], outputs[1]], axis=2)
+
+        self.output = tf.reshape(outputs, [-1, self.sequence_length*2*self.output_size])
+
+        self.set_fc_layer_for_dynamic_len()
+
+
 ##################################################
             #Builing RO Nets
 ##################################################
-    def build_non_multimodal_stacked_BiLSTM(self):
+    def set_RO_Net(self):
         with tf.variable_scope("Stacked_bi_lstm1"):
             self.set_preprocessing_bi_LSTM_for_8_uwb()
             self.concatenate_preprocessed_data_for_bi_LSTM()
@@ -446,9 +481,10 @@ class RONet:
         self.pose_pred = tf.reshape(fc_layer, [-1, self.sequence_length, self.output_size])
 
     def build_FC_layer(self):
+        num_layer = 100
         with tf.variable_scope("FC_layer"):
-            fc_layer = tf.contrib.layers.fully_connected(self.X_data, 2048)
-            fc_layer = tf.contrib.layers.fully_connected(fc_layer, 2048)
+            fc_layer = tf.contrib.layers.fully_connected(self.X_data, num_layer)
+            fc_layer = tf.contrib.layers.fully_connected(fc_layer, num_layer)
 
             self.pose_pred = tf.contrib.layers.fully_connected(fc_layer, self.output_size)
 

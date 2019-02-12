@@ -236,31 +236,77 @@ class DataManager:
     ##################################################
                     #For FC layer
     ##################################################
-    def set_range_data_for_fc_layer(self):
+    def set_train_data_for_fc_layer(self):
         '''For non-multimodal!'''
         self.X_data = []
-        for train_data in self.train_data_list:
-            x = train_data[:,:self.num_uwb]
+        self.position_data =[]
 
-            for i in range(len(x)):
-                _x = x[i]
+        for train_file_dir in self.train_files_dir:
+            train_data = np.loadtxt(train_file_dir , delimiter=',')
+
+            range_data = train_data[:, :self.input_size]
+            p_data = train_data[:, self.input_size:self.input_size + 2]
+
+            range_data = self.scaler.transform(range_data)
+            p_data = self.scaler_for_prediction.transform(p_data)
+
+            for i in range(len(range_data)):
+                _x = range_data[i]
+                _position = p_data[i]
+
                 self.X_data.append(_x)
+                self.position_data.append(_position)
 
         self.X_data = np.array(self.X_data)
+        self.position_data = np.array(self.position_data)
 
-    def set_gt_data_for_fc_layer(self):
-            self.position_data =[]
-            self.quaternion_data = []
+    def set_val_data_for_fc_layer(self):
+        '''For non-multimodal!'''
+        self.X_data = []
+        self.position_data = []
 
-            for train_data in self.train_data_list:
-                robot_position = train_data[:, self.num_uwb: self.num_uwb + 3]  # Close as label
-                robot_quaternion = train_data[:, self.num_uwb+3:]
+        for val_file_dir in self.val_files_dir:
+            val_data = np.loadtxt(val_file_dir , delimiter=',')
 
-                for i in range(len(robot_position)):
-                    self.position_data.append(robot_position[i])
-                    self.quaternion_data.append(robot_quaternion[i])
-            self.position_data = np.array(self.position_data)
-            self.quaternion_data = np.array(self.quaternion_data)
+            range_data = val_data[:, :self.input_size]
+            p_data = val_data[:, self.input_size:self.input_size + 2]
+
+            range_data = self.scaler.transform(range_data)
+            p_data = self.scaler_for_prediction.transform(p_data)
+
+            for i in range(len(range_data)):
+                _x = range_data[i]
+                _position = p_data[i]
+
+                self.X_data.append(_x)
+                self.position_data.append(_position)
+
+
+        self.X_data = np.array(self.X_data)
+        self.position_data = np.array(self.position_data)
+
+    def set_test_data_for_fc_layer(self):
+        self.X_data = []
+        self.position_data = []
+
+        test_data = np.loadtxt(self.test_dir, delimiter=',')
+
+        range_data = test_data[:, :self.input_size]
+        p_data = test_data[:, self.input_size:self.input_size + 2]
+
+        range_data = self.scaler.transform(range_data)
+        p_data = self.scaler_for_prediction.transform(p_data)
+
+        for i in range(len(range_data)):
+            _x = range_data[i]
+            _position = p_data[i]
+
+            self.X_data.append(_x)
+            self.position_data.append(_position)
+
+
+        self.X_data = np.array(self.X_data)
+        self.position_data = np.array(self.position_data)
 
     def set_data_for_fc_layer(self):
         self.set_range_data_for_fc_layer()

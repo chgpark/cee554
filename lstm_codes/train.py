@@ -16,13 +16,13 @@ p =argparse.ArgumentParser()
 p.add_argument('--mode', type=str, default='train')
 p.add_argument('--train_data', type=str, default="/home/shapelim/RONet/RO_train/")
 p.add_argument('--val_data', type=str, default="/home/shapelim/RONet/RO_val/")
-p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test_1/")
+p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test_fc_2/")
 
 p.add_argument('--lr', type=float, default = 0.001)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 5)
-p.add_argument('--epoches', type=int, default = 1200)
-p.add_argument('--batch_size', type=int, default = 4353) #11257)
+p.add_argument('--epoches', type=int, default = 1000)
+p.add_argument('--batch_size', type=int, default = 6450) #11257)
 
 #NETWORK PARAMETERS
 p.add_argument('--output_type', type = str, default = 'position') # position or pose
@@ -32,15 +32,15 @@ p.add_argument('--first_layer_output_size', type=int, default = 256)
 # Second: not in use
 p.add_argument('--second_layer_output_size', type=int, default = 128)
 p.add_argument('--fc_layer_size', type=int, default=1024)
-p.add_argument('--sequence_length', type=int, default = 5) # # of lstm rolling
+p.add_argument('--sequence_length', type=int, default = 100) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 2) # We only infer x, y
 '''
 network_type
 is_multimodal == True => stacked_bi
-is_multimodal == False => fc / stacked_bi
+is_multimodal == False => fc / stacked_bi / RO
 '''
 p.add_argument('--is_multimodal', type=bool, default = False) #True / False
-p.add_argument('--network_type', type=str, default = 'stacked_bi')
+p.add_argument('--network_type', type=str, default = 'fc')
 p.add_argument('--clip', type=float, default = 5.0)
 p.add_argument('--dropout_prob', type=float, default = 1.0)
 
@@ -170,7 +170,7 @@ else:
     '''train for non-multimodal case'''
     print ("Loading train data for non multimodal...")
     if args.network_type == 'fc':
-        data_parser.set_data_for_fc_layer()
+        data_parser.set_train_data_for_fc_layer()
     else:
         data_parser.set_train_data()
 
@@ -181,7 +181,7 @@ else:
 
     print ("Loading val data...")
     if args.network_type == 'fc':
-        data_parser.set_data_for_fc_layer()
+        data_parser.set_val_data_for_fc_layer()
     else:
         data_parser.set_val_data()
 

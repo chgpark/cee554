@@ -125,7 +125,7 @@ if __name__  == "__main__":
     '''Setting directories of object files'''
     # full_path = "/home/shapelim/Desktop/uio_net_data/190108/"
     # dir = full_path + "test/2019-01-08-08-31-38/"
-    abs_path = "/home/shapelim/git_files/cee554/190209_range/range_data/"
+    abs_path = "/home/shapelim/git_files/cee554/190209_range/range_02_11/"
     dir_list = os.listdir(abs_path)
 
     '''Remove files that are not target data folder files'''
@@ -183,5 +183,5 @@ if __name__  == "__main__":
         output_file_name = output_file_name[-1]
         output_file_name = output_file_name[-8:-3]
 
-        output_dir_name = abs_path[:-11] + 'synced/' + output_file_name + '.csv'
+        output_dir_name = abs_path[:-12] + 'synced_02_11/' + output_file_name + '.csv'
         write_file_data(result_csv, output_dir_name)

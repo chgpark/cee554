@@ -38,10 +38,10 @@ p.add_argument('--output_size', type=int, default = 2) # We only infer x, y
 '''
 network_type
 is_multimodal == True => stacked_bi
-is_multimodal == False => fc / stacked_bi
+is_multimodal == False => fc / stacked_bi / RO
 '''
 p.add_argument('--is_multimodal', type=bool, default = False) #True / False
-p.add_argument('--network_type', type=str, default = 'stacked_bi')
+p.add_argument('--network_type', type=str, default = 'fc')
 p.add_argument('--clip', type=float, default = 5.0)
 p.add_argument('--dropout_prob', type=float, default = 1.0)
 
@@ -49,7 +49,7 @@ p.add_argument('--gpu', type=str, default='4')
 
 #FOR TEST
 p.add_argument('--mode', type=str, default='test')
-p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/0210_1/")
+p.add_argument('--load_model_dir', type=str, default="/home/shapelim/RONet/test_fc_2/")
 p.add_argument('--test_data', type=str, default='/home/shapelim/RONet/RO_test/02-38.csv')
 # p.add_argument('--test_data', type=str, default='inputs/np_test_2.csv')
 ###########
@@ -112,7 +112,7 @@ with tf.Session() as sess:
         else:
             '''Non-multimodal case'''
             if args.network_type == 'fc':
-                data_parser.set_data_for_fc_layer()
+                data_parser.set_test_data_for_fc_layer()
             else:
                 data_parser.set_test_data()
             X_data = data_parser.get_range_data_for_nonmultimodal()
@@ -129,16 +129,7 @@ with tf.Session() as sess:
         data_parser.write_file_data(output_csv)
    
         viz.set_2D_plot_name(output_plot)
+        viz.calDistanceError2D(output_csv)
         viz.draw_2D_trajectory(output_csv)
-        if args.network_type != 'fc':
-            '''For LSTMs'''
-            viz.plotDistanceError2D(output_csv)
-            _, rmse = viz._calDistanceError2D(output_csv)
-        elif args.network_type == 'fc':
-            '''For FC layers'''
-            viz.plotDistanceError2D_for_FC_layer(output_csv)
-            _, rmse = viz._calDistanceError2D_for_FC_layer(output_csv)
-
-        f = open(args.load_model_dir + FILE_NAME + target_model_name + "_RMSE.txt", 'w')
-        f.write(str(rmse))
-        f.close()
+        viz.plotDistanceError2D(output_csv)
+        viz.draw_box_plot()

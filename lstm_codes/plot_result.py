@@ -68,19 +68,34 @@ class Visualization:
         #y_array: gt_xy[:,1]
         self.gt_xyz = gt_xyz[:, self.args.num_uwb:self.args.num_uwb+3]
 
-    def _calDistanceError2D(self, predicted_result_dir):
+    def calDistanceError2D(self, predicted_result_dir):
         predicted_xyz = np.loadtxt(predicted_result_dir, delimiter=',')
         # gt_xy = np.random.randint(3,size = (4,2))
         # predicted_xy = np.random.randint(3, size = (4,2))
-        dx_dy_array = self.gt_xyz[self.seq_length - 1:] - predicted_xyz
+        if self.args.network_type != 'fc':
+            dx_dy_array = self.gt_xyz[self.seq_length - 1:] - predicted_xyz
+        else:
+            dx_dy_array = self.gt_xyz - predicted_xyz
 
-        distance_square = np.square(dx_dy_array[:,0]) + np.square(dx_dy_array[:,1]) 
+        distance_square = np.square(dx_dy_array[:,0]) + np.square(dx_dy_array[:,1])
+        self.error = np.sqrt(distance_square)
         MSE = np.sum(distance_square)/distance_square.shape
-        RMSE = np.sqrt(MSE)
-        print ("RMSE: " + str(RMSE*100) + " cm")
+        self.RMSE = np.sqrt(MSE)
+        print ("RMSE: " + str(self.RMSE*100) + " cm")
 
-        return np.sqrt(distance_square) , RMSE*100
-    
+
+    def draw_box_plot(self):
+        fig1, ax1 = plt.subplots()
+        plt.text(1.2, 0.038, 'RMSE' + str(self.RMSE), fontsize=10)
+        plt.text(1.2, 0.032, 'Max ' + str(np.percentile(self.error, 100)), fontsize=10)
+        plt.text(1.2, 0.026, '3   ' + str(np.percentile(self.error, 75)), fontsize=10)
+        plt.text(1.2, 0.02, '2   ' + str(np.percentile(self.error, 50)), fontsize=10)
+        plt.text(1.2, 0.014, '1   ' + str(np.percentile(self.error, 25)), fontsize=10)
+        plt.text(1.2, 0.008, 'min ' + str(np.percentile(self.error, 0)), fontsize=10)
+        ax1.boxplot(self.error)
+
+        fig1.savefig(self._2d_plot_name[:-4]+'_box.png')
+
     def plotDistanceError2D(self, *target_files_csv):
         plot_title = "Distance Error"
         plt.title(plot_title)
@@ -88,8 +103,7 @@ class Visualization:
         plt.figure(figsize=(7,4.326))
         for i, csv in enumerate(target_files_csv):
 
-            distance_error, _ = self._calDistanceError2D(csv)
-            distance_error = distance_error*100
+            distance_error = self.error*100
 
             x_axis = range(distance_error.shape[0])
 

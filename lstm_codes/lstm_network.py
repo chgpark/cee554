@@ -569,5 +569,5 @@ class RONet:
             # gradients, variables = zip(*self.optimizer.compute_gradients(self.loss))
             # gradients, _ = tf.clip_by_global_norm(gradients, 5.0)
             # self.optimize = self.optimizer.apply_gradients(zip(gradients, variables))
-            self.optimize = self.optimizer.minimize(self.loss)
+            self.optimize = self.optimizer.minimize(self.loss, global_step=self.global_step)
 

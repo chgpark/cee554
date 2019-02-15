@@ -21,7 +21,7 @@ p.add_argument('--save_dir', type=str, default="/home/shapelim/RONet/test_fc_2/"
 p.add_argument('--lr', type=float, default = 0.001)
 p.add_argument('--decay_rate', type=float, default = 0.7)
 p.add_argument('--decay_step', type=int, default = 5)
-p.add_argument('--epoches', type=int, default = 1000)
+p.add_argument('--epoches', type=int, default = 1500)
 p.add_argument('--batch_size', type=int, default = 6450) #11257)
 
 #NETWORK PARAMETERS

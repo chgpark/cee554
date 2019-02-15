@@ -32,7 +32,8 @@ class BoxPlotModule:
         
     def do_test(self, gt_path, al_path_list):
         self.load_gt_set(gt_path)
-        self.load_al_set(al_path_list)
+        for al_path in al_path_list:
+            self.load_al_set(al_path, os.path.split(al_path)[1])
         self.get_dict_error()
         self.do()
         
@@ -59,11 +60,11 @@ class BoxPlotModule:
         
     def _read_data_from_set_(self, input_path):
         self.tmp_dict = collections.OrderedDict()
-        file_list = os.path.listdir(input_path)
+        file_list = os.listdir(input_path)
         for file_name in file_list:
             file_path = os.path.join(input_path, file_name)
-            item_name = os.path.split(file_name)[0].split('_')[1]
-            self.tmp_dict[item_name] = np.loadtxt(file_path)
+            item_name = os.path.split(file_name)[1].split('.')[0].split('_')[-1]
+            self.tmp_dict[item_name] = np.loadtxt(file_path, delimiter=',')
 
     def _set_box_color_(self, bp, color):
         self.plt.setp(bp['boxes'], color=color)
@@ -89,10 +90,11 @@ class BoxPlotModule:
         self.plt.xlabel("The number of the anchor sensors", fontsize=15)
         self.plt.ylabel("Error [cm]", fontsize=15)
         self.plt.xticks(range(offset, scale*len(ticks), scale), self.ticks)
-        self.plt.xlim(-2, scale*len(self.ticks))
+        self.plt.xlim(-scale/2, scale*len(self.ticks))
         self.plt.ylim(0, 20)
         self.plt.tight_layout()
         self.plt.savefig('boxcompare.png')
+        self.plt.show()
         
 class DataPlotModule:
     def __init__(self):
@@ -131,9 +133,9 @@ class DataPlotModule:
         
 
 if __name__ == '__main__':
-    # bpm = BoxPlotModule()
-    # bpm.do_test('gt_path',['al1', 'al2'])
-    dpm = DataPlotModule()
-    dpm.plot_data([[3, 4, 1, 5, 9],[2, 3, 1, 6, 10],[0, 2, 5, 4, 1]])
+    bpm = BoxPlotModule()
+    bpm.do_test('../../test/fc',['../../test/stacked_bi', '../../test/Particle_filter'])
+    # dpm = DataPlotModule()
+    # dpm.plot_data([[3, 4, 1, 5, 9],[2, 3, 1, 6, 10],[0, 2, 5, 4, 1]])
 
 

@@ -3,6 +3,7 @@ import collections
 import numpy as np
 import os
 
+COLORSET = [(241/255.0, 101/255.0, 65/255.0), (19/255.0, 128/255.0, 20/255.0), (191/255.0, 17/255.0, 46/255.0), (2/255.0, 23/255.0, 157/255.0)]
 
 data_pozyx = [[1,2,5], [5,7,2,2,5], [7,2,5]]
 data_RO_SLAM = [[6,4,2], [1,2,5,3,2], [2,3,5,1]]
@@ -28,8 +29,9 @@ class BoxPlotModule:
         self.list_al_name = None
         self.ticks = []
         
-        self.color_set = ['#34B291', '#FFC000', '#EE3030', '#30EE30', '#3030EE']
-        
+        # self.color_set = ['#34B291', '#FFC000', '#EE3030', '#30EE30', '#3030EE']
+        self.color_set = COLORSET
+
     def do_test(self, gt_path, al_path_list):
         self.load_gt_set(gt_path)
         for al_path in al_path_list:
@@ -68,7 +70,7 @@ class BoxPlotModule:
                 continue
             item_name = os.path.split(file_name)[1].split('.')[0].split('_')[-1]
             tmp_dict[item_name] = np.loadtxt(file_path, delimiter=',')[-4800:,:]
-        self.ticks = list(tmp_dict.keys())
+        self.ticks = list(sorted(tmp_dict.keys()))
         return tmp_dict
 
     def _set_box_color_(self, bp, color):
@@ -82,16 +84,18 @@ class BoxPlotModule:
         self.plt.figure()
 
         offset = 1
-        scale = 2 * 2
+        scale = 3
         n = (len(self.list_al_name)-1.0) / 2. * 0.7
         interval = np.arange(-n, n + 0.7, 0.7)
-        width = 0.5
+        width = 0.6
         dict_bp = {}
-        
+        ALGORITHM_NAME = ["Particle Filter", "MLP", "Stacked Bi-LSTM", "Ours"]
         for idx, al_name in enumerate(self.list_al_name):
-            dict_bp[al_name] = self.plt.boxplot(self.dict_error[al_name], positions=np.array(range(len(self.ticks))) * scale + interval[idx] + offset, sym='+', widths=width)
+            dict_bp[al_name] = self.plt.boxplot(self.dict_error[al_name], positions=np.array(range(len(self.ticks))) * scale + interval[idx] + offset,
+                                                sym='+', widths=width)
             self._set_box_color_(dict_bp[al_name], self.color_set[idx])
-            self.plt.plot([], c=self.color_set[idx], label=al_name)
+            # self.plt.plot([], c=self.color_set[idx], label=al_name)
+            self.plt.plot([], c=self.color_set[idx], label=ALGORITHM_NAME[idx])
 
         self.plt.legend()
         self.plt.xlabel("The number of the anchor sensors", fontsize=15)

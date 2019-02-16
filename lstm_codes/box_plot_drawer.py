@@ -36,12 +36,18 @@ class BoxPlotModule:
             self.load_al_set(al_path, os.path.split(al_path)[1])
         self.get_dict_error()
         self.do()
-        
-    def load_gt_set(self, dir_path):
-        self.gt_dir_path = dir_path
-        self._read_data_from_set_(dir_path)
-        self.dict_gt = self.tmp_dict
-        self.ticks = list(self.dict_gt.keys())
+
+    def load_gt_set(self,dir_path):
+        np_gt_csv = np.loadtxt(dir_path, delimiter=',')
+        self.gt_xy = np_gt_csv[:, -2:]
+        # print(self.gt_xy)
+
+    # def load_gt_set(self, dir_path):
+    #     self.gt_dir_path = dir_path
+    #     self._read_data_from_set_(dir_path)
+    #     self.dict_gt = self.tmp_dict
+    #     print(self.dict_gt)
+    #     # self.ticks = list(self.dict_gt.keys())
         
     def load_al_set(self, dir_path, al_name):
         self.target_dir_path[al_name] = dir_path
@@ -134,7 +140,8 @@ class DataPlotModule:
 
 if __name__ == '__main__':
     bpm = BoxPlotModule()
-    bpm.do_test('../../test/fc',['../../test/stacked_bi', '../../test/Particle_filter'])
+    bpm.do_test('/home/shapelim/RONet/RO_test/02-38.csv', ['../result_data/stacked_bi', '../result_data/Particle_filter'])
+    # bpm.do_test('/home/shapelim/RONet/RO_test/', ['../../test/stacked_bi', '../../test/Particle_filter'])
     # dpm = DataPlotModule()
     # dpm.plot_data([[3, 4, 1, 5, 9],[2, 3, 1, 6, 10],[0, 2, 5, 4, 1]])
 

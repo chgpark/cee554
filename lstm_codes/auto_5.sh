@@ -58,6 +58,6 @@ python3.5 train.py --save_dir $dir$count --gpu $gpu --sequence_length $seq --bat
 python3.5 test.py --load_model_dir $dir$count --gpu $gpu --sequence_length $seq --network_type $network --train_data $train_dt --val_data $val_dt --num_uwb $num_uwb --test_data $test_dt
 #
 count="_6/"
-python3.5 train.py --save_dir $dir$count --gpu $gpu --sequence_length $seq --batch_size $batch--decay_rate 0.99 --decay_step 20 --network_type $network --train_data $train_dt --val_data $val_dt --num_uwb $num_uwb
+python3.5 train.py --save_dir $dir$count --gpu $gpu --sequence_length $seq --batch_size $batch --decay_rate 0.99 --decay_step 20 --network_type $network --train_data $train_dt --val_data $val_dt --num_uwb $num_uwb
 python3.5 test.py --load_model_dir $dir$count --gpu $gpu --sequence_length $seq --network_type $network --train_data $train_dt --val_data $val_dt --num_uwb $num_uwb --test_data $test_dt
 #

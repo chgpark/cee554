@@ -11,15 +11,15 @@ import numpy as np
 class Calibration:
     def __init__(self):
         self.count = 0
+
     def set_x_y(self, x_value, y_value):
         self.x = x_value
         self.y = y_value
+
     def least_square(self):
-        power_3 = np.power(self.x, 3)
-        power_2 = np.power(self.x, 2)
         power_1 = np.power(self.x, 1)
         power_0 = np.power(self.x, 0)
-        A = np.concatenate((power_3, power_2, power_1, power_0), 1)
+        A = np.concatenate((power_1, power_0), 1)
         # for x_i in self.x:
         #     A_i = []
         #     while dimension + 1:
@@ -33,46 +33,44 @@ class Calibration:
         coefficients = np.dot(A_pseudo, self.y)
         return coefficients
 
-
-
     def plot_results(self, coefficient):
         self.fig = plt.figure()
         x = np.concatenate(self.x, axis = 0)
         y= np.concatenate(self.y, axis = 0)
         plt.xlim(0,5)
         plt.ylim(0,5)
-        plt.scatter(y, x)
+        plt.scatter(x, y)
 
         coefficient = np.concatenate(coefficient, axis = 0)
         print (coefficient)
         least_square_x = np.linspace(0,5)
-        least_square_y = coefficient[0]*np.power(least_square_x, 3)+\
-                        coefficient[1]*np.power(least_square_x, 2)+ \
-                         coefficient[2]*np.power(least_square_x, 1)+ \
-                         coefficient[3]*np.power(least_square_x, 0)
+        least_square_y = coefficient[0]*np.power(least_square_x, 1)+ \
+                         coefficient[1]*np.power(least_square_x, 0)
         plt.plot(least_square_x, least_square_y)
 
         plt.grid(True)
 
         self.fig = plt.gcf()
-        self.fig.savefig("he" + str(self.count) +".png")
+        self.fig.savefig("target" + str(self.count) +".png")
         self.count += 1
+
 if __name__ == '__main__':
-    file_name = '1234'
+    file_name = 'extra'
     csv_1 = file_name + '_1m.csv'
     csv_2 = file_name + '_2m.csv'
     csv_3 = file_name + '_3m.csv'
     csv_4 = file_name + '_4m.csv'
 
-    m1 = np.loadtxt(csv_1, delimiter = ',')
-    m2 = np.loadtxt(csv_2, delimiter = ',')
-    m3 = np.loadtxt(csv_3, delimiter = ',')
-    m4 = np.loadtxt(csv_4, delimiter = ',')
+    m1 = np.loadtxt(csv_1, delimiter=',')
+    m2 = np.loadtxt(csv_2, delimiter=',')
+    m3 = np.loadtxt(csv_3, delimiter=',')
+    m4 = np.loadtxt(csv_4, delimiter=',')
 
     list_1 = [[1]]*len(m1)
     list_2 = [[2]]*len(m2)
     list_3 = [[3]]*len(m3)
     list_4 = [[4]]*len(m4)
+
     gt = np.concatenate([list_1, list_2, list_3, list_4], axis = 0)
     gt = np.array(gt)
 
@@ -101,7 +99,3 @@ if __name__ == '__main__':
         coefficient = cali.least_square()
         cali.plot_results(coefficient)
 
-'''
-fog 1d_LiDAR :        y = 0.09502746x^3 - 0.24772325x^2 + 1.179433x  - 0.10962938
-non_fog_1d_LiDAR :    y = 0.15284259x^3 - 0.47716544x^2 + 1.4462534x - 0.1841911
-'''

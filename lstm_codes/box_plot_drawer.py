@@ -56,22 +56,25 @@ class BoxPlotModule:
     def _cal_error_per_al_(self, al_name):
         self.dict_error[al_name] = []
         for item in self.ticks:
-            self.dict_error[al_name].append(np.sqrt(np.sum(np.square(self.dict_al[al_name][item] - self.dict_gt[item]), axis=0)).tolist())
+            self.dict_error[al_name].append(np.sqrt(np.sum(np.square(self.dict_al[al_name][item] - self.dict_gt[item]), axis=1)).tolist())
         
     def _read_data_from_set_(self, input_path):
         self.tmp_dict = collections.OrderedDict()
         file_list = os.listdir(input_path)
         for file_name in file_list:
             file_path = os.path.join(input_path, file_name)
+            if os.path.isdir(file_path):
+                continue
             item_name = os.path.split(file_name)[1].split('.')[0].split('_')[-1]
-            self.tmp_dict[item_name] = np.loadtxt(file_path, delimiter=',')
+            self.tmp_dict[item_name] = np.loadtxt(file_path, delimiter=',')[-4800:,:]
 
     def _set_box_color_(self, bp, color):
         self.plt.setp(bp['boxes'], color=color)
         self.plt.setp(bp['whiskers'], color=color)
         self.plt.setp(bp['caps'], color=color)
         self.plt.setp(bp['medians'], color=color)
-        
+        self.plt.setp(bp['fliers'], markeredgecolor=color)
+
     def do(self):
         self.plt.figure()
 
@@ -83,16 +86,16 @@ class BoxPlotModule:
         dict_bp = {}
         
         for idx, al_name in enumerate(self.list_al_name):
-            dict_bp[al_name] = self.plt.boxplot(self.dict_error[al_name], positions=np.array(range(len(self.ticks))) * scale + interval[idx] + offset, sym='', widths=width)
+            dict_bp[al_name] = self.plt.boxplot(self.dict_error[al_name], positions=np.array(range(len(self.ticks))) * scale + interval[idx] + offset, sym='+', widths=width)
             self._set_box_color_(dict_bp[al_name], self.color_set[idx])
             self.plt.plot([], c=self.color_set[idx], label=al_name)
-            
+
         self.plt.legend()
         self.plt.xlabel("The number of the anchor sensors", fontsize=15)
         self.plt.ylabel("Error [cm]", fontsize=15)
         self.plt.xticks(range(offset, scale*len(ticks), scale), self.ticks)
         self.plt.xlim(-scale/2, scale*len(self.ticks))
-        self.plt.ylim(0, 20)
+        self.plt.ylim(0, 0.5)
         self.plt.tight_layout()
         self.plt.savefig('boxcompare.png')
         self.plt.show()
@@ -135,7 +138,7 @@ class DataPlotModule:
 
 if __name__ == '__main__':
     bpm = BoxPlotModule()
-    bpm.do_test('../../test/fc',['../../test/stacked_bi', '../../test/Particle_filter'])
+    bpm.do_test('../result_data/fc',['../result_data/stacked_bi', '../result_data/Particle_filter', '../result_data/RONet'])
     # dpm = DataPlotModule()
     # dpm.plot_data([[3, 4, 1, 5, 9],[2, 3, 1, 6, 10],[0, 2, 5, 4, 1]])
 

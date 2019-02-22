@@ -98,8 +98,8 @@ class BoxPlotModule:
             self.plt.plot([], c=self.color_set[idx], label=ALGORITHM_NAME[idx])
 
         self.plt.legend()
-        self.plt.xlabel("The number of the anchor sensors", fontsize=15)
-        self.plt.ylabel("Error [m]", fontsize=15)
+        self.plt.xlabel("Number of the anchors", fontsize=16)
+        self.plt.ylabel("Error [m]", fontsize=16)
         self.plt.xticks(range(offset, scale*len(ticks), scale), self.ticks)
         self.plt.xlim(-scale/2, scale*len(self.ticks))
         self.plt.ylim(0, 0.3)

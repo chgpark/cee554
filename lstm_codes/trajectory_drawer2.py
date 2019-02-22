@@ -259,16 +259,16 @@ if __name__ == "__main__":
     stacked_bi = abs_dir + "stacked_bi/stacked_bi_" + mode +".csv"
     RONet = abs_dir + "RONet/RONet_" + mode + ".csv"
     # viz.draw_2D_trajectory(mode, PF, fc, stacked_bi, RONet)
-    plot_index = 1
+    plot_index = 2
     # viz.set_2D_plot_name("/home/shapelim/RONet/trajectory/pf/PF_" + mode+".png")
     # viz.draw_2D_full_trajectory(mode, PF)
 
-    viz.set_2D_plot_name("/home/shapelim/RONet/trajectory/fc/fc_" + mode+".png")
-    viz.draw_2D_full_trajectory(mode, fc)
-    #
-    # viz.set_2D_plot_name("/home/shapelim/RONet/trajectory/stacked_bi/stacked_bi_" + mode+".png")
-    # viz.draw_2D_full_trajectory(mode, stacked_bi)
-    #
-    # viz.set_2D_plot_name("/home/shapelim/RONet/trajectory/ronet/RONet_" + mode+".png")
-    # viz.draw_2D_full_trajectory(mode, RONet)
+    # viz.set_2D_plot_name("/home/shapelim/RONet/trajectory/fc/fc_" + mode+".png")
+    # viz.draw_2D_full_trajectory(mode, fc)
+
+    viz.set_2D_plot_name("/home/shapelim/RONet/trajectory/stacked_bi/stacked_bi_" + mode+".png")
+    viz.draw_2D_full_trajectory(mode, stacked_bi)
+
+    viz.set_2D_plot_name("/home/shapelim/RONet/trajectory/ronet/RONet_" + mode+".png")
+    viz.draw_2D_full_trajectory(mode, RONet)
 

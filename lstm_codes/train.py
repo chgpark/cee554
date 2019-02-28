@@ -32,12 +32,12 @@ p.add_argument('--first_layer_output_size', type=int, default = 256)
 # Second: not in use
 p.add_argument('--second_layer_output_size', type=int, default = 128)
 p.add_argument('--fc_layer_size', type=int, default=1024)
-p.add_argument('--sequence_length', type=int, default = 100) # # of lstm rolling
+p.add_argument('--sequence_length', type=int, default = 8) # # of lstm rolling
 p.add_argument('--output_size', type=int, default = 2) # We only infer x, y
 '''
 network_type
 is_multimodal == True => stacked_bi
-is_multimodal == False => fc / stacked_bi / RO
+is_multimodal == False => fc / stacked_bi / RO / RO_wo_A
 '''
 p.add_argument('--is_multimodal', type=bool, default = False) #True / False
 p.add_argument('--network_type', type=str, default = 'fc')

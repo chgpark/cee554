@@ -170,7 +170,6 @@ class Visualization:
             #                 linestyle = LINE[i],label = self.label[i])
             for kk in range(t_step):
                 plt.scatter(predicted_x[kk], predicted_y[kk], c= self.color_set[1], marker='o', s=10)
-            plt.text(0.5, -2, self.label[plot_index], fontsize=15)
             data_list = [(-3, 0, 'u'), (3, -2, 'u'), (6, -4, 'l'), (6, 6, 'd'),
                          (0, 2, 'd'), (-6, -3, 'r'), (1, -5, 'l'), (-5, 5, 'r')]
 
@@ -259,16 +258,16 @@ if __name__ == "__main__":
     stacked_bi = abs_dir + "stacked_bi/stacked_bi_" + mode +".csv"
     RONet = abs_dir + "RONet/RONet_" + mode + ".csv"
     # viz.draw_2D_trajectory(mode, PF, fc, stacked_bi, RONet)
-    plot_index = 2
+    plot_index = 3
     # viz.set_2D_plot_name("/home/shapelim/RONet/trajectory/pf/PF_" + mode+".png")
     # viz.draw_2D_full_trajectory(mode, PF)
 
     # viz.set_2D_plot_name("/home/shapelim/RONet/trajectory/fc/fc_" + mode+".png")
     # viz.draw_2D_full_trajectory(mode, fc)
 
-    viz.set_2D_plot_name("/home/shapelim/RONet/trajectory/stacked_bi/stacked_bi_" + mode+".png")
-    viz.draw_2D_full_trajectory(mode, stacked_bi)
+    # viz.set_2D_plot_name("/home/shapelim/RONet/trajectory2/stacked_bi/stacked_bi_" + mode+".png")
+    # viz.draw_2D_full_trajectory(mode, stacked_bi)
 
-    viz.set_2D_plot_name("/home/shapelim/RONet/trajectory/ronet/RONet_" + mode+".png")
+    viz.set_2D_plot_name("/home/shapelim/RONet/trajectory2/ronet/RONet_" + mode+".png")
     viz.draw_2D_full_trajectory(mode, RONet)
 

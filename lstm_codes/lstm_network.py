@@ -36,6 +36,10 @@ class RONet:
                 self.set_placeholders_for_non_multimodal()
                 self.set_RO_Net()
 
+            elif self.network_type == 'RO_wo_A':
+                self.set_placeholders_for_non_multimodal()
+                self.set_RO_Net_wo_A()
+
         self.set_loss_terms()
 
     def set_placeholders_for_fc_layer(self):
@@ -323,7 +327,7 @@ class RONet:
     def get_attentioned_first_layer_output(self):
         with tf.variable_scope("First_layer_attention"):
             attention = tf.nn.sigmoid(self.output)
-            self.output = attention*self.output + self.output +self.preprocessed_output
+            self.output = attention*self.output + self.output
 
     def set_second_layer_bi_LSTM(self):
         with tf.variable_scope("Stacked_bi_lstm2"):
@@ -336,7 +340,6 @@ class RONet:
 
             self.layer_output_fw = outputs[0]
             self.layer_output_bw = outputs[1]
-
 
     def concatenate_second_layer_output(self):
         with tf.variable_scope("Second_layer_concatenation"):
@@ -446,12 +449,12 @@ class RONet:
             self.set_first_layer_bi_LSTM()
             self.concatenate_first_layer_output()
 
-            self.get_attentioned_preprocessed_data()
+            self.get_attentioned_first_layer_output()
 
             self.set_second_layer_bi_LSTM()
             self.concatenate_second_layer_output()
 
-            self.get_attentioned_preprocessed_data()
+            self.get_attentioned_second_layer_output()
 
             # self.output = tf.reshape(self.output, [-1, self.sequence_length*self.first_layer_output_size*2])
             self.output = tf.reshape(self.output, [-1, self.sequence_length*self.second_layer_output_size*2])
@@ -460,7 +463,31 @@ class RONet:
             '''For test for all sequeneces!!'''
             # self.set_fc_layer_for_seq_len_5()
             self.set_fc_layer_for_dynamic_len()
-        
+
+    def set_RO_Net_wo_A(self):
+        with tf.variable_scope("Stacked_bi_lstm1"):
+            self.set_preprocessing_bi_LSTM_for_8_uwb()
+            self.concatenate_preprocessed_data_for_bi_LSTM()
+            # self.get_attentioned_preprocessed_data()
+            self.preprocessed_output = self.output
+            self.set_first_layer_bi_LSTM()
+            self.concatenate_first_layer_output()
+
+            # self.get_attentioned_preprocessed_data()
+
+            self.set_second_layer_bi_LSTM()
+            self.concatenate_second_layer_output()
+
+            # self.get_attentioned_preprocessed_data()
+
+            # self.output = tf.reshape(self.output, [-1, self.sequence_length*self.first_layer_output_size*2])
+            self.output = tf.reshape(self.output, [-1, self.sequence_length*self.second_layer_output_size*2])
+            print(self.output.shape[1])
+            print("hello!")
+            '''For test for all sequeneces!!'''
+            # self.set_fc_layer_for_seq_len_5()
+            self.set_fc_layer_for_dynamic_len()
+
     def build_RO_Net_bi_multimodal(self):
         self.set_multimodal_Preprocessing_bi_LSTM_for_8_uwb()
         self.concatenate_preprocessed_data_for_8multimodal_bi_LSTM()
